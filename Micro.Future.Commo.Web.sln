@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4F7E37F0-B
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Micro.Future.Common.Web.Test", "test\Micro.Future.Common.Web.Test\Micro.Future.Common.Web.Test.xproj", "{2D23046C-3C74-4C06-BB72-F5032DAFC891}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{A22A2AFB-2A85-4F81-88FE-9D6AD18CD371}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataModel", "DataModel", "{A22A2AFB-2A85-4F81-88FE-9D6AD18CD371}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Micro.Future.Business.DataAccess", "..\FutureXShare\src\Micro.Future.Business.DataAccess\Micro.Future.Business.DataAccess.xproj", "{CF63E8F2-9426-4285-8D34-1D90B45FEB8F}"
 EndProject
