@@ -14,6 +14,7 @@ using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace Micro.Future.Commo.Web
 {
@@ -21,6 +22,8 @@ namespace Micro.Future.Commo.Web
     {
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Seq(Configuration["Logging:Serilog"]).CreateLogger();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -66,6 +69,7 @@ namespace Micro.Future.Commo.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddSerilog();
 
             if (env.IsDevelopment())
             {
