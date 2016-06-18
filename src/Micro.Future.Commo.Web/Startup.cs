@@ -15,6 +15,8 @@ using Micro.Future.Commo.Web.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Serilog;
+using Micro.Future.Commo.Web.Repository.IRepository;
+using Micro.Future.Commo.Web.Repository;
 
 namespace Micro.Future.Commo.Web
 {
@@ -62,6 +64,8 @@ namespace Micro.Future.Commo.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
