@@ -20,9 +20,9 @@ namespace Micro.Future.Commo.Web.Controllers
         }
 
         [HttpGet]
-        public string Get()
+        public async Task<IActionResult> Get()
         {
-            return "Hello";
+            return Ok(/*await*/ "Helo");
         }
     }
 }
