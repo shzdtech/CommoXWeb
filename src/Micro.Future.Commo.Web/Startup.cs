@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Micro.Future.Commo.Web.Data;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Services;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Micro.Future.Commo.Web
 {
@@ -47,7 +49,12 @@ namespace Micro.Future.Commo.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options=>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+                options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
