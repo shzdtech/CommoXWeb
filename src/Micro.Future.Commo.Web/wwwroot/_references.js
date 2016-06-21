@@ -1,4 +1,5 @@
 ﻿/// <autosync enabled="true" />
+/// <reference path="../bower_components/bootstrap-sass/assets/javascripts/bootstrap.js" />
 /// <reference path="../bower_components/hammerjs/hammer.js" />
 /// <reference path="../bower_components/jquery/dist/jquery.js" />
 /// <reference path="../bower_components/moment/moment.js" />
