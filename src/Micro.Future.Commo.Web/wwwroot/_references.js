@@ -5,6 +5,7 @@
 /// <reference path="../bower_components/moment/moment.js" />
 /// <reference path="../bower_components/respond/dest/respond.src.js" />
 /// <reference path="../bower_components/underscore/underscore.js" />
+/// <reference path="../client/scripts/sample.js" />
 /// <reference path="../gulpfile.js" />
 /// <reference path="../webpack.config.js" />
 /// <reference path="js/site.js" />
