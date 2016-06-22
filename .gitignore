@@ -253,3 +253,5 @@ paket-files/
 
 src/Micro.Future.Commo.Web/dist/*
 
+src/Micro.Future.Commo.Web/Client/Content/*.css
+src/Micro.Future.Commo.Web/Client/Content/*.css.map

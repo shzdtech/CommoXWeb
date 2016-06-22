@@ -1,5 +1,5 @@
 ﻿"use strict";
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var extractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
@@ -12,6 +12,9 @@ module.exports = {
         host: "localhost",
         port: 9000
     },
+    plugins: [
+        new extractTextPlugin("./dist/bundle.css")
+    ],
     module: {
         loaders: [
           {
@@ -20,8 +23,7 @@ module.exports = {
               exclude: /node_modules/
           },
           {
-              test: /\.scss$/,
-              loader: ExtractTextPlugin.extract('style', 'css!sass')
+              test: /\.scss$/, loader: extractTextPlugin.extract('style-loader', 'css-loader!sass-loader')
           },
           {
               test: /\.(png|woff|woff2|eot|ttf|svg)$/,
