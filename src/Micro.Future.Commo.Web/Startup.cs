@@ -12,6 +12,11 @@ using Microsoft.Extensions.Logging;
 using Micro.Future.Commo.Web.Data;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Services;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Serilog;
+using Micro.Future.Commo.Web.Repository.IRepository;
+using Micro.Future.Commo.Web.Repository;
 
 namespace Micro.Future.Commo.Web
 {
@@ -19,6 +24,8 @@ namespace Micro.Future.Commo.Web
     {
         public Startup(IHostingEnvironment env)
         {
+            Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Seq(Configuration["Logging:Serilog"]).CreateLogger();
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -47,11 +54,18 @@ namespace Micro.Future.Commo.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options=>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+                options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
+            });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IContactRepository, ContactRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +73,7 @@ namespace Micro.Future.Commo.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddSerilog();
 
             if (env.IsDevelopment())
             {

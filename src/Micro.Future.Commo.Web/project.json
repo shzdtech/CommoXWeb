@@ -38,7 +38,11 @@
       "version": "1.0.0-preview1-final",
       "type": "build"
     },
-    "Micro.Future.Business.Owin.Wechat": "1.0.0-*"
+    "Micro.Future.Business.Owin.Wechat": "1.0.0-*",
+    "Newtonsoft.Json": "9.0.1-beta1",
+    "Serilog": "2.0.0-rc-622",
+    "Serilog.Sinks.Seq": "2.0.0-rc-55",
+    "Serilog.Extensions.Logging": "1.0.0-rc2-10110"
   },
 
   "tools": {
