@@ -3,14 +3,14 @@ var extractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
-    entry: "./Client/Scripts/sample.jsx",
+    entry: ["./Client/Scripts/abc.js"],
     output: {
         filename: "./dist/bundle.js"
     },
     devServer: {
         contentBase: ".",
         host: "localhost",
-        port: 9000
+        port: 9010
     },
     plugins: [
         new extractTextPlugin("./dist/bundle.css")
@@ -41,5 +41,9 @@ module.exports = {
           path.resolve(__dirname, './node_modules/bootstrap-sass/assets/stylesheets/'),
           path.resolve(__dirname, './node_modules/compass-mixins/lib/')
         ]
-    }
+    },
+    resolve: {
+        root: path.resolve('./Client/Scripts'),
+        extensions: ['', '.js', '.jsx']
+    },
 };
