@@ -1,2 +1,37 @@
-div {
+#filter_container{
+    border: 1px solid #999;
+    padding: 0 10px;
+   ul {
+       margin: 0;
+       list-style: none;
+       span.title {
+           display: inline-block;
+           width: 80px;
+           color: #999;
+       }
+       li{
+           border-bottom: 1px solid #999;
+           padding: 10px;
+           &:last-child{
+               border-bottom: none;
+           }
+       }
+   } 
+
+   ul.items {
+       display: inline-block;
+       color: #666;
+       li {
+           padding: 0;
+           margin-left: 20px;
+           display: inline-block;
+           border:none;
+           a {
+               cursor: pointer;
+           }
+           a:hover{
+               color: #0f7192;
+           }
+       }
+   }
 }

@@ -10,8 +10,8 @@ const Filter = React.createClass({
                 </li>
             }); 
      return <li>
-        <span>{this.props.title}</span>
-        <ul>
+        <span className='title'>{this.props.title + ':'}</span>
+        <ul className='items'>
            {items}
         </ul>
     </li>;

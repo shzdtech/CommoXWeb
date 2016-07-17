@@ -33,6 +33,7 @@ export default [
             id: 3,
             name: '范围范围范围'
         }
-    ]
+    ],
+    multipleSelection: true
 }
 ];
