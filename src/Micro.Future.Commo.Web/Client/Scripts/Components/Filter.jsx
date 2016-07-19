@@ -1,73 +1,45 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {toggleFilterMutipleSelection, toggleFilterCollapse} from '../Actions'
 import CheckBox from './CheckBox';
 
 class Filter extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            isCollapsed: false,
-            isMultipleSelected: false
-        };
-        this.handleCollapseClick = this.handleCollapseClick.bind(this);
-        this.handleMultipleSelectedClick = this.handleMultipleSelectedClick.bind(this);
-        this.handleCancelMultipleSelectedClick = this.handleCancelMultipleSelectedClick.bind(this);
-    }
-
-    handleCollapseClick(){
-        this.state.isCollapsed = !this.state.isCollapsed;
-        this.state.isMultipleSelected = false;
-        this.setState(this.state);
-    }
-
-    handleMultipleSelectedClick(){
-        this.state.isMultipleSelected = true;
-        this.state.isCollapsed = true;
-        this.setState(this.state);
-    }
-
-    handleCancelMultipleSelectedClick(){
-        this.state.isMultipleSelected = false;
-        this.state.isCollapsed = false;
-        this.setState(this.state);
-    }
-
     render(){
-        let items =  this.props.items.map(function(item) {
-            return <li key={item.id}>
-                <a>
-                    <CheckBox className='filter-checkbox' />
-                    <span>{item.name}</span>
-                </a>
-            </li>;
-        });
         let rightSelector = null,
             operators = null,
             filterClassName = 'filter-category';
 
-        if(this.state.isCollapsed){
+        if(this.props.isCollapsed){
             filterClassName = filterClassName + ' collapsed';
         }
 
-        if(this.state.isMultipleSelected){
+        if(this.props.isMultipleSelected){
             filterClassName = filterClassName + ' multiple-selected'
         }
 
         if(this.props.multipleSelection){
             rightSelector = <div className='right-selector'>
-                <span className='multiply' onClick={this.handleMultipleSelectedClick}>多选</span>
-                <span className='togglebtn more' onClick={this.handleCollapseClick}>更多</span>
-                <span className='togglebtn retract' onClick={this.handleCollapseClick}>收起</span>
+                <span className='multiply' onClick={this.props.onToggleMultipleSelectedClick}>多选</span>
+                <span className='togglebtn more' onClick={this.props.onCollapseClick}>更多</span>
+                <span className='togglebtn retract' onClick={this.props.onCollapseClick}>收起</span>
             </div>;
             operators = <div className='operator-btn'>
                 <span className='multiply-submit'>提交</span>
-                <span className='calloff' onClick={this.handleCancelMultipleSelectedClick}>取消</span>
+                <span className='calloff' onClick={this.props.onToggleMultipleSelectedClick}>取消</span>
             </div>;
         }
 
         return <li className={filterClassName}>
            <span className='title'>{this.props.title + ':'}</span>
            <ul className='items'>
-              {items}
+              {this.props.items.map(function(item) {
+                  return <li key={item.id}>
+                <a>
+                    <CheckBox className='filter-checkbox' />
+                    <span>{item.name}</span>
+                </a>
+               </li>;
+            })}
            </ul>
         {rightSelector}
         {operators}
@@ -75,4 +47,21 @@ class Filter extends React.Component {
     }
 };
 
-module.exports = Filter;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isCollapsed: state.isCollapsed,
+    isMultipleSelected: state.isMultipleSelected
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onToggleMultipleSelectedClick: () => {
+      dispatch(toggleFilterMutipleSelection());
+    },
+    onCollapseClick: () => {
+      dispatch(toggleFilterCollapse());
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

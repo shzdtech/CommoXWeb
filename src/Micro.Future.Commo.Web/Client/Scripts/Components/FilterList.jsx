@@ -1,17 +1,19 @@
-import React from 'react'; 
+import React, {PropTypes} from 'react'; 
 import ReactDOM from 'react-dom'; 
 import Filter from './Filter';
 
-const FilterList = React.createClass(
-{
-    render: function() {
+class FilterList extends React.Component{
+    render() {
         var list = this.props.filters.map(function(filter) {
            return <Filter {...filter} />
         }); 
-        return <ul>
+        return <div>
+        <span>所有〉</span>
+        <ul>
         {list}
-        </ul>  
+        </ul>
+        </div>
     }
-});
+}
 
 module.exports = FilterList;
