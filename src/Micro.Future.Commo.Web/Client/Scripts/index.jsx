@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import FilterList from './Components/FilterList';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import filterStatus from './Reducers/filterStatus';
+import filterReducers from './Reducers';
 import filters from 'filterList';
 import '../Content/site.scss';
 
@@ -14,7 +14,7 @@ const App = React.createClass(
     }
 });
 
-let store = createStore(filterStatus);
+let store = createStore(filterReducers);
 
 ReactDOM.render(
     <Provider store = {store}>
