@@ -6,18 +6,18 @@ const initialState ={
 const filterStatus = (state = initialState, action) =>{
     switch(action.type){
         case TOGGLE_MULTIPLE_SELECTION: 
-             return {
-                   isCollapsed: state.isMultipleSelected ? false : true,
-                   isMultipleSelected: !state.isMultipleSelected
-             }
+            return {
+                isCollapsed: state.isMultipleSelected ? false : true,
+                isMultipleSelected: !state.isMultipleSelected
+            }
         case TOGGLE_COLLAPSE:
-        return {
-            isCollapsed: !state.isCollapsed,
-            isMultipleSelected: false
-        }
+            return {
+                isCollapsed: !state.isCollapsed,
+                isMultipleSelected: false
+            }
 
         default: 
-        return state;
+            return state;
     }
 }
 

@@ -3,8 +3,8 @@ import filters from './filters'
 import filterStatus from './filterStatus'
 
 const filterReducers = combineReducers({
-  filters,
-  filterStatus
+    filters,
+    filterStatus
 })
 
 export default filterReducers
