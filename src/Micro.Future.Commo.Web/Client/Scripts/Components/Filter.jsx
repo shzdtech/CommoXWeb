@@ -54,8 +54,8 @@ class Filter extends React.Component {
            <span className='title'>{this.props.title + ':'}</span>
            <ul className='items'>
               {this.props.items.map((item) => {
-                  return <li key={item.id}>
-                <a onClick={(item) => this.handleFilterSelection(item)}>
+                return <li key={item.id}>
+                <a onClick={() => this.handleFilterSelection(item)}>
                     <CheckBox className='filter-checkbox' />
                     <span>{item.name}</span>
                 </a>
