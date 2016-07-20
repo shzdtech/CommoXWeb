@@ -47,7 +47,7 @@ class Filter extends React.Component {
             filterClassName = filterClassName + ' multiple-selected'
         }
 
-        if(multipleSelection){
+        if(filter.multipleSelection){
             rightSelector = <div className='right-selector'>
                 <span className='multiply' onClick={onToggleMultipleSelectedClick}>多选</span>
                 <span className='togglebtn more' onClick={onCollapseClick}>更多</span>
@@ -77,7 +77,14 @@ class Filter extends React.Component {
     }
 };
 
-Filter.propTypes
+Filter.propTypes = {
+    filter: PropTypes.object.isRequired,
+    selectedFilters: PropTypes.arrayOf(PropTypes.object),
+    isCollapsed: PropTypes.bool.isRequired,
+    isMultipleSelected: PropTypes.bool.isRequired,
+    onToggleMultipleSelectedClick: PropTypes.func.isRequired,
+    onCollapseClick: PropTypes.func.isRequired
+}
 
 const mapStateToProps = (state, ownProps) => {
     return {

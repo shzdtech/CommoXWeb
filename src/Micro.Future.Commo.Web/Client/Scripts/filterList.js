@@ -1,39 +1,66 @@
-export default [
-{
+export default [{
     id: 1,
-    title: '类目',
-    items: [
-        {
-            id: 1,
-            name: 'Op1'
-        },
-        {
-            id: 2,
-            name: 'Op2'
-        },
-        {
-            id: 3,
-            name: 'Op3'
-        }
-    ]
+    title: '订单属性',
+    items: [{
+        id: 1,
+        name: '出资'
+    }, {
+        id: 2,
+        name: '出货'
+    }, {
+        id: 3,
+        name: '出钱补贴'
+    }, {
+        id: 4,
+        name: '商业承兑'
+    }],
+    multipleSelection: false
+}, {
+    id: 2,
+    title: '企业类型',
+    items: [{
+        id: 1,
+        name: '国有企业'
+    }, {
+        id: 2,
+        name: '私有企业'
+    }, {
+        id: 3,
+        name: '外商独资'
+    }, {
+        id: 4,
+        name: '中外合资'
+    }, {
+        id: 5,
+        name: '港澳独资'
+    }],
+    multipleSelection: false
 },
 {
-    id: 2,
-    title: '交易范围',
-    items: [
-        {
-            id: 1,
-            name: '范围1'
-        },
-        {
-            id: 2,
-            name: '范围范围2'
-        },
-        {
-            id: 3,
-            name: '范围范围范围'
-        }
-    ],
-    multipleSelection: true
+    id: 3,
+    title: '注册资本',
+    items: [{
+        id: 1,
+        name: '100万以内'
+    },{
+        id: 2,
+        name: '100万至1000万'
+    },{
+        id: 3,
+        name: '1000万以上'
+    }],
+    multipleSelection: false
+},
+{
+    id: 4,
+    title: '注册地',
+    items:[],
+    multipleSelection: false
+},
+{
+    id: 5,
+    title: '开票量',
+    items:[],
+    multipleSelection: false
 }
 ];
