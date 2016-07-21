@@ -3,7 +3,9 @@ var extractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
-    entry: ["./Client/Scripts/index.jsx"],
+    entry: [
+        'bootstrap-loader',
+        "./Client/Scripts/index.jsx"],
     output: {
         filename: "./dist/bundle.js"
     },
@@ -33,6 +35,11 @@ module.exports = {
               test: /\.(js|jsx)$/,
               exclude: /node_modules/,
               loader: 'eslint-loader'
+          },
+
+          // Bootstrap 3
+          { test: /bootstrap-sass(\\|\/)assets(\\|\/)javascripts(\\|\/)/,
+            loader: 'imports?jQuery=jquery' 
           }
         ]
     },

@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import Filter from './Filter';
+import {removeFilter} from '../Actions';
 
 class FilterList extends React.Component{
     render() {
@@ -17,7 +18,12 @@ class FilterList extends React.Component{
             var names = filter.selectedItems.map((item)=>{
                 return item.name;
             });
-            return <span className='selected-filter'>{filter.title + ': ' + names.join(', ')}</span>
+            return <span className='selected-filter'>
+            {filter.title + ': ' + names.join(', ')}
+            <span className="glyphicon glyphicon-remove filter-remove" aria-hidden="true" onClick={
+                ()=>this.props.onRemoveFilterClick(filter)
+            }></span>
+            </span>
         });
 
         return <div>
@@ -36,4 +42,12 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-module.exports = connect(mapStateToProps, {})(FilterList);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onRemoveFilterClick: (filter) => {
+            dispatch(removeFilter(filter));
+        }
+    };
+};
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(FilterList);

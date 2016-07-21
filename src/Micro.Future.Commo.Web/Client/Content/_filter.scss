@@ -15,6 +15,15 @@
                 border: 1px solid $primary-color;
                 color: $primary-color;
             }
+
+            .filter-remove {
+                left: 2px;
+                top: 2px;
+
+                &:hover{
+                    cursor: pointer;
+                }
+            }
         }
     }
     
@@ -33,7 +42,7 @@
             border-bottom: 1px solid $normal-font-color;
             padding: 10px;
             position: relative;
-            height: 19px;
+            height: 40px;
             overflow: hidden;
 
             &:last-child {
@@ -67,6 +76,7 @@
 
                 .checkbox.filter-checkbox {
                     display: inline-block;
+                    margin: 0 2px 0 0;
                 }
             }
 
@@ -107,14 +117,16 @@
 
         li {
             padding: 0;
-            margin-left: 20px;
+            margin: 0 20px;
             display: inline-block;
 
             a {
                 cursor: pointer;
+                color: #666;
 
                 &:hover {
                     color: $primary-color;
+                    text-decoration: none;
                 }
 
                 .checkbox.filter-checkbox {
@@ -124,7 +136,8 @@
 
                     span,
                     input[type=checkbox] {
-                        top: 2px;
+                        top: 3px;
+                        margin-left: 0;
                     }
                 }
             }

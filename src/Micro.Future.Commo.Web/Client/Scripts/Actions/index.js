@@ -2,6 +2,7 @@ import {
     TOGGLE_MULTIPLE_SELECTION, 
     TOGGLE_COLLAPSE,
     SELECT_FILTER,
+    REMOVE_FILTER,
     CHECK_ITEM} from '../Constants/ActionTypes';
 
 export const toggleFilterMutipleSelection = (filter)=>{
@@ -31,5 +32,12 @@ export const checkItem = (isChecked, filter, item) => {
         isChecked: isChecked,
         filter: filter,
         item: item
+    };
+};
+
+export const removeFilter = (filter) => {
+    return {
+        type: REMOVE_FILTER,
+        filter: filter,
     };
 };
