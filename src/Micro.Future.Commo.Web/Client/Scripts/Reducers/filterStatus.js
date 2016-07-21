@@ -1,24 +1,21 @@
 import {TOGGLE_MULTIPLE_SELECTION, TOGGLE_COLLAPSE} from '../Constants/ActionTypes';
-const initialState ={
-    isCollapsed: false,
-    isMultipleSelected: false
-}
-const filterStatus = (state = initialState, action) =>{
+
+const filterStatus = (state, action) =>{
     switch(action.type){
         case TOGGLE_MULTIPLE_SELECTION: 
-            return {
+            return Object.assign({}, state, {
                 isCollapsed: state.isMultipleSelected ? false : true,
                 isMultipleSelected: !state.isMultipleSelected
-            }
+            });
         case TOGGLE_COLLAPSE:
-            return {
+            return  Object.assign({}, state, {
                 isCollapsed: !state.isCollapsed,
                 isMultipleSelected: false
-            }
+            });
 
         default: 
             return state;
     }
-}
+};
 
 export default filterStatus;

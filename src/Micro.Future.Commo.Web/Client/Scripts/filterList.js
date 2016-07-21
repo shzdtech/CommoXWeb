@@ -34,7 +34,7 @@ export default [{
         id: 5,
         name: '港澳独资'
     }],
-    multipleSelection: false
+    multipleSelection: true
 },
 {
     id: 3,
@@ -49,7 +49,7 @@ export default [{
         id: 3,
         name: '1000万以上'
     }],
-    multipleSelection: false
+    multipleSelection: true
 },
 {
     id: 4,

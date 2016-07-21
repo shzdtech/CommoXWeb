@@ -9,11 +9,15 @@ class FilterList extends React.Component{
             return <Filter filter = {filter} />
             });
 
-        var selected = this.props.selectedFilters.map((selectedFilter) => {
-            var names = selectedFilter.items.map((item)=>{
+        var selectedFilters = this.props.filters.filter((f)=>{
+            return f.selected
+        });
+        
+        var selected = selectedFilters.map((filter) => {
+            var names = filter.selectedItems.map((item)=>{
                 return item.name;
             });
-            return <span className='selected-filter'>{selectedFilter.title + ': ' + names.join(', ')}</span>
+            return <span className='selected-filter'>{filter.title + ': ' + names.join(', ')}</span>
         });
 
         return <div>
@@ -28,7 +32,7 @@ class FilterList extends React.Component{
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        selectedFilters: [...state.filters]
+        filters: [...state.filters]
     }
 }
 

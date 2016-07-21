@@ -4,13 +4,12 @@ import FilterList from './Components/FilterList';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import filterReducers from './Reducers';
-import filters from 'filterList';
 import '../Content/site.scss';
 
 const App = React.createClass(
 {
     render: function() {
-        return <FilterList filters={filters} />;
+        return <FilterList  />;
     }
 });
 

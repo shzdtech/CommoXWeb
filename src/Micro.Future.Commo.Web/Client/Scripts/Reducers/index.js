@@ -1,10 +1,9 @@
-import { combineReducers } from 'redux'
-import filters from './filters'
-import filterStatus from './filterStatus'
+import { combineReducers } from 'redux';
+import filters from './filters';
+import filterStatus from './filterStatus';
 
 const filterReducers = combineReducers({
-    filters,
-    filterStatus
-})
+    filters
+});
 
-export default filterReducers
+export default filterReducers;

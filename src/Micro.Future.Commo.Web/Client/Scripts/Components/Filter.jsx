@@ -2,35 +2,44 @@ import React , {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {toggleFilterMutipleSelection,
     toggleFilterCollapse,
-    addFilter} from '../Actions'
+    selectFilter,
+    checkItem} from '../Actions';
 import CheckBox from './CheckBox';
 
 class Filter extends React.Component {
     constructor(){
         super();
         this.handleFilterSelection = this.handleFilterSelection.bind(this);
+        this.handItemChecked = this.handItemChecked.bind(this);
+        this.handleMultipleSelectionSubmit = this.handleMultipleSelectionSubmit.bind(this);
     }
 
     handleFilterSelection(item){
         const {filter, onFilterSelected} = this.props;
-        onFilterSelected({
-            id: filter.id,
-            title: filter.title,
-            items: [item]
-        })
+        onFilterSelected(Object.assign({}, filter, {selectedItems: [item]}));
+    }
+
+    handItemChecked(isChecked, item){
+         event.stopPropagation(); 
+         const {filter, onItemChecked} = this.props;
+         onItemChecked(isChecked, filter, item);
+    }
+
+    handleMultipleSelectionSubmit(){
+        const {filter, onFilterSelected, onToggleMultipleSelectedClick} = this.props;
+        if(filter.selectedItems && filter.selectedItems.length > 0){
+            onFilterSelected(Object.assign({}, filter));
+        }
     }
 
     render(){
         const { filter,
-            selectedFilters,
             isCollapsed,
             isMultipleSelected,
-            multipleSelection,
             onToggleMultipleSelectedClick,
             onCollapseClick } = this.props;
 
-        let filtered = selectedFilters.filter((selectedFilter)=>{return selectedFilter.id === filter.id});
-        if(filtered.length > 0)
+        if(filter.selected)
         {
             return null;
         }
@@ -39,23 +48,23 @@ class Filter extends React.Component {
             operators = null,
             filterClassName = 'filter-category';
 
-        if(isCollapsed){
+        if(filter.isCollapsed){
             filterClassName = filterClassName + ' collapsed';
         }
 
-        if(isMultipleSelected){
-            filterClassName = filterClassName + ' multiple-selected'
+        if(filter.isMultipleSelected){
+            filterClassName = filterClassName + ' multiple-selected';
         }
 
         if(filter.multipleSelection){
             rightSelector = <div className='right-selector'>
-                <span className='multiply' onClick={onToggleMultipleSelectedClick}>多选</span>
-                <span className='togglebtn more' onClick={onCollapseClick}>更多</span>
-                <span className='togglebtn retract' onClick={onCollapseClick}>收起</span>
+                <span className='multiply' onClick={() => onToggleMultipleSelectedClick(filter)}>多选</span>
+                <span className='togglebtn more' onClick={() => onCollapseClick(filter)}>更多</span>
+                <span className='togglebtn retract' onClick={() => onCollapseClick(filter)}>收起</span>
             </div>;
             operators = <div className='operator-btn'>
-                <span className='multiply-submit'>提交</span>
-                <span className='calloff' onClick={onToggleMultipleSelectedClick}>取消</span>
+                <span className='multiply-submit' onClick={this.handleMultipleSelectionSubmit}>提交</span>
+                <span className='calloff' onClick={()=>onToggleMultipleSelectedClick(filter)}>取消</span>
             </div>;
         }
 
@@ -63,10 +72,10 @@ class Filter extends React.Component {
            <span className='title'>{filter.title + ':'}</span>
            <ul className='items'>
               {this.props.filter.items.map((item) => {
-                  return <li key={item.id}>
-                  <a onClick={() => this.handleFilterSelection(item)}>
-                      <CheckBox className='filter-checkbox' />
-                      <span>{item.name}</span>
+                return  <li key={item.id}>
+                  <a>
+                      <CheckBox className='filter-checkbox' onChecked={(isChecked) => this.handItemChecked(isChecked, item)}/>
+                      <span onClick={() => this.handleFilterSelection(item)}>{item.name}</span>
                   </a>
                  </li>;
               })}
@@ -75,37 +84,36 @@ class Filter extends React.Component {
         {operators}
         </li>;
     }
-};
+}
 
 Filter.propTypes = {
     filter: PropTypes.object.isRequired,
-    selectedFilters: PropTypes.arrayOf(PropTypes.object),
-    isCollapsed: PropTypes.bool.isRequired,
-    isMultipleSelected: PropTypes.bool.isRequired,
-    onToggleMultipleSelectedClick: PropTypes.func.isRequired,
-    onCollapseClick: PropTypes.func.isRequired
-}
+    onCollapseClick: PropTypes.func.isRequired,
+    onItemChecked: PropTypes.func.isRequired,
+    onToggleMultipleSelectedClick: PropTypes.func.isRequired
+};
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        isCollapsed: state.filterStatus.isCollapsed,
-        isMultipleSelected: state.filterStatus.isMultipleSelected,
-        selectedFilters: [...state.filters]
-    }
-}
+
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onToggleMultipleSelectedClick: () => {
-            dispatch(toggleFilterMutipleSelection());
+        onToggleMultipleSelectedClick: (filter) => {
+            dispatch(toggleFilterMutipleSelection(filter));
         },
-        onCollapseClick: () => {
-            dispatch(toggleFilterCollapse());
+        onCollapseClick: (filter) => {
+            dispatch(toggleFilterCollapse(filter));
         },
-        onFilterSelected:(filter) =>{
-            dispatch(addFilter(filter));
+        onFilterSelected:(filter) => {
+            dispatch(selectFilter(filter));
+        },
+        onItemChecked:(isChecked, filter, item) =>{
+             dispatch(checkItem(isChecked, filter, item));
         }
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);
