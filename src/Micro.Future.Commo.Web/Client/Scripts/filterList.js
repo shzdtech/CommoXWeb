@@ -1,3 +1,5 @@
+import {TEXT} from './Constants/FilterTypes';
+
 export default [{
     id: 1,
     title: '订单属性',
@@ -55,7 +57,8 @@ export default [{
     id: 4,
     title: '注册地',
     items:[],
-    multipleSelection: false
+    multipleSelection: false,
+    type: TEXT
 },
 {
     id: 5,

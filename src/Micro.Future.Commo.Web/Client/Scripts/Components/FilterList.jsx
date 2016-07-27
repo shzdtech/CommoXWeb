@@ -2,12 +2,19 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import Filter from './Filter';
+import InputFilter from './InputFilter';
 import {removeFilter} from '../Actions';
+import {TEXT} from '../Constants/FilterTypes';
 
 class FilterList extends React.Component{
     render() {
         var list = this.props.filters.map(function(filter) {
+            if(!filter.selected){
+            if(filter.type === TEXT){
+                return <InputFilter filter = {filter} />
+            }
             return <Filter filter = {filter} />
+            }
             });
 
         var selectedFilters = this.props.filters.filter((f)=>{
@@ -15,6 +22,7 @@ class FilterList extends React.Component{
         });
         
         var selected = selectedFilters.map((filter) => {
+            if(filter.selectedItems){
             var names = filter.selectedItems.map((item)=>{
                 return item.name;
             });
@@ -24,6 +32,7 @@ class FilterList extends React.Component{
                 ()=>this.props.onRemoveFilterClick(filter)
             }></span>
             </span>
+            }
         });
 
         return <div>

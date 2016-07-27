@@ -3,3 +3,4 @@ export const TOGGLE_COLLAPSE = 'TOGGLE_COLLAPSE';
 export const SELECT_FILTER = 'SELECT_FILTER';
 export const REMOVE_FILTER = 'REMOVE_FILTER';
 export const CHECK_ITEM  = 'CHECK_ITEM';
+export const TYPE_ITEM = 'TYPE_ITEM';

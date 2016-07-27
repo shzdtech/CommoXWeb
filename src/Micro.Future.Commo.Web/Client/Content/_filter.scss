@@ -14,6 +14,9 @@
             &:hover {
                 border: 1px solid $primary-color;
                 color: $primary-color;
+                .filter-remove{
+                    color: $normal-font-color;
+                }
             }
 
             .filter-remove {
@@ -22,6 +25,7 @@
 
                 &:hover{
                     cursor: pointer;
+                    color: $primary-color;
                 }
             }
         }
@@ -44,7 +48,7 @@
             position: relative;
             height: 40px;
             overflow: hidden;
-
+            
             &:last-child {
                 border-bottom: none;
             }
@@ -83,7 +87,7 @@
             .right-selector {
                 position: absolute;
                 right: 0;
-                top: 10px;
+                top: 6px;
 
                 span {
                     margin-right: 10px;
@@ -100,6 +104,21 @@
 
                 .more {
                     display: inline-block;
+                }
+            }
+
+            &>input[type=text]{
+                margin-left: 20px;
+            }
+        }
+
+        .input-filter{
+            padding: 7px 10px;
+
+            .submit-filter{
+                margin-left: 20px;
+                &:hover{
+                    color: $primary-color;
                 }
             }
         }
@@ -157,5 +176,30 @@
                 color: $primary-color;
             }
         }
+
+        span.calloff{
+            background: #999;
+            color: white;
+        }
+
+        span.calloff:hover{
+            background: #fff;
+            border: 1px solid #999;
+            color: #999;
+        }
     }
 }
+
+.btn{
+    color: #fff;
+    background: $primary-color;
+    border: 1px solid $primary-color;
+    padding: 3px 12px !important;
+    
+    &:hover{
+        color: $primary-color;
+        background: #fff;
+        border: 1px solid $primary-color;
+    }
+}
+

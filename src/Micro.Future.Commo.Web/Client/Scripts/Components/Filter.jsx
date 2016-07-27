@@ -39,11 +39,6 @@ class Filter extends React.Component {
             onToggleMultipleSelectedClick,
             onCollapseClick } = this.props;
 
-        if(filter.selected)
-        {
-            return null;
-        }
-
         let rightSelector = null,
             operators = null,
             filterClassName = 'filter-category';
@@ -58,13 +53,13 @@ class Filter extends React.Component {
 
         if(filter.multipleSelection){
             rightSelector = <div className='right-selector'>
-                <span className='multiply' onClick={() => onToggleMultipleSelectedClick(filter)}>多选</span>
-                <span className='togglebtn more' onClick={() => onCollapseClick(filter)}>更多</span>
-                <span className='togglebtn retract' onClick={() => onCollapseClick(filter)}>收起</span>
+                <span className='btn multiply' onClick={() => onToggleMultipleSelectedClick(filter)}>多选</span>
+                <span className='btn togglebtn more' onClick={() => onCollapseClick(filter)}>更多</span>
+                <span className='btn togglebtn retract' onClick={() => onCollapseClick(filter)}>收起</span>
             </div>;
             operators = <div className='operator-btn'>
-                <span className='multiply-submit' onClick={this.handleMultipleSelectionSubmit}>提交</span>
-                <span className='calloff' onClick={()=>onToggleMultipleSelectedClick(filter)}>取消</span>
+                <span className='btn multiply-submit' onClick={this.handleMultipleSelectionSubmit}>提交</span>
+                <span className='btn calloff' onClick={()=>onToggleMultipleSelectedClick(filter)}>取消</span>
             </div>;
         }
 

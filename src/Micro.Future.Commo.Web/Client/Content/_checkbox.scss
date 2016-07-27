@@ -31,13 +31,13 @@
             left: 4px;
             width: 8px;
             height: 5px;
-            background-color: #FFFFFF;
+            background-color: #fff;
         }
 
         &:checked + span:after {
             top: 2px;
             left: 4px;
-            background-color: #cacaca;
+            background-color: $primary-color;
         }
     }
 
@@ -46,7 +46,7 @@
         display: inline-block;
         height: 16px;
         width: 16px;
-        background: #cacaca;
+        background: $primary-color;
         top: 0;
         left: 0;
     }
