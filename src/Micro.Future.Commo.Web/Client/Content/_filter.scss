@@ -40,11 +40,13 @@
             display: inline-block;
             width: 80px;
             color: $normal-font-color;
+            vertical-align: top;
+            line-height: 40px;
         }
 
         .filter-category {
             border-bottom: 1px solid $normal-font-color;
-            padding: 10px;
+            padding: 0 10px;
             position: relative;
             height: 40px;
             overflow: hidden;
@@ -107,13 +109,15 @@
                 }
             }
 
-            &>input[type=text]{
-                margin-left: 20px;
-            }
         }
 
         .input-filter{
-            padding: 7px 10px;
+            padding: 0 10px;
+
+            input[type=text]{
+                margin-left: 20px;
+                margin-top: 7px;
+            }
 
             .submit-filter{
                 margin-left: 20px;
@@ -133,11 +137,13 @@
         display: inline-block;
         color: #666;
         border: none;
+        width: calc(100% - 210px);
 
         li {
             padding: 0;
             margin: 0 20px;
             display: inline-block;
+            line-height: 40px;
 
             a {
                 cursor: pointer;
@@ -165,7 +171,7 @@
 
     .operator-btn {
         text-align: center;
-        margin-top: 20px;
+        margin: 20px 0;
         display: none;
 
         span {
