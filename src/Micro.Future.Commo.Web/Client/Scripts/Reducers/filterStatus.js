@@ -5,12 +5,14 @@ const filterStatus = (state, action) =>{
         case TOGGLE_MULTIPLE_SELECTION: 
             return Object.assign({}, state, {
                 isCollapsed: state.isMultipleSelected ? false : true,
+                selectedItems: state.isMultipleSelected ? state.selectedItems : [],
                 isMultipleSelected: !state.isMultipleSelected
             });
         case TOGGLE_COLLAPSE:
             return  Object.assign({}, state, {
                 isCollapsed: !state.isCollapsed,
-                isMultipleSelected: false
+                isMultipleSelected: false,
+                selectedItems: []
             });
 
         default: 

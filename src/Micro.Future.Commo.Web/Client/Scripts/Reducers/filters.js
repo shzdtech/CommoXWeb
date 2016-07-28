@@ -14,7 +14,7 @@ const selectedItems = (state = [], action) => {
             ];
             }else{
      return state.filter((item) =>{
-                item.id !== action.item.id;
+               return  item.id !== action.item.id;
             });
             }
         default:

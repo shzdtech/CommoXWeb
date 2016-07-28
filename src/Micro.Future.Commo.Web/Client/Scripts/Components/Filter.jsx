@@ -15,8 +15,13 @@ class Filter extends React.Component {
     }
 
     handleFilterSelection(item){
-        const {filter, onFilterSelected} = this.props;
-        onFilterSelected(Object.assign({}, filter, {selectedItems: [item]}));
+        const {filter, onFilterSelected, onItemChecked} = this.props;
+        if(filter.isMultipleSelected){
+             let checked = filter.selectedItems && filter.selectedItems.filter((i)=>{return i.id === item.id}).length > 0;
+             onItemChecked(!checked, filter, item)
+        }else{
+             onFilterSelected(Object.assign({}, filter, {selectedItems: [item]}));
+        }
     }
 
     handItemChecked(isChecked, item){
@@ -69,7 +74,7 @@ class Filter extends React.Component {
               {this.props.filter.items.map((item) => {
                 return  <li key={item.id}>
                   <a>
-                      <CheckBox className='filter-checkbox' onChecked={(isChecked) => this.handItemChecked(isChecked, item)}/>
+                      <CheckBox className='filter-checkbox' isChecked={filter.selectedItems && filter.selectedItems.filter((i)=>{return i.id === item.id}).length > 0} onChecked={(isChecked) => this.handItemChecked(isChecked, item)}/>
                       <span onClick={() => this.handleFilterSelection(item)}>{item.name}</span>
                   </a>
                  </li>;
