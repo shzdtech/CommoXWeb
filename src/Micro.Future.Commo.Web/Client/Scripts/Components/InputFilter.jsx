@@ -18,7 +18,7 @@ class InputFilter extends React.Component {
          <span className='btn submit-filter' onClick={this.onSumited}>提交</span>
         </li>
     }
-    
+
     handleValueChange(e) {
         this.props.onItemTyped(this.props.filter, {id: 1, name: e.target.value})
     }
@@ -42,7 +42,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(selectFilter(filter));
         },
         onItemTyped:(filter, item) =>{
-             dispatch(typeItem(filter, item));
+            dispatch(typeItem(filter, item));
         }
     };
 };

@@ -6,7 +6,7 @@ class CheckBox extends React.Component{
         this.onChecked = this.onChecked.bind(this);
     }
     onChecked(event){
-        event.stopPropagation(); 
+        event.stopPropagation();
         this.props.onChecked(event.target.checked);
     }
     render() {
