@@ -1,11 +1,11 @@
 import React from 'react';
 
-class CheckBox extends React.Component{
-    constructor(){
+class CheckBox extends React.Component {
+    constructor() {
         super();
         this.onChecked = this.onChecked.bind(this);
     }
-    onChecked(event){
+    onChecked(event) {
         event.stopPropagation();
         this.props.onChecked(event.target.checked);
     }
