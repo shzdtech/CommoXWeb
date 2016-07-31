@@ -1,4 +1,4 @@
-#filter_container {
+.filter-container {
     padding: 0 10px;
 
     .filter-btn {
@@ -226,7 +226,7 @@
 
 @media (max-width: 568px) {
 
-    #filter_container {
+    .filter-container {
         position: relative;
         border: none;
 

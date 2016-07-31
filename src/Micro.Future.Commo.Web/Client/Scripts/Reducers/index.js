@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import filters from './filters';
-import filterStatus from './filterStatus';
 import filterContentToggled from './filterContentToggled'
+import chains from './chains';
 
-const filterReducers = combineReducers({
+const reducers = combineReducers({
     filters,
-    filterContentToggled
+    filterContentToggled,
+    chains
 });
 
-export default filterReducers;
+export default reducers;

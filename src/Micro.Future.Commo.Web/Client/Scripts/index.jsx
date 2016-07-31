@@ -1,24 +1,28 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom'; 
 import FilterList from './Components/FilterList';
+import ChainList from './Components/Chain/ChainList';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import filterReducers from './Reducers';
+import reducers from './reducers';
 import '../Content/site.scss';
 
 const App = React.createClass(
 {
     render: function() {
-        return <FilterList  />;
+        return <div>
+        <FilterList  />
+        <ChainList />
+        </div>;
     }
 });
 
-let store = createStore(filterReducers);
+let store = createStore(reducers);
 
 ReactDOM.render(
     <Provider store = {store}>
         <App />
     </Provider>,
-    document.getElementById('filter_container')
+    document.getElementById('app')
 );
 

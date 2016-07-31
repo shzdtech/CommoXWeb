@@ -37,7 +37,7 @@ class FilterList extends React.Component {
             }
         });
 
-        return <div>
+        return <div className='filter-container'>
             <div className='btn filter-btn' onClick={onToggleFilterList}>筛选</div>
             <div className={ 'filter-content' + (isIn ? ' in' : '')}>
                 <span className="glyphicon glyphicon-remove close" aria-hidden="true" onClick={onToggleFilterList}></span>
