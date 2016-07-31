@@ -89,7 +89,7 @@ namespace Micro.Future.Commo.Web
             app.UseStaticFiles();
 
             app.UseIdentity();
-
+            app.UseSignalR();
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
