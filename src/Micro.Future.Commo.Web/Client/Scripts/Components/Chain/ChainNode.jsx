@@ -9,7 +9,7 @@ class ChainNode extends React.Component {
 
     render() {
         let {chainNode} = this.props;
-        return <div className='chain-node'>
+        return (<div className='chain-node'>
             <div className='title'>{chainNode.name}</div>
             <div className='sub-title'>{chainNode.product}</div>
             <div className='operators'>
@@ -17,7 +17,7 @@ class ChainNode extends React.Component {
                 <span className='btn'>拒绝</span>
             </div>
             <div className='operators-overlay'></div>
-        </div>
+        </div>);
     }
 
 }

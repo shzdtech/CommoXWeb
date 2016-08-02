@@ -5,8 +5,10 @@ import {
     SELECT_FILTER,
     REMOVE_FILTER,
     TYPE_ITEM,
-    CHECK_ITEM} from '../Constants/ActionTypes';
+    CHECK_ITEM,
+    RECEIVE_CHAIN_LIST} from '../Constants/ActionTypes';
 
+//filter actions
 export const toggleFilterMutipleSelection = (filter) => {
     return {
         filter: filter,
@@ -55,5 +57,13 @@ export const removeFilter = (filter) => {
 export const toggleFilterList = () => {
     return {
         type: TOGGLE_FILTER_LIST,
+    };
+};
+
+//chain actions
+export const receiveChainList = (chainList)=>{
+    return {
+        type: RECEIVE_CHAIN_LIST,
+        chainList: chainList
     };
 };

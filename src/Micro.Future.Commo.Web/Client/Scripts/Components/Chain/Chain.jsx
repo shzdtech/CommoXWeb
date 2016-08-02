@@ -11,7 +11,7 @@ class Chain extends React.Component {
        return <div className='chain'>
             {
                 this.props.chain.chainNodes.map((chainNode) => {
-                   return <ChainNode key={chainNode.id} chainNode = {chainNode}/>
+                   return <ChainNode key={chainNode.id} chainNode = {chainNode}/>;
                 })
             }
         </div>;

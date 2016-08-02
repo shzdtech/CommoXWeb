@@ -10,22 +10,7 @@ import '../Content/site.scss';
 
 const App = React.createClass(
     {
-        render: function () {
-            var connection = $.hubConnection('http://localhost:5000/signalr', { useDefaultPath: false });
-            var chainhub = connection.createHubProxy('chainHub');
-
-            connection.logging = true;
-            console.log("connection.hub.start");
-            connection.start().done(function () {
-                console.log("start done");
-                chainhub.invoke('callOnChainChanged');
-            }).fail(function (error) { console.log('Could not Connect!'); });
-            chainhub.on('onRequirementChainChanged', (requimentInfoList) => {
-
-                console.log(requimentInfoList);
-            })
-
-
+        render: function (){
             return <div>
                 <FilterList  />
                 <ChainList />

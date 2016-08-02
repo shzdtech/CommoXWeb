@@ -101,7 +101,11 @@ namespace Micro.Future.Commo.Web
             app.UseStaticFiles();
 
             app.UseIdentity();
-            app.UseCors("AllowAll");
+            app.Map("/signalr", map =>
+            {
+                map.UseCors("AllowAll");
+                map.RunSignalR();
+            });
             app.UseSignalR();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715

@@ -5,7 +5,7 @@ const filterContentToggled = (state = { isIn: false }, action) => {
         case TOGGLE_FILTER_LIST:
             return {
                 isIn: !state.isIn
-            }
+            };
 
         default:
             return state;
