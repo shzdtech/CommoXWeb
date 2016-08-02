@@ -1,6 +1,7 @@
 ﻿"use strict";
 var extractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     entry: [
@@ -15,7 +16,12 @@ module.exports = {
         port: 9010
     },
     plugins: [
-        new extractTextPlugin("./dist/bundle.css")
+        new extractTextPlugin("./dist/bundle.css"),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
+        })
     ],
     module: {
         loaders: [

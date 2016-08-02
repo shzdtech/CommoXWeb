@@ -2,10 +2,6 @@
   "userSecretsId": "aspnet-Micro.Future.Commo.Web-ed3bbb30-a4f9-40ff-9095-90cd030f9e51",
 
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0",
-      "type": "platform"
-    },
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -36,11 +32,12 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Micro.Future.Business.Owin.Wechat": "1.0.0-*",
+    //"Micro.Future.Business.Owin.Wechat": "1.0.0-*",
     "Newtonsoft.Json": "9.0.1",
     "Serilog": "2.0.0",
     "Serilog.Sinks.Seq": "2.0.0",
-    "Serilog.Extensions.Logging": "1.0.0"
+    "Serilog.Extensions.Logging": "1.0.0",
+    "Micro.Future.Business.DataAccess.Commo": "1.0.0-*"
   },
 
   "tools": {
@@ -66,13 +63,24 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet5.6",
-        "dnxcore50",
-        "portable-net45+win8"
-      ]
+    "net451": {
+      "dependencies": {
+        "Micro.Future.Business.MongoDB.Commo": "1.0.0-*",
+        "Micro.Future.Commo.Business.Requirement": "1.0.0-*"
+      }
     }
+    //"netcoreapp1.0": {
+    //  "dependencies": {
+    //    "Microsoft.NETCore.App": {
+    //      "version": "1.0.0",
+    //      "type": "platform"
+    //    }
+    //  },
+    //  "imports": [
+    //    "dnxcore50",
+    //    "portable-net45+win8"
+    //  ]
+    //}
   },
 
   "buildOptions": {

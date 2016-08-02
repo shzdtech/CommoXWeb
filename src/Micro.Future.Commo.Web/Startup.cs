@@ -59,6 +59,18 @@ namespace Micro.Future.Commo.Web
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             });
 
+            services.AddCors(options => options.AddPolicy("AllowAll", p => {
+                    p.AllowAnyOrigin();
+                    p.AllowAnyHeader();
+                    p.AllowAnyMethod();
+                    p.AllowCredentials();
+                }));
+
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableJavaScriptProxies = false;
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
@@ -89,7 +101,9 @@ namespace Micro.Future.Commo.Web
             app.UseStaticFiles();
 
             app.UseIdentity();
+            app.UseCors("AllowAll");
             app.UseSignalR();
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
