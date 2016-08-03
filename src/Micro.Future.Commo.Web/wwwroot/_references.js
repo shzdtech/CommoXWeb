@@ -10,6 +10,7 @@
 /// <reference path="../client/scripts/constants/ActionTypes.js" />
 /// <reference path="../client/scripts/constants/FilterTypes.js" />
 /// <reference path="../client/scripts/filterlist.js" />
+/// <reference path="../client/scripts/models/filterproperty.js" />
 /// <reference path="../client/scripts/models/requirementproperty.js" />
 /// <reference path="../client/scripts/reducers/chains.js" />
 /// <reference path="../client/scripts/reducers/filterContentToggled.js" />

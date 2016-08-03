@@ -5,19 +5,58 @@ import Filter from './Filter';
 import InputFilter from './InputFilter';
 import {removeFilter, toggleFilterList} from '../Actions';
 import {TEXT} from '../Constants/FilterTypes';
+import RequirementProperty from '../Models/RequirementProperty';
+import FilterProperty from '../Models/FilterProperty';
+
 
 class FilterList extends React.Component {
     render() {
         const {filters, isIn, onRemoveFilterClick, onToggleFilterList} = this.props;
-
-        let list = filters.map(function (filter) {
+        let requirements = [];
+        let rules = [];
+        filters.forEach((filter) => {
             if (!filter.selected) {
-                if (filter.type === TEXT) {
-                    return <InputFilter key={filter.id} filter = {filter} />
+                if (filter.filterProperty === FilterProperty.Requirement) {
+                    requirements.push(filter);
+                } else if (filter.filterProperty === FilterProperty.Rule) {
+                    rules.push(filter);
                 }
-                return <Filter key={filter.id} filter = {filter} />
             }
         });
+
+        let requirementList = null;
+        let ruleList = null;
+        if (requirements.length > 0) {
+            requirementList = <li>
+                <div className='title'>需求属性：</div>
+                <ul>
+                    {requirements.map(function (r) {
+                        if (!r.selected) {
+                            if (r.type === TEXT) {
+                                return <InputFilter key={r.id} filter = {r} />;
+                            }
+                            return <Filter key={r.id} filter = {r} />;
+                        }
+                    }) }
+                </ul>
+            </li>
+        }
+
+        if (rules.length > 0) {
+            ruleList = <li>
+                <div className='title'>附加需求：</div>
+                <ul>{
+                    rules.map(function (filter) {
+                        if (!filter.selected && filter.filterProperty === FilterProperty.Rule) {
+                            if (filter.type === TEXT) {
+                                return <InputFilter key={filter.id} filter = {filter} />;
+                            }
+                            return <Filter key={filter.id} filter = {filter} />;
+                        }
+                    }) }
+                </ul>
+            </li>
+        }
 
         let selectedFilters = filters.filter((f) => {
             return f.selected
@@ -39,13 +78,14 @@ class FilterList extends React.Component {
 
         return <div className='filter-container'>
             <div className='btn filter-btn' onClick={onToggleFilterList}>筛选</div>
-            <div className={ 'filter-content' + (isIn ? ' in' : '')}>
+            <div className={ 'filter-content' + (isIn ? ' in' : '') }>
                 <span className="glyphicon glyphicon-remove close" aria-hidden="true" onClick={onToggleFilterList}></span>
                 <div className='selected-filter-container'>
                     <span>所有〉</span>{selected}
                 </div>
                 <ul>
-                    {list}
+                    {requirementList}
+                    {ruleList}
                 </ul>
             </div>
             <div className='filter-content-overlay' onClick={onToggleFilterList}></div>
@@ -65,7 +105,7 @@ const mapDispatchToProps = (dispatch) => {
         onRemoveFilterClick: (filter) => {
             dispatch(removeFilter(filter));
         },
-        onToggleFilterList:()=>{
+        onToggleFilterList: () => {
             dispatch(toggleFilterList());
         }
     };

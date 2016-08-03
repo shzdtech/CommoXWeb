@@ -1,19 +1,9 @@
-const ColumnTextAlign = (function () {
-    function ColumnTextAlign() {
-    }
-    ColumnTextAlign.Left = 'text-left';
-    ColumnTextAlign.Center = 'text-center';
-    ColumnTextAlign.Right = 'text-right';
-    return ColumnTextAlign;
-}());
+let RequirementProperty = {
+    Sell: 'Sell',
+    Buy: 'Buy',
+    Bonus: 'Bonus',
+    Acceptance: 'Acceptance',
+    Common: 'Common'
+};
 
-
-let RequirementProperty = (()=>{
-    var RequirementProperty = ()=>{
-    }
-
-    RequirementProperty.Sell = 'Sell';
-    RequirementProperty.Buy = 'Buy';
-    RequirementProperty.Bonus = 'Bonus';
-    RequirementProperty.Acceptance = 'Acceptance';
-})();
+export default RequirementProperty

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FilterList from './Components/FilterList';
 import ChainList from './Components/Chain/ChainList';
-import RequirementList from './Components/Requirement/RequirementList'
+import Requirement from './Components/Requirement/Requirement';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from './reducers';
@@ -14,7 +14,7 @@ const App = React.createClass(
         render: function (){
             return <div>
                 <FilterList  />
-                <RequirementList />
+                <Requirement />
                 <ChainList />
             </div>;
         }

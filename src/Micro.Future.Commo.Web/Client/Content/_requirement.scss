@@ -1,0 +1,45 @@
+.requirements {
+    margin-top: 10px;
+    padding: 20px 10px;
+    width: 100%;
+    color: $normal-font-color;
+
+    & > div {
+        border: 1px solid $normal-font-color;
+        padding: 20px;
+    }
+
+    .category {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .requirement {
+        padding: 10px 20px;
+
+        .title {
+            width: 80px;
+        }
+
+        .content {
+            margin-left: 20px;
+        }
+    }
+
+    .operators {
+        span {
+            margin-right: 20px;
+
+            &.calloff {
+                background: #999;
+                color: $white;
+
+                &:hover {
+                    background: $white;
+                    border-color: #999;
+                    color: #999;
+                }
+            }
+        }
+    }
+}
