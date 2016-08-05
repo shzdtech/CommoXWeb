@@ -78,6 +78,10 @@ class FilterList extends React.Component {
         return <div className='filter-container'>
             <div className='btn filter-btn' onClick={onToggleFilterList}>筛选</div>
             <div className={ 'filter-content' + (isIn ? ' in' : '') }>
+                <div className='right-selector'>
+                    <span className='btn togglebtn more' onClick={onToggleFilterList}>展开<span className='glyphicon glyphicon-chevron-down'></span></span>
+                    <span className='btn togglebtn retract' onClick={onToggleFilterList}>收起<span className='glyphicon glyphicon-chevron-up'></span></span>
+                </div>
                 <span className="glyphicon glyphicon-remove close" aria-hidden="true" onClick={onToggleFilterList}></span>
                 <div className='selected-filter-container'>
                     <span>所有〉</span>{selected}

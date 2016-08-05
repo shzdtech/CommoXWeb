@@ -20,7 +20,7 @@ class InputFilter extends React.Component {
     }
 
     handleValueChange(e) {
-        this.props.onItemTyped(this.props.filter, { id: 1, name: e.target.value })
+        this.props.onItemTyped(this.props.filter, { id: 1, name: e.target.value, value: e.target.value })
     }
 
     onSumited() {

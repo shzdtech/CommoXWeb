@@ -18,7 +18,7 @@ export default [{
             value: RequirementType.Sell
         }, {
             id: 3,
-            name: '出钱补贴',
+            name: '补贴',
             value: RequirementType.Bonus
         }],
     multipleSelection: false
@@ -77,15 +77,34 @@ export default [{
         items: [],
         multipleSelection: false,
         type: TEXT
-    }, {
+    },
+    {
         id: 5,
+        title: '货物类型',
+        filterProperty: FilterProperty.Requirement,
+        key: 'productType',
+        items: [{
+            id: 1,
+            name: '有色金属',
+            value: '有色金属'
+        }, {
+                id: 2,
+                name: '化工',
+                value: '化工'
+            }, {
+                id: 3,
+                name: '其他',
+                value: '其他'
+            }]
+    }, {
+        id: 6,
         title: '货物名称',
         filterProperty: FilterProperty.Requirement,
         key: 'productName',
         items: [{
             id: 1,
             name: '铜',
-            value:'铜'
+            value: '铜'
         }, {
                 id: 2,
                 name: '铁',
@@ -102,9 +121,47 @@ export default [{
         multipleSelection: true
     },
     {
-        id: 6,
-        title: '货物数量',
+        id: 7,
+        title: '货物规格',
+        key: 'productSpecification',
+        filterProperty: FilterProperty.Requirement,
         items: [],
         type: TEXT
+    },
+    {
+        id: 8,
+        title: '货物单价',
+        key: 'productPrice',
+        filterProperty: FilterProperty.Requirement,
+        items: [],
+        type: TEXT
+    },
+    {
+        id: 9,
+        title: '货物数量',
+        key: 'productQuantity',
+        filterProperty: FilterProperty.Requirement,
+        items: [],
+        type: TEXT
+    },
+    {
+        id: 10,
+        title: '货物单位',
+        key: 'productUnit',
+        filterProperty: FilterProperty.Requirement,
+        items: [{
+            id: 1,
+            name: '千克',
+            value: '千克'
+        }, {
+                id: 2,
+                name: '吨',
+                value: '吨'
+            }, {
+                id: 3,
+                name: '千吨',
+                value: '千吨'
+            }]
     }
+
 ];

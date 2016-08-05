@@ -38,12 +38,44 @@
     }
 
     .filter-content {
+        position: relative;
+
+        & > .right-selector {
+            position: absolute;
+            top: 0;
+            right: 30px;
+
+            & > span {
+                margin-left: 10px;
+
+                &.retract {
+                    display: none;
+                }
+            }
+        }
+
         .close {
             display: none;
         }
 
         .filter-content-overlay {
             display: none;
+        }
+
+        &.in {
+            & > .right-selector {
+                .more {
+                    display: none;
+                }
+
+                .retract {
+                    display: block;
+                }
+            }
+
+            & > ul{
+                height: auto;
+            }
         }
 
         ul {
@@ -59,12 +91,12 @@
                 line-height: 40px;
             }
 
-            div.title{
+            div.title {
                 height: 50px;
                 color: $normal-font-color;
                 line-height: 50px;
                 font-size: 15px;
-                border-bottom: 1px solid $normal-font-color; 
+                border-bottom: 1px solid $normal-font-color;
             }
 
             .filter-category {
@@ -211,6 +243,9 @@
 
         & > ul {
             padding: 0 20px;
+            height: 0;
+            overflow: hidden;
+            transition: all linear 1s;
         }
     }
 }
@@ -252,6 +287,10 @@
             &.in {
                 left: 0;
 
+                & > .right-selector {
+                    display: none;
+                }
+
                 & + .filter-content-overlay {
                     display: block;
                     position: fixed;
@@ -263,35 +302,37 @@
                     opacity: 0;
                 }
 
-                >ul{
+                & > ul {
                     border: none;
                     padding: 0 10px;
+                    height: auto;
 
-                    .filter-category{
+                    .filter-category {
                         height: auto;
 
                         .items {
-                            width:calc(100% - 120px);
+                            width: calc(100% - 120px);
 
-                            & > li{
+                            & > li {
                                 margin: 0 10px;
 
-                                & > a > span{
+                                & > a > span {
                                     background: $white;
                                     border: 1px solid $primary-color;
                                     padding: 5px 6px;
                                     color: $primary-color;
                                     border-radius: 4px;
 
-                                    &:hover{
-                                       color: $white;
-                                       background: $primary-color;
+                                    &:hover {
+                                        color: $white;
+                                        background: $primary-color;
                                     }
                                 }
                             }
                         }
-                        .right-selector{
-                            .more{
+
+                        .right-selector {
+                            .more {
                                 display: none;
                             }
                         }
