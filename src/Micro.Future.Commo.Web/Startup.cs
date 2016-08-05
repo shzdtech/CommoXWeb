@@ -13,6 +13,8 @@ using Micro.Future.Commo.Web.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Serilog;
+using Micro.Future.Commo.Business.Requirement.Handler;
+using Micro.Future.Commo.Business.Abstraction.BizInterface;
 
 namespace Micro.Future.Commo.Web
 {
@@ -63,6 +65,8 @@ namespace Micro.Future.Commo.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IRequirementManager, RequirementManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,15 +90,14 @@ namespace Micro.Future.Commo.Web
             }
 
             app.UseStaticFiles();
-
-            app.UseIdentity();
+     
             app.Map("/signalr", map =>
             {
                 map.UseCors("AllowAll");
                 map.RunSignalR();
             });
             app.UseSignalR();
-
+      
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

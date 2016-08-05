@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Micro.Future.Commo.Web.Services;
 
 namespace Micro.Future.Commo.Web.Controllers
 {
@@ -12,10 +13,10 @@ namespace Micro.Future.Commo.Web.Controllers
     public class TestController : Controller
     {
 
-        public TestController()
+        public TestController(IEmailSender emailService)
         {
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {

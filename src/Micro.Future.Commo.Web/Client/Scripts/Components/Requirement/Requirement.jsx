@@ -4,6 +4,7 @@ import Filter from '../Filter';
 import InputFilter from '../InputFilter';
 import {TEXT} from '../../Constants/FilterTypes';
 import FilterProperty from '../../Models/FilterProperty';
+import {addRequirement} from '../../Actions';
 
 class Requirement extends React.Component {
 
@@ -13,7 +14,7 @@ class Requirement extends React.Component {
 
     render() {
 
-        let {selectedFilters} = this.props;
+        let {selectedFilters, addRequirement} = this.props;
         let selectedRequirements = [];
         let selectedRules = [];
         selectedFilters.forEach((filter) => {
@@ -54,7 +55,7 @@ class Requirement extends React.Component {
                     { selectedRequirements.map((r) => { return action(r) }) }
                     {extra}
                     <div className='operators'>
-                        <span className='btn multiply-submit'>提交</span>
+                        <span className='btn multiply-submit' onClick={() => addRequirement(selectedFilters)}>提交</span>
                         <span className='btn calloff'>取消</span>
                     </div>
                 </div>
@@ -72,6 +73,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        addRequirement: (selectedFilters) => dispatch(addRequirement(selectedFilters))
     };
 };
 

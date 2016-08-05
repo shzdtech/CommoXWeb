@@ -1,11 +1,12 @@
 import {TEXT} from './Constants/FilterTypes';
 import RequirementType from './Models/RequirementType';
 import FilterProperty from './Models/FilterProperty';
+import RuleType from './Models/RuleType';
 
 export default [{
     id: 1,
     title: '订单属性',
-    key: 'requirementType',
+    key: 'type',
     filterProperty: FilterProperty.Requirement,
     items: [{
         id: 1,
@@ -19,16 +20,13 @@ export default [{
             id: 3,
             name: '出钱补贴',
             value: RequirementType.Bonus
-        }, {
-            id: 4,
-            name: '商业承兑',
-            value: RequirementType.Acceptance
         }],
     multipleSelection: false
 }, {
         id: 2,
         title: '企业类型',
         filterProperty: FilterProperty.Rule,
+        ruleType: RuleType.Enterprise,
         items: [{
             id: 1,
             name: '国有企业'
@@ -55,6 +53,7 @@ export default [{
         id: 3,
         title: '注册资本',
         filterProperty: FilterProperty.Rule,
+        ruleType: RuleType.Enterprise,
         items: [{
             id: 1,
             name: '100万以内',
@@ -73,6 +72,8 @@ export default [{
     {
         id: 4,
         title: '注册地',
+        filterProperty: FilterProperty.Rule,
+        ruleType: RuleType.Enterprise,
         items: [],
         multipleSelection: false,
         type: TEXT

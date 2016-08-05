@@ -5,7 +5,6 @@ import Filter from './Filter';
 import InputFilter from './InputFilter';
 import {removeFilter, toggleFilterList} from '../Actions';
 import {TEXT} from '../Constants/FilterTypes';
-import RequirementProperty from '../Models/RequirementProperty';
 import FilterProperty from '../Models/FilterProperty';
 
 

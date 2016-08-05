@@ -6,6 +6,7 @@ import {
     REMOVE_FILTER,
     TYPE_ITEM,
     CHECK_ITEM,
+    ADD_REQUIREMENT,
     RECEIVE_CHAIN_LIST} from '../Constants/ActionTypes';
 
 //filter actions
@@ -61,9 +62,17 @@ export const toggleFilterList = () => {
 };
 
 //chain actions
-export const receiveChainList = (chainList)=>{
+export const receiveChainList = (chainList) => {
     return {
         type: RECEIVE_CHAIN_LIST,
         chainList: chainList
     };
 };
+
+//requirement
+export const addRequirement = (selectedFilters) => {
+    return {
+        type: ADD_REQUIREMENT,
+        selectedFilters: selectedFilters
+    }
+}

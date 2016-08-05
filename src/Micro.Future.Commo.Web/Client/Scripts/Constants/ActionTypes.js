@@ -9,3 +9,6 @@ export const TOGGLE_FILTER_LIST = 'TOGGLE_FILTER_LIST';
 
 //chain actions
 export const RECEIVE_CHAIN_LIST = 'RECEIVE_CHAIN_LIST';
+
+//requirement
+export const ADD_REQUIREMENT = 'ADD_REQUIREMENT';

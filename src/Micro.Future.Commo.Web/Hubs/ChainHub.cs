@@ -1,6 +1,8 @@
 ﻿using Micro.Future.Business.MongoDB.Commo.BizObjects;
 using Micro.Future.Business.MongoDB.Commo.Handler;
+using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Business.Abstraction.Handler;
 using Micro.Future.Commo.Business.Requirement.Handler;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -12,13 +14,12 @@ namespace Micro.Future.Commo.Web.Hubs
 {
     public class ChainHub: Hub
     {
-        private RequirementManager _manager;
-        private RequirementHandler _handler;
-        public ChainHub()
+        private IRequirementManager _manager;
+        public ChainHub(IRequirementManager requirementManager)
         {
-            _handler = new RequirementHandler();
-            _manager = new RequirementManager(_handler);
-            _manager.OnRequirementChainChanged += _onRequirementChainChanged;
+            _manager = requirementManager;
+            if (_manager is AbstractRequirementManager) 
+            (_manager as RequirementManager).OnRequirementChainChanged += _onRequirementChainChanged;
         }
 
         private void _onRequirementChainChanged(IEnumerable<RequirementChainInfo> chain)
@@ -28,7 +29,7 @@ namespace Micro.Future.Commo.Web.Hubs
 
         public void CallOnChainChanged()
         {
-            _handler.CallOnChainChanged(new List<ChainObject>() { }); ;
+            //_handler.CallOnChainChanged(new List<ChainObject>() { }); ;
         }
 
     }
