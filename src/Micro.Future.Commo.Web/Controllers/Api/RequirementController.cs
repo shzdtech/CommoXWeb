@@ -47,5 +47,21 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
             _requirementManager.AddRequirementInfo(requirementInfo);
         }
+
+        [Route("")]
+        [HttpGet]
+        public IEnumerable<Models.RequirementInfo> GetRequirements()
+        {
+            var userId = 6;
+            return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r));
+        }
+
+        [Route("{id:int}")]
+        [HttpGet]
+        public Models.RequirementInfo GetRequirement(int id)
+        {
+            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Micro.Future.Commo.Web.Models
         /// 需求ID
         /// </summary>
         public int RequirementId { get; set; }
-       
+
         /// <summary>
         /// 需求类型：买/卖/补贴
         /// </summary>
@@ -114,5 +114,24 @@ namespace Micro.Future.Commo.Web.Models
         /// 需求的撮合规则
         /// </summary>
         public IEnumerable<RequirementRuleInfo> Rules { get; set; }
+
+        public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
+        {
+            RequirementId = requirement.RequirementId;
+            ProductName = requirement.ProductName;
+            ProductPrice = requirement.ProductPrice;
+            ProductQuantity = requirement.ProductQuantity;
+            ProductSpecification = requirement.ProductSpecification;
+            ProductType = requirement.ProductType;
+            ProductUnit = requirement.ProductUnit;
+            TradeAmount = requirement.TradeAmount;
+            Type = requirement.Type;
+            Subsidies = requirement.Subsidies;
+            WarehouseState = requirement.WarehouseState;
+            WarehouseCity = requirement.WarehouseCity;
+            WarehouseAddress1 = requirement.WarehouseAddress1;
+            WarehouseAddress2 = requirement.WarehouseAddress2;
+            Rules = requirement.Rules;
+        }
     }
 }
