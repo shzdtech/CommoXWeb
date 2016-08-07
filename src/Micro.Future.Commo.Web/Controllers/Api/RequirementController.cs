@@ -63,5 +63,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
         }
 
+        [Route("{id:int}/Chains")]
+        [HttpGet]
+        public IEnumerable<Models.ChainInfo> GetChains(int id)
+        {
+            var chains = _requirementManager.QueryRequirementChains(id);
+            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
+        }
+
     }
 }

@@ -14,6 +14,10 @@ namespace Micro.Future.Commo.Web.Models
         public int RequirementId { get; set; }
 
         /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string EnterpriseName { get; set; }
+        /// <summary>
         /// 需求类型：买/卖/补贴
         /// </summary>
         public RequirementType Type { get; set; }
