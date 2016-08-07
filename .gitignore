@@ -255,3 +255,10 @@ src/Micro.Future.Commo.Web/dist/*
 
 src/Micro.Future.Commo.Web/Client/Content/*.css
 src/Micro.Future.Commo.Web/Client/Content/*.css.map
+src/Micro.Future.Commo.Web/wwwroot/css/site.min.css
+src/Micro.Future.Commo.Web/wwwroot/dist/bundle.css
+src/Micro.Future.Commo.Web/wwwroot/dist/bundle.js
+src/Micro.Future.Commo.Web/wwwroot/js/site.min.js
+src/Micro.Future.Commo.Web/89889688147bd7575d6327160d64e760.svg
+src/Micro.Future.Commo.Web/Properties/PublishProfiles/commo.web-publish.ps1
+src/Micro.Future.Commo.Web/Properties/PublishProfiles/publish-module.psm1

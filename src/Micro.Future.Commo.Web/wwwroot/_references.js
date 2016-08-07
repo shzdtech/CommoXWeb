@@ -25,4 +25,5 @@
 /// <reference path="../dist/vendor.js" />
 /// <reference path="../gulpfile.js" />
 /// <reference path="../webpack.config.js" />
+/// <reference path="dist/bundle.js" />
 /// <reference path="js/site.js" />

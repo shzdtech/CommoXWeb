@@ -8,7 +8,7 @@ module.exports = {
         'bootstrap-loader',
         "./Client/Scripts/index.jsx"],
     output: {
-        filename: "./dist/bundle.js"
+        filename: "./wwwroot/dist/bundle.js"
     },
     devServer: {
         contentBase: ".",
@@ -16,7 +16,7 @@ module.exports = {
         port: 9010
     },
     plugins: [
-        new extractTextPlugin("./dist/bundle.css"),
+        new extractTextPlugin("./wwwroot/dist/bundle.css"),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
