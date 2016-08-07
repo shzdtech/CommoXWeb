@@ -8,10 +8,10 @@ class ChainNode extends React.Component {
     }
 
     render() {
-        let {chainNode} = this.props;
+        let {requirement} = this.props;
         return (<div className='chain-node'>
-            <div className='title'>{chainNode.name}</div>
-            <div className='sub-title'>{chainNode.product}</div>
+            <div className='title'>{requirement.enterpriseName}</div>
+            <div className='sub-title'>{requirement.productName}</div>
             <div className='operators'>
                 <span className='btn'>确认</span>
                 <span className='btn'>拒绝</span>

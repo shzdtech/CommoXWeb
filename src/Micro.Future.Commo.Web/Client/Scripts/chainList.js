@@ -1,49 +1,51 @@
 export default [{
-    id: 1,
-    chainNodes: [
+    chainId: 1,
+    requirements: [
         {
-            id: 1,
-            name: '公司1',
-            product: '铜'
+            requirementId: 1,
+            enterpriseName: '公司1',
+            type: 1,
+            productName: '铜'
         },
         {
-            id: 2,
-            name: '公司2',
-            product: '铜'
+            requirementId: 2,
+            enterpriseName: '公司1',
+            type: 1,
+            productName: '铜'
         },
         {
-            id: 3,
-            name: '公司3',
-            product: '铜'
+            requirementId: 3,
+            enterpriseName: '公司1',
+            type: 1,
+            productName: '铜'
         },
         {
-            id: 4,
-            name: '公司4',
-            product: '铜'
+            requirementId: 4,
+            enterpriseName: '公司1',
+            type: 1,
+            productName: '铜'
         }
     ]
 }, {
-        id: 2,
-        chainNodes: [
+        chainId: 2,
+        requirements: [
             {
-                id: 1,
-                name: '公司1',
-                product: '铜'
+                requirementId: 1,
+                enterpriseName: '公司1',
+                type: 1,
+                productName: '铜'
             },
             {
-                id: 2,
-                name: '公司2',
-                product: '铜'
+                requirementId: 2,
+                enterpriseName: '公司1',
+                type: 1,
+                productName: '铜'
             },
             {
-                id: 3,
-                name: '公司3',
-                product: '铜'
-            },
-            {
-                id: 4,
-                name: '公司4',
-                product: '铜'
+                requirementId: 3,
+                enterpriseName: '公司1',
+                type: 1,
+                productName: '铜'
             }
         ]
     }

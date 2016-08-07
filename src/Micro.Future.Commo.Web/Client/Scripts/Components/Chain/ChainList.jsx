@@ -13,7 +13,7 @@ class ChainList extends React.Component {
         return <div>
             {
                 this.props.chains.map((chain) => {
-                    return <Chain key={chain.id} chain={chain} />;
+                    return <Chain key={chain.chainId} chain={chain} />;
                 })
             }
         </div>;
