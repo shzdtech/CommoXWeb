@@ -1,4 +1,4 @@
-import {ADD_REQUIREMENT} from '../Constants/ActionTypes';
+import {ADD_REQUIREMENT, FETCH_REQUIREMENT_LIST_SUCCESS} from '../Constants/ActionTypes';
 import FilterProperty from '../Models/FilterProperty';
 import {HOST} from '../appSettings';
 
@@ -8,7 +8,7 @@ const requirements = (state = [], action) => {
             let requirement = {};
             requirement.rules = [];
             action.selectedFilters.forEach((f) => {
-                let values = f.selectedItems.map((item) => { return item.value });
+                let values = f.selectedItems.map((item) => { return item.value; });
                 if (f.filterProperty === FilterProperty.Requirement) {
                     requirement[f.key] = values.join(',');
                 } else if (f.filterProperty === FilterProperty.Rule) {
@@ -22,11 +22,17 @@ const requirements = (state = [], action) => {
             });
 
             $.post(HOST + 'api/Requirement', requirement);
-            return action.selectedFilters
+            return [
+                ...state,
+                action.requirement
+            ];
+        }
+        case FETCH_REQUIREMENT_LIST_SUCCESS: {
+            return action.requirements;
         }
         default:
             return state;
     }
-}
+};
 
 export default requirements;

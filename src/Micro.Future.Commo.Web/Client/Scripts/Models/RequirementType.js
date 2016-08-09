@@ -5,4 +5,4 @@ let RequirementType = {
     Subsidy: 3
 };
 
-export default RequirementType
+export default RequirementType;

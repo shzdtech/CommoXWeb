@@ -103,7 +103,7 @@ export default [{
         title: '货物名称',
         filterProperty: FilterProperty.Requirement,
         key: 'productName',
-        parentFilterId: 1,
+        parentFilterId: 5,
         parentItemId: 1,
         items: [{
             id: 1,
@@ -184,6 +184,103 @@ export default [{
         parentItemId: 3,
         items: [],
         type: TEXT
+    },
+    {
+        id: 12,
+        title: '货物类型',
+        filterProperty: FilterProperty.Requirement,
+        parentFilterId: 1,
+        parentItemId: 2,
+        key: 'productType',
+        items: [{
+            id: 1,
+            name: '有色金属',
+            value: '有色金属'
+        }, {
+                id: 2,
+                name: '化工',
+                value: '化工'
+            }, {
+                id: 3,
+                name: '其他',
+                value: '其他'
+            }]
+    }, {
+        id: 13,
+        title: '货物名称',
+        filterProperty: FilterProperty.Requirement,
+        key: 'productName',
+        parentFilterId: 12,
+        parentItemId: 1,
+        items: [{
+            id: 1,
+            name: '铜',
+            value: '铜'
+        }, {
+                id: 2,
+                name: '铁',
+                value: '铁'
+            }, {
+                id: 3,
+                name: '锌',
+                value: '锌'
+            }, {
+                id: 4,
+                name: '铝',
+                value: '铝'
+            }],
+        multipleSelection: true
+    },
+    {
+        id: 14,
+        title: '货物规格',
+        parentFilterId: 1,
+        parentItemId: 2,
+        key: 'productSpecification',
+        filterProperty: FilterProperty.Requirement,
+        items: [],
+        type: TEXT
+    },
+    {
+        id: 15,
+        title: '货物单价',
+        key: 'productPrice',
+        parentFilterId: 1,
+        parentItemId: 2,
+        filterProperty: FilterProperty.Requirement,
+        items: [],
+        type: TEXT
+    },
+    {
+        id: 16,
+        title: '货物数量',
+        key: 'productQuantity',
+        parentFilterId: 1,
+        parentItemId: 2,
+        filterProperty: FilterProperty.Requirement,
+        items: [],
+        type: TEXT
+    },
+    {
+        id: 17,
+        title: '货物单位',
+        key: 'productUnit',
+        parentFilterId: 1,
+        parentItemId: 2,
+        filterProperty: FilterProperty.Requirement,
+        items: [{
+            id: 1,
+            name: '千克',
+            value: '千克'
+        }, {
+                id: 2,
+                name: '吨',
+                value: '吨'
+            }, {
+                id: 3,
+                name: '千吨',
+                value: '千吨'
+            }]
     }
 
 ];

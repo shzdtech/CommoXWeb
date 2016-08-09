@@ -1,5 +1,6 @@
-let FilterProperty = {
+const FilterProperty = {
     Requirement : 'Requirement',
     Rule : 'Rule'
-}
-export default FilterProperty
+};
+
+export default FilterProperty;

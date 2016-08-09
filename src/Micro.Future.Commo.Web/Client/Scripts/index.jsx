@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import FilterList from './Components/FilterList';
 import ChainList from './Components/Chain/ChainList';
 import Requirement from './Components/Requirement/Requirement';
+import Requirements from './Components/Requirement/Requirements';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -16,6 +17,7 @@ const App = React.createClass(
             return <div>
                 <FilterList  />
                 <Requirement />
+                <Requirements />
                 <ChainList />
             </div>;
         }

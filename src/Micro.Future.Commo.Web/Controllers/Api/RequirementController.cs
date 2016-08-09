@@ -25,7 +25,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             var requirementInfo = new RequirementInfo
             {
-                UserId = new Random().Next(100),
+                UserId = 1,
                 EnterpriseId = new Random().Next(100),
                 CreateTime = DateTime.UtcNow,
                 ModifyTime = DateTime.UtcNow,
@@ -52,7 +52,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
-            var userId = 6;
+            var userId = 1;
             return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r));
         }
 

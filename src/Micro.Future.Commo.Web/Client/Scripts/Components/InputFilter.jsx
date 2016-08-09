@@ -16,11 +16,11 @@ class InputFilter extends React.Component {
             <span className='title'>{filter.title + ':'}</span>
             <input type='text' onChange={(e) => { this.handleValueChange(e) } }></input>
             <span className='btn submit-filter' onClick={this.onSumited}>提交</span>
-        </li>
+        </li>;
     }
 
     handleValueChange(e) {
-        this.props.onItemTyped(this.props.filter, { id: 1, name: e.target.value, value: e.target.value })
+        this.props.onItemTyped(this.props.filter, { id: 1, name: e.target.value, value: e.target.value });
     }
 
     onSumited() {
