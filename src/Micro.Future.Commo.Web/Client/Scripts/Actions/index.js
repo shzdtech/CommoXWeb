@@ -7,7 +7,14 @@ import {
     TYPE_ITEM,
     CHECK_ITEM,
     ADD_REQUIREMENT,
-    RECEIVE_CHAIN_LIST} from '../Constants/ActionTypes';
+    RECEIVE_CHAIN_LIST,
+    FETCH_CHAIN_LIST,
+    FETCH_CHAIN_LIST_SUCCESS,
+    FETCH_CHAIN_LIST_FAILURE,
+    REQUEST_REQUIREMENT,
+    RECEIVE_REQUIREMENT} from '../Constants/ActionTypes';
+
+import {HOST} from '../appSettings';
 
 //filter actions
 export const toggleFilterMutipleSelection = (filter) => {
@@ -69,10 +76,53 @@ export const receiveChainList = (chainList) => {
     };
 };
 
+export const fetchChainsRequest = () => {
+    var requirementId = 6; //temp
+    const request = $.get(HOST + 'api/requirement/' + requirementId + '/Chains');
+
+     return request;
+}
+
+export const fetchChainsSuccess = (chains) => {
+    return {
+        type: FETCH_CHAIN_LIST_SUCCESS,
+        chains: chains
+    };
+}
+
+export const fetchChainsFailure = (error) => {
+  return {
+    type: FETCH_CHAIN_LIST_FAILURE,
+    payload: error
+  };
+}
+
+export const fetchChains = ()=>{
+    return (dispatch) =>{
+        return fetchChainsRequest().then(
+            chains => dispatch(fetchChainsSuccess(chains)),
+            error => dispatch(fetchChainsFailure(error))
+        );
+    }
+}
+
 //requirement
 export const addRequirement = (selectedFilters) => {
     return {
         type: ADD_REQUIREMENT,
         selectedFilters: selectedFilters
+    }
+}
+
+export const requestRequirement = () => {
+    return {
+        type: REQUEST_REQUIREMENT
+    }
+}
+
+export const receiveRequirement = (requirements) => {
+    return {
+        type: RECEIVE_REQUIREMENT,
+        requirements: requirements
     }
 }

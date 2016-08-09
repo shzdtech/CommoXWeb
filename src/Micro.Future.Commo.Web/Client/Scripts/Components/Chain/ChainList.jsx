@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import Chain from './Chain';
-import {receiveChainList} from '../../Actions';
+import {receiveChainList, fetchChains} from '../../Actions';
 import {SIGNALR_ADDRESS} from '../../appSettings';
 
 class ChainList extends React.Component {
@@ -19,20 +19,24 @@ class ChainList extends React.Component {
         </div>;
     }
 
-    componentDidMount(){
-         var connection = $.hubConnection(SIGNALR_ADDRESS, { useDefaultPath: false });
-            var chainHub = connection.createHubProxy('chainHub');
+    componentWillMount() {
+        this.props.fetchChains();
+    }
 
-            connection.logging = true;
-            console.log("connection.hub.start");
-            connection.start().done(function () {
-                console.log("start done");
-                chainHub.invoke('callOnChainChanged');
-            }).fail(function (error) { console.log('Could not Connect!'); });
-            chainHub.on('onRequirementChainChanged', (requimentInfoList) => {
-                this.props.onReceiveChainList(requimentInfoList);
-                console.log(requimentInfoList);
-            });
+    componentDidMount() {
+        var connection = $.hubConnection(SIGNALR_ADDRESS, { useDefaultPath: false });
+        var chainHub = connection.createHubProxy('chainHub');
+
+        connection.logging = true;
+        console.log("connection.hub.start");
+        connection.start().done(function () {
+            console.log("start done");
+            chainHub.invoke('callOnChainChanged');
+        }).fail(function (error) { console.log('Could not Connect!'); });
+        chainHub.on('onRequirementChainChanged', (requimentInfoList) => {
+            this.props.onReceiveChainList(requimentInfoList);
+            console.log(requimentInfoList);
+        });
 
     }
 
@@ -46,8 +50,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList))
-    };
+        onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList)),
+        fetchChains: () => {
+            dispatch(fetchChains());
+        }
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChainList);
