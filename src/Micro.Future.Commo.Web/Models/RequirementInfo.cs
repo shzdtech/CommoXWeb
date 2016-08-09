@@ -119,6 +119,10 @@ namespace Micro.Future.Commo.Web.Models
         /// </summary>
         public IEnumerable<RequirementRuleInfo> Rules { get; set; }
 
+        public RequirementInfo()
+        {
+        }
+
         public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
         {
             RequirementId = requirement.RequirementId;

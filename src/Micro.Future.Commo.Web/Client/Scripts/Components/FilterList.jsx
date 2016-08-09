@@ -11,12 +11,17 @@ import FilterProperty from '../Models/FilterProperty';
 class FilterList extends React.Component {
     render() {
         const {filters, isIn, onRemoveFilterClick, onToggleFilterList} = this.props;
+        let selectedFilters = filters.filter((f) => {
+            return f.selected
+        });
         let requirements = [];
         let rules = [];
         filters.forEach((filter) => {
             if (!filter.selected) {
                 if (filter.filterProperty === FilterProperty.Requirement) {
-                    requirements.push(filter);
+                    if (!filter.parentFilterId || selectedFilters.filter((f) => {return f.id === filter.parentFilterId 
+                        && f.selectedItems.filter((i)=>{return i.id === filter.parentItemId}).length > 0}).length > 0)
+                        requirements.push(filter);
                 } else if (filter.filterProperty === FilterProperty.Rule) {
                     rules.push(filter);
                 }
@@ -56,10 +61,6 @@ class FilterList extends React.Component {
                 </ul>
             </li>
         }
-
-        let selectedFilters = filters.filter((f) => {
-            return f.selected
-        });
 
         let selected = selectedFilters.map((filter) => {
             if (filter.selectedItems) {

@@ -82,6 +82,8 @@ export default [{
         id: 5,
         title: '货物类型',
         filterProperty: FilterProperty.Requirement,
+        parentFilterId: 1,
+        parentItemId: 1,
         key: 'productType',
         items: [{
             id: 1,
@@ -101,6 +103,8 @@ export default [{
         title: '货物名称',
         filterProperty: FilterProperty.Requirement,
         key: 'productName',
+        parentFilterId: 1,
+        parentItemId: 1,
         items: [{
             id: 1,
             name: '铜',
@@ -123,6 +127,8 @@ export default [{
     {
         id: 7,
         title: '货物规格',
+        parentFilterId: 1,
+        parentItemId: 1,
         key: 'productSpecification',
         filterProperty: FilterProperty.Requirement,
         items: [],
@@ -132,6 +138,8 @@ export default [{
         id: 8,
         title: '货物单价',
         key: 'productPrice',
+        parentFilterId: 1,
+        parentItemId: 1,
         filterProperty: FilterProperty.Requirement,
         items: [],
         type: TEXT
@@ -140,6 +148,8 @@ export default [{
         id: 9,
         title: '货物数量',
         key: 'productQuantity',
+        parentFilterId: 1,
+        parentItemId: 1,
         filterProperty: FilterProperty.Requirement,
         items: [],
         type: TEXT
@@ -148,6 +158,8 @@ export default [{
         id: 10,
         title: '货物单位',
         key: 'productUnit',
+        parentFilterId: 1,
+        parentItemId: 1,
         filterProperty: FilterProperty.Requirement,
         items: [{
             id: 1,
@@ -162,6 +174,16 @@ export default [{
                 name: '千吨',
                 value: '千吨'
             }]
+    },
+    {
+        id: 11,
+        title: '交易量',
+        key: 'tradeAmount',
+        filterProperty: FilterProperty.Requirement,
+        parentFilterId: 1,
+        parentItemId: 3,
+        items: [],
+        type: TEXT
     }
 
 ];
