@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import Chain from './Chain';
-import {receiveChainList, fetchChains} from '../../Actions';
+import {receiveChainList} from '../../Actions';
 import {SIGNALR_ADDRESS} from '../../appSettings';
 
 class ChainList extends React.Component {
@@ -17,10 +17,6 @@ class ChainList extends React.Component {
                 })
             }
         </div>;
-    }
-
-    componentWillMount() {
-        this.props.fetchChains();
     }
 
     componentDidMount() {
@@ -51,9 +47,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList)),
-        fetchChains: () => {
-            dispatch(fetchChains());
-        }
     }
 };
 

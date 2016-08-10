@@ -7,6 +7,8 @@ import {
     TYPE_ITEM,
     CHECK_ITEM,
     ADD_REQUIREMENT,
+    ADD_REQUIREMENT_SUCCESS,
+    ADD_REQUIREMENT_FAILURE,
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
     FETCH_REQUIREMENT_LIST_FAILURE,
@@ -18,6 +20,7 @@ import {
     RECEIVE_REQUIREMENT} from '../Constants/ActionTypes';
 
 import {HOST} from '../appSettings';
+import FilterProperty from '../Models/FilterProperty';
 
 //filter actions
 export const toggleFilterMutipleSelection = (filter) => {
@@ -79,11 +82,10 @@ export const receiveChainList = (chainList) => {
     };
 };
 
-export const fetchChainsRequest = () => {
-    var requirementId = 6; //temp
+export const fetchChainsRequest = (requirementId) => {
     const request = $.get(HOST + 'api/requirement/' + requirementId + '/Chains');
 
-     return request;
+    return request;
 };
 
 export const fetchChainsSuccess = (chains) => {
@@ -94,15 +96,15 @@ export const fetchChainsSuccess = (chains) => {
 };
 
 export const fetchChainsFailure = (error) => {
-  return {
-    type: FETCH_CHAIN_LIST_FAILURE,
-    payload: error
-  };
+    return {
+        type: FETCH_CHAIN_LIST_FAILURE,
+        error: error
+    };
 };
 
-export const fetchChains = ()=>{
-    return (dispatch) =>{
-        return fetchChainsRequest().then(
+export const fetchChains = (requirementId) => {
+    return (dispatch) => {
+        return fetchChainsRequest(requirementId).then(
             chains => dispatch(fetchChainsSuccess(chains)),
             error => dispatch(fetchChainsFailure(error))
         );
@@ -110,16 +112,46 @@ export const fetchChains = ()=>{
 };
 
 //requirement
-export const addRequirement = (selectedFilters) => {
+export const addRequirementRequest = (selectedFilters) => {
+    let requirement = {};
+    requirement.rules = [];
+    selectedFilters.forEach((f) => {
+        let values = f.selectedItems.map((item) => { return item.value; });
+        if (f.filterProperty === FilterProperty.Requirement) {
+            requirement[f.key] = values.join(',');
+        } else if (f.filterProperty === FilterProperty.Rule) {
+            requirement.rules.push({
+                ruleType: f.ruleType,
+                key: f.title,
+                value: values.join(','),
+                operationType: 2
+            });
+        }
+    });
+
+    return $.post(HOST + 'api/Requirement', requirement);
+};
+
+export const addRequirementSuccess = (requirement)=>{
     return {
-        type: ADD_REQUIREMENT,
-        selectedFilters: selectedFilters
+        type: ADD_REQUIREMENT_SUCCESS,
+        requirement: requirement
     };
 };
 
-export const requestRequirement = () => {
+export const addRequirementFailure = (error)=>{
     return {
-        type: REQUEST_REQUIREMENT
+        type: ADD_REQUIREMENT_FAILURE,
+        error: error
+    };
+};
+
+export const addRequirement = (selectedFilters) =>{
+     return (dispatch) => {
+        return addRequirementRequest(selectedFilters).then(
+            requirement => dispatch(addRequirementSuccess(requirement)),
+            error => dispatch(addRequirementFailure(error))
+        );
     };
 };
 
@@ -131,10 +163,8 @@ export const receiveRequirement = (requirements) => {
 };
 
 export const fetchRequirementsRequest = () => {
-    var requirementId = 6; //temp
     const request = $.get(HOST + 'api/requirement');
-
-     return request;
+    return request;
 };
 
 export const fetchRequirementsSuccess = (requirements) => {
@@ -145,14 +175,14 @@ export const fetchRequirementsSuccess = (requirements) => {
 };
 
 export const fetchRequirementssFailure = (error) => {
-  return {
-    type: FETCH_REQUIREMENT_LIST_FAILURE,
-    payload: error
-  };
+    return {
+        type: FETCH_REQUIREMENT_LIST_FAILURE,
+        error: error
+    };
 };
 
-export const fetchRequirements = ()=>{
-    return (dispatch) =>{
+export const fetchRequirements = () => {
+    return (dispatch) => {
         return fetchRequirementsRequest().then(
             requirements => dispatch(fetchRequirementsSuccess(requirements)),
             error => dispatch(fetchRequirementssFailure(error))

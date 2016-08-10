@@ -21,7 +21,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
         [Route("")]
         [HttpPost]
-        public void AddRequirement(Models.RequirementInfo requirement)
+        public Models.RequirementInfo AddRequirement(Models.RequirementInfo requirement)
         {
             var requirementInfo = new RequirementInfo
             {
@@ -46,6 +46,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             };
 
             _requirementManager.AddRequirementInfo(requirementInfo);
+
+            requirement.RequirementId = new Random().Next(100, 1000000);
+            return requirement;
         }
 
         [Route("")]
@@ -54,6 +57,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             var userId = 1;
             return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r));
+            //return new List<Models.RequirementInfo> { new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(16).Result),
+            //    new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(6).Result),
+            //    new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(7).Result) };
         }
 
         [Route("{id:int}")]
