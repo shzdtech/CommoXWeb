@@ -45,9 +45,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 Rules = requirement.Rules
             };
 
-            _requirementManager.AddRequirementInfo(requirementInfo);
+            var result = _requirementManager.AddRequirementInfo(requirementInfo).Result;
 
-            requirement.RequirementId = new Random().Next(100, 1000000);
+            requirement.RequirementId = result.RequirementId;
             return requirement;
         }
 
@@ -57,9 +57,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             var userId = 1;
             return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r));
-            //return new List<Models.RequirementInfo> { new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(16).Result),
-            //    new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(6).Result),
-            //    new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(7).Result) };
         }
 
         [Route("{id:int}")]

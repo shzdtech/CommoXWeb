@@ -13,7 +13,7 @@ class Chain extends React.Component {
                 this.props.chain.requirements.map((requirement) => {
                    return <ChainNode key={requirement.requirementId} requirement = {requirement}/>;
                 })
-            }
+            }            
         </div>;
     }
 

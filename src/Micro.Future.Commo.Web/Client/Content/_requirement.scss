@@ -53,7 +53,6 @@
         margin: 20px 20px 0 20px;
         box-shadow: 0 0 3px rgba(69, 69, 70, 0.2);
         width: 240px;
-        position: relative;
         color: #444;
         background: $primary-color-opacity;
         float: left;
@@ -79,6 +78,7 @@
             height: 70px;
             width: 100%;
             background: $white;
+            position: relative;
 
             & > span {
                 margin-top: 20px;
@@ -88,5 +88,6 @@
                 transform: translateX(-50%);
             }
         }
+
     }
 }

@@ -19,7 +19,7 @@ export default [{
         }, {
             id: 3,
             name: '补贴',
-            value: RequirementType.Bonus
+            value: RequirementType.Subsidy
         }],
     multipleSelection: false
 }, {

@@ -21,6 +21,7 @@ class Requirements extends React.Component {
                 requirements.map((requirement) => {
                     return this.getRequirement(requirement);
                 }) }
+            <div className='clearfix'></div>
         </div>;
     }
 

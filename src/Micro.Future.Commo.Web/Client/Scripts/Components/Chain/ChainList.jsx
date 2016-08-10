@@ -10,7 +10,8 @@ class ChainList extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div className='chain-list'>
+            {this.props.chains && this.props.chains.length > 0 ? <div>匹配详情：</div> : null}
             {
                 this.props.chains.map((chain) => {
                     return <Chain key={chain.chainId} chain={chain} />;
