@@ -12,6 +12,7 @@ namespace Micro.Future.Commo.Web.Models
         /// 需求ID
         /// </summary>
         public int RequirementId { get; set; }
+        public int EnterpriseId { get; set; }
 
         /// <summary>
         /// 公司名称
@@ -126,6 +127,7 @@ namespace Micro.Future.Commo.Web.Models
         public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
         {
             RequirementId = requirement.RequirementId;
+            EnterpriseId = requirement.EnterpriseId;
             ProductName = requirement.ProductName;
             ProductPrice = requirement.ProductPrice;
             ProductQuantity = requirement.ProductQuantity;

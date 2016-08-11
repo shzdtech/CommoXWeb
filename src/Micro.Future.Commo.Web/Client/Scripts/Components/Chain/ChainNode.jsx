@@ -10,6 +10,7 @@ class ChainNode extends React.Component {
     render() {
         let {requirement} = this.props;
         let {requirementId,
+            enterpriseId,
             enterpriseName,
             type,
             productType,
@@ -21,6 +22,7 @@ class ChainNode extends React.Component {
             tradeAmount
         } = requirement;
         return (<div className='chain-node'>
+            {enterpriseId ? <div className='title'><span>企业编号：</span><span>{enterpriseId}</span></div> : null}
             <div className='title'>{enterpriseName}</div>
             {type ? <div className='title'><span>需求类型：</span><span>{type === 1 ? '出资' : type === 2 ? '出货' : '补贴'}</span></div> : null}
             {productType ? <div className='sub-title'><span>货物类型：</span><span>{productType}</span></div> : null}
