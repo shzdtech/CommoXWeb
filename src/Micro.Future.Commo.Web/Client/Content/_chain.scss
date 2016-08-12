@@ -1,13 +1,16 @@
 .chain-list {
     color: $normal-font-color;
-    padding: 20px;
-
+    & > .title{
+        padding: 0 20px;
+    }
+    
     .chain {
         padding: 10px;
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: flex;
+        justify-content: center;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         -webkit-flex-direction: row;

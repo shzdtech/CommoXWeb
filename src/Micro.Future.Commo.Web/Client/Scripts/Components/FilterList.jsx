@@ -67,7 +67,7 @@ class FilterList extends React.Component {
                 let names = filter.selectedItems.map((item) => {
                     return item.name;
                 });
-                return <span className='selected-filter'>
+                return <span key={filter.id} className='selected-filter'>
                     {filter.title + ': ' + names.join(', ') }
                     <span className="glyphicon glyphicon-remove filter-remove" aria-hidden="true" onClick={
                         () => onRemoveFilterClick(filter)

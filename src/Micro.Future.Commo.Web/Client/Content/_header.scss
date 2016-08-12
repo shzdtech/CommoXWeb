@@ -1,0 +1,22 @@
+.header {
+    width: 100%;
+    background: $primary-color;
+
+    nav{
+        max-width: 1170px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        background: $primary-color;
+        border-radius: 0;
+        border:none;
+
+.navbar-nav{
+        li{
+            a{
+                color: $white;
+                font-size: 20px;
+            }
+        }
+    }
+    }
+}

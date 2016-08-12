@@ -29,7 +29,7 @@ class Requirement extends React.Component {
             let names = r.selectedItems.map((item) => {
                 return item.name;
             });
-            return <div className='requirement'>
+            return <div key={r.id} className='requirement'>
                 <span className='title'>
                     {r.title + ':'}
                 </span>

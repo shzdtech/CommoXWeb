@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router'
 import {fetchRequirements, fetchChains} from '../../Actions';
 
 class Requirements extends React.Component {
@@ -16,7 +17,7 @@ class Requirements extends React.Component {
     render() {
         const {requirements} = this.props;
         return <div className='requirement-list'>
-            {requirements && requirements.length > 0 ? <div>我的需求：</div> : null}
+            {requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
             {
                 requirements.map((requirement) => {
                     return this.getRequirement(requirement);
@@ -54,7 +55,7 @@ class Requirements extends React.Component {
                 {tradeAmount ? <div className='requirement-item'><span className='title'>交易量：</span><span>{tradeAmount}</span></div> : null}
             </div>
             <div className='operators'>
-                <span className='btn' onClick={()=>this.props.fetchChains(requirementId)}>查看匹配详情</span>
+                <Link to="/chains" className='btn' onClick={()=>this.props.fetchChains(requirementId)}>查看匹配详情</Link>
             </div>
         </div>;
     }

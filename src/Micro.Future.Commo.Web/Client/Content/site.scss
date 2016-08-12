@@ -1,5 +1,16 @@
 @import 'colors';
+@import 'header';
 @import 'checkbox';
 @import 'filter';
 @import 'requirement';
 @import 'chain';
+
+body{
+     background: $grey !important;
+}
+
+.main-wrapper{
+    min-height: calc(100vh - 80px);
+    background: #fff;
+    padding: 20px;
+}

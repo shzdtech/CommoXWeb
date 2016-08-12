@@ -45,8 +45,11 @@
 }
 
 .requirement-list {
-    padding: 20px;
     color: $normal-font-color;
+
+    &>.title{
+        padding: 0 20px;
+    }
 
     .requirement {
         min-height: 300px;
@@ -80,7 +83,7 @@
             background: $white;
             position: relative;
 
-            & > span {
+            & > a {
                 margin-top: 20px;
                 text-align: center;
                 position: absolute;
