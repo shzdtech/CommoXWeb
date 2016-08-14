@@ -6,10 +6,10 @@ import requirements from './requirements'
 import { routerReducer } from 'react-router-redux'
 
 const reducers = combineReducers({
-    filters: filters,
-    filterContentToggled: filterContentToggled,
-    chains: chains,
-    requirements: requirements,
+    filters,
+    filterContentToggled,
+    chains,
+    requirements,
     routing: routerReducer
 });
 

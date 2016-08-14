@@ -278,6 +278,7 @@
             position: fixed;
             top: 0;
             width: 90%;
+            min-width: 320px;
             height: 100%;
             left: -90%;
             transition: left 0.3s;

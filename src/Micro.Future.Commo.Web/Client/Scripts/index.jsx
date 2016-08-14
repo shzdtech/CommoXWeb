@@ -20,13 +20,22 @@ const App = ({ children }) =>
     <div>
         <div className='header'>
             <nav className='navbar navbar-default'>
-                <div id="navbar container" class="navbar-collapse collapse" aria-expanded="false">
-                    <div class="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="icon-delete"></span></div>
-                    <ul className='nav navbar-nav navbar-left'>
-                        <li><Link to="/requirement">我的需求</Link></li>
-                        <li><Link to="/addRequirement">添加新需求</Link></li>
-                    </ul>
-                    <div className='clearfix'></div>
+                <div className='container'>
+                    <div className="navbar-header">
+                        <div className="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span className="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <div className="navbar-brand">
+                        </div>
+                    </div>
+                    <div id="navbar" className="navbar-collapse collapse" aria-expanded="false">
+                        <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="icon-delete"></span></div>
+                        <ul className='nav navbar-nav navbar-left'>
+                            <li><Link to="/requirement">我的需求</Link></li>
+                            <li><Link to="/addRequirement">添加新需求</Link></li>
+                        </ul>
+                        <div className='clearfix'></div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -43,7 +52,6 @@ const DevTools = createDevTools(
 
 
 let store = createStore(reducers,
-    DevTools.instrument(),
     applyMiddleware(thunk));
 
 const history = syncHistoryWithStore(browserHistory, store)
@@ -56,7 +64,7 @@ ReactDOM.render(
                 <Route path="/addRequirement" component={AddRequirement} />
                 <Route path="/requirement" component={Requirements}>
                 </Route>
-                 <Route path="/chains" component={ChainList}/>
+                <Route path="/chains" component={ChainList}/>
                 <Route path="*" component={Requirements}/>
             </Route>
         </Router>

@@ -13,5 +13,23 @@ namespace Micro.Future.Commo.Web.Controllers
         {
             return View();
         }
+
+        [Route("/Requirement")]
+        public ActionResult Requirement()
+        {
+            return View("Index");
+        }
+
+        [Route("/AddRequirement")]
+        public ActionResult AddRequirement()
+        {
+            return View("Index");
+        }
+
+        [Route("/Chains")]
+        public ActionResult Chains()
+        {
+            return View("Index");
+        }
     }
 }
