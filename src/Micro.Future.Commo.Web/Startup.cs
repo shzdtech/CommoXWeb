@@ -67,6 +67,7 @@ namespace Micro.Future.Commo.Web
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddSingleton<IRequirementManager, RequirementManager>();
+            services.AddSingleton<IChainManager, ChainManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -11,9 +11,29 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     public class ChainController : Controller
     {
         private IRequirementManager _requirementManager;
-        public ChainController(IRequirementManager requirementManager)
+        private IChainManager _chainManager;
+
+        public ChainController(IRequirementManager requirementManager, IChainManager chainManager)
         {
             _requirementManager = requirementManager;
+            _chainManager = chainManager;
+        }
+
+        [HttpPost]
+        [Route("{id:int}/Confirmation/{requirementId:int}")]
+        public int ConfirmChain(int id, int requirementId)
+        {
+            int tradeId;
+            _chainManager.ConfirmRequirement(id, requirementId, out tradeId);
+            return tradeId;
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IEnumerable<Models.ChainInfo> Get()
+        {
+            var userId = 1;
+            return _chainManager.QueryChains(1).Select(c => new Models.ChainInfo(c, userId)).ToList(); ;
         }
     }
 }

@@ -21,6 +21,17 @@
         -ms-flex-align: stretch;
         width: 80%;
 
+        &.reject{
+            .chain-node{
+                background: $red;
+                color: $white;
+
+                .title{
+                    color:$white;
+                }
+            }
+        }
+
         .chain-node {
             border-color: $primary-color;
             border-width: 1px 0 1px 1px;
@@ -30,6 +41,16 @@
             min-width: 200px;
             min-height: 80px;
             color: $normal-font-color;
+
+            &.accept{
+                background: $primary-color;
+                color: $white;
+                border-right: 1px solid $white;
+
+                .title{
+                    color: $white;
+                }
+            }
 
 
             &::after {

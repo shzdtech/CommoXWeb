@@ -17,7 +17,10 @@ import {
     FETCH_CHAIN_LIST_SUCCESS,
     FETCH_CHAIN_LIST_FAILURE,
     REQUEST_REQUIREMENT,
-    RECEIVE_REQUIREMENT} from '../Constants/ActionTypes';
+    RECEIVE_REQUIREMENT,
+    CONFIRM_CHAIN_SUCCEDD,
+    CONFIRM_CHAIN_FAILURE
+} from '../Constants/ActionTypes';
 
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
@@ -110,6 +113,39 @@ export const fetchChains = (requirementId) => {
         );
     };
 };
+
+export const confirmChainRequest = (chainId, requirementId) =>{
+    const request = $.post(HOST + 'api/chain/'+ chainId + '/Confirmation/'+ requirementId);
+    return request;
+}
+
+export const confirmChainSuccess = (chainId, requirementId, accept) =>{
+    return {
+        type: CONFIRM_CHAIN_SUCCEDD,
+        chainId: chainId,
+        requirementId: requirementId,
+        accept: accept
+    };
+}
+
+export const confirmChainFailure = (chainId, requirementId, accept) =>{
+    return {
+        type: CONFIRM_CHAIN_FAILURE,
+        chainId: chainId,
+        requirementId: requirementId,
+        accept: accept
+    };
+}
+
+export const confirmChain = (chainId, requirementId, accept) =>{
+    return (dispatch) => {
+
+        return confirmChainRequest(chainId, requirementId).then(
+            success => dispatch(confirmChainSuccess(chainId, requirementId, accept)),
+            error => dispatch(confirmChainFailure(error))
+        );
+    };
+}
 
 //requirement
 export const addRequirementRequest = (selectedFilters) => {

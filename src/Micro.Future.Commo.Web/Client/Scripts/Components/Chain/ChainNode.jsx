@@ -1,14 +1,15 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {} from '../../Actions';
+import {confirmChain} from '../../Actions';
 
 class ChainNode extends React.Component {
     constructor() {
         super();
+        this.confirmChain = this.confirmChain.bind(this);
     }
 
     render() {
-        let {requirement} = this.props;
+        let {requirement, chain} = this.props;
         let {requirementId,
             enterpriseId,
             enterpriseName,
@@ -19,9 +20,21 @@ class ChainNode extends React.Component {
             productPrice,
             productQuantity,
             productUnit,
-            tradeAmount
+            tradeAmount,
+            isMyRequest,
+            accept
         } = requirement;
-        return (<div className='chain-node'>
+        let operators = null;
+        let operatorsOverlay = null;
+        if (isMyRequest && !chain.reject && !accept) {
+            operators = <div className='operators'>
+                <span className='btn' onClick={() => this.confirmChain(chain.chainId, requirementId, true) }>确认</span>
+                <span className='btn' onClick={() => this.confirmChain(chain.chainId, requirementId, false) }>拒绝</span>
+            </div>
+            operatorsOverlay = <div className='operators-overlay'></div>
+        }
+
+        return (<div className={!chain.reject && accept ? 'chain-node accept' : 'chain-node'}>
             {enterpriseId ? <div className='title'><span>企业编号：</span><span>{enterpriseId}</span></div> : null}
             <div className='title'>{enterpriseName}</div>
             {type ? <div className='title'><span>需求类型：</span><span>{type === 1 ? '出资' : type === 2 ? '出货' : '补贴'}</span></div> : null}
@@ -32,12 +45,13 @@ class ChainNode extends React.Component {
             {productQuantity ? <div className='sub-title'><span>货物数量：</span><span>{productQuantity}</span></div> : null}
             {productUnit ? <div className='sub-title'><span>货物单位：</span><span>{productUnit}</span></div> : null}
             {tradeAmount ? <div className='sub-title'><span>交易量：</span><span>{tradeAmount}</span></div> : null}
-            <div className='operators'>
-                <span className='btn'>确认</span>
-                <span className='btn'>拒绝</span>
-            </div>
-            <div className='operators-overlay'></div>
+            {operators}
+            {operatorsOverlay}
         </div>);
+    }
+
+    confirmChain(chainId, requirementId, accept) {
+        this.props.confirmChain(chainId, requirementId, accept);
     }
 
 }
@@ -50,6 +64,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept)),
     };
 };
 

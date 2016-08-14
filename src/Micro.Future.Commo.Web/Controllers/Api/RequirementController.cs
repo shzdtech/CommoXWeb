@@ -14,6 +14,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     [Route("api/Requirement")]
     public class RequirementController : Controller
     {
+        private int _userId = 1;
         private IRequirementManager _requirementManager;
         public RequirementController(IRequirementManager requirementManager)
         {
@@ -56,14 +57,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
             var userId = 1;
-            return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r));
+            return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r, _userId));
         }
 
         [Route("{id:int}")]
         [HttpGet]
         public Models.RequirementInfo GetRequirement(int id)
         {
-            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
+            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result, _userId);
         }
 
         [Route("{id:int}/Chains")]
@@ -71,7 +72,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = _requirementManager.QueryRequirementChains(id);
-            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
+            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c, _userId)).ToList();
         }
 
     }

@@ -114,7 +114,8 @@ namespace Micro.Future.Commo.Web.Models
         public decimal Subsidies { get; set; }
 
         #endregion
-
+    
+        public bool IsMyRequest { get; set; }
         /// <summary>
         /// 需求的撮合规则
         /// </summary>
@@ -124,7 +125,7 @@ namespace Micro.Future.Commo.Web.Models
         {
         }
 
-        public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
+        public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement, int userId)
         {
             RequirementId = requirement.RequirementId;
             EnterpriseId = requirement.EnterpriseId;
@@ -142,6 +143,7 @@ namespace Micro.Future.Commo.Web.Models
             WarehouseAddress1 = requirement.WarehouseAddress1;
             WarehouseAddress2 = requirement.WarehouseAddress2;
             Rules = requirement.Rules;
+            IsMyRequest = userId == requirement.UserId;
         }
     }
 }
