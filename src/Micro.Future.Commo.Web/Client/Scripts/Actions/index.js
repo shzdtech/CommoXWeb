@@ -24,6 +24,7 @@ import {
 
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
+import { push } from 'react-router-redux'
 
 //filter actions
 export const toggleFilterMutipleSelection = (filter) => {
@@ -114,30 +115,30 @@ export const fetchChains = (requirementId) => {
     };
 };
 
-export const confirmChainRequest = (chainId, requirementId) =>{
-    const request = $.post(HOST + 'api/chain/'+ chainId + '/Confirmation/'+ requirementId);
+export const confirmChainRequest = (chainId, requirementId) => {
+    const request = $.post(HOST + 'api/chain/' + chainId + '/Confirmation/' + requirementId);
     return request;
-}
+};
 
-export const confirmChainSuccess = (chainId, requirementId, accept) =>{
+export const confirmChainSuccess = (chainId, requirementId, accept) => {
     return {
         type: CONFIRM_CHAIN_SUCCEDD,
         chainId: chainId,
         requirementId: requirementId,
         accept: accept
     };
-}
+};
 
-export const confirmChainFailure = (chainId, requirementId, accept) =>{
+export const confirmChainFailure = (chainId, requirementId, accept) => {
     return {
         type: CONFIRM_CHAIN_FAILURE,
         chainId: chainId,
         requirementId: requirementId,
         accept: accept
     };
-}
+};
 
-export const confirmChain = (chainId, requirementId, accept) =>{
+export const confirmChain = (chainId, requirementId, accept) => {
     return (dispatch) => {
 
         return confirmChainRequest(chainId, requirementId).then(
@@ -145,7 +146,7 @@ export const confirmChain = (chainId, requirementId, accept) =>{
             error => dispatch(confirmChainFailure(error))
         );
     };
-}
+};
 
 //requirement
 export const addRequirementRequest = (selectedFilters) => {
@@ -168,24 +169,24 @@ export const addRequirementRequest = (selectedFilters) => {
     return $.post(HOST + 'api/Requirement', requirement);
 };
 
-export const addRequirementSuccess = (requirement)=>{
+export const addRequirementSuccess = (requirement) => {
     return {
         type: ADD_REQUIREMENT_SUCCESS,
         requirement: requirement
     };
 };
 
-export const addRequirementFailure = (error)=>{
+export const addRequirementFailure = (error) => {
     return {
         type: ADD_REQUIREMENT_FAILURE,
         error: error
     };
 };
 
-export const addRequirement = (selectedFilters) =>{
-     return (dispatch) => {
+export const addRequirement = (selectedFilters) => {
+    return (dispatch) => {
         return addRequirementRequest(selectedFilters).then(
-            requirement => dispatch(addRequirementSuccess(requirement)),
+            requirement => { dispatch(addRequirementSuccess(requirement)); dispatch(push('/requirements')); },
             error => dispatch(addRequirementFailure(error))
         );
     };

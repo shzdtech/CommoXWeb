@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 require('signalr');
@@ -50,9 +51,10 @@ const DevTools = createDevTools(
     </DockMonitor>
 );
 
+const rm = routerMiddleware(browserHistory);
 
 let store = createStore(reducers,
-    applyMiddleware(thunk));
+    applyMiddleware(thunk, rm));
 
 const history = syncHistoryWithStore(browserHistory, store)
 
@@ -64,7 +66,7 @@ ReactDOM.render(
                 <Route path="/addRequirement" component={AddRequirement} />
                 <Route path="/requirement" component={Requirements}>
                 </Route>
-                <Route path="/chains" component={ChainList}/>
+                <Route path="/requirement/:requirementId/chains" component={ChainList}/>
                 <Route path="*" component={Requirements}/>
             </Route>
         </Router>

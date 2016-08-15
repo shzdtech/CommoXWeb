@@ -55,7 +55,7 @@ class Requirements extends React.Component {
                 {tradeAmount ? <div className='requirement-item'><span className='title'>交易量：</span><span>{tradeAmount}</span></div> : null}
             </div>
             <div className='operators'>
-                <Link to="/chains" className='btn' onClick={()=>this.props.fetchChains(requirementId)}>查看匹配详情</Link>
+                <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>
             </div>
         </div>;
     }

@@ -31,5 +31,12 @@ namespace Micro.Future.Commo.Web.Controllers
         {
             return View("Index");
         }
+
+
+        [Route("/Requirement/{id:int}/Chains")]
+        public ActionResult RequirementChain()
+        {
+            return View("Index");
+        }
     }
 }
