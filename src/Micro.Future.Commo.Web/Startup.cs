@@ -13,8 +13,10 @@ using Micro.Future.Commo.Web.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using Serilog;
+using Micro.Future.Business.MatchMaker.Commo;
 using Micro.Future.Commo.Business.Requirement.Handler;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
+using Micro.Future.Business.MatchMaker.Commo.Config;
 
 namespace Micro.Future.Commo.Web
 {
@@ -66,8 +68,10 @@ namespace Micro.Future.Commo.Web
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            services.AddMatchMakerSystem(new MatcherConfig());
             services.AddSingleton<IRequirementManager, RequirementManager>();
             services.AddSingleton<IChainManager, ChainManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

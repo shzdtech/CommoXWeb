@@ -37,7 +37,8 @@
     "Serilog": "2.0.0",
     "Serilog.Sinks.Seq": "2.0.0",
     "Serilog.Extensions.Logging": "1.0.0",
-    "Micro.Future.Business.DataAccess.Commo": "1.0.0-*"
+    "Micro.Future.Business.DataAccess.Commo": "1.0.0-*",
+    "Micro.Future.Business.MatchMaker.Commo": "1.0.0-*"
   },
 
   "tools": {
