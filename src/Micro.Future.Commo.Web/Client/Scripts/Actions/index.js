@@ -160,18 +160,20 @@ export const addRequirementRequest = (list, selectedType) => {
     list.forEach((l) => {
 
         if (l.type === TEXT) {
-            if (l.filterProperty === FilterProperty.Requirement) {
-                requirement[l.key] = l.value;
-            } else if (l.filterProperty === FilterProperty.Rule) {
-                requirement.rules.push({
-                    ruleType: l.ruleType,
-                    key: l.title,
-                    value: l.value,
-                    operationType: 2
-                });
+            if (l.value !== undefined && l.value !== null && l.value !== '') {
+                if (l.filterProperty === FilterProperty.Requirement) {
+                    requirement[l.key] = l.value;
+                } else if (l.filterProperty === FilterProperty.Rule) {
+                    requirement.rules.push({
+                        ruleType: l.ruleType,
+                        key: l.title,
+                        value: l.value,
+                        operationType: 2
+                    });
+                }
             }
         } else {
-            let values = l.items.filter((item) => { return item.selected; }).map((i)=>{return i.value;});
+            let values = l.items.filter((item) => { return item.selected; }).map((i) => { return i.value; });
             if (l.filterProperty === FilterProperty.Requirement) {
                 requirement[l.key] = values.join(',');
             } else if (l.filterProperty === FilterProperty.Rule) {
@@ -205,10 +207,10 @@ export const addRequirementFailure = (error) => {
 export const addRequirement = (list, selectedType) => {
     return (dispatch) => {
         return addRequirementRequest(list, selectedType).then(
-            requirement => { 
+            requirement => {
                 dispatch(addRequirementSuccess(requirement));
                 dispatch(resetForm());
-                dispatch(push('/requirements')); 
+                dispatch(push('/requirements'));
             },
             error => dispatch(addRequirementFailure(error))
         );
@@ -275,7 +277,7 @@ export const typeFormItem = (formItem, value) => {
     }
 };
 
-export const resetForm = ()=>{
+export const resetForm = () => {
     return {
         type: RESET_FORM
     };

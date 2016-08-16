@@ -8,11 +8,12 @@ import ChainList from './Components/Chain/ChainList';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
 import Form from './Components/Form/Form';
+import FormConfirmation from './Components/Form/FormConfirmation';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
-import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import { routerMiddleware } from 'react-router-redux'
+import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 require('signalr');
@@ -66,6 +67,8 @@ ReactDOM.render(
                 <IndexRoute component={Requirements} />
                 <Route path="/addRequirement" component={Form} />
                 <Route path="/requirement" component={Requirements}>
+                </Route>
+                <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>
                 <Route path="*" component={Requirements}/>

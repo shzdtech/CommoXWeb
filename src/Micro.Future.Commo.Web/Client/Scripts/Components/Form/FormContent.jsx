@@ -5,6 +5,7 @@ import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
 import FilterProperty from '../../Models/FilterProperty';
 import {TEXT} from '../../Constants/FilterTypes';
+import {Link} from 'react-router';
 
 class FormContent extends React.Component {
     render() {
@@ -30,12 +31,10 @@ class FormContent extends React.Component {
                 <div className='title'>需求属性：</div>
                 <div className='form-item-list'>
                     {requirements.map(function (r) {
-                        if (!r.selected) {
                             if (r.type === TEXT) {
                                 return <InputFormItem key={r.id} formItem = {r} />;
                             }
                             return <FormItem key={r.id} formItem = {r} />;
-                        }
                     }) }
                 </div>
             </div>
@@ -46,7 +45,7 @@ class FormContent extends React.Component {
                 <div className='title'>附加需求：</div>
                 <div className='form-item-list'>{
                     rules.map(function (r) {
-                        if (!r.selected && r.filterProperty === FilterProperty.Rule) {
+                        if ( r.filterProperty === FilterProperty.Rule) {
                             if (r.type === TEXT) {
                                 return <InputFormItem key={r.id} formItem = {r} />;
                             }
@@ -61,7 +60,7 @@ class FormContent extends React.Component {
             {requirementList}
             {ruleList}
             {requirements.length > 0 ? <div className="operators"> 
-                <span className='btn submit' onClick={()=>this.props.onSubmitForm(this.props.list, this.props.selectedType)}>提交</span>
+                <Link to="/formConfirm" className='btn'>确定</Link>
                 <span className='btn calloff' onClick={()=>this.props.resetForm()}>取消</span></div> : null}
         </div>
     }
