@@ -19,9 +19,13 @@ import {
     REQUEST_REQUIREMENT,
     RECEIVE_REQUIREMENT,
     CONFIRM_CHAIN_SUCCEDD,
-    CONFIRM_CHAIN_FAILURE
+    CONFIRM_CHAIN_FAILURE,
+    CHANGE_FORM_TYPE,
+    SELECT_FORM_ITEM,
+    TYPE_FORM_ITEM,
+    RESET_FORM
 } from '../Constants/ActionTypes';
-
+import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux'
@@ -149,20 +153,35 @@ export const confirmChain = (chainId, requirementId, accept) => {
 };
 
 //requirement
-export const addRequirementRequest = (selectedFilters) => {
+export const addRequirementRequest = (list, selectedType) => {
     let requirement = {};
     requirement.rules = [];
-    selectedFilters.forEach((f) => {
-        let values = f.selectedItems.map((item) => { return item.value; });
-        if (f.filterProperty === FilterProperty.Requirement) {
-            requirement[f.key] = values.join(',');
-        } else if (f.filterProperty === FilterProperty.Rule) {
-            requirement.rules.push({
-                ruleType: f.ruleType,
-                key: f.title,
-                value: values.join(','),
-                operationType: 2
-            });
+    requirement.type = selectedType;
+    list.forEach((l) => {
+
+        if (l.type === TEXT) {
+            if (l.filterProperty === FilterProperty.Requirement) {
+                requirement[l.key] = l.value;
+            } else if (l.filterProperty === FilterProperty.Rule) {
+                requirement.rules.push({
+                    ruleType: l.ruleType,
+                    key: l.title,
+                    value: l.value,
+                    operationType: 2
+                });
+            }
+        } else {
+            let values = l.items.filter((item) => { return item.selected; }).map((i)=>{return i.value;});
+            if (l.filterProperty === FilterProperty.Requirement) {
+                requirement[l.key] = values.join(',');
+            } else if (l.filterProperty === FilterProperty.Rule) {
+                requirement.rules.push({
+                    ruleType: l.ruleType,
+                    key: l.title,
+                    value: values.join(','),
+                    operationType: 2
+                });
+            }
         }
     });
 
@@ -183,10 +202,14 @@ export const addRequirementFailure = (error) => {
     };
 };
 
-export const addRequirement = (selectedFilters) => {
+export const addRequirement = (list, selectedType) => {
     return (dispatch) => {
-        return addRequirementRequest(selectedFilters).then(
-            requirement => { dispatch(addRequirementSuccess(requirement)); dispatch(push('/requirements')); },
+        return addRequirementRequest(list, selectedType).then(
+            requirement => { 
+                dispatch(addRequirementSuccess(requirement));
+                dispatch(resetForm());
+                dispatch(push('/requirements')); 
+            },
             error => dispatch(addRequirementFailure(error))
         );
     };
@@ -224,5 +247,36 @@ export const fetchRequirements = () => {
             requirements => dispatch(fetchRequirementsSuccess(requirements)),
             error => dispatch(fetchRequirementssFailure(error))
         );
+    };
+};
+
+
+//form
+export const changeFormType = (formType) => {
+    return {
+        type: CHANGE_FORM_TYPE,
+        formType: formType
+    };
+};
+
+export const selectFormItem = (formItem, item) => {
+    return {
+        type: SELECT_FORM_ITEM,
+        formItem: formItem,
+        item: item
+    };
+};
+
+export const typeFormItem = (formItem, value) => {
+    return {
+        type: TYPE_FORM_ITEM,
+        formItem: formItem,
+        value: value
+    }
+};
+
+export const resetForm = ()=>{
+    return {
+        type: RESET_FORM
     };
 };

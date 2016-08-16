@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import ChainList from './Components/Chain/ChainList';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
+import Form from './Components/Form/Form';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router'
@@ -63,7 +64,7 @@ ReactDOM.render(
         <Router history={history}>
             <Route path='/' component={App} >
                 <IndexRoute component={Requirements} />
-                <Route path="/addRequirement" component={AddRequirement} />
+                <Route path="/addRequirement" component={Form} />
                 <Route path="/requirement" component={Requirements}>
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>
