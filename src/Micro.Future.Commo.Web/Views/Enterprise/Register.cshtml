@@ -1,0 +1,115 @@
+@model Micro.Future.Commo.Web.Models.EnterpriseViewModels.EnterpriseRegisterViewModel
+@{
+    ViewData["Title"] = "企业注册";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+    <h4>企业信息注册</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    
+    <div class="form-group">
+        <label asp-for="BusinessTypeId" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="BusinessTypeId" class="form-control" />
+            <select asp-for="BusinessTypeId" class="form-control">
+                <option value="1">国营企业</option>
+                <option value="2">民营企业</option>
+                <option value="3">外商独资</option>
+            </select>
+            <span asp-validation-for="BusinessTypeId" class="text-danger"></span>
+        </div>
+    </div>
+    
+   
+
+    <div class="form-group">
+        <label asp-for="BusinessRange" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="BusinessRange" class="form-control" />
+            <span asp-validation-for="BusinessRange" class="text-danger"></span>
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+        <label asp-for="Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RegisterNumber" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RegisterNumber" class="form-control" />
+            <span asp-validation-for="RegisterNumber" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RegisterTime" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RegisterTime" class="form-control" />
+            <span asp-validation-for="RegisterTime" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RegisterAddress" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RegisterAddress" class="form-control" />
+            <span asp-validation-for="RegisterAddress" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RegisterCapital" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RegisterCapital" class="form-control" />
+            <span asp-validation-for="RegisterCapital" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Address" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Contacts" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Contacts" class="form-control" />
+            <span asp-validation-for="Contacts" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Register</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

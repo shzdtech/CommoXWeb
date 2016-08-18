@@ -81,6 +81,7 @@ namespace Micro.Future.Commo.Web
             services.AddMatchMakerSystem(new MatcherConfig());
             services.AddSingleton<IRequirementManager, RequirementManager>();
             services.AddSingleton<IChainManager, ChainManager>();
+            services.AddSingleton<IEnterpriseManager, EnterpriseManager>();
 
         }
 
