@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import ChainList from './Components/Chain/ChainList';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
+import Register from './Components/Account/Register';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
 import { Provider } from 'react-redux'
@@ -36,6 +37,10 @@ const App = ({ children }) =>
                         <ul className='nav navbar-nav navbar-left'>
                             <li><Link to="/requirement">我的需求</Link></li>
                             <li><Link to="/addRequirement">添加新需求</Link></li>
+                        </ul>
+                         <ul className='nav navbar-nav navbar-right'>
+                            <li><Link to="/requirement">登陆</Link></li>
+                            <li><Link to="/register">注册</Link></li>
                         </ul>
                         <div className='clearfix'></div>
                     </div>
@@ -71,6 +76,7 @@ ReactDOM.render(
                 <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>
+                <Route path="/register" component={Register} />
                 <Route path="*" component={Requirements}/>
             </Route>
         </Router>

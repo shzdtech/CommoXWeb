@@ -23,7 +23,9 @@ import {
     CHANGE_FORM_TYPE,
     SELECT_FORM_ITEM,
     TYPE_FORM_ITEM,
-    RESET_FORM
+    RESET_FORM,
+
+    CHANGE_ENTERPRISE_FORM
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -282,3 +284,13 @@ export const resetForm = () => {
         type: RESET_FORM
     };
 };
+
+
+//account
+export const changeEnterpriseInfo = (keyName, value) =>{
+    return {
+        type: CHANGE_ENTERPRISE_FORM,
+        keyName: keyName,
+        value: value
+    }
+}

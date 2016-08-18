@@ -29,3 +29,6 @@ export const CHANGE_FORM_TYPE = 'CHANGE_FORM_TYPE';
 export const SELECT_FORM_ITEM = 'SELECT_FORM_ITEM';
 export const TYPE_FORM_ITEM = 'TYPE_FORM_ITEM';
 export const RESET_FORM = 'RESET_FORM';
+
+//account
+export const CHANGE_ENTERPRISE_FORM = 'CHANGE_ENTERPRISE_FORM';

@@ -3,8 +3,9 @@ import filters from './filters';
 import filterContentToggled from './filterContentToggled'
 import chains from './chains';
 import forms from './forms';
-import requirements from './requirements'
-import { routerReducer } from 'react-router-redux'
+import requirements from './requirements';
+import register from './register';
+import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
     filters,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
     chains,
     requirements,
     forms,
+    register,
     routing: routerReducer
 });
 

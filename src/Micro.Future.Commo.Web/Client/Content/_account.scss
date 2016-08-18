@@ -1,0 +1,38 @@
+.input-container {
+    padding: 10px;
+
+    .input_label {
+        width: 15%;
+        text-align: right;
+        padding-right: 10px;
+        color: $normal-font-color;
+    }
+
+    .form-control {
+        display: inline-block !important;
+        color: $normal-font-color;
+        width: 20% !important;
+
+        &.long {
+            width: 60% !important;
+        }
+
+        &.medium {
+            width: 40% !important;
+        }
+
+        &.short {
+            width: 20% !important;
+        }
+    }
+}
+
+.select-container{
+    @extend .input-container;
+
+    .custom-select{
+        display: inline-block;
+        width: 20%;
+        vertical-align: middle;
+    }
+}

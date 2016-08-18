@@ -92,8 +92,8 @@ class FomrConfirmation extends React.Component {
                     </div>
                 </div>
             </div>
-            {requirementList}
-            {ruleList}
+            requirements.length > 0 ? {requirementList} : null
+            rules.length > 0 ? {ruleList} : null
             {requirements.length > 0 ? <div className="operators">
                 <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType) }>我同意提交需求>></a>
                 <Link to='/addRequirement' className='calloff'>返回</Link></div> : null}
