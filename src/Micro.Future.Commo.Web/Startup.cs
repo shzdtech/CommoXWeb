@@ -17,6 +17,8 @@ using Micro.Future.Business.MatchMaker.Commo;
 using Micro.Future.Commo.Business.Requirement.Handler;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Business.MatchMaker.Commo.Config;
+using Micro.Future.Commo.Web.Data;
+using Micro.Future.Commo.Web.Models;
 
 namespace Micro.Future.Commo.Web
 {
@@ -44,6 +46,14 @@ namespace Micro.Future.Commo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             // Add framework services.
             services.AddMvc().AddJsonOptions(options=>
             {
