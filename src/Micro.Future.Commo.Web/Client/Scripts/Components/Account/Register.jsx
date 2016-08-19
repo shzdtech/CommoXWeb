@@ -21,6 +21,10 @@ class Register extends React.Component {
         }
         return <div>
             {list}
+            <div className='operators'>
+                <span className='btn submit' onClick={this.handleMultipleSelectionSubmit}>提交</span>
+                <span className='btn calloff' onClick={() => onToggleMultipleSelectedClick(filter) }>取消</span>
+            </div>
         </div>
     }
 }

@@ -70,12 +70,13 @@
                 }
 
                 .input-group {
-                    width: 40%;
+                    width: 50%;
                     min-width: 300px;
 
                     .input-group-addon {
                         background: $primary-color;
                         color: $white;
+                        width: 130px;
                     }
                 }
 

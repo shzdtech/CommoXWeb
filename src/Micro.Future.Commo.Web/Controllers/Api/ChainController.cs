@@ -32,8 +32,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("")]
         public IEnumerable<Models.ChainInfo> Get()
         {
-            var userId = 1;
-            return _chainManager.QueryChains(1).Select(c => new Models.ChainInfo(c, userId)).ToList(); ;
+            var userId = "1";
+            return _chainManager.QueryChains(userId).Select(c => new Models.ChainInfo(c, "1")).ToList(); ;
         }
     }
 }

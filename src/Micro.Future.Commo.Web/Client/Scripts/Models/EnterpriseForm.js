@@ -101,7 +101,7 @@ export default {
             label:'良好'
         },{
             key: '3',
-            value: '3'
+            value: '3',
             label:'一般'
         }]
     },

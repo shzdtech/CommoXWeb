@@ -14,7 +14,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     [Route("api/Requirement")]
     public class RequirementController : Controller
     {
-        private int _userId = 1;
+        private string _userId = "1";
         private IRequirementManager _requirementManager;
         public RequirementController(IRequirementManager requirementManager)
         {
@@ -26,7 +26,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             var requirementInfo = new RequirementInfo
             {
-                UserId = 1,
+                UserId = _userId,
                 EnterpriseId = new Random().Next(100),
                 CreateTime = DateTime.UtcNow,
                 ModifyTime = DateTime.UtcNow,
@@ -56,8 +56,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
-            var userId = 1;
-            return _requirementManager.QueryRequirements(userId).Result.Select(r => new Models.RequirementInfo(r, _userId));
+            return _requirementManager.QueryRequirements(_userId).Result.Select(r => new Models.RequirementInfo(r, _userId));
         }
 
         [Route("{id:int}")]

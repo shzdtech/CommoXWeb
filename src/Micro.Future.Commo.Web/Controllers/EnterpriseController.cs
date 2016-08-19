@@ -70,7 +70,7 @@ namespace Micro.Future.Commo.Web.Controllers
                 newEnterprise.Name = model.Name;
                 newEnterprise.Address = model.Address;
                 newEnterprise.Contacts = model.Contacts;
-                newEnterprise.Email = model.Email;
+                //newEnterprise.Email = model.Email;
                 newEnterprise.RegisterNumber = model.RegisterNumber;
                 newEnterprise.RegisterTime = model.RegisterTime;
                 newEnterprise.RegisterCapital = model.RegisterCapital;

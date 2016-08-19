@@ -4,6 +4,7 @@ import {addRequirement, resetForm} from '../../Actions';
 import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
 import FilterProperty from '../../Models/FilterProperty';
+import Category from '../../Models/Category';
 import {TEXT} from '../../Constants/FilterTypes';
 import {Link} from 'react-router';
 
@@ -12,56 +13,55 @@ class FormContent extends React.Component {
 
         const {list, selectedType} = this.props;
 
-        let requirements = [];
-        let rules = [];
+        let capitals = [];
+        let products = [];
+        let invoices = [];
+        let contracts = [];
+        let enterprises = [];
+
         list.forEach((l) => {
-            if (!l.selected) {
-                if (l.filterProperty === FilterProperty.Requirement) {
-                    requirements.push(l);
-                } else if (l.filterProperty === FilterProperty.Rule) {
-                    rules.push(l);
-                }
+            if (l.category === Category.Capital) {
+                capitals.push(l);
+            } else if (l.category === Category.Product) {
+                products.push(l);
+            } else if (l.category === Category.Contract) {
+                contracts.push(l);
+            } else if (l.category === Category.Invoice) {
+                invoices.push(l);
+            } else if (l.category === Category.Enterprise) {
+                enterprises.push(l);
             }
         });
 
-        let requirementList = null;
-        let ruleList = null;
-        if (requirements.length > 0) {
-            requirementList = <div className='form-content-group'>
-                <div className='title'>需求属性：</div>
-                <div className='form-item-list'>
-                    {requirements.map(function (r) {
-                            if (r.type === TEXT) {
-                                return <InputFormItem key={r.id} formItem = {r} />;
-                            }
-                            return <FormItem key={r.id} formItem = {r} />;
-                    }) }
-                </div>
-            </div>
-        }
+        let viewModel = [{ title: Category.Contract, items: contracts },
+            { title: Category.Capital, items: capitals },
+            { title: Category.Product, items: products },
+            { title: Category.Invoice, items: invoices },
+            { title: Category.Enterprise, items: enterprises }
+        ];
 
-        if (rules.length > 0) {
-            ruleList = <div className='form-content-group'>
-                <div className='title'>附加需求：</div>
-                <div className='form-item-list'>{
-                    rules.map(function (r) {
-                        if ( r.filterProperty === FilterProperty.Rule) {
+        let view = viewModel.map((m) => {
+            if (m.items && m.items.length > 0) {
+                return <div className='form-content-group'>
+                    <div className='title'>{m.title}</div>
+                    <div className='form-item-list'>
+                        {m.items.map(function (r) {
                             if (r.type === TEXT) {
                                 return <InputFormItem key={r.id} formItem = {r} />;
                             }
                             return <FormItem key={r.id} formItem = {r} />;
-                        }
-                    }) }
+                        }) }
+                    </div>
                 </div>
-            </div>
-        }
+            }
+            return null;
+        });
 
         return <div className='form-content'>
-            {requirementList}
-            {ruleList}
-            {requirements.length > 0 ? <div className="operators"> 
+            {view}
+            <div className="operators">
                 <Link to="/formConfirm" className='btn'>确定</Link>
-                <span className='btn calloff' onClick={()=>this.props.resetForm()}>取消</span></div> : null}
+                <span className='btn calloff' onClick={() => this.props.resetForm() }>取消</span></div>
         </div>
     }
 }
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
         onSubmitForm: (list, selectedType) => {
             dispatch(addRequirement(list, selectedType));
         },
-        resetForm: ()=>{
+        resetForm: () => {
             dispatch(resetForm());
         }
     };

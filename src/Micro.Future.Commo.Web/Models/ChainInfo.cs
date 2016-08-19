@@ -34,7 +34,7 @@ namespace Micro.Future.Commo.Web.Models
         public bool IsDeleted { get; set; }
 
 
-        public ChainInfo(RequirementChainInfo chain, int userId)
+        public ChainInfo(RequirementChainInfo chain, string userId)
         {
             ChainId = chain.ChainId;
             IsDeleted = chain.IsDeleted;
