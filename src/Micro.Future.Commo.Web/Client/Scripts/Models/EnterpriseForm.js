@@ -71,9 +71,11 @@ export default {
             {
                 label:'国有企业',
                 key:'1',
+                value: '1'
             },{
                 label:'合资企业',
                 key:'2',
+                value: '2'
             }
         ]
     },
@@ -91,12 +93,15 @@ export default {
         length: 'short',
         options:[{
             key: '1',
+            value: '1',
             label:'极好'
         },{
             key: '2',
+            value: '2',
             label:'良好'
         },{
             key: '3',
+            value: '3'
             label:'一般'
         }]
     },
@@ -128,13 +133,16 @@ export default {
         length: 'short',
         options:[{
             key: '1',
-            label:'现金'
+            label:'现金',
+            value: '1'
         },{
             key: '2',
-            label:'承兑汇票'
+            label:'承兑汇票',
+            value: '2'
         },{
             key: '3',
-            label:'转帐'
+            label:'转帐',
+            value: '3'
         }]
     },
     registerBankId: {
@@ -144,12 +152,15 @@ export default {
         length: 'short',
         options:[{
             key: '1',
+            value: '1',
             label:'中国工商银行'
         },{
             key: '2',
+            value: '2',
             label:'中国建设银行'
         },{
             key: '3',
+            value: '3',
             label:'中国农业银行'
         }]
     },

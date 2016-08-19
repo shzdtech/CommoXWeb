@@ -7,4 +7,4 @@ let RuleType = {
     Pay: 3
 };
 
-export default RuleType
+export default RuleType;

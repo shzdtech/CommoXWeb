@@ -3,6 +3,7 @@ import React from 'react';
 class Input extends React.Component {
   constructor() {
     super();
+    this.changeValue = this.changeValue.bind(this);
   }
 
   render() {
@@ -16,9 +17,15 @@ class Input extends React.Component {
         placeholder={info.placeholder}
         value={info.value}
         className={ 'form-control ' + info.length}
+        onChange={this.changeValue}
         />
     </div>
   }
+
+  changeValue(e){
+        console.log(e.target.value);
+        this.props.onChangeEnterpriseForm(this.props.info.key, Object.assign({}, this.props.info, {value: e.target.value}));
+    }
 }
 
 module.exports = Input;
