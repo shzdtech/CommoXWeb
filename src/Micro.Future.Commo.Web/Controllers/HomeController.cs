@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Micro.Future.Commo.Web.Controllers
 {
-    [Route("")]
+    [Route("", Order = -1)]
+    [Route("{*pathInfo}", Order = 1000)]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -14,29 +15,29 @@ namespace Micro.Future.Commo.Web.Controllers
             return View();
         }
 
-        [Route("/Requirement")]
-        public ActionResult Requirement()
-        {
-            return View("Index");
-        }
+        //[Route("/Requirement")]
+        //public ActionResult Requirement()
+        //{
+        //    return View("Index");
+        //}
 
-        [Route("/AddRequirement")]
-        public ActionResult AddRequirement()
-        {
-            return View("Index");
-        }
+        //[Route("/AddRequirement")]
+        //public ActionResult AddRequirement()
+        //{
+        //    return View("Index");
+        //}
 
-        [Route("/Chains")]
-        public ActionResult Chains()
-        {
-            return View("Index");
-        }
+        //[Route("/Chains")]
+        //public ActionResult Chains()
+        //{
+        //    return View("Index");
+        //}
 
 
-        [Route("/Requirement/{id:int}/Chains")]
-        public ActionResult RequirementChain()
-        {
-            return View("Index");
-        }
+        //[Route("/Requirement/{id:int}/Chains")]
+        //public ActionResult RequirementChain()
+        //{
+        //    return View("Index");
+        //}
     }
 }

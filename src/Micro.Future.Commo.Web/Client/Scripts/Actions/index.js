@@ -26,7 +26,9 @@ import {
     RESET_FORM,
 
     CHANGE_ENTERPRISE_FORM,
-    REGISTER_ENTERPRISE
+    REGISTER_ENTERPRISE,
+    REGISTER_ENTERPRISE_SUCCESS,
+    REGISTER_ENTERPRISE_FAILURE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';

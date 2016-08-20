@@ -41,8 +41,21 @@
     text-align: center;
     margin-bottom: 20px;
     padding: 20px;
+    font-size: 16px;
 
     .btn{
         margin: 10px;
+        padding: 6px 20px !important;
+
+        &.calloff{
+            background: $normal-font-color;
+            color: $white;
+
+            &:hover{
+                background: $white;
+                border: 1px solid $normal-font-color;
+                color: $normal-font-color;
+            }
+        }
     }
 }

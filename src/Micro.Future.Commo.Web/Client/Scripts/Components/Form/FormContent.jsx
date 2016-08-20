@@ -42,7 +42,7 @@ class FormContent extends React.Component {
 
         let view = viewModel.map((m) => {
             if (m.items && m.items.length > 0) {
-                return <div className='form-content-group'>
+                return <div key={m.title} className='form-content-group'>
                     <div className='title'>{m.title}</div>
                     <div className='form-item-list'>
                         {m.items.map(function (r) {

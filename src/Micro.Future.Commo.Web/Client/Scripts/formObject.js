@@ -83,7 +83,7 @@ export default {
                     value: '其他'
                 }]
         }, {
-            id: 5,
+            id: 6,
             title: '货物名称',
             filterProperty: FilterProperty.Requirement,
             key: 'productName',
@@ -108,7 +108,7 @@ export default {
             multipleSelection: true
         },
         {
-            id: 6,
+            id: 7,
             title: '货物规格',
             key: 'productSpecification',
             category: Category.Product,
@@ -116,7 +116,7 @@ export default {
             items: [],
             type: TEXT
         }, {
-            id: 9,
+            id: 8,
             title: '货物数量',
             key: 'productQuantity',
             category: Category.Product,
@@ -222,7 +222,7 @@ export default {
         }
     ],
     sell: [{
-        id: 5,
+        id: 1,
         title: '货物类型',
         filterProperty: FilterProperty.Requirement,
         key: 'productType',
@@ -241,7 +241,7 @@ export default {
                 value: '其他'
             }]
     }, {
-            id: 1,
+            id: 2,
             title: '货物名称',
             filterProperty: FilterProperty.Requirement,
             key: 'productName',
@@ -266,28 +266,28 @@ export default {
             multipleSelection: true
         },
         {
-            id: 2,
+            id: 3,
             title: '货物规格',
             key: 'productSpecification',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 3,
+            id: 4,
             title: '货物数量',
             key: 'productQuantity',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 4,
+            id: 5,
             title: '仓库地址',
             key: 'warehouseAddress1',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 5,
+            id: 6,
             title: '开票面额',
             key: 'invoiceValue',
             category: Category.Invoice,
@@ -306,21 +306,21 @@ export default {
                     value: '1000万'
                 }]
         }, {
-            id: 6,
+            id: 7,
             title: '开票时间',
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 7,
+            id: 8,
             title: '发票交接方式',
             key: 'invoiceTransferMode',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 8,
+            id: 9,
             title: '企业类型',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -349,7 +349,7 @@ export default {
             multipleSelection: true
         },
         {
-            id: 9,
+            id: 10,
             title: '注册资本',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -369,7 +369,7 @@ export default {
                 }],
             multipleSelection: true
         }, {
-            id: 10,
+            id: 11,
             title: '注册地',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,

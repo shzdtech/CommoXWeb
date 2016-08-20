@@ -121,6 +121,10 @@ namespace Micro.Future.Commo.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    "NotFound",
+                    "{*PathInfo}",
+                    new { controller = "Home", action = "Index" });
             });
         }
     }
