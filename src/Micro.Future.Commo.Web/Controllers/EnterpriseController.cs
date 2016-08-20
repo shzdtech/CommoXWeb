@@ -61,7 +61,7 @@ namespace Micro.Future.Commo.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(EnterpriseRegisterViewModel model, string returnUrl = null)
+        public async Task<EnterpriseInfo> Register(EnterpriseRegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace Micro.Future.Commo.Web.Controllers
 
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(3, "User created a new account with password.");
-                        return RedirectToLocal(returnUrl);
+                        return newEnterprise;
                     }
                 }
 
@@ -106,7 +106,7 @@ namespace Micro.Future.Commo.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return null;
         }
 
 

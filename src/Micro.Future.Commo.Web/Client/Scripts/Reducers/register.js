@@ -1,5 +1,5 @@
 import enterpriseForm from '../Models/EnterpriseForm';
-import {CHANGE_ENTERPRISE_FORM} from '../Constants/ActionTypes';
+import {CHANGE_ENTERPRISE_FORM, REGISTER_ENTERPRISE} from '../Constants/ActionTypes';
 
 const register = (state = enterpriseForm, action) => {
     switch (action.type) {

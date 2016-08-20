@@ -20,6 +20,13 @@ export default {
         key: 'contacts',
         placehodler:'联系人'
     },
+    email: {
+        label: '企业邮箱',
+        type: 'text',
+        legth: 'medium',
+        key: 'email',
+        placehodler:'企业邮箱'
+    },
     registerNumber: {
         label: '企业注册代码',
         type: 'text',

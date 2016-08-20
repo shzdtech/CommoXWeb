@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Input from './Input';
 import Dropdown from './Dropdown';
-import {changeEnterpriseInfo} from '../../Actions';
+import {changeEnterpriseInfo, registerEnterprise} from '../../Actions';
 
 class Register extends React.Component {
     constructor() {
@@ -11,7 +11,7 @@ class Register extends React.Component {
 
     render() {
         let list = [];
-        const {enterpriseInfo, onChangeEnterpriseForm} = this.props;
+        const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm} = this.props;
         for (var key in enterpriseInfo) {
             if (enterpriseInfo[key].type === 'text' || enterpriseInfo[key].type === 'date' || enterpriseInfo[key].type === 'number') {
                 list.push(<Input info={enterpriseInfo[key]} onChangeEnterpriseForm={onChangeEnterpriseForm} />);
@@ -21,9 +21,9 @@ class Register extends React.Component {
         }
         return <div>
             {list}
-            <div className='operators'>
-                <span className='btn submit' onClick={this.handleMultipleSelectionSubmit}>提交</span>
-                <span className='btn calloff' onClick={() => onToggleMultipleSelectedClick(filter) }>取消</span>
+            <div className='register-operators'>
+                <span className='btn submit' onClick={()=>onSubmitEnterpriseForm(enterpriseInfo)}>提交</span>
+                <span className='btn calloff' >取消</span>
             </div>
         </div>
     }
@@ -38,7 +38,10 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeEnterpriseForm: (key, newValue) => {
-            dispatch(changeEnterpriseInfo(key, newValue))
+            dispatch(changeEnterpriseInfo(key, newValue));
+        },
+        onSubmitEnterpriseForm: (enterpriseInfo) => {
+            dispatch(registerEnterprise(enterpriseInfo));
         }
     };
 };

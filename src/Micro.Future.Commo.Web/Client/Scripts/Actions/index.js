@@ -25,7 +25,8 @@ import {
     TYPE_FORM_ITEM,
     RESET_FORM,
 
-    CHANGE_ENTERPRISE_FORM
+    CHANGE_ENTERPRISE_FORM,
+    REGISTER_ENTERPRISE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -287,10 +288,43 @@ export const resetForm = () => {
 
 
 //account
-export const changeEnterpriseInfo = (keyName, value) =>{
+export const changeEnterpriseInfo = (keyName, value) => {
     return {
         type: CHANGE_ENTERPRISE_FORM,
         keyName: keyName,
         value: value
+    };
+};
+
+
+const registerEnterpriseRequest = (enterpriseInfo) => {
+    var model = {};
+    for (var key in enterpriseInfo) {
+        model[key] = enterpriseInfo[key].value;
     }
-}
+
+    const request = $.post(HOST + 'api/Enterprise', model);
+    return request;
+};
+
+const resigterEnterpriseSuccess = () => {
+    return {
+        type: REGISTER_ENTERPRISE_SUCCESS
+    };
+};
+
+const resigerEnterpriseFailure = (error) => {
+   return {
+        type: REGISTER_ENTERPRISE_FAILURE,
+        error: error
+    };
+};
+
+export const registerEnterprise = (enterpriseInfo) => {
+    return (dispatch) => {
+        return registerEnterpriseRequest(enterpriseInfo).then(
+            response => dispatch(resigterEnterpriseSuccess(response)),
+            error => dispatch(resigerEnterpriseFailure(error))
+        );
+    };
+};
