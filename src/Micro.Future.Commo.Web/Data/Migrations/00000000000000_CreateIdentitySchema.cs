@@ -57,7 +57,9 @@ namespace Micro.Future.Commo.Web.Data.Migrations
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    EnterpriseId = table.Column<int>(nullable: false),
+                    InitialPassword = table.Column<string>(maxLength: 128)
                 },
                 constraints: table =>
                 {

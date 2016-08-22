@@ -66,8 +66,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
                 if (!bizResult.HasError && bizResult.Result > 0)
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = bizResult.Result };
                     string initialPassword = "QAZ@wsx3";
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = bizResult.Result, InitialPassword = initialPassword };
+                    
                     var result = await _userManager.CreateAsync(user, initialPassword);
                     if (result.Succeeded)
                     {

@@ -125,7 +125,7 @@ namespace Micro.Future.Commo.Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplication3.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Micro.Future.Commo.Web.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id");
 
@@ -158,6 +158,8 @@ namespace Micro.Future.Commo.Web.Data.Migrations
                     b.Property<string>("SecurityStamp");
 
                     b.Property<bool>("TwoFactorEnabled");
+                    b.Property<int>("EnterpriseId");
+                    b.Property<string>("InitialPassword");
 
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
