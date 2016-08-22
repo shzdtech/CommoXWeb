@@ -316,7 +316,7 @@ const resigterEnterpriseSuccess = () => {
 };
 
 const resigerEnterpriseFailure = (error) => {
-   return {
+    return {
         type: REGISTER_ENTERPRISE_FAILURE,
         error: error
     };
@@ -325,7 +325,10 @@ const resigerEnterpriseFailure = (error) => {
 export const registerEnterprise = (enterpriseInfo) => {
     return (dispatch) => {
         return registerEnterpriseRequest(enterpriseInfo).then(
-            response => dispatch(resigterEnterpriseSuccess(response)),
+            response => {
+                dispatch(resigterEnterpriseSuccess(response));
+                dispatch(push('/requirements'));
+            },
             error => dispatch(resigerEnterpriseFailure(error))
         );
     };

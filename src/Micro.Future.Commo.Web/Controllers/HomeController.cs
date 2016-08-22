@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Micro.Future.Commo.Web.Controllers
 {
     [Route("", Order = -1)]
-   // [Route("{*pathInfo}", Order = 1000)]
+    [Route("{*pathInfo}", Order = 1000)]
     public class HomeController : Controller
     {
         public ActionResult Index()
