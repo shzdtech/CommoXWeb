@@ -13,6 +13,10 @@
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
+    "Microsoft.EntityFrameworkCore.SqlServer.Design": {
+      "version": "1.0.0",
+      "type": "build"
+    },
     "Microsoft.EntityFrameworkCore.Tools": {
       "version": "1.0.0-preview2-final",
       "type": "build"
@@ -38,7 +42,8 @@
     "Serilog.Sinks.Seq": "2.0.0",
     "Serilog.Extensions.Logging": "1.0.0",
     "Micro.Future.Business.DataAccess.Commo": "1.0.0-*",
-    "Micro.Future.Business.MatchMaker.Commo": "1.0.0-*"
+    "Micro.Future.Business.MatchMaker.Commo": "1.0.0-*",
+    "Micro.Future.Commo.Business.Requirement": "1.0.0-*"
   },
 
   "tools": {
@@ -66,8 +71,7 @@
   "frameworks": {
     "net451": {
       "dependencies": {
-        "Micro.Future.Business.MongoDB.Commo": "1.0.0-*",
-        "Micro.Future.Commo.Business.Requirement": "1.0.0-*"
+        "Micro.Future.Business.MongoDB.Commo": "1.0.0-*"
       }
     }
     //"netcoreapp1.0": {
