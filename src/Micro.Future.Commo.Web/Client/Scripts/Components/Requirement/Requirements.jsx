@@ -45,7 +45,7 @@ class Requirements extends React.Component {
         return <div key={requirementId} className='requirement'>
             <div className='requirement-items'>
                 {enterpriseName ? <div className='requirement-item'><span className='title'>公司名称：</span><span>{enterpriseName}</span></div> : null}
-                {type ? <div className='requirement-item'><span className='title'>需求类型：</span><span>{type === 1 ? '出资' : (type === 2 ? '出货' : '补贴')}</span></div> : null}
+                {type ? <div className='requirement-item'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销')}</span></div> : null}
                 {productType ? <div className='requirement-item'><span className='title'>货物类型：</span><span>{productType}</span></div> : null}
                 {productName ? <div className='requirement-item'><span className='title'>货物名称：</span><span>{productName}</span></div> : null}
                 {productSpecification ? <div className='requirement-item'><span className='title'>货物规格：</span><span>{productSpecification}</span></div> : null}
