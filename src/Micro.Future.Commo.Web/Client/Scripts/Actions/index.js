@@ -28,7 +28,9 @@ import {
     CHANGE_ENTERPRISE_FORM,
     REGISTER_ENTERPRISE,
     REGISTER_ENTERPRISE_SUCCESS,
-    REGISTER_ENTERPRISE_FAILURE
+    REGISTER_ENTERPRISE_FAILURE,
+    LOGIN_SUCCESS,
+    LOGIN_FAILURE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -332,4 +334,40 @@ export const registerEnterprise = (enterpriseInfo) => {
             error => dispatch(resigerEnterpriseFailure(error))
         );
     };
+};
+
+export const loginRequest = (email, password)=>{
+   const request = $.post(HOST + 'api/Account/Login', {
+       email: email,
+       password: password
+   });
+    return request;
+};
+
+export const loginSuccess = (userInfo) =>{
+    return {
+        type: LOGIN_SUCCESS,
+        userInfo: userInfo
+    }
+}
+
+export const loginFailure = (userInfo) =>{
+    return {
+        type: LOGIN_FAILURE,
+        userInfo: userInfo
+    }
+}
+
+
+export const loginAction = (email, password)=>{
+    return dispatch => {
+        loginRequest(email, password).then(
+            userInfo=>{
+                dispatch(loginSuccess(userInfo));
+            },
+            error =>{
+                dispatch(loginFailure(error));
+            }
+        )
+    }
 };

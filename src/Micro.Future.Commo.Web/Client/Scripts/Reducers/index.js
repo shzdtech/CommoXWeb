@@ -4,7 +4,7 @@ import filterContentToggled from './filterContentToggled'
 import chains from './chains';
 import forms from './forms';
 import requirements from './requirements';
-import register from './register';
+import account from './Account/account';
 import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
@@ -13,7 +13,7 @@ const reducers = combineReducers({
     chains,
     requirements,
     forms,
-    register,
+    account,
     routing: routerReducer
 });
 

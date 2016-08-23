@@ -8,6 +8,7 @@ import ChainList from './Components/Chain/ChainList';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
 import Register from './Components/Account/Register';
+import Login from './Components/Account/Login';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
 import { Provider } from 'react-redux'
@@ -20,8 +21,10 @@ import reducers from './reducers';
 require('signalr');
 import '../Content/site.scss';
 
-const App = ({ children }) =>
-    <div>
+class App extends React.Component{
+    render(){
+        console.log(this.props);
+        return <div>
         <div className='header'>
             <nav className='navbar navbar-default'>
                 <div className='container'>
@@ -39,7 +42,7 @@ const App = ({ children }) =>
                             <li><Link to="/addRequirement">添加新需求</Link></li>
                         </ul>
                          <ul className='nav navbar-nav navbar-right'>
-                            <li><Link to="/requirement">登陆</Link></li>
+                            <li><Link to="/login">登录</Link></li>
                             <li><Link to="/register">注册</Link></li>
                         </ul>
                         <div className='clearfix'></div>
@@ -48,9 +51,11 @@ const App = ({ children }) =>
             </nav>
         </div>
         <div className='container main-wrapper'>
-            {children}
+            {this.props.children}
         </div>
-    </div>;
+        </div>
+    }
+}
 
 const DevTools = createDevTools(
     <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
@@ -77,6 +82,7 @@ ReactDOM.render(
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>
                 <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
                 <Route path="*" component={Requirements}/>
             </Route>
         </Router>
