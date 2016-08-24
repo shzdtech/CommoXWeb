@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import {loginAction} from '../../Actions';
 
 class Login extends React.Component {
     constructor() {
@@ -36,16 +34,4 @@ class Login extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: (email, password) => {
-            dispatch(loginAction(email, password));
-        }   
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Login);
+module.exports = Login;

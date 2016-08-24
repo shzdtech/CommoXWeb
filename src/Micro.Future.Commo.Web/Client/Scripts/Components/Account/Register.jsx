@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Input from './Input';
 import Dropdown from './Dropdown';
-import {changeEnterpriseInfo, registerEnterprise} from '../../Actions';
 
 class Register extends React.Component {
     constructor() {
@@ -29,21 +27,4 @@ class Register extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        enterpriseInfo: state.account.register
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onChangeEnterpriseForm: (key, newValue) => {
-            dispatch(changeEnterpriseInfo(key, newValue));
-        },
-        onSubmitEnterpriseForm: (enterpriseInfo) => {
-            dispatch(registerEnterprise(enterpriseInfo));
-        }
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Register);
+module.exports = Register;

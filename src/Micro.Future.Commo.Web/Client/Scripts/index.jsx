@@ -4,11 +4,12 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Header from './Containers/Header';
 import ChainList from './Components/Chain/ChainList';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
-import Register from './Components/Account/Register';
-import Login from './Components/Account/Login';
+import Register from './Containers/Account/Register';
+import Login from './Containers/Account/Login';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
 import { Provider } from 'react-redux'
@@ -25,31 +26,7 @@ class App extends React.Component{
     render(){
         console.log(this.props);
         return <div>
-        <div className='header'>
-            <nav className='navbar navbar-default'>
-                <div className='container'>
-                    <div className="navbar-header">
-                        <div className="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span className="glyphicon glyphicon-menu-hamburger"></span>
-                        </div>
-                        <div className="navbar-brand">
-                        </div>
-                    </div>
-                    <div id="navbar" className="navbar-collapse collapse" aria-expanded="false">
-                        <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="icon-delete"></span></div>
-                        <ul className='nav navbar-nav navbar-left'>
-                            <li><Link to="/requirement">我的需求</Link></li>
-                            <li><Link to="/addRequirement">添加新需求</Link></li>
-                        </ul>
-                         <ul className='nav navbar-nav navbar-right'>
-                            <li><Link to="/login">登录</Link></li>
-                            <li><Link to="/register">注册</Link></li>
-                        </ul>
-                        <div className='clearfix'></div>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <Header />
         <div className='container main-wrapper'>
             {this.props.children}
         </div>

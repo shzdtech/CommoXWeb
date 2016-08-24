@@ -336,38 +336,38 @@ export const registerEnterprise = (enterpriseInfo) => {
     };
 };
 
-export const loginRequest = (email, password)=>{
-   const request = $.post(HOST + 'api/Account/Login', {
-       email: email,
-       password: password
-   });
+export const loginRequest = (email, password) => {
+    const request = $.post(HOST + 'api/Account/Login', {
+        email: email,
+        password: password
+    });
     return request;
 };
 
-export const loginSuccess = (userInfo) =>{
+export const loginSuccess = (userInfo) => {
     return {
         type: LOGIN_SUCCESS,
         userInfo: userInfo
-    }
-}
+    };
+};
 
-export const loginFailure = (userInfo) =>{
+export const loginFailure = (userInfo) => {
     return {
         type: LOGIN_FAILURE,
         userInfo: userInfo
-    }
-}
+    };
+};
 
-
-export const loginAction = (email, password)=>{
+export const loginAction = (email, password) => {
     return dispatch => {
         loginRequest(email, password).then(
-            userInfo=>{
+            userInfo => {
                 dispatch(loginSuccess(userInfo));
+                dispatch(push('/requirements'));
             },
-            error =>{
+            error => {
                 dispatch(loginFailure(error));
             }
-        )
-    }
+        );
+    };
 };
