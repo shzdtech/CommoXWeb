@@ -30,14 +30,14 @@ export default {
         {
             id: 1,
             title: '资金金额',
-            key: 'productSpecification',
+            key: 'paymentAmount',
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
             type: TEXT
         }, {
             id: 2,
             title: '货款支付时间',
-            key: 'productSpecification',
+            key: 'paymentDateTime',
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
             type: TEXT

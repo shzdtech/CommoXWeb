@@ -170,7 +170,11 @@ namespace Micro.Future.Commo.Web.Models
         {
             RequirementId = requirement.RequirementId;
             EnterpriseId = requirement.EnterpriseId;
+            PaymentType = requirement.PaymentType;
+            PaymentDateTime = requirement.PaymentDateTime;
+            PaymentAmount = requirement.PaymentAmount;
             ProductName = requirement.ProductName;
+            WarehouseAccount = requirement.WarehouseAccount;
             ProductPrice = requirement.ProductPrice;
             ProductQuantity = requirement.ProductQuantity;
             ProductSpecification = requirement.ProductSpecification;
@@ -178,6 +182,11 @@ namespace Micro.Future.Commo.Web.Models
             ProductUnit = requirement.ProductUnit;
             TradeAmount = requirement.TradeAmount;
             Type = requirement.Type;
+            InvoiceValue = requirement.InvoiceValue;
+            InvoiceIssueDateTime = requirement.InvoiceIssueDateTime;
+            InvoiceTransferMode = requirement.InvoiceTransferMode;
+            TradeProfit = requirement.TradeProfit;
+            BusinessRange = requirement.BusinessRange;
             Subsidies = requirement.Subsidies;
             WarehouseState = requirement.WarehouseState;
             WarehouseCity = requirement.WarehouseCity;
