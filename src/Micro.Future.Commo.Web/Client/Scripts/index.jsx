@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Containers/Header';
 import ChainList from './Components/Chain/ChainList';
+import ChainListManger from './Components/Chain/ChainListManger';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
 import Register from './Containers/Account/Register';
@@ -60,6 +61,7 @@ ReactDOM.render(
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/chainManager" component={ChainListManger} />
                 <Route path="*" component={Requirements}/>
             </Route>
         </Router>

@@ -56,14 +56,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
-            return _requirementManager.QueryRequirements(_userId).Result.Select(r => new Models.RequirementInfo(r, _userId));
+            return _requirementManager.QueryRequirements(_userId).Result.Select(r => new Models.RequirementInfo(r));
         }
 
         [Route("{id:int}")]
         [HttpGet]
         public Models.RequirementInfo GetRequirement(int id)
         {
-            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result, _userId);
+            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
         }
 
         [Route("{id:int}/Chains")]
@@ -71,7 +71,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = _requirementManager.QueryRequirementChains(id);
-            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c, _userId)).ToList();
+            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
     }

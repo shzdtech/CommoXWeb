@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {addRequirement, resetForm} from '../../Actions';
+import {addRequirement, resetForm, selectFormItem} from '../../Actions';
 import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
 import FilterProperty from '../../Models/FilterProperty';
@@ -11,7 +11,7 @@ import {Link} from 'react-router';
 class FormContent extends React.Component {
     render() {
 
-        const {list, selectedType} = this.props;
+        const {list, selectedType, onFormItemSelected} = this.props;
 
         let capitals = [];
         let products = [];
@@ -49,7 +49,7 @@ class FormContent extends React.Component {
                             if (r.type === TEXT) {
                                 return <InputFormItem key={r.id} formItem = {r} />;
                             }
-                            return <FormItem key={r.id} formItem = {r} />;
+                            return <FormItem key={r.id} formItem = {r} onFormItemSelected={onFormItemSelected} />;
                         }) }
                     </div>
                 </div>
@@ -78,6 +78,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         resetForm: () => {
             dispatch(resetForm());
+        },
+        onFormItemSelected: (formItem, item) => {
+            dispatch(selectFormItem(formItem, item));
         }
     };
 };

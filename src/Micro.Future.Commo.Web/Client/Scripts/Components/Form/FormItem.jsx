@@ -25,18 +25,4 @@ class FormItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFormItemSelected: (formItem, item) => {
-            dispatch(selectFormItem(formItem, item));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormItem);
+module.exports = FormItem;

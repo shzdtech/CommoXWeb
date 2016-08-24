@@ -24,6 +24,7 @@ class Header extends React.Component {
                              { this.props.userInfo.userName ? <a href='#'>{this.props.userInfo.userName}</a> : <Link to="/login">登录</Link>}
                              </li>
                             <li><Link to="/register">注册</Link></li>
+                            <li><Link to="/chainManager">管理</Link></li>
                         </ul>
                         <div className='clearfix'></div>
                     </div>

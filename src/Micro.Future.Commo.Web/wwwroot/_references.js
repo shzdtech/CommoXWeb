@@ -23,6 +23,7 @@
 /// <reference path="../Client/Scripts/Reducers/Account/account.js" />
 /// <reference path="../Client/Scripts/Reducers/Account/login.js" />
 /// <reference path="../Client/Scripts/Reducers/Account/register.js" />
+/// <reference path="../client/scripts/reducers/chainlistmanager.js" />
 /// <reference path="../client/scripts/reducers/chains.js" />
 /// <reference path="../client/scripts/reducers/filterContentToggled.js" />
 /// <reference path="../client/scripts/reducers/filters.js" />

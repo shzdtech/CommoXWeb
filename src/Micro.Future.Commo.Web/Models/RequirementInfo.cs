@@ -166,7 +166,7 @@ namespace Micro.Future.Commo.Web.Models
         {
         }
 
-        public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement, string userId)
+        public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
         {
             RequirementId = requirement.RequirementId;
             EnterpriseId = requirement.EnterpriseId;
@@ -184,7 +184,6 @@ namespace Micro.Future.Commo.Web.Models
             WarehouseAddress1 = requirement.WarehouseAddress1;
             WarehouseAddress2 = requirement.WarehouseAddress2;
             Rules = requirement.Rules;
-            IsMyRequest = userId == requirement.UserId;
         }
     }
 }

@@ -12,10 +12,13 @@ import {
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
     FETCH_REQUIREMENT_LIST_FAILURE,
+
     RECEIVE_CHAIN_LIST,
     FETCH_CHAIN_LIST,
     FETCH_CHAIN_LIST_SUCCESS,
     FETCH_CHAIN_LIST_FAILURE,
+    SELECT_CHAIN_TYPE,
+
     REQUEST_REQUIREMENT,
     RECEIVE_REQUIREMENT,
     CONFIRM_CHAIN_SUCCEDD,
@@ -126,6 +129,21 @@ export const fetchChains = (requirementId) => {
     };
 };
 
+export const fetchChainsByTypeRequest = (typeId) => {
+    const request = $.get(HOST + 'api/Chain/Status/' + typeId);
+
+    return request;
+};
+
+export const fetchChainsByType = (typeId) => {
+    return (dispatch) => {
+        return fetchChainsByTypeRequest(typeId).then(
+            chains => dispatch(fetchChainsSuccess(chains)),
+            error => dispatch(fetchChainsFailure(error))
+        );
+    };
+};
+
 export const confirmChainRequest = (chainId, requirementId) => {
     const request = $.post(HOST + 'api/chain/' + chainId + '/Confirmation/' + requirementId);
     return request;
@@ -158,6 +176,13 @@ export const confirmChain = (chainId, requirementId, accept) => {
         );
     };
 };
+
+export const selectChainListType = (item) => {
+    return {
+        type: SELECT_CHAIN_TYPE,
+        item: item
+    }
+}
 
 //requirement
 export const addRequirementRequest = (list, selectedType) => {

@@ -34,13 +34,13 @@ namespace Micro.Future.Commo.Web.Models
         public bool IsDeleted { get; set; }
 
 
-        public ChainInfo(RequirementChainInfo chain, string userId)
+        public ChainInfo(RequirementChainInfo chain)
         {
             ChainId = chain.ChainId;
             IsDeleted = chain.IsDeleted;
             CreateTime = chain.CreateTime;
             ModifyTime = chain.ModifyTime;
-            Requirements = chain.Requirements.Select(r => new Models.RequirementInfo(r, userId)).ToList();
+            Requirements = chain.Requirements.Select(r => new Models.RequirementInfo(r)).ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import filters from './filters';
+import chainListManager from './chainListManager';
 import filterContentToggled from './filterContentToggled'
 import chains from './chains';
 import forms from './forms';
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     filters,
     filterContentToggled,
     chains,
+    chainListManager,
     requirements,
     forms,
     account,
