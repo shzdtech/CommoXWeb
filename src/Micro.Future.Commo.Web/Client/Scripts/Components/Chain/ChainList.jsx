@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
 import Chain from './Chain';
-import {receiveChainList} from '../../Actions';
+import {receiveChainList, confirmChain} from '../../Actions';
 import {SIGNALR_ADDRESS} from '../../appSettings';
 
 class ChainList extends React.Component {
@@ -10,11 +9,12 @@ class ChainList extends React.Component {
     }
 
     render() {
+        let {chains, confirmChain} = this.props;
         return <div className='chain-list'>
-            {this.props.chains && this.props.chains.length > 0 ? <div className='title'>匹配详情：</div> : null}
+            {chains && chains.length > 0 ? <div className='title'>匹配详情：</div> : null}
             {
-                this.props.chains.map((chain) => {
-                    return <Chain key={chain.chainId} chain={chain} />;
+                chains.map((chain) => {
+                    return <Chain key={chain.chainId} chain={chain} confirmChain={confirmChain}/>;
                 })
             }
         </div>;
@@ -39,16 +39,4 @@ class ChainList extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        chains: state.chains
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList)),
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChainList);
+module.exports = ChainList;

@@ -75,16 +75,4 @@ class ChainNode extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept)),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChainNode);
+module.exports = ChainNode;

@@ -8,14 +8,15 @@ class Chain extends React.Component {
     }
 
     render() {
-        let {chain} = this.props;
+        let {chain, confirmChain} = this.props;
         return <div className={chain.reject ? 'chain reject' : 'chain'}>
             {
                 this.props.chain.requirements.map((requirement) => {
                     return <ChainNode key={requirement.requirementId}
                         chainId={chain.chainId}
                         chain={chain}
-                        requirement = {requirement}/>;
+                        requirement={requirement}
+                        confirmChain={confirmChain} />;
                 })
             }
         </div>;
@@ -23,15 +24,4 @@ class Chain extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Chain);
+module.exports = Chain;

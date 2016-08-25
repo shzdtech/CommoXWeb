@@ -24,6 +24,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpPost]
         public Models.RequirementInfo AddRequirement(Models.RequirementInfo requirement)
         {
+            var user = Request.HttpContext.User.Identity;
             var requirementInfo = new RequirementInfo
             {
                 UserId = _userId,
