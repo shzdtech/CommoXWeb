@@ -33,8 +33,9 @@ class ChainNode extends React.Component {
             invoiceTransferMode,
             accept
         } = requirement;
-        let operators = null;
+        
         let isMyRequest = false;//temp, will remove if not used in the future
+        let operators = null;
         let operatorsOverlay = null;
         if (isMyRequest && !chain.reject && !accept) {
             operators = <div className='operators'>

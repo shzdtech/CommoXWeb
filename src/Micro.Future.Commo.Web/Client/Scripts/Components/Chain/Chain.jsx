@@ -8,7 +8,17 @@ class Chain extends React.Component {
     }
 
     render() {
-        let {chain, confirmChain} = this.props;
+        let {chain, confirmChain, manageChain} = this.props;
+        let operators = null;
+        let operatorsOverlay = null;
+        if (manageChain) {
+            operators = <div className='operators'>
+                <span className='btn' onClick={() => manageChain(chain.chainId, true) }>确认</span>
+                <span className='btn' onClick={() => manageChain(chain.chainId, false) }>拒绝</span>
+            </div>
+            operatorsOverlay = <div className='operators-overlay'></div>
+        }
+
         return <div className={chain.reject ? 'chain reject' : 'chain'}>
             {
                 this.props.chain.requirements.map((requirement) => {
@@ -19,6 +29,8 @@ class Chain extends React.Component {
                         confirmChain={confirmChain} />;
                 })
             }
+            {operators}
+            {operatorsOverlay}
         </div>;
     }
 
