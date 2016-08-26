@@ -18,6 +18,8 @@ import {
     FETCH_CHAIN_LIST_SUCCESS,
     FETCH_CHAIN_LIST_FAILURE,
     SELECT_CHAIN_TYPE,
+    CHANGE_CHAIN_STATUS_SUCCESS,
+    CHANGE_CHAIN_STATUS_FAILURE,
 
     REQUEST_REQUIREMENT,
     RECEIVE_REQUIREMENT,
@@ -130,7 +132,7 @@ export const fetchChains = (requirementId) => {
 };
 
 export const fetchChainsByTypeRequest = (typeId) => {
-    const request = $.get(HOST + 'api/Chain/Status/' + typeId);
+    const request = $.get(HOST + 'api/Chain/Status/' + typeId + '/Chains');
 
     return request;
 };
@@ -169,7 +171,6 @@ export const confirmChainFailure = (chainId, requirementId, accept) => {
 
 export const confirmChain = (chainId, requirementId, accept) => {
     return (dispatch) => {
-
         return confirmChainRequest(chainId, requirementId).then(
             success => dispatch(confirmChainSuccess(chainId, requirementId, accept)),
             error => dispatch(confirmChainFailure(error))
@@ -183,6 +184,34 @@ export const selectChainListType = (item) => {
         item: item
     }
 }
+
+export const manageChainRequest = (chain) => {
+    const request = $.post(HOST + 'api/chain/' + chain.chainId + '/Status/' + chain.chainStatus);
+    return request;
+};
+
+export const manageChainSuccess = (chain) => {
+    return {
+        type: CHANGE_CHAIN_STATUS_SUCCESS,
+        chain: chain
+    }
+};
+
+export const manageChainFailure = (error) => {
+    return {
+        type: CHANGE_CHAIN_STATUS_FAILURE,
+        error: error
+    }
+};
+
+export const manageChain = (chain) =>{
+    return (dispatch) => {
+        return manageChainRequest(chain).then(
+            res => dispatch(manageChainSuccess(chain)),
+            error => dispatch(manageChainFailure(error))
+        );
+    };
+};
 
 //requirement
 export const addRequirementRequest = (list, selectedType) => {

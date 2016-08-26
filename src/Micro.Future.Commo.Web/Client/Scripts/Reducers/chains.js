@@ -2,7 +2,9 @@ import initialChains from '../chainList';
 import {RECEIVE_CHAIN_LIST,
     FETCH_CHAIN_LIST_SUCCESS,
     CONFIRM_CHAIN_SUCCEDD,
-    CONFIRM_CHAIN_FAILURE} from '../Constants/ActionTypes';
+    CONFIRM_CHAIN_FAILURE,
+    CHANGE_CHAIN_STATUS_SUCCESS,
+    CHANGE_CHAIN_STATUS_FAILURE} from '../Constants/ActionTypes';
 
 const chain = (state = {}, action) => {
     switch (action.type) {
@@ -36,6 +38,10 @@ const chains = (state = [], action) => {
         case CONFIRM_CHAIN_SUCCEDD:
             return state.map((s) => {
                 return chain(s, action);
+            });
+        case CHANGE_CHAIN_STATUS_SUCCESS:
+            return state.filter((s) => {
+                return s.chainId !== action.chain.chainId;
             });
         default:
             return state;

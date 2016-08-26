@@ -33,6 +33,13 @@ namespace Micro.Future.Commo.Web.Models
         /// </summary>
         public bool IsDeleted { get; set; }
 
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public ChainStatusType ChainStatus { get; set; }
+
+        public int Version { get; set; }
+
 
         public ChainInfo(RequirementChainInfo chain)
         {
@@ -40,6 +47,8 @@ namespace Micro.Future.Commo.Web.Models
             IsDeleted = chain.IsDeleted;
             CreateTime = chain.CreateTime;
             ModifyTime = chain.ModifyTime;
+            ChainStatus = chain.ChainStatus;
+            Version = chain.Version;
             Requirements = chain.Requirements.Select(r => new Models.RequirementInfo(r)).ToList();
         }
     }

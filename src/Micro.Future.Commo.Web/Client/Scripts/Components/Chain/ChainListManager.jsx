@@ -14,7 +14,7 @@ class ChainListManager extends React.Component {
     }
 
     render() {
-        let {formItem, chains, onFormItemSelected, onReceiveChainList, confirmChain} = this.props;
+        let {formItem, chains, onFormItemSelected, onReceiveChainList, confirmChain, manageChain} = this.props;
         return <div className='chain-list-manager-container'>
             <FormItem formItem={formItem} onFormItemSelected={onFormItemSelected} />
             <div className='chain-list-container'>
@@ -25,20 +25,4 @@ class ChainListManager extends React.Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        formItem: state.chainListManager,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFormItemSelected: (formItem, item) => {
-            dispatch(selectChainListType(item));
-            dispatch(fetchChainsByType(item.value));
-        }
-
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChainListManager);
+module.exports = ChainListManager;

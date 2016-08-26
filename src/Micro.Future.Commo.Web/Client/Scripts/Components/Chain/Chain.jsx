@@ -9,17 +9,35 @@ class Chain extends React.Component {
 
     render() {
         let {chain, confirmChain, manageChain} = this.props;
+
+        let className = 'chain';
+        let text = '锁定';
+         if (chain.chainStatus == 0) {
+             className += ' open';
+        }
+        if (chain.chainStatus == 1) {
+            className += ' locked';
+            text = '确认';
+        } else if (chain.chainStatus == 2) {
+            className += ' confirmed'
+        }
+
+        if (chain.reject) {
+            className + 'reject';
+        }
+
         let operators = null;
         let operatorsOverlay = null;
-        if (manageChain) {
+        if (manageChain && (chain.chainStatus === 0 || chain.chainStatus === 1)) {
             operators = <div className='operators'>
-                <span className='btn' onClick={() => manageChain(chain.chainId, true) }>确认</span>
-                <span className='btn' onClick={() => manageChain(chain.chainId, false) }>拒绝</span>
+                <span className='btn' onClick={() => manageChain(chain) }>{text}</span>
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }
 
-        return <div className={chain.reject ? 'chain reject' : 'chain'}>
+        return <div className={className}>
+            {operators}
+            {operatorsOverlay}
             {
                 this.props.chain.requirements.map((requirement) => {
                     return <ChainNode key={requirement.requirementId}
@@ -29,8 +47,6 @@ class Chain extends React.Component {
                         confirmChain={confirmChain} />;
                 })
             }
-            {operators}
-            {operatorsOverlay}
         </div>;
     }
 

@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Serilog;
 using Micro.Future.Business.MatchMaker.Commo;
 using Micro.Future.Commo.Business.Requirement.Handler;
+using Micro.Future.Commo.Business.Requirement;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Business.MatchMaker.Commo.Config;
 using Micro.Future.Commo.Web.Data;
@@ -79,6 +80,7 @@ namespace Micro.Future.Commo.Web
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddMatchMakerSystem(new MatcherConfig());
+            services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = "DefaultConnection" });
             services.AddSingleton<IRequirementManager, RequirementManager>();
             services.AddSingleton<IChainManager, ChainManager>();
             services.AddSingleton<IEnterpriseManager, EnterpriseManager>();

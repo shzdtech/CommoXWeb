@@ -21,6 +21,76 @@
         -webkit-align-items: stretch;
         -ms-flex-align: stretch;
         width: 80%;
+        position: relative;
+
+        & > .operators{
+             position: absolute;
+                top: 50%;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                display: none;
+                transform: translateY(-50%);
+
+                & > span{
+                    padding: 6px 20px !important;
+                    font-size: 16px;
+                }
+        }
+
+         &.locked{
+             .chain-node{
+                    background: $primary-color-opacity;
+                    border-color: $white;
+                }
+
+                 &::after {
+                         background: $primary-color-opacity;
+                         border-color: $white;
+                }
+         }
+
+         &.confirmed{
+              .chain-node{
+                    background: $primary-color;
+                    color: $white;
+                    border-right: 1px solid $white;
+                    
+                    .title {
+                        color: $white;
+                    }
+
+                     &::after {
+                         background: $primary-color;
+                         border-color: $white;
+                     }
+                }
+        }
+
+        &.locked:hover,
+        &.open:hover {
+                cursor: pointer;
+                
+                .chain-node{
+                    background: $pink;
+                }
+
+                & > .operators {
+                    display: block;
+                    z-index: 99;
+                }
+
+                & > .operators-overlay {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0.8;
+                    z-index: 98;
+                }
+        }
 
         &.reject {
             .chain-node {

@@ -40,15 +40,31 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         //}
 
         [HttpGet]
-        [Route("Status/{statusId:int}")]
+        [Route("Status/{statusId:int}/Chains")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
             var chainList = _chainManager.QueryAllChains(statusId);
-            if (chainList == null) {
+            if (chainList == null)
+            {
                 return new List<Models.ChainInfo>();
             }
 
             return _chainManager.QueryAllChains(statusId).Select(c => new Models.ChainInfo(c)).ToList();
+        }
+
+        [HttpPost]
+        [Route("{id:int}/Status/{status:int}")]
+        public void ChangeChainStatus(int id, ChainStatusType status)
+        {
+            if (status == ChainStatusType.OPEN)
+            {
+                _chainManager.LockChain(id);
+            }
+            else if (status == ChainStatusType.LOCKED)
+            {
+                int tradeId;
+                _chainManager.ComfirmChain(id, out tradeId);
+            }
         }
     }
 }

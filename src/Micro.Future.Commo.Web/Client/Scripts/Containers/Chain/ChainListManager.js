@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {selectChainListType, fetchChainsByType, onReceiveChainList, confirmChain} from '../../Actions';
+import {selectChainListType, fetchChainsByType, onReceiveChainList, confirmChain, manageChain} from '../../Actions';
 import ChainListManager from '../../Components/Chain/ChainListManager';
 
 const mapStateToProps = (state, ownProps) => {
@@ -16,7 +16,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(fetchChainsByType(item.value));
         },
         onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList)),
-        confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept))
+        confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept)),
+        manageChain:(chain)=> dispatch(
+            manageChain(chain)
+        )
     };
 };
 
