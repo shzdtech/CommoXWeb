@@ -40,13 +40,17 @@
 
          &.locked{
              .chain-node{
-                    background: $primary-color-opacity;
+                    background: $primary-color-light;
                     border-color: $white;
-                }
 
-                 &::after {
-                         background: $primary-color-opacity;
+                    &::after {
+                         background: $primary-color-light;
                          border-color: $white;
+                    }
+
+                    &:last-child {
+                        border-color: $white;
+                    }
                 }
          }
 
@@ -70,9 +74,14 @@
         &.locked:hover,
         &.open:hover {
                 cursor: pointer;
-                
+
                 .chain-node{
                     background: $pink;
+
+                     &::after {
+                         background: $pink;
+                         border-color: $white;
+                     }
                 }
 
                 & > .operators {

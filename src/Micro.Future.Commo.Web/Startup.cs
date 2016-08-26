@@ -80,7 +80,7 @@ namespace Micro.Future.Commo.Web
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddMatchMakerSystem(new MatcherConfig());
-            services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = "DefaultConnection" });
+            services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = Configuration.GetConnectionString("DefaultConnection") });
             services.AddSingleton<IRequirementManager, RequirementManager>();
             services.AddSingleton<IChainManager, ChainManager>();
             services.AddSingleton<IEnterpriseManager, EnterpriseManager>();
