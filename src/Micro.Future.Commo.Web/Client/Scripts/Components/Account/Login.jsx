@@ -1,5 +1,6 @@
 import React from 'react';
 import { push } from 'react-router-redux';
+import { Link} from 'react-router';
 
 class Login extends React.Component {
     constructor() {
@@ -16,6 +17,7 @@ class Login extends React.Component {
                 <input type="text" className="form-control" ref='email' placeholder='用户邮箱' />
                 <input type="password" className="form-control" ref='password' placeholder='密码'/>
                 <a className='btn login-btn' onClick={this.onLogin}>登录</a>
+                <div className='no-account'>没有账号？<Link to='/register' >注册</Link></div>
             </div>
             <div className='login-form-overlay' onClick={this.cancelLogin}></div>
         </div>

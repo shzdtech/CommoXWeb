@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
     [Route("api/Chain")]
-    public class ChainController : Controller
+    public class ChainController : BaseController
     {
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
@@ -56,6 +56,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("{id:int}/Status/{status:int}")]
         public void ChangeChainStatus(int id, ChainStatusType status)
         {
+            
             if (status == ChainStatusType.OPEN)
             {
                 _chainManager.LockChain(id);

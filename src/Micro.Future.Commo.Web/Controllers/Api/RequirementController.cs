@@ -12,22 +12,22 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
     [Produces("application/json")]
     [Route("api/Requirement")]
-    public class RequirementController : Controller
+    public class RequirementController : BaseController
     {
-        private string _userId = "1";
         private IRequirementManager _requirementManager;
-        public RequirementController(IRequirementManager requirementManager)
+        private IChainManager _chainManager;
+        public RequirementController(IRequirementManager requirementManager, IChainManager chainManager)
         {
             _requirementManager = requirementManager;
+            _chainManager = chainManager;
         }
         [Route("")]
         [HttpPost]
         public Models.RequirementInfo AddRequirement(Models.RequirementInfo requirement)
         {
-            var user = Request.HttpContext.User.Identity;
             var requirementInfo = new RequirementInfo
             {
-                UserId = _userId,
+                UserId = UserId,
                 RequirementId = requirement.RequirementId,
                 EnterpriseId = requirement.EnterpriseId,
                 PaymentType = requirement.PaymentType,
@@ -65,7 +65,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
-            return _requirementManager.QueryRequirements(_userId).Result.Select(r => new Models.RequirementInfo(r));
+
+            return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
         }
 
         [Route("{id:int}")]
@@ -79,7 +80,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
-            var chains = _requirementManager.QueryRequirementChains(id);
+            var chains = new List<RequirementChainInfo>();
+            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED);
+            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED);
+            if (lockedChains != null)
+            {
+                chains.AddRange(lockedChains.ToList());
+            }
+            if (confirmedChains != null)
+            {
+                chains.AddRange(confirmedChains.ToList());
+            }
             return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
         }
 

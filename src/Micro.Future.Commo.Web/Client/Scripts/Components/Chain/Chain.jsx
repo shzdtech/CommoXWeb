@@ -12,13 +12,13 @@ class Chain extends React.Component {
 
         let className = 'chain';
         let text = '锁定';
-         if (chain.chainStatus == 0) {
+         if (chain.chainStatus === 0) {
              className += ' open';
         }
-        if (chain.chainStatus == 1) {
+        if (chain.chainStatus === 1) {
             className += ' locked';
             text = '确认';
-        } else if (chain.chainStatus == 2) {
+        } else if (chain.chainStatus === 2) {
             className += ' confirmed'
         }
 

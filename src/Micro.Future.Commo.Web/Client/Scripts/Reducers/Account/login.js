@@ -1,11 +1,12 @@
 import {LOGIN_SUCCESS} from '../../Constants/ActionTypes';
+import auth from '../../auth.js'
 
-let userInfo = $.parseJSON(sessionStorage.getItem('userInfo'));
+let userInfo = auth.getUserInfo();
 
 const login = (state = userInfo, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS: {
-            sessionStorage.setItem('userInfo', JSON.stringify(action.userInfo));
+            auth.setUserInfo(action.userInfo);
             return action.userInfo;
         }
         default:

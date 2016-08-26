@@ -13,6 +13,7 @@ import Register from './Containers/Account/Register';
 import Login from './Containers/Account/Login';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
+import auth from './auth';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router';
@@ -35,11 +36,15 @@ class App extends React.Component{
     }
 }
 
-const DevTools = createDevTools(
-    <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q">
-        <LogMonitor theme="tomorrow" preserveScrollTop={false} />
-    </DockMonitor>
-);
+// const requireAuth = (nextState, replace) => {
+//     console.log(nextState.location.pathname);
+//   if (!auth.loggedIn()) {
+//     replace({
+//       pathname: '/login',
+//       state: { nextPathname: nextState.location.pathname }
+//     })
+//   }
+// }
 
 const rm = routerMiddleware(browserHistory);
 
@@ -62,7 +67,7 @@ ReactDOM.render(
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/chainManager" component={ChainListManger} />
-                <Route path="*" component={Requirements}/>
+                <Route path="*" component={Requirements} />
             </Route>
         </Router>
     </Provider>,
