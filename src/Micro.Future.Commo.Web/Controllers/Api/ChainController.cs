@@ -47,7 +47,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("Status/{statusId:int}/Chains")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
-            _matchMakerManger.Make();
             var chainList = _chainManager.QueryAllChains(statusId);
             if (chainList == null)
             {
