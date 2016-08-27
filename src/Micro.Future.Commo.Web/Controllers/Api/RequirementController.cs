@@ -1,6 +1,7 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Micro.Future.Commo.Web.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     {
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
-        public RequirementController(IRequirementManager requirementManager, IChainManager chainManager)
+        public RequirementController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager)
+            :base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;

@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     {
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
+        private IMatchMakerManager _matchMakerManger;
 
-        public ChainController(IRequirementManager requirementManager, IChainManager chainManager)
+        public ChainController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager, IMatchMakerManager matchMakerManger)
+            :base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;
+            _matchMakerManger = matchMakerManger;
         }
 
         //[HttpPost]
@@ -43,6 +47,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("Status/{statusId:int}/Chains")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
+            _matchMakerManger.Make();
             var chainList = _chainManager.QueryAllChains(statusId);
             if (chainList == null)
             {

@@ -14,8 +14,24 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             get
             {
-                return User.Identity.Name;
+                if (User.Identity != null)
+                {
+                    var task = _userManager.FindByNameAsync(User.Identity.Name);
+                    task.Wait();
+                    return task.Result.Id;
+                }
+                else
+                {
+                    return null;
+                }
             }
+        }
+        private UserManager<ApplicationUser> _userManager;
+
+        public BaseController(
+            UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
         }
     }
 }

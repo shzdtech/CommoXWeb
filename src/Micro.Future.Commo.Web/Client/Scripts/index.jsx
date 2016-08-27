@@ -18,7 +18,8 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware, routerActions } from 'react-router-redux';
+import { UserAuthWrapper } from 'redux-auth-wrapper'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 require('signalr');
@@ -45,6 +46,12 @@ class App extends React.Component{
 //     })
 //   }
 // }
+
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.user, // how to get the user state
+  redirectAction: routerActions.replace, // the redux action to dispatch for redirect
+  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+})
 
 const rm = routerMiddleware(browserHistory);
 

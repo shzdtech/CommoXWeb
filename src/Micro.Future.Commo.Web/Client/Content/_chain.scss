@@ -11,26 +11,24 @@
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
         display: flex;
-        justify-content: center;
+        justify-content: left;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         -webkit-flex-direction: row;
         -ms-flex-direction: row;
         flex-direction: row;
+        flex-wrap: wrap;
         -webkit-box-align: stretch;
         -webkit-align-items: stretch;
         -ms-flex-align: stretch;
-        width: 80%;
         position: relative;
 
         & > .operators{
              position: absolute;
-                top: 50%;
-                left: 0;
-                width: 100%;
+                top: 10px;
+                left: 10px;
                 text-align: center;
                 display: none;
-                transform: translateY(-50%);
 
                 & > span{
                     padding: 6px 20px !important;
@@ -71,7 +69,7 @@
                 }
         }
 
-        &.locked:hover,
+       
         &.open:hover {
                 cursor: pointer;
 
@@ -80,7 +78,7 @@
 
                      &::after {
                          background: $pink;
-                         border-color: $white;
+                         border-color: $primary-color;
                      }
                 }
 
@@ -101,6 +99,14 @@
                 }
         }
 
+        &.locked:hover{
+             .chain-node{
+                   &::after {
+                         border-color: $primary-color;
+                    }
+              }
+        }
+
         &.reject {
             .chain-node {
                 background: $red;
@@ -116,9 +122,8 @@
             border-color: $primary-color;
             border-width: 1px 0 1px 1px;
             border-style: solid;
-            padding: 20px 40px;
+            padding: 20px 15px;
             position: relative;
-            min-width: 200px;
             min-height: 80px;
             color: $normal-font-color;
 
@@ -168,6 +173,10 @@
                 font-size: 18px;
                 font-weight: bold;
                 color: $primary-color;
+            }
+
+            .sub-title{
+                font-size: 10px;
             }
 
             .operators {

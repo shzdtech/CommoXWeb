@@ -81,6 +81,7 @@ namespace Micro.Future.Commo.Web
 
             services.AddMatchMakerSystem(new MatcherConfig());
             services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = Configuration.GetConnectionString("DefaultConnection") });
+            services.AddSingleton<IMatchMakerManager, MatchMakerManager>();
             services.AddSingleton<IRequirementManager, RequirementManager>();
             services.AddSingleton<IChainManager, ChainManager>();
             services.AddSingleton<IEnterpriseManager, EnterpriseManager>();

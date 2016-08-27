@@ -274,20 +274,27 @@ export default {
             type: TEXT
         }, {
             id: 4,
+            title: '货物单价',
+            key: 'productPrice',
+            category: Category.Product,
+            filterProperty: FilterProperty.Requirement,
+            type: TEXT
+        }, {
+            id: 5,
             title: '货物数量',
             key: 'productQuantity',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 5,
+            id: 6,
             title: '仓库地址',
             key: 'warehouseAddress1',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 6,
+            id: 7,
             title: '开票面额',
             key: 'invoiceValue',
             category: Category.Invoice,
@@ -306,21 +313,21 @@ export default {
                     value: '1000万'
                 }]
         }, {
-            id: 7,
+            id: 8,
             title: '开票时间',
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 8,
+            id: 9,
             title: '发票交接方式',
             key: 'invoiceTransferMode',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 9,
+            id: 10,
             title: '企业类型',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -349,7 +356,7 @@ export default {
             multipleSelection: true
         },
         {
-            id: 10,
+            id: 11,
             title: '注册资本',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -369,7 +376,7 @@ export default {
                 }],
             multipleSelection: true
         }, {
-            id: 11,
+            id: 12,
             title: '注册地',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
