@@ -1,6 +1,7 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Micro.Future.Commo.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -63,6 +64,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return requirement;
         }
 
+        [Authorize]
         [Route("")]
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()

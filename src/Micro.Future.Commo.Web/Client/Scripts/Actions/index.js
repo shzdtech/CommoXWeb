@@ -126,7 +126,7 @@ export const fetchChains = (requirementId) => {
     return (dispatch) => {
         return fetchChainsRequest(requirementId).then(
             chains => dispatch(fetchChainsSuccess(chains)),
-            error => dispatch(fetchChainsFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };
@@ -160,20 +160,11 @@ export const confirmChainSuccess = (chainId, requirementId, accept) => {
     };
 };
 
-export const confirmChainFailure = (chainId, requirementId, accept) => {
-    return {
-        type: CONFIRM_CHAIN_FAILURE,
-        chainId: chainId,
-        requirementId: requirementId,
-        accept: accept
-    };
-};
-
 export const confirmChain = (chainId, requirementId, accept) => {
     return (dispatch) => {
         return confirmChainRequest(chainId, requirementId).then(
             success => dispatch(confirmChainSuccess(chainId, requirementId, accept)),
-            error => dispatch(confirmChainFailure(error))
+            error =>ajaxError(dispatch, error)
         );
     };
 };
@@ -208,7 +199,7 @@ export const manageChain = (chain) =>{
     return (dispatch) => {
         return manageChainRequest(chain).then(
             res => dispatch(manageChainSuccess(chain)),
-            error => dispatch(manageChainFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };
@@ -273,7 +264,7 @@ export const addRequirement = (list, selectedType) => {
                 dispatch(resetForm());
                 dispatch(push('/requirements'));
             },
-            error => dispatch(addRequirementFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };
@@ -308,7 +299,7 @@ export const fetchRequirements = () => {
     return (dispatch) => {
         return fetchRequirementsRequest().then(
             requirements => dispatch(fetchRequirementsSuccess(requirements)),
-            error => dispatch(fetchRequirementssFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };
@@ -424,4 +415,11 @@ export const loginAction = (email, password) => {
             }
         );
     };
+};
+
+//ajax error
+const ajaxError = (dispatch, error) => {
+    if(error.status === 401){
+        dispatch(push('/login'));
+    }
 };

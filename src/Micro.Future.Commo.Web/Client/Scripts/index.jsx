@@ -48,7 +48,7 @@ class App extends React.Component{
 // }
 
 const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user, // how to get the user state
+  authSelector: state => state.account.login, // how to get the user state
   redirectAction: routerActions.replace, // the redux action to dispatch for redirect
   wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
 })
@@ -64,9 +64,9 @@ ReactDOM.render(
     <Provider store = {store}>
         <Router history={history}>
             <Route path='/' component={App} >
-                <IndexRoute component={Requirements} />
+                <IndexRoute component={UserIsAuthenticated(Requirements)} />
                 <Route path="/addRequirement" component={Form} />
-                <Route path="/requirement" component={Requirements}>
+                <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
                 </Route>
                 <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>

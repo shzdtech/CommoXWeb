@@ -18,8 +18,7 @@ namespace Micro.Future.Commo.Web.Hubs
         public ChainHub(IRequirementManager requirementManager)
         {
             _manager = requirementManager;
-            if (_manager is AbstractRequirementManager) 
-            (_manager as RequirementManager).OnRequirementChainChanged += _onRequirementChainChanged;
+            _manager.OnChainChanged += _onRequirementChainChanged;
         }
 
         private void _onRequirementChainChanged(IEnumerable<RequirementChainInfo> chain)
