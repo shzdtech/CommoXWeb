@@ -15,10 +15,10 @@ class InputFormItem extends React.Component {
             formItem.value = '';
         }
         return <div className='form-item'>
-            <div className="input-group">
-                <span className="input-group-addon" id="basic-addon1">{formItem.title}</span>
-                <input type="text" className="form-control" value={formItem.value} placeholder={formItem.title}  onChange={(e) => { this.handleValueChange(e) } }/>
-            </div>
+            <label className="input_label" htmlFor={formItem.title}>
+                <span className="label_text">{formItem.title + ':'}</span>
+            </label>
+            <input type="text" className="form-control" value={formItem.value} placeholder={formItem.title}  onChange={(e) => { this.handleValueChange(e) } }/>
         </div>
     }
 

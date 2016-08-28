@@ -403,7 +403,7 @@ export default {
             type: TEXT
         }, {
             id: 3,
-            title: '合同上下游企业类型',
+            title: '上下游企业类型',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Contract,
