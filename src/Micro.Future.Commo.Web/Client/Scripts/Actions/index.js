@@ -35,7 +35,9 @@ import {
     REGISTER_ENTERPRISE_SUCCESS,
     REGISTER_ENTERPRISE_FAILURE,
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    TYPE_NEW_USER_EMAIL,
+    CREATE_NEW_USER_SUCCESS
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -164,7 +166,7 @@ export const confirmChain = (chainId, requirementId, accept) => {
     return (dispatch) => {
         return confirmChainRequest(chainId, requirementId).then(
             success => dispatch(confirmChainSuccess(chainId, requirementId, accept)),
-            error =>ajaxError(dispatch, error)
+            error => ajaxError(dispatch, error)
         );
     };
 };
@@ -195,7 +197,7 @@ export const manageChainFailure = (error) => {
     }
 };
 
-export const manageChain = (chain) =>{
+export const manageChain = (chain) => {
     return (dispatch) => {
         return manageChainRequest(chain).then(
             res => dispatch(manageChainSuccess(chain)),
@@ -417,9 +419,39 @@ export const loginAction = (email, password) => {
     };
 };
 
+export const typeUserEmail = (email) => {
+    return {
+        type: TYPE_NEW_USER_EMAIL,
+        email: email
+    };
+};
+
+export const submitCreateUserSuccess = () => {
+    return {
+        type: CREATE_NEW_USER_SUCCESS
+    };
+};
+
+const submitCreateUserRequest = (user) => {
+    return $.post(HOST + 'api/Account/User', user);
+};
+
+export const submitCreateUser = (user) => {
+    return dispatch => {
+        submitCreateUserRequest(user).then(
+            res => {
+                dispatch(submitCreateUserSuccess());
+            },
+            error => {
+
+            }
+        );
+    };
+};
+
 //ajax error
 const ajaxError = (dispatch, error) => {
-    if(error.status === 401){
+    if (error.status === 401) {
         dispatch(push('/login'));
     }
 };

@@ -12,7 +12,7 @@ class Register extends React.Component {
         const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm} = this.props;
         for (var key in enterpriseInfo) {
             if (enterpriseInfo[key].type === 'text' || enterpriseInfo[key].type === 'date' || enterpriseInfo[key].type === 'number') {
-                list.push(<Input key={key} info={enterpriseInfo[key]} onChangeEnterpriseForm={onChangeEnterpriseForm} />);
+                list.push(<Input key={key} info={enterpriseInfo[key]} onChangeForm={onChangeEnterpriseForm} />);
             } else if (enterpriseInfo[key].type === 'select') {
                 list.push(<Dropdown key={key} info={enterpriseInfo[key]} onChangeEnterpriseForm={onChangeEnterpriseForm} />);
             }

@@ -24,7 +24,7 @@ class Input extends React.Component {
 
   changeValue(e){
         console.log(e.target.value);
-        this.props.onChangeEnterpriseForm(this.props.info.key, Object.assign({}, this.props.info, {value: e.target.value}));
+        this.props.onChangeForm(this.props.info.key, Object.assign({}, this.props.info, {value: e.target.value}));
     }
 }
 

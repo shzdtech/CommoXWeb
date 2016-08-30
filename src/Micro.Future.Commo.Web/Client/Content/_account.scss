@@ -108,3 +108,24 @@
         }
     }
 }
+
+.create-user-container{
+    padding: 20px 0;
+
+    .input-container{
+        width: 60%;
+        display: inline-block;
+
+        .form-control{
+            width: 80% !important;
+        }
+    }
+
+    .create-user-operators{
+        display: inline-block;
+        .btn{
+
+            padding: 6px 20px !important;
+        }
+    }
+}

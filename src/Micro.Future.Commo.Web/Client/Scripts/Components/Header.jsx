@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 class Header extends React.Component {
     render() {
@@ -21,7 +22,12 @@ class Header extends React.Component {
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             <li>
-                             { this.props.userInfo &&　this.props.userInfo.userName ? <a href='#'>{this.props.userInfo.userName}</a> : <Link to="/login">登录</Link>}
+                             { this.props.userInfo &&　this.props.userInfo.userName ? 
+                                <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
+                                <MenuItem eventKey="1" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
+                                <MenuItem eventKey="2">修改密码</MenuItem>
+                                </DropdownButton>: 
+                                 <Link to="/login">登录</Link>}
                              </li>
                             <li><Link to="/register">注册</Link></li>
                             <li><Link to="/chainManager">管理</Link></li>

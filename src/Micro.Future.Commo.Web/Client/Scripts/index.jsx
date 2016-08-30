@@ -10,6 +10,7 @@ import ChainListManger from './Containers/Chain/ChainListManager';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Components/Requirement/Requirements';
 import Register from './Containers/Account/Register';
+import CreateUser from './Containers/Account/CreateUser';
 import Login from './Containers/Account/Login';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
@@ -70,9 +71,10 @@ ReactDOM.render(
                 </Route>
                 <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>
-                <Route path="/requirement/:requirementId/chains" component={ChainList}/>
+                <Route path="/requirement/:requirementId/chains" component={ChainList}/>           
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
+                <Route path="/createuser" component={CreateUser} />
                 <Route path="/chainManager" component={ChainListManger} />
                 <Route path="*" component={Requirements} />
             </Route>

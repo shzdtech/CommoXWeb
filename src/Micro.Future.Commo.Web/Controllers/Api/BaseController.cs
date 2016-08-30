@@ -16,9 +16,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 if (User.Identity != null)
                 {
-                    var task = _userManager.FindByNameAsync(User.Identity.Name);
-                    task.Wait();
-                    return task.Result.Id;
+                    return _userManager.GetUserId(User);
                 }
                 else
                 {
