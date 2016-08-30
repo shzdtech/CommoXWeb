@@ -68,6 +68,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
+
                 string initialPassword = "QAZ@wsx3";
                 var createdUser = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = user.EnterpriseId, InitialPassword = initialPassword };
 

@@ -12,7 +12,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSelectDropdown: (key, event)=>{
-            dispatch(push("/createuser"));
+            if(key === "1"){
+                dispatch(push("/createuser"));
+            }
+            else if(key === "2"){
+                dispatch(push("/changepassword"));
+            }
         }
     };
 };

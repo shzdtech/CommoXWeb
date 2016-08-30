@@ -69,7 +69,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public IEnumerable<Models.RequirementInfo> GetRequirements()
         {
-
             return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
         }
 

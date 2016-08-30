@@ -11,6 +11,7 @@
 /// <reference path="../client/scripts/chainlist.js" />
 /// <reference path="../client/scripts/constants/ActionTypes.js" />
 /// <reference path="../client/scripts/constants/FilterTypes.js" />
+/// <reference path="../client/scripts/containers/account/changepassword.js" />
 /// <reference path="../client/scripts/containers/account/createuser.js" />
 /// <reference path="../client/scripts/containers/account/login.js" />
 /// <reference path="../client/scripts/containers/account/register.js" />

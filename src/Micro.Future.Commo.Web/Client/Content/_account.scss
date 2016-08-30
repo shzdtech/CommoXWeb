@@ -123,8 +123,25 @@
 
     .create-user-operators{
         display: inline-block;
-        .btn{
 
+        .btn{
+            padding: 6px 20px !important;
+        }
+    }
+}
+
+.change-password-container{
+    padding: 20px 0;
+
+    .input-container{
+        padding: 10px 0 10px 22.5%;
+    }
+
+    .change-password-operators{
+        margin-top: 20px;
+        text-align: center;
+
+        .btn{
             padding: 6px 20px !important;
         }
     }
