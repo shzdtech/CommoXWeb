@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ChangePassword from '../../Components/Account/ChangePassword'
-//import {typeUserEmail, submitCreateUser} from '../../Actions';
+import {changePasswordModel, submitChangePassword} from '../../Actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -15,24 +15,28 @@ const mapStateToProps = (state, ownProps) => {
         },{
             label: '新密码',
             type: 'password',
-            key: 'password',
+            key: 'newPassword',
             length: 'medium',
             placehodler: '新密码'
         },{
             label: '确认新密码',
             type: 'password',
-            key: 'password',
+            key: 'newPasswordConfirm',
             length: 'medium',
             placehodler: '确认新密码'
-        }]
+        }],
+        password: state.account.password
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onChangeForm: (key, newValue) => {
-            //dispatch(typeUserEmail(newValue.value));
+            dispatch(changePasswordModel(key, newValue.value));
         },
+        submitChangePassword: (password) => {
+            dispatch(submitChangePassword(password));
+        }
     };
 };
 

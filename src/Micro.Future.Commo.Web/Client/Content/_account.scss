@@ -133,8 +133,20 @@
 .change-password-container{
     padding: 20px 0;
 
+    .instruction{
+        padding: 0 0 0 35%;
+        color: $normal-font-color;
+        font-size: 12px;
+    }
+
     .input-container{
         padding: 10px 0 10px 22.5%;
+    }
+
+    .error{
+        font-size: 10px;
+        color: $red;
+        padding: 0 0 0 35%;
     }
 
     .change-password-operators{

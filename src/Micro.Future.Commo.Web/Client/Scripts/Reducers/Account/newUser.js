@@ -1,6 +1,6 @@
 import {TYPE_NEW_USER_EMAIL} from '../../Constants/ActionTypes';
 
-const user = (state={}, action) => {
+const newUser = (state={}, action) => {
     switch(action.type){
         case TYPE_NEW_USER_EMAIL:{
             return Object.assign({}, state, {email: action.email});
@@ -10,4 +10,4 @@ const user = (state={}, action) => {
     }
 }
 
-module.exports = user;
+module.exports = newUser;

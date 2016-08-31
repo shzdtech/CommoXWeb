@@ -37,7 +37,9 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
     TYPE_NEW_USER_EMAIL,
-    CREATE_NEW_USER_SUCCESS
+    CREATE_NEW_USER_SUCCESS,
+    TYPE_PASSWORD_MODEL,
+    CHANGE_PASSWORD_SUCCESS
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -447,6 +449,42 @@ export const submitCreateUser = (user) => {
             }
         );
     };
+};
+
+export const changePasswordModel = (keyName, value) => {
+    return {
+        type: TYPE_PASSWORD_MODEL,
+        keyName: keyName,
+        value: value
+    };
+};
+
+const submitChangePasswordRequest = (password) => {
+    return $.post(HOST + 'api/Account/Password', {password: password.password, newPassword: password.newPassword});
+};
+
+export const submitChangePasswordSuccess = () => {
+    return {
+        type:　CHANGE_PASSWORD_SUCCESS
+    }
+};
+
+const submitChangePasswordFailure = () => {
+
+};
+
+export const submitChangePassword = (password) => {
+    return dispatch => {
+            submitChangePasswordRequest(password).then(
+                res => {
+                    dispatch(submitChangePasswordSuccess());
+                    dispatch(push('/requirements'));
+                },
+                error => {
+                    //dispatch(loginFailure(error));
+                }
+            );
+        };
 };
 
 //ajax error

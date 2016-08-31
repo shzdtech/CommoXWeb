@@ -63,7 +63,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("User")]
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public async Task<IdentityResult> CreateUser(CreateUserModel model)
+        public async Task CreateUser(CreateUserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -84,9 +84,42 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
                     await _userManager.AddToRoleAsync(createdUser, roleName);
                 }
-                return result;
             }
-            return null;
+
+            throw new Exception();
+        }
+
+        [Route("Password")]
+        [HttpPost]
+        public async Task ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var isMatch = await _userManager.CheckPasswordAsync(user, model.Password);
+                if (isMatch)
+                {
+                    await _userManager.RemovePasswordAsync(user);
+                    var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception("密码不符合规范");
+                    }
+                }
+                else
+                {
+                    throw new Exception("密码不正确");
+                }
+            }
+
+            throw new Exception();
+        }
+
+        [Route("SignOut")]
+        [HttpPost]
+        public async Task SignOut()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

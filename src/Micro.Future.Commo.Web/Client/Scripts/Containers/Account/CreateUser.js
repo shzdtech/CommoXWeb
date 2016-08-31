@@ -5,7 +5,7 @@ import {typeUserEmail, submitCreateUser} from '../../Actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        newUser: state.account.user
+        newUser: state.account.newUser
     };
 }
 

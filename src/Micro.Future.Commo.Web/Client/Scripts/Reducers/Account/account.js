@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import login from './login';
 import register from './register';
-import user from './user';
+import newUser from './newUser';
+import password from './password';
 
 const account = combineReducers({
     login,
     register,
-    user
+    newUser,
+    password
 });
 
 export default account;
