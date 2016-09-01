@@ -52,12 +52,12 @@
     }
 
     .requirement {
-        min-height: 425px;
+        // min-height: 425px;
         margin: 20px 20px 0 20px;
-        box-shadow: 0 0 3px rgba(69, 69, 70, 0.2);
+        box-shadow: 1px 2px 20px 1px #d3d3d3;
         width: 240px;
+        padding: 5px;
         color: #444;
-        background: $primary-color-opacity;
         float: left;
 
         &:hover {
@@ -65,8 +65,9 @@
         }
 
         .requirement-items {
-            min-height: 355px;
-            padding: 20px;
+            // min-height: 355px;
+            padding: 10px;
+            background: $primary-color-opacity;
 
             .requirement-item {
                 margin-bottom: 5px;

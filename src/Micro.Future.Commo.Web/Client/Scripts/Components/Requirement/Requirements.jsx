@@ -1,7 +1,12 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router'
+import {Link} from 'react-router';
+import Masonry from 'react-masonry-component';
 import {fetchRequirements, fetchChains} from '../../Actions';
+
+const masonryOptions = {
+    transitionDuration: 1
+};
 
 class Requirements extends React.Component {
 
@@ -18,10 +23,17 @@ class Requirements extends React.Component {
         const {requirements} = this.props;
         return <div className='requirement-list'>
             {requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
-            {
-                requirements.map((requirement) => {
-                    return this.getRequirement(requirement);
-                }) }
+            <Masonry
+                className={'my-gallery-class'} // default ''
+                options={masonryOptions} // default {}
+                disableImagesLoaded={false} // default false
+                updateOnEachImageLoad={false} // default false and works only if disableImagesLoaded is false
+                >
+                {
+                    requirements.map((requirement) => {
+                        return this.getRequirement(requirement);
+                    }) }
+            </Masonry>
             <div className='clearfix'></div>
         </div>;
     }
@@ -55,7 +67,7 @@ class Requirements extends React.Component {
         return <div key={requirementId} className='requirement'>
             <div className='requirement-items'>
                 {enterpriseName ? <div className='requirement-item'><span className='title'>公司名称：</span><span>{enterpriseName}</span></div> : null}
-                {type ? <div className='requirement-item'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销')}</span></div> : null}
+                {type ? <div className='requirement-item'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销') }</span></div> : null}
                 {paymentAmount ? <div className='requirement-item'><span className='title'>资金金额: </span><span>{paymentAmount}</span></div> : null}
                 {paymentDateTime ? <div className='requirement-item'><span className='title'>货款支付时间: </span><span>{paymentDateTime}</span></div> : null}
                 {paymentType ? <div className='requirement-item'><span className='title'>支付方式: </span><span>{paymentType}</span></div> : null}
