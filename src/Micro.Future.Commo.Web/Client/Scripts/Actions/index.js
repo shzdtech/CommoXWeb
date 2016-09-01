@@ -40,7 +40,10 @@ import {
     CREATE_NEW_USER_SUCCESS,
     TYPE_PASSWORD_MODEL,
     CHANGE_PASSWORD_SUCCESS,
-    SIGN_OUT_SUCCESS
+    SIGN_OUT_SUCCESS,
+    UPDATE_ENTERPRISE_FORM,
+    UPDATE_ENTERPRISE_SUCCESS,
+    UPDATE_ENTERPRISE_FAILURE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -509,6 +512,49 @@ export const signOut = () => {
             },
             error => {}
         )
+    };
+};
+
+export const updateEnterpriseInfo = (keyName, value) => {
+    return {
+        type: UPDATE_ENTERPRISE_FORM,
+        keyName: keyName,
+        value: value
+    };
+};
+
+const updateEnterpriseRequest = (enterpriseInfo) => {
+    var model = {};
+    for (var key in enterpriseInfo) {
+        model[key] = enterpriseInfo[key].value;
+    }
+
+    const request = $.post(HOST + 'api/Enterprise/Detail', model);
+    return request;
+};
+
+const updateEnterpriseSuccess = () => {
+    return {
+        type: UPDATE_ENTERPRISE_SUCCESS
+    };
+};
+
+const updateEnterpriseFailure = (error) => {
+    return {
+        type: UPDATE_ENTERPRISE_FAILURE,
+        error: error
+    };
+};
+
+export const updateEnterprise = (enterpriseInfo) => {
+    return (dispatch) => {
+        return updateEnterpriseRequest(enterpriseInfo).then(
+            response => {
+                dispatch(updateEnterpriseSuccess(response));
+                dispatch(push('/requirements'));
+            },
+            error => dispatch(updateEnterpriseFailure(error))
+        );
     };
 };
 

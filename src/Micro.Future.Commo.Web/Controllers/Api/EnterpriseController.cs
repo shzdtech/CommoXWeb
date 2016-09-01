@@ -47,28 +47,30 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("")]
-        public async Task<EnterpriseInfo> Register(EnterpriseRegisterViewModel model)
+        public async Task<EnterpriseInfo> Register(EnterpriseRegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
                 enterpriseInfo.Name = model.Name;
-                enterpriseInfo.Address = model.Address;
                 enterpriseInfo.Contacts = model.Contacts;
-                //newEnterprise.Email = model.Email;
-                enterpriseInfo.RegisterNumber = model.RegisterNumber;
-                enterpriseInfo.RegisterTime = model.RegisterTime;
-                enterpriseInfo.RegisterCapital = model.RegisterCapital;
-                enterpriseInfo.RegisterAddress = model.RegisterAddress;
-                enterpriseInfo.BusinessTypeId = model.BusinessTypeId;
-                enterpriseInfo.BusinessRange = model.BusinessRange;
+                enterpriseInfo.EmailAddress = model.EmailAddress;
+                enterpriseInfo.MobilePhone = model.MobilePhone;
+                enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
                 enterpriseInfo.CreateTime = DateTime.Now;
 
                 var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
                 if (!bizResult.HasError && bizResult.Result > 0)
                 {
                     string initialPassword = "QAZ@wsx3";
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = bizResult.Result, InitialPassword = initialPassword };
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.EmailAddress,
+                        PhoneNumber =model.MobilePhone,
+                        Email = model.EmailAddress,
+                        EnterpriseId = bizResult.Result,
+                        InitialPassword = initialPassword
+                    };
                     
                     var result = await _userManager.CreateAsync(user, initialPassword);
                     if (result.Succeeded)

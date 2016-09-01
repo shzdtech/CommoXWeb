@@ -13,6 +13,13 @@ export default {
     //     key: 'address',
     //     placehodler: '企业地址'
     // },
+    emailAddress: {
+        label: '企业邮箱',
+        type: 'text',
+        legth: 'medium',
+        key: 'emailAddress',
+        placehodler: '企业邮箱'
+    },
     contacts: {
         label: '联系人',
         type: 'text',
@@ -20,13 +27,13 @@ export default {
         key: 'contacts',
         placehodler: '联系人'
     },
-    email: {
-        label: '企业邮箱',
+    mobilePhone:{
+        label: '联系方式',
         type: 'text',
         legth: 'medium',
-        key: 'email',
-        placehodler: '企业邮箱'
-    },
+        key: 'mobilePhone',
+        placehodler: '联系人手机号码'
+    }
     // registerNumber: {
     //     label: '企业注册代码',
     //     type: 'text',

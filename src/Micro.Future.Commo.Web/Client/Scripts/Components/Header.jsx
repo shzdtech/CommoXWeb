@@ -4,6 +4,26 @@ import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 class Header extends React.Component {
     render() {
+        const loginAndRegister = () => {
+            if (this.props.userInfo && this.props.userInfo.userName) {
+                return <li key="userInfo">
+                    <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
+                        <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
+                        <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
+                        <MenuItem divider />
+                        <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>
+                        <MenuItem divider />
+                        <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
+                    </DropdownButton>
+                </li>
+            } else {
+                return [
+                    <li key="login"><Link to="/login">登录</Link></li>,
+                    <li key="register"><Link to="/register">注册</Link></li>
+                ];
+            }
+        }
+
         return <div className='header'>
             <nav className='navbar navbar-default'>
                 <div className='container'>
@@ -21,17 +41,7 @@ class Header extends React.Component {
                             <li><Link to="/addRequirement">添加新需求</Link></li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
-                            <li>
-                             { this.props.userInfo &&　this.props.userInfo.userName ? 
-                                <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
-                                <MenuItem eventKey="1" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
-                                <MenuItem eventKey="2" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey="3" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
-                                </DropdownButton>: 
-                                 <Link to="/login">登录</Link>}
-                             </li>
-                            <li><Link to="/register">注册</Link></li>
+                            {loginAndRegister()}
                             <li><Link to="/chainManager">管理</Link></li>
                         </ul>
                         <div className='clearfix'></div>
