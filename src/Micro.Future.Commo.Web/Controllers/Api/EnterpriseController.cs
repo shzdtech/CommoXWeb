@@ -1,7 +1,7 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Micro.Future.Commo.Web.Models;
-using Micro.Future.Commo.Web.Models.EnterpriseViewModels;
+using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

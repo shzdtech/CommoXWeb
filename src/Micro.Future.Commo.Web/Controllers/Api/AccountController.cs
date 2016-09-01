@@ -1,5 +1,5 @@
 ﻿using Micro.Future.Commo.Web.Models;
-using Micro.Future.Commo.Web.Models.AccountViewModels;
+using Micro.Future.Commo.Web.Models.AccountModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;

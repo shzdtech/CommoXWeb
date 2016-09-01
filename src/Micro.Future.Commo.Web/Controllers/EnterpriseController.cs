@@ -9,7 +9,7 @@ using Micro.Future.Commo.Web.Services;
 using Micro.Future.Commo.Web.Models;
 using Microsoft.Extensions.Logging;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
-using Micro.Future.Commo.Web.Models.EnterpriseViewModels;
+using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
