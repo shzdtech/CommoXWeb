@@ -39,12 +39,14 @@ import {
     TYPE_NEW_USER_EMAIL,
     CREATE_NEW_USER_SUCCESS,
     TYPE_PASSWORD_MODEL,
-    CHANGE_PASSWORD_SUCCESS
+    CHANGE_PASSWORD_SUCCESS,
+    SIGN_OUT_SUCCESS
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
-import { push } from 'react-router-redux'
+import { push } from 'react-router-redux';
+import auth from '../auth';
 
 //filter actions
 export const toggleFilterMutipleSelection = (filter) => {
@@ -485,6 +487,29 @@ export const submitChangePassword = (password) => {
                 }
             );
         };
+};
+
+const signOutRequest = () => {
+    return $.post(HOST + 'api/Account/SignOut');
+};
+
+const signOutSuccess = () => {
+    return {
+        type: SIGN_OUT_SUCCESS
+    }
+}
+
+export const signOut = () => {
+    return dispatch => {
+        signOutRequest().then(
+            res =>{
+                auth.removeUserInfo(); 
+                dispatch(signOutSuccess());             
+                dispatch(push('/requirements'));
+            },
+            error => {}
+        )
+    };
 };
 
 //ajax error

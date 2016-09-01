@@ -26,6 +26,8 @@ class Header extends React.Component {
                                 <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                                 <MenuItem eventKey="1" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
                                 <MenuItem eventKey="2" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="3" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                                 </DropdownButton>: 
                                  <Link to="/login">登录</Link>}
                              </li>

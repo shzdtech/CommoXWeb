@@ -9,5 +9,9 @@ module.exports = {
 
     setUserInfo(userInfo) {
         localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    },
+
+    removeUserInfo(){
+        localStorage.removeItem('userInfo');
     }
 }

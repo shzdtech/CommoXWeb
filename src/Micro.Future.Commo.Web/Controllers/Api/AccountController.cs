@@ -85,8 +85,11 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     await _userManager.AddToRoleAsync(createdUser, roleName);
                 }
             }
+            else
+            {
+                throw new Exception();
+            }
 
-            throw new Exception();
         }
 
         [Route("Password")]
@@ -111,8 +114,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     throw new Exception("密码不正确");
                 }
             }
-
-            throw new Exception();
+            else
+            {
+                throw new Exception();
+            }
         }
 
         [Route("SignOut")]

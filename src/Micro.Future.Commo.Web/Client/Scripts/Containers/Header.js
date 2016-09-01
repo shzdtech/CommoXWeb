@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
-import { push } from 'react-router-redux'
+import { push } from 'react-router-redux';
+import {signOut} from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -17,6 +18,8 @@ const mapDispatchToProps = (dispatch) => {
             }
             else if(key === "2"){
                 dispatch(push("/changepassword"));
+            }else if(key === "3"){
+                dispatch(signOut());
             }
         }
     };
