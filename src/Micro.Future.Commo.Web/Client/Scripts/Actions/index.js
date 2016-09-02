@@ -529,7 +529,7 @@ const updateEnterpriseRequest = (enterpriseInfo) => {
         model[key] = enterpriseInfo[key].value;
     }
 
-    const request = $.post(HOST + 'api/Enterprise/Detail', model);
+    const request = $.post(HOST + 'api/Enterprise/'+auth.getUserInfo().enterpriseId, model);
     return request;
 };
 

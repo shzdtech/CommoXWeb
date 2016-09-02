@@ -95,12 +95,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpPost]
-        [Route("Detail")]
-        public async Task UpdateEnterprise(EnterpriseUpdateModel model)
+        [Route("{id:int}")]
+        public async Task UpdateEnterprise(int id, EnterpriseUpdateModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.GetUserAsync(User);          
+                var user = await _userManager.GetUserAsync(User);
+                if (user.EnterpriseId != id)
+                {
+                    throw new Exception("Not Allowed");
+                }
+                   
                 EnterpriseInfo enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
                 enterpriseInfo.Address = model.Address;
                 enterpriseInfo.AnnualInspection = model.AnnualInspection;
