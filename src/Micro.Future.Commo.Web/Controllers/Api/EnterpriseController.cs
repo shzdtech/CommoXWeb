@@ -66,12 +66,12 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     var user = new ApplicationUser
                     {
                         UserName = model.EmailAddress,
-                        PhoneNumber =model.MobilePhone,
+                        PhoneNumber = model.MobilePhone,
                         Email = model.EmailAddress,
                         EnterpriseId = bizResult.Result,
                         InitialPassword = initialPassword
                     };
-                    
+
                     var result = await _userManager.CreateAsync(user, initialPassword);
                     if (result.Succeeded)
                     {
@@ -92,6 +92,37 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             throw new Exception();
+        }
+
+        [HttpPost]
+        [Route("Detail")]
+        public async Task UpdateEnterprise(EnterpriseUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);          
+                EnterpriseInfo enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
+                enterpriseInfo.Address = model.Address;
+                enterpriseInfo.AnnualInspection = model.AnnualInspection;
+                enterpriseInfo.BusinessRange = model.BusinessRange;
+                enterpriseInfo.BusinessTypeId = model.BusinessTypeId;
+                enterpriseInfo.InvoicedQuantity = model.InvoicedQuantity;
+                enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
+                enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
+                enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
+                enterpriseInfo.PreviousProfit = model.PreviousProfit;
+                enterpriseInfo.PreviousSales = model.PreviousSales;
+                enterpriseInfo.RegisterAccount = model.RegisterAccount;
+                enterpriseInfo.RegisterAddress = model.RegisterAddress;
+                enterpriseInfo.RegisterBankId = model.RegisterBankId;
+                enterpriseInfo.RegisterCapital = model.RegisterCapital;
+                enterpriseInfo.RegisterNumber = model.RegisterNumber;
+                enterpriseInfo.RegisterTime = model.RegisterTime;
+                enterpriseInfo.ReputationGrade = model.ReputationGrade;
+                _enterpriseManager.UpdateEnterprise(enterpriseInfo);
+            }
+
+            throw new Exception("输入数据不合法");
         }
     }
 }
