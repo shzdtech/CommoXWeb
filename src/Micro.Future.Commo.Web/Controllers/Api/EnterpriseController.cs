@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -24,6 +26,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private IOptions<CommoSettings> _commoSettingsAccessor;
 
         private readonly IEnterpriseManager _enterpriseManager;
 
@@ -34,6 +37,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             IEnterpriseManager enterpriseManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            IOptions<CommoSettings> commoSettingsAccessor,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
@@ -42,6 +46,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             _enterpriseManager = enterpriseManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _commoSettingsAccessor = commoSettingsAccessor;
             _logger = loggerFactory.CreateLogger<EnterpriseController>();
         }
 
@@ -105,8 +110,30 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 {
                     throw new Exception("Not Allowed");
                 }
-                   
+
+
                 EnterpriseInfo enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
+
+                var imageFile = HttpContext.Request.Form.Files["businessLicense"];
+                if (imageFile != null)
+                {
+                    var filePath = _commoSettingsAccessor.Value.ImageFolder;
+                    var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    var fullPath = Path.Combine(filePath, fileName);
+                    using (var stream = System.IO.File.Create(fullPath))
+                    {
+                        imageFile.OpenReadStream().CopyTo(stream);
+                    }
+
+                    enterpriseInfo.LicenseImagePath = fullPath;
+                }
+              
+
                 enterpriseInfo.Address = model.Address;
                 enterpriseInfo.AnnualInspection = model.AnnualInspection;
                 enterpriseInfo.BusinessRange = model.BusinessRange;

@@ -4,49 +4,56 @@ export default {
         type: 'text',
         legth: 'long',
         key: 'address',
-        placehodler: '企业地址'
+        placeholder: '企业地址'
     },
     registerNumber: {
         label: '企业注册代码',
         type: 'text',
         key: 'registerNumber',
         length: 'medium',
-        placehodler: '企业注册代码'
+        placeholder: '企业注册代码'
+    },
+    businessLicense: {
+        label: '企业执照',
+        type: 'file',
+        key: 'businessLicense',
+        length: 'medium',
+        placeholder: '上传企业执照照片'
     },
     registerTime: {
         label: '企业注册时间',
         type: 'date',
         key: 'registerTime',
         length: 'medium',
-        placehodler: '企业注册时间'
+        placeholder: '企业注册时间'
     },
     registerCapital: {
         label: '注册资金(￥)',
         type: 'text',
         key: 'registerCapital',
         length: 'medium',
-        placehodler: '企业注册资金'
+        placeholder: '企业注册资金'
     },
     registerAddress: {
         label: '注册地址',
         type: 'text',
         key: 'registerAddress',
         length: 'medium',
-        placehodler: '注册地址'
+        placeholder: '注册地址'
     },
     legalRepresentative: {
         label: '法人代表',
         type: 'text',
         key: 'legalRepresentative',
         length: 'short',
-        placehodler: '法人代表'
+        placeholder: '法人代表'
     },
     invoicedQuantity: {
         label: '开票量',
         type: 'number',
         key: 'invoicedQuantity',
         length: 'short',
-        placehodler: '开票量'
+        placeholder: '开票量'
     },
     businessTypeId: {
         label: '企业类型',
@@ -105,21 +112,21 @@ export default {
         type: 'text',
         key: 'annualInspection',
         length: 'medium',
-        placehodler: '年检情况'
+        placeholder: '年检情况'
     },
     previousSales: {
         label: '上年度营业额',
         type: 'number',
         key: 'previousSales',
         length: 'short',
-        placehodler: '上年度营业额'
+        placeholder: '上年度营业额'
     },
     previousProfit: {
         label: '上年度营利润',
         type: 'number',
         key: 'previousProfit',
         length: 'short',
-        placehodler: '上年度营利润'
+        placeholder: '上年度营利润'
     },
     paymentMethodId: {
         label: '支付方式',
@@ -164,6 +171,6 @@ export default {
         type: 'text',
         key: 'registerAccount',
         length: 'short',
-        placehodler: '企业开户账号'
+        placeholder: '企业开户账号'
     }
 };

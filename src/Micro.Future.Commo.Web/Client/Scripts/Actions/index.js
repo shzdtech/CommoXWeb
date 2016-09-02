@@ -465,12 +465,12 @@ export const changePasswordModel = (keyName, value) => {
 };
 
 const submitChangePasswordRequest = (password) => {
-    return $.post(HOST + 'api/Account/Password', {password: password.password, newPassword: password.newPassword});
+    return $.post(HOST + 'api/Account/Password', { password: password.password, newPassword: password.newPassword });
 };
 
 export const submitChangePasswordSuccess = () => {
     return {
-        type:　CHANGE_PASSWORD_SUCCESS
+        type: 　CHANGE_PASSWORD_SUCCESS
     }
 };
 
@@ -480,16 +480,16 @@ const submitChangePasswordFailure = () => {
 
 export const submitChangePassword = (password) => {
     return dispatch => {
-            submitChangePasswordRequest(password).then(
-                res => {
-                    dispatch(submitChangePasswordSuccess());
-                    dispatch(push('/requirements'));
-                },
-                error => {
-                    //dispatch(loginFailure(error));
-                }
-            );
-        };
+        submitChangePasswordRequest(password).then(
+            res => {
+                dispatch(submitChangePasswordSuccess());
+                dispatch(push('/requirements'));
+            },
+            error => {
+                //dispatch(loginFailure(error));
+            }
+        );
+    };
 };
 
 const signOutRequest = () => {
@@ -505,12 +505,12 @@ const signOutSuccess = () => {
 export const signOut = () => {
     return dispatch => {
         signOutRequest().then(
-            res =>{
-                auth.removeUserInfo(); 
-                dispatch(signOutSuccess());             
+            res => {
+                auth.removeUserInfo();
+                dispatch(signOutSuccess());
                 dispatch(push('/requirements'));
             },
-            error => {}
+            error => { }
         )
     };
 };
@@ -524,12 +524,26 @@ export const updateEnterpriseInfo = (keyName, value) => {
 };
 
 const updateEnterpriseRequest = (enterpriseInfo) => {
-    var model = {};
+    var model = new FormData();
     for (var key in enterpriseInfo) {
-        model[key] = enterpriseInfo[key].value;
+        if(enterpriseInfo[key].type === 'file'){
+            if(enterpriseInfo[key].file[0] !== null &&
+            enterpriseInfo[key].file[0].size > 0 &&
+            enterpriseInfo[key].file[0].type.indexOf('image') > -1){
+                model.append(key, enterpriseInfo[key].file[0]);
+            }
+        }
+        model.append(key, enterpriseInfo[key].value);
     }
-
-    const request = $.post(HOST + 'api/Enterprise/'+auth.getUserInfo().enterpriseId, model);
+    const request = $.ajax({
+        type: 'post',
+        url: HOST + 'api/Enterprise/' + auth.getUserInfo().enterpriseId,
+        contentType: false,
+        processData: false,
+        data: model,
+        timeout: 600000
+    });
+    //const request = $.post(HOST + 'api/Enterprise/'+auth.getUserInfo().enterpriseId, model);
     return request;
 };
 
