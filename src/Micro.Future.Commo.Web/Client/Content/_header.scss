@@ -2,69 +2,70 @@
     width: 100%;
     background: $primary-color;
 
-    nav{
+    nav {
         max-width: 1170px;
         margin: 0 auto;
         margin-bottom: 20px;
         background: $primary-color;
         border-radius: 0;
-        border:none;
+        border: none;
 
-        .navbar-nav{
-                li{
-                    a{
-                        color: $white;
-                        font-size: 20px;
-                    }
+        .navbar-nav {
+            li {
+                a {
+                    color: $white;
+                    font-size: 20px;
                 }
             }
+        }
     }
 
-    .btn-group{
+    .btn-group {
         margin-top: 10px;
 
-        .btn{
+        .btn {
             background: $primary-color;
             border: none;
             font-size: 20px;
             color: $white;
 
             &:focus,
-            &:hover{
+            &:hover {
                 background: $primary-color;
             }
         }
 
-        .btn-default{
+        .btn-default {
             &.dropdown-toggle {
                 box-shadow: none;
+                background: $primary-color !important;
+                color: $white !important;
             }
         }
 
-        &.open {      
-         & > .btn-default{
-                 &.dropdown-toggle{
-                     background: $primary-color !important;
-                     color: $white;
+        &.open {
+            & > .btn-default {
+                &.dropdown-toggle {
+                    background: $primary-color !important;
+                    color: $white !important;
 
-                     &:active,
-                     &:focus,
-                     &:hover{
-                         background: $primary-color;
-                         color: $white;
-                     }
-                 }
+                    &:active,
+                    &:focus,
+                    &:hover {
+                        background: $primary-color;
+                        color: $white;
+                    }
+                }
             }
         }
 
-        .dropdown-menu{
+        .dropdown-menu {
             top: 110%;
 
-            & > li > a{
-            
+            & > li > a {
                 color: $normal-font-color;
 
-                &:hover{
+                &:hover {
                     background: $primary-color;
                     color: $white;
                 }

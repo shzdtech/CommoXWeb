@@ -1,29 +1,29 @@
- .btn {
+.btn {
     color: $white;
     background: $primary-color;
     border: 1px solid $primary-color;
     padding: 3px 12px !important;
     cursor: pointer;
 
-                &.calloff {
-                    background: #999;
-                    color: $white;
+    &.calloff {
+        background: #999;
+        color: $white;
 
-                    &:hover {
-                    background: $white;
-                    border: 1px solid #999;
-                    color: #999;
-                }    
-                }
+        &:hover {
+            background: $white;
+            border: 1px solid #999;
+            color: #999;
+        }
+    }
 
     &:hover {
-        color: $primary-color;
+        color: $primary-color !important;
         background: $white;
         border: 1px solid $primary-color;
     }
 }
 
- .btn-large {
-        padding: 8px 20px !important;
-        margin: 0 15px 0 0;
+.btn-large {
+    padding: 7px 20px !important;
+    margin: 0 15px 0 0;
 }
