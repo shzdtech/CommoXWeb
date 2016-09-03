@@ -4,6 +4,7 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from './Components/Home';
 import Header from './Containers/Header';
 import ChainList from './Containers/Chain/ChainList';
 import ChainListManger from './Containers/Chain/ChainListManager';
@@ -63,7 +64,7 @@ ReactDOM.render(
     <Provider store = {store}>
         <Router history={history}>
             <Route path='/' component={App} >
-                <IndexRoute component={UserIsAuthenticated(Requirements)} />
+                <IndexRoute component={Home} />
                 <Route path="/addRequirement" component={Form} />
                 <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
                 </Route>

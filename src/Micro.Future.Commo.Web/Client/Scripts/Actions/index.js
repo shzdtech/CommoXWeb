@@ -417,7 +417,7 @@ export const loginAction = (email, password) => {
         loginRequest(email, password).then(
             userInfo => {
                 dispatch(loginSuccess(userInfo));
-                dispatch(push('/requirements'));
+                dispatch(push('/'));
             },
             error => {
                 dispatch(loginFailure(error));

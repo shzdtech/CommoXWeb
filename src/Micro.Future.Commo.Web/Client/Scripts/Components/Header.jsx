@@ -4,18 +4,31 @@ import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 class Header extends React.Component {
     render() {
-        const loginAndRegister = () => {
+        const userPanel = () => {
             if (this.props.userInfo && this.props.userInfo.userName) {
-                return <li key="userInfo">
-                    <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
-                        <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
-                        <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>
-                        <MenuItem divider />
-                        <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
-                    </DropdownButton>
-                </li>
+                if (this.props.userInfo.roles.filter((r) => { return r === 'Admin' }).length > 0) {
+                    return [<li key="userInfo">
+                        <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
+                            <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
+                            <MenuItem divider />
+                            <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
+                        </DropdownButton>
+                    </li>,
+                        <li><Link to="/chainManager">管理</Link></li>]
+                } else {
+                    return [<li key="requirement"><Link to="/requirement">我的需求</Link></li>,
+                        <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,
+                        <li key="userInfo">
+                            <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
+                                <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem>
+                                <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>
+                                <MenuItem divider />
+                                <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
+                            </DropdownButton>
+                        </li>]
+                }
             } else {
                 return [
                     <li key="login"><Link to="/login">登录</Link></li>,
@@ -37,12 +50,10 @@ class Header extends React.Component {
                     <div id="navbar" className="navbar-collapse collapse" aria-expanded="false">
                         <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="icon-delete"></span></div>
                         <ul className='nav navbar-nav navbar-left'>
-                            <li><Link to="/requirement">我的需求</Link></li>
-                            <li><Link to="/addRequirement">添加新需求</Link></li>
+                            <li><Link to="/">首页</Link></li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
-                            {loginAndRegister()}
-                            <li><Link to="/chainManager">管理</Link></li>
+                            {userPanel() }
                         </ul>
                         <div className='clearfix'></div>
                     </div>

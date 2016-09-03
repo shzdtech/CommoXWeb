@@ -75,7 +75,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var result = await _userManager.CreateAsync(createdUser, initialPassword);
                 if (result.Succeeded)
                 {
-                    string roleName = "User";
+                    string roleName = "Admin";
                     var isRoleExists = await _roleManager.RoleExistsAsync(roleName);
                     if (!isRoleExists)
                     {
