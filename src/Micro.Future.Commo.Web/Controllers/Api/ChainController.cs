@@ -47,13 +47,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("Status/{statusId:int}/Chains")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
-            var chainList = _chainManager.QueryAllChains(statusId);
+            var chainList = _chainManager.QueryAllChains(statusId).Result;
             if (chainList == null)
             {
                 return new List<Models.ChainInfo>();
             }
 
-            return _chainManager.QueryAllChains(statusId).Select(c => new Models.ChainInfo(c)).ToList();
+            return chainList.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
         [HttpPost]

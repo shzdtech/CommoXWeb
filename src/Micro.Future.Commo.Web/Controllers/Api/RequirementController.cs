@@ -18,11 +18,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     {
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
+        private UserManager<Models.ApplicationUser> _userManager;
         public RequirementController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager)
             :base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;
+            _userManager = userManager;
         }
         [Route("")]
         [HttpPost]
@@ -67,9 +69,11 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Authorize]
         [Route("")]
         [HttpGet]
-        public IEnumerable<Models.RequirementInfo> GetRequirements()
+        public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements()
         {
-            return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            var user = await _userManager.GetUserAsync(User);
+            //return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
         }
 
         [Route("{id:int}")]
@@ -84,8 +88,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = new List<RequirementChainInfo>();
-            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED);
-            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED);
+            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED).Result;
+            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED).Result;
             if (lockedChains != null)
             {
                 chains.AddRange(lockedChains.ToList());
@@ -94,7 +98,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 chains.AddRange(confirmedChains.ToList());
             }
-            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
+            return chains.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
     }

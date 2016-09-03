@@ -4,35 +4,42 @@ export default {
         type: 'text',
         legth: 'medium',
         key: 'name',
-        placehodler: '企业名称'
+        placeholder: '企业名称'
     },
-    // address: {
-    //     label: '企业地址',
-    //     type: 'text',
-    //     legth: 'long',
-    //     key: 'address',
-    //     placehodler: '企业地址'
-    // },
+    address: {
+        label: '企业地址',
+        type: 'text',
+        legth: 'long',
+        key: 'address',
+        placeholder: '企业地址'
+    },
     emailAddress: {
         label: '企业邮箱',
         type: 'text',
         legth: 'medium',
         key: 'emailAddress',
-        placehodler: '企业邮箱'
+        placeholder: '企业邮箱'
     },
     contacts: {
         label: '联系人',
         type: 'text',
         legth: 'medium',
         key: 'contacts',
-        placehodler: '联系人'
+        placeholder: '联系人'
     },
     mobilePhone:{
         label: '联系方式',
         type: 'text',
         legth: 'medium',
         key: 'mobilePhone',
-        placehodler: '联系人手机号码'
+        placeholder: '联系人手机号码'
+    },
+    fax:{
+        label: '传真',
+        type: 'text',
+        legth: 'medium',
+        key: 'fax',
+        placeholder: '传真号码'
     }
     // registerNumber: {
     //     label: '企业注册代码',

@@ -1,11 +1,4 @@
 export default {
-    address: {
-        label: '企业地址',
-        type: 'text',
-        legth: 'long',
-        key: 'address',
-        placeholder: '企业地址'
-    },
     registerNumber: {
         label: '企业注册代码',
         type: 'text',

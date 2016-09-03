@@ -69,6 +69,7 @@ namespace Micro.Future.Commo.Web.Controllers
                 EnterpriseInfo newEnterprise = new EnterpriseInfo();
                 newEnterprise.Name = model.Name;
                 newEnterprise.Contacts = model.Contacts;
+                newEnterprise.Address = model.Address;
                 newEnterprise.CreateTime = DateTime.Now;
 
                 var bizResult = _enterpriseManager.AddEnterprise(newEnterprise);

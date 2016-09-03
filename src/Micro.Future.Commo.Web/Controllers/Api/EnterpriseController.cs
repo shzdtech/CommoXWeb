@@ -61,6 +61,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.Contacts = model.Contacts;
                 enterpriseInfo.EmailAddress = model.EmailAddress;
                 enterpriseInfo.MobilePhone = model.MobilePhone;
+                enterpriseInfo.Address = model.Address;
                 enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
                 enterpriseInfo.CreateTime = DateTime.Now;
 
@@ -132,9 +133,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
                     enterpriseInfo.LicenseImagePath = fullPath;
                 }
-              
 
-                enterpriseInfo.Address = model.Address;
+
                 enterpriseInfo.AnnualInspection = model.AnnualInspection;
                 enterpriseInfo.BusinessRange = model.BusinessRange;
                 enterpriseInfo.BusinessTypeId = model.BusinessTypeId;
@@ -153,8 +153,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.ReputationGrade = model.ReputationGrade;
                 _enterpriseManager.UpdateEnterprise(enterpriseInfo);
             }
-
-            throw new Exception("输入数据不合法");
+            else
+            {
+                throw new Exception("输入数据不合法");
+            }
         }
     }
 }

@@ -16,6 +16,11 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         public string Name { get; set; }
 
         /// <summary>
+        /// 企业地址
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
         /// 联系人
         /// </summary>
         [Required]
@@ -31,5 +36,10 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         [Phone]
         [Display(Name = "联系方式")]
         public string MobilePhone { get; set; }
+
+        /// <summary>
+        /// 企业传真
+        /// </summary>
+        public string Fax { get; set; }
     }
 }
