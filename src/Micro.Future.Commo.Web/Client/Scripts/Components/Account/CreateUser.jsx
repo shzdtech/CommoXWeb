@@ -19,7 +19,7 @@ class CreateUser extends React.Component {
         return <div className='create-user-container'>
             <Input info={u} onChangeForm={this.props.onChangeForm} />
             <div className='create-user-operators'>
-                <span className='btn submit' onClick={()=>{this.props.submitCreateUser(this.props.newUser)}}>提交</span>
+                <span className='btn btn-large submit' onClick={()=>{this.props.submitCreateUser(this.props.newUser)}}>提交</span>
             </div>
         </div>
     }

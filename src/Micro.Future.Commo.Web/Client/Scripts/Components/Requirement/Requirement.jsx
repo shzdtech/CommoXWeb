@@ -55,8 +55,8 @@ class Requirement extends React.Component {
                     { selectedRequirements.map((r) => { return action(r) }) }
                     {extra}
                     <div className='operators'>
-                        <span className='btn multiply-submit'>提交</span>
-                        <span className='btn calloff'>取消</span>
+                        <span className='btn btn-large multiply-submit'>提交</span>
+                        <span className='btn btn-large calloff'>取消</span>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@ class ChangePassword extends React.Component {
             {inputs}
             {error}
             <div className='change-password-operators'>
-                <span className='btn submit' onClick={()=>{this.props.submitChangePassword(this.props.password)}}>提交</span>
+                <span className='btn btn-large submit' onClick={()=>{this.props.submitChangePassword(this.props.password)}}>提交</span>
             </div>
         </div>
     }

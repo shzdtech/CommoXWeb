@@ -20,8 +20,8 @@ class Register extends React.Component {
         return <div>
             {list}
             <div className='register-operators'>
-                <span className='btn submit' onClick={()=>onSubmitEnterpriseForm(enterpriseInfo)}>提交</span>
-                <span className='btn calloff' >取消</span>
+                <span className='btn btn-large submit' onClick={()=>onSubmitEnterpriseForm(enterpriseInfo)}>提交</span>
+                <span className='btn btn-large calloff' >取消</span>
             </div>
         </div>
     }
