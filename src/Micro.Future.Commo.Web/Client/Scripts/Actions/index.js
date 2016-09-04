@@ -6,6 +6,8 @@ import {
     REMOVE_FILTER,
     TYPE_ITEM,
     CHECK_ITEM,
+    SEARCH_BY_FILTER_SUCCESS,
+    SEARCH_BY_FILTER_FAILURE,
     ADD_REQUIREMENT,
     ADD_REQUIREMENT_SUCCESS,
     ADD_REQUIREMENT_FAILURE,
@@ -101,6 +103,33 @@ export const toggleFilterList = () => {
     return {
         type: TOGGLE_FILTER_LIST
     };
+};
+
+const searchByFilterRequest = (searchCriteria) => {
+    return $.get(HOST + 'api/requirement/SearchResult', searchCriteria);
+};
+
+const searchByFilterSuccess = (requirements) => {
+    return {
+        type: SEARCH_BY_FILTER_SUCCESS,
+        requirements: requirements
+    };
+};
+
+const searchByFilterFailure = (error) => {
+    return {
+        type: SEARCH_BY_FILTER_FAILURE,
+        error: error
+    };
+};
+
+export const searchByFilter = (searchCriteria)=>{
+    return (dispatch) => {
+            return searchByFilterRequest(searchCriteria).then(
+                requirements => dispatch(searchByFilterSuccess(requirements)),
+                error => ajaxError(dispatch, error)
+            );
+        };
 };
 
 //chain actions

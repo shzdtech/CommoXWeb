@@ -15,6 +15,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
     [Produces("application/json")]
     [Route("api/Requirement")]
+    [Authorize]
     public class RequirementController : BaseController
     {
         private IRequirementManager _requirementManager;
@@ -67,7 +68,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return requirement;
         }
 
-        [Authorize]
         [Route("")]
         [HttpGet]
         public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements()
@@ -102,22 +102,19 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return chains.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
-        [HttpPost]
-        public SearchResult<RequirementInfo> SearchRequirements(RequirementSearchViewModel searchCriteria)
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("SearchResult")]
+        public IEnumerable<Models.RequirementInfo> SearchRequirements(RequirementSearchModel searchCriteria)
         {
             var criteria = new RequirementSearchCriteria();
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductName))
                 criteria.ProductName = searchCriteria.ProductName;
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductType))
                 criteria.ProductType = searchCriteria.ProductType;
-            if(!string.IsNullOrWhiteSpace(searchCriteria.RequirementType))
+            if (searchCriteria.RequirementType != RequirementType.None)
             {
-                criteria.RequirementType = (RequirementType)int.Parse(searchCriteria.RequirementType);
-            }
-
-            if(!string.IsNullOrWhiteSpace(searchCriteria.RequirementState))
-            {
-                criteria.RequirementState =  (RequirementState)int.Parse(searchCriteria.RequirementState);
+                criteria.RequirementType = searchCriteria.RequirementType;
             }
 
             if (searchCriteria.StartTradeAmount > 0m)
@@ -129,7 +126,18 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             criteria.PageNo = searchCriteria.PageNo;
             criteria.PageSize = searchCriteria.PageSize;
 
-            return _requirementManager.SearchRequirements(criteria);
+            var searchResult = _requirementManager.SearchRequirements(criteria);
+            var requirements = new List<Models.RequirementInfo>();
+            if (searchResult.Result != null)
+            {
+                requirements.AddRange(searchResult.Result.Select(r => new Models.RequirementInfo(r)));
+            }
+
+            return requirements;
+
+            //var user = await _userManager.GetUserAsync(User);
+            ////return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            //return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
         }
     }
 }

@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import ReactDOM from 'react-dom';
 import Filter from './Filter';
 import InputFilter from './InputFilter';
@@ -19,8 +20,8 @@ class FilterList extends React.Component {
         filters.forEach((filter) => {
             if (!filter.selected) {
                 if (filter.filterProperty === FilterProperty.Requirement) {
-                    if (!filter.parentFilterId || selectedFilters.filter((f) => {return f.id === filter.parentFilterId 
-                        && f.selectedItems.filter((i)=>{return i.id === filter.parentItemId}).length > 0}).length > 0)
+                    // if (!filter.parentFilterId || selectedFilters.filter((f) => {return f.id === filter.parentFilterId 
+                    //     && f.selectedItems.filter((i)=>{return i.id === filter.parentItemId}).length > 0}).length > 0)
                         requirements.push(filter);
                 } else if (filter.filterProperty === FilterProperty.Rule) {
                     rules.push(filter);
@@ -32,9 +33,8 @@ class FilterList extends React.Component {
         let ruleList = null;
         if (requirements.length > 0) {
             requirementList = <li>
-                <div className='title'>需求属性：</div>
                 <ul>
-                    {requirements.map(function (r) {
+                    {requirements.map((r) => {
                         if (!r.selected) {
                             if (r.type === TEXT) {
                                 return <InputFilter key={r.id} filter = {r} />;
@@ -48,9 +48,8 @@ class FilterList extends React.Component {
 
         if (rules.length > 0) {
             ruleList = <li>
-                <div className='title'>附加需求：</div>
                 <ul>{
-                    rules.map(function (filter) {
+                    rules.map((filter) => {
                         if (!filter.selected && filter.filterProperty === FilterProperty.Rule) {
                             if (filter.type === TEXT) {
                                 return <InputFilter key={filter.id} filter = {filter} />;
@@ -70,7 +69,9 @@ class FilterList extends React.Component {
                 return <span key={filter.id} className='selected-filter'>
                     {filter.title + ': ' + names.join(', ') }
                     <span className="glyphicon glyphicon-remove filter-remove" aria-hidden="true" onClick={
-                        () => onRemoveFilterClick(filter)
+                        () => {
+                            onRemoveFilterClick(filter);
+                        }
                     }></span>
                 </span>
             }

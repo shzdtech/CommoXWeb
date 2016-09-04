@@ -21,7 +21,9 @@ const selectedItems = (state = [], action) => {
             return state;
     }
 };
-
+const selectedFilters = (state = [], action) =>{
+    
+}
 const filterReducer = (state, action) => {
     switch (action.type) {
         case SELECT_FILTER:
