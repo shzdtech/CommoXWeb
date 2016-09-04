@@ -30,7 +30,7 @@ class Chain extends React.Component {
         let operatorsOverlay = null;
         if (manageChain && (chain.chainStatus === 0 || chain.chainStatus === 1)) {
             operators = <div className='operators'>
-                <span className='btn' onClick={() => manageChain(chain) }>{text}</span>
+                <span className='btn btn-large' onClick={() => manageChain(chain) }>{text}</span>
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }

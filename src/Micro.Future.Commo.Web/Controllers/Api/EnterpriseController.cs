@@ -1,14 +1,16 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Micro.Future.Commo.Web.Models;
-using Micro.Future.Commo.Web.Models.EnterpriseViewModels;
+using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -24,6 +26,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private IOptions<CommoSettings> _commoSettingsAccessor;
 
         private readonly IEnterpriseManager _enterpriseManager;
 
@@ -34,6 +37,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             IEnterpriseManager enterpriseManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            IOptions<CommoSettings> commoSettingsAccessor,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
@@ -42,34 +46,38 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             _enterpriseManager = enterpriseManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _commoSettingsAccessor = commoSettingsAccessor;
             _logger = loggerFactory.CreateLogger<EnterpriseController>();
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<EnterpriseInfo> Register(EnterpriseRegisterViewModel model)
+        public async Task<EnterpriseInfo> Register(EnterpriseRegisterModel model)
         {
             if (ModelState.IsValid)
             {
                 EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
                 enterpriseInfo.Name = model.Name;
-                enterpriseInfo.Address = model.Address;
                 enterpriseInfo.Contacts = model.Contacts;
-                //newEnterprise.Email = model.Email;
-                enterpriseInfo.RegisterNumber = model.RegisterNumber;
-                enterpriseInfo.RegisterTime = model.RegisterTime;
-                enterpriseInfo.RegisterCapital = model.RegisterCapital;
-                enterpriseInfo.RegisterAddress = model.RegisterAddress;
-                enterpriseInfo.BusinessTypeId = model.BusinessTypeId;
-                enterpriseInfo.BusinessRange = model.BusinessRange;
+                enterpriseInfo.EmailAddress = model.EmailAddress;
+                enterpriseInfo.MobilePhone = model.MobilePhone;
+                enterpriseInfo.Address = model.Address;
+                enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
                 enterpriseInfo.CreateTime = DateTime.Now;
 
                 var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
                 if (!bizResult.HasError && bizResult.Result > 0)
                 {
                     string initialPassword = "QAZ@wsx3";
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = bizResult.Result, InitialPassword = initialPassword };
-                    
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.EmailAddress,
+                        PhoneNumber = model.MobilePhone,
+                        Email = model.EmailAddress,
+                        EnterpriseId = bizResult.Result,
+                        InitialPassword = initialPassword
+                    };
+
                     var result = await _userManager.CreateAsync(user, initialPassword);
                     if (result.Succeeded)
                     {
@@ -90,6 +98,65 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             throw new Exception();
+        }
+
+        [HttpPost]
+        [Route("{id:int}")]
+        public async Task UpdateEnterprise(int id, EnterpriseUpdateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user.EnterpriseId != id)
+                {
+                    throw new Exception("Not Allowed");
+                }
+
+
+                EnterpriseInfo enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
+
+                var imageFile = HttpContext.Request.Form.Files["businessLicense"];
+                if (imageFile != null)
+                {
+                    var filePath = _commoSettingsAccessor.Value.ImageFolder;
+                    var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+
+                    if (!Directory.Exists(filePath))
+                    {
+                        Directory.CreateDirectory(filePath);
+                    }
+                    var fullPath = Path.Combine(filePath, fileName);
+                    using (var stream = System.IO.File.Create(fullPath))
+                    {
+                        imageFile.OpenReadStream().CopyTo(stream);
+                    }
+
+                    enterpriseInfo.LicenseImagePath = fullPath;
+                }
+
+
+                enterpriseInfo.AnnualInspection = model.AnnualInspection;
+                enterpriseInfo.BusinessRange = model.BusinessRange;
+                enterpriseInfo.BusinessTypeId = model.BusinessTypeId;
+                enterpriseInfo.InvoicedQuantity = model.InvoicedQuantity;
+                enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
+                enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
+                enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
+                enterpriseInfo.PreviousProfit = model.PreviousProfit;
+                enterpriseInfo.PreviousSales = model.PreviousSales;
+                enterpriseInfo.RegisterAccount = model.RegisterAccount;
+                enterpriseInfo.RegisterAddress = model.RegisterAddress;
+                enterpriseInfo.RegisterBankId = model.RegisterBankId;
+                enterpriseInfo.RegisterCapital = model.RegisterCapital;
+                enterpriseInfo.RegisterNumber = model.RegisterNumber;
+                enterpriseInfo.RegisterTime = model.RegisterTime;
+                enterpriseInfo.ReputationGrade = model.ReputationGrade;
+                _enterpriseManager.UpdateEnterprise(enterpriseInfo);
+            }
+            else
+            {
+                throw new Exception("输入数据不合法");
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ using Micro.Future.Commo.Web.Services;
 using Micro.Future.Commo.Web.Models;
 using Microsoft.Extensions.Logging;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
-using Micro.Future.Commo.Web.Models.EnterpriseViewModels;
+using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -61,28 +61,21 @@ namespace Micro.Future.Commo.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<EnterpriseInfo> Register(EnterpriseRegisterViewModel model, string returnUrl = null)
+        public async Task<EnterpriseInfo> Register(EnterpriseRegisterModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
                 EnterpriseInfo newEnterprise = new EnterpriseInfo();
                 newEnterprise.Name = model.Name;
-                newEnterprise.Address = model.Address;
                 newEnterprise.Contacts = model.Contacts;
-                //newEnterprise.Email = model.Email;
-                newEnterprise.RegisterNumber = model.RegisterNumber;
-                newEnterprise.RegisterTime = model.RegisterTime;
-                newEnterprise.RegisterCapital = model.RegisterCapital;
-                newEnterprise.RegisterAddress = model.RegisterAddress;
-                newEnterprise.BusinessTypeId = model.BusinessTypeId;
-                newEnterprise.BusinessRange = model.BusinessRange;
+                newEnterprise.Address = model.Address;
                 newEnterprise.CreateTime = DateTime.Now;
 
                 var bizResult = _enterpriseManager.AddEnterprise(newEnterprise);
                 if (!bizResult.HasError && bizResult.Result > 0)
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = bizResult.Result };
+                    var user = new ApplicationUser { UserName = model.EmailAddress, Email = model.EmailAddress, EnterpriseId = bizResult.Result };
                     string initialPassword = "QAZ@wsx3";
                     var result = await _userManager.CreateAsync(user, initialPassword);
                     if (result.Succeeded)

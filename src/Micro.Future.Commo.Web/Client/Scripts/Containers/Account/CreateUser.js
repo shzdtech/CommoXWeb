@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CreateUser from '../../Components/Account/CreateUser'
-import {typeUserEmail, submitCreateUser} from '../../Actions';
+import {typeUserEmail, submitCreateUser} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

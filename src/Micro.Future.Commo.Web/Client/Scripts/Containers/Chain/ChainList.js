@@ -9,8 +9,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onReceiveChainList: (chainList) => dispatch(receiveChainList(chainList)),
-        confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept)),
     }
 };
 

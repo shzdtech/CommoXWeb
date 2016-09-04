@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Models.RequirementModels;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,25 +15,29 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
     [Produces("application/json")]
     [Route("api/Requirement")]
+    [Authorize]
     public class RequirementController : BaseController
     {
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
+        private UserManager<Models.ApplicationUser> _userManager;
         public RequirementController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager)
             :base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;
+            _userManager = userManager;
         }
         [Route("")]
         [HttpPost]
-        public Models.RequirementInfo AddRequirement(Models.RequirementInfo requirement)
+        public async Task<Models.RequirementInfo> AddRequirement(Models.RequirementInfo requirement)
         {
+            var user = await _userManager.GetUserAsync(User);
             var requirementInfo = new RequirementInfo
             {
                 UserId = UserId,
                 RequirementId = requirement.RequirementId,
-                EnterpriseId = requirement.EnterpriseId,
+                EnterpriseId = user.EnterpriseId,
                 PaymentType = requirement.PaymentType,
                 PaymentDateTime = requirement.PaymentDateTime,
                 PaymentAmount = requirement.PaymentAmount,
@@ -64,12 +69,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return requirement;
         }
 
-        [Authorize]
         [Route("")]
         [HttpGet]
-        public IEnumerable<Models.RequirementInfo> GetRequirements()
+        public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements()
         {
-            return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            var user = await _userManager.GetUserAsync(User);
+            //return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
         }
 
         [Route("{id:int}")]
@@ -84,8 +90,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = new List<RequirementChainInfo>();
-            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED);
-            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED);
+            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED).Result;
+            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED).Result;
             if (lockedChains != null)
             {
                 chains.AddRange(lockedChains.ToList());
@@ -94,8 +100,45 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 chains.AddRange(confirmedChains.ToList());
             }
-            return _requirementManager.QueryRequirementChains(id).Result.Select(c => new Models.ChainInfo(c)).ToList();
+            return chains.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("SearchResult")]
+        public IEnumerable<Models.RequirementInfo> SearchRequirements(RequirementSearchModel searchCriteria)
+        {
+            var criteria = new RequirementSearchCriteria();
+            if (!string.IsNullOrWhiteSpace(searchCriteria.ProductName))
+                criteria.ProductName = searchCriteria.ProductName;
+            if (!string.IsNullOrWhiteSpace(searchCriteria.ProductType))
+                criteria.ProductType = searchCriteria.ProductType;
+            if (searchCriteria.RequirementType != RequirementType.None)
+            {
+                criteria.RequirementType = searchCriteria.RequirementType;
+            }
+
+            if (searchCriteria.StartTradeAmount > 0m)
+                criteria.StartTradeAmount = searchCriteria.StartTradeAmount;
+
+            if (searchCriteria.EndTradeAmount > 0m)
+                criteria.EndTradeAmount = searchCriteria.EndTradeAmount;
+
+            criteria.PageNo = searchCriteria.PageNo;
+            criteria.PageSize = searchCriteria.PageSize;
+
+            var searchResult = _requirementManager.SearchRequirements(criteria);
+            var requirements = new List<Models.RequirementInfo>();
+            if (searchResult.Result != null)
+            {
+                requirements.AddRange(searchResult.Result.Select(r => new Models.RequirementInfo(r)));
+            }
+
+            return requirements;
+
+            //var user = await _userManager.GetUserAsync(User);
+            ////return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
+            //return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
+        }
     }
 }

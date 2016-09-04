@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ChangePassword from '../../Components/Account/ChangePassword'
-import {changePasswordModel, submitChangePassword} from '../../Actions';
+import {changePasswordModel, submitChangePassword} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

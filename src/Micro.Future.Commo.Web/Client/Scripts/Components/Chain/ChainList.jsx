@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import Chain from './Chain';
-import {receiveChainList, confirmChain} from '../../Actions';
 import {SIGNALR_ADDRESS} from '../../appSettings';
 
 class ChainList extends React.Component {

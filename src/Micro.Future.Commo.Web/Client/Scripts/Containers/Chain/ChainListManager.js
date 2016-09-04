@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {selectChainListType, fetchChainsByType, onReceiveChainList, confirmChain, manageChain} from '../../Actions';
+import {selectChainListType, fetchChainsByType, onReceiveChainList, confirmChain, manageChain} from '../../Actions/ChainActions';
 import ChainListManager from '../../Components/Chain/ChainListManager';
 
 const mapStateToProps = (state, ownProps) => {

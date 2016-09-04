@@ -1,6 +1,4 @@
 import {ADD_REQUIREMENT, ADD_REQUIREMENT_SUCCESS, FETCH_REQUIREMENT_LIST_SUCCESS} from '../Constants/ActionTypes';
-import FilterProperty from '../Models/FilterProperty';
-import {HOST} from '../appSettings';
 
 const requirements = (state = [], action) => {
     switch (action.type) {

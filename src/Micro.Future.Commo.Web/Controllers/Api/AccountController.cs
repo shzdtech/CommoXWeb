@@ -1,5 +1,5 @@
 ﻿using Micro.Future.Commo.Web.Models;
-using Micro.Future.Commo.Web.Models.AccountViewModels;
+using Micro.Future.Commo.Web.Models.AccountModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -75,7 +75,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var result = await _userManager.CreateAsync(createdUser, initialPassword);
                 if (result.Succeeded)
                 {
-                    string roleName = "User";
+                    string roleName = "Admin";
                     var isRoleExists = await _roleManager.RoleExistsAsync(roleName);
                     if (!isRoleExists)
                     {

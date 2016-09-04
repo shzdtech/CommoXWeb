@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {addRequirement, resetForm, selectFormItem} from '../../Actions';
 import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
-import FilterProperty from '../../Models/FilterProperty';
 import Category from '../../Models/Category';
 import {TEXT} from '../../Constants/FilterTypes';
 import {Link} from 'react-router';
@@ -60,8 +59,8 @@ class FormContent extends React.Component {
         return <div className='form-content'>
             {view}
             <div className="operators">
-                <Link to="/formConfirm" className='btn'>确定</Link>
-                <span className='btn calloff' onClick={() => this.props.resetForm() }>取消</span></div>
+                <Link to="/formConfirm" className='btn btn-large'>确定</Link>
+                <span className='btn btn-large calloff' onClick={() => this.props.resetForm() }>取消</span></div>
         </div>
     }
 }

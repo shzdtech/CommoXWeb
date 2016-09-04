@@ -4,17 +4,15 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from './Containers/Home';
 import Header from './Containers/Header';
 import ChainList from './Containers/Chain/ChainList';
 import ChainListManger from './Containers/Chain/ChainListManager';
 import AddRequirement from './Components/AddRequirement';
-import Requirements from './Components/Requirement/Requirements';
-import Register from './Containers/Account/Register';
-import CreateUser from './Containers/Account/CreateUser';
-import ChangePassword from './Containers/Account/ChangePassword';
-import Login from './Containers/Account/Login';
+import Requirements from './Containers/Requirement/Requirements';
 import Form from './Components/Form/Form';
 import FormConfirmation from './Components/Form/FormConfirmation';
+import AccountRouter from './Router/AccountRouter';
 import auth from './auth';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
@@ -66,17 +64,14 @@ ReactDOM.render(
     <Provider store = {store}>
         <Router history={history}>
             <Route path='/' component={App} >
-                <IndexRoute component={UserIsAuthenticated(Requirements)} />
+                <IndexRoute component={Home} />
                 <Route path="/addRequirement" component={Form} />
                 <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
                 </Route>
                 <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>           
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/createuser" component={CreateUser} />
-                <Route path="/changepassword" component={ChangePassword} />
+                {AccountRouter}
                 <Route path="/chainManager" component={ChainListManger} />
                 <Route path="*" component={Requirements} />
             </Route>

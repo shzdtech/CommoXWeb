@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
 import {Link} from 'react-router';
 import Masonry from 'react-masonry-component';
-import {fetchRequirements, fetchChains} from '../../Actions';
 
 const masonryOptions = {
     transitionDuration: 1
@@ -20,9 +18,9 @@ class Requirements extends React.Component {
     }
 
     render() {
-        const {requirements} = this.props;
+        const {requirements, isDemo} = this.props;
         return <div className='requirement-list'>
-            {requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
+            {!isDemo && requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
             <Masonry
                 className={'my-gallery-class'} // default ''
                 options={masonryOptions} // default {}
@@ -86,27 +84,10 @@ class Requirements extends React.Component {
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
             </div>
             <div className='operators'>
-                <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>
+               {this.props.isDemo ? null : <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>}
             </div>
         </div>;
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        requirements: state.requirements
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchRequirements: () => {
-            dispatch(fetchRequirements());
-        },
-        fetchChains: (requirementId) => {
-            dispatch(fetchChains(requirementId));
-        }
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Requirements);
+module.exports = Requirements;

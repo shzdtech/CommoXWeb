@@ -39,8 +39,8 @@ class ChainNode extends React.Component {
         let operatorsOverlay = null;
         if (isMyRequest && !chain.reject && !accept) {
             operators = <div className='operators'>
-                <span className='btn' onClick={() => this.confirmChain(chain.chainId, requirementId, true) }>确认</span>
-                <span className='btn' onClick={() => this.confirmChain(chain.chainId, requirementId, false) }>拒绝</span>
+                <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, true) }>确认</span>
+                <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, false) }>拒绝</span>
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }

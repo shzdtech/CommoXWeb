@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -47,17 +48,18 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("Status/{statusId:int}/Chains")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
-            var chainList = _chainManager.QueryAllChains(statusId);
+            var chainList = _chainManager.QueryAllChains(statusId).Result;
             if (chainList == null)
             {
                 return new List<Models.ChainInfo>();
             }
 
-            return _chainManager.QueryAllChains(statusId).Select(c => new Models.ChainInfo(c)).ToList();
+            return chainList.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
         [HttpPost]
         [Route("{id:int}/Status/{status:int}")]
+        [Authorize(Roles = "Admin")]
         public void ChangeChainStatus(int id, ChainStatusType status)
         {
             
