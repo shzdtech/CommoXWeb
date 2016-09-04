@@ -102,7 +102,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return chains.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
-        [HttpGet]
+        [HttpPost]
         public SearchResult<RequirementInfo> SearchRequirements(RequirementSearchViewModel searchCriteria)
         {
             var criteria = new RequirementSearchCriteria();
