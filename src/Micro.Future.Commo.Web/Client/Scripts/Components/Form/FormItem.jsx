@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {selectFormItem} from '../../Actions';
-
 
 class FormItem extends React.Component {
     constructor() {

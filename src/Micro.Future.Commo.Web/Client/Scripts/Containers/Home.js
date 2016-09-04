@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Home from '../Components/Home';
 import {searchByFilter} from '../Actions';
+import {fetchChains} from '../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

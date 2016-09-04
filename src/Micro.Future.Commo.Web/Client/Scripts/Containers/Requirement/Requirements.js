@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import Requirements from '../../Components/Requirement/Requirements';
-import {fetchRequirements, fetchChains} from '../../Actions';
+import {fetchRequirements} from '../../Actions/RequirementActions';
+import {fetchChains} from '../../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

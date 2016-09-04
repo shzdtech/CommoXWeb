@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { push } from 'react-router-redux';
-import {signOut} from '../Actions';
+import {signOut} from '../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

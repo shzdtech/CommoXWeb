@@ -30,13 +30,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
         [Route("")]
         [HttpPost]
-        public Models.RequirementInfo AddRequirement(Models.RequirementInfo requirement)
+        public async Task<Models.RequirementInfo> AddRequirement(Models.RequirementInfo requirement)
         {
+            var user = await _userManager.GetUserAsync(User);
             var requirementInfo = new RequirementInfo
             {
                 UserId = UserId,
                 RequirementId = requirement.RequirementId,
-                EnterpriseId = requirement.EnterpriseId,
+                EnterpriseId = user.EnterpriseId,
                 PaymentType = requirement.PaymentType,
                 PaymentDateTime = requirement.PaymentDateTime,
                 PaymentAmount = requirement.PaymentAmount,

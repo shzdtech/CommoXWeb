@@ -4,7 +4,7 @@ import Filter from '../Filter';
 import InputFilter from '../InputFilter';
 import {TEXT} from '../../Constants/FilterTypes';
 import FilterProperty from '../../Models/FilterProperty';
-import {addRequirement} from '../../Actions';
+import {addRequirement} from '../../Actions/RequirementActions';
 
 class Requirement extends React.Component {
 

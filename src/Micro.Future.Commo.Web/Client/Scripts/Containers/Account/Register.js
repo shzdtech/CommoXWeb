@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Register from '../../Components/Account/Register';
-import {changeEnterpriseInfo, registerEnterprise} from '../../Actions';
+import {changeEnterpriseInfo, registerEnterprise} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {

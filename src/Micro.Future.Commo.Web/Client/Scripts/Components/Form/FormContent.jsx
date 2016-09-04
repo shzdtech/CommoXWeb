@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {addRequirement, resetForm, selectFormItem} from '../../Actions';
 import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
-import FilterProperty from '../../Models/FilterProperty';
 import Category from '../../Models/Category';
 import {TEXT} from '../../Constants/FilterTypes';
 import {Link} from 'react-router';
