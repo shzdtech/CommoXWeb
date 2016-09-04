@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Models.RequirementModels;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -101,5 +102,34 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return chains.Select(c => new Models.ChainInfo(c)).ToList();
         }
 
+        [HttpGet]
+        public SearchResult<RequirementInfo> SearchRequirements(RequirementSearchViewModel searchCriteria)
+        {
+            var criteria = new RequirementSearchCriteria();
+            if (!string.IsNullOrWhiteSpace(searchCriteria.ProductName))
+                criteria.ProductName = searchCriteria.ProductName;
+            if (!string.IsNullOrWhiteSpace(searchCriteria.ProductType))
+                criteria.ProductType = searchCriteria.ProductType;
+            if(!string.IsNullOrWhiteSpace(searchCriteria.RequirementType))
+            {
+                criteria.RequirementType = (RequirementType)int.Parse(searchCriteria.RequirementType);
+            }
+
+            if(!string.IsNullOrWhiteSpace(searchCriteria.RequirementState))
+            {
+                criteria.RequirementState =  (RequirementState)int.Parse(searchCriteria.RequirementState);
+            }
+
+            if (searchCriteria.StartTradeAmount > 0m)
+                criteria.StartTradeAmount = searchCriteria.StartTradeAmount;
+
+            if (searchCriteria.EndTradeAmount > 0m)
+                criteria.EndTradeAmount = searchCriteria.EndTradeAmount;
+
+            criteria.PageNo = searchCriteria.PageNo;
+            criteria.PageSize = searchCriteria.PageSize;
+
+            return _requirementManager.SearchRequirements(criteria);
+        }
     }
 }
