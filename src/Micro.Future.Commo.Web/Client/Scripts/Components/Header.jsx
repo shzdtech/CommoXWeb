@@ -16,7 +16,7 @@ class Header extends React.Component {
                             <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                         </DropdownButton>
                     </li>,
-                     <li><Link to="/chainManager">管理</Link></li>]
+                     <li key="manageChain"><Link to="/chainManager">管理</Link></li>]
                 } else {
                     return [<li key="requirement"><Link to="/requirement">我的需求</Link></li>,
                         <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,

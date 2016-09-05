@@ -25,6 +25,16 @@
             width: 20% !important;
         }
     }
+
+    .required::after{
+        content: '  *';
+        color: $red;
+        font-size: 30px;
+        display: inline-block;
+        line-height: 30px;
+        vertical-align: bottom;
+        padding: 0 5px;
+    }
 }
 
 .select-container {

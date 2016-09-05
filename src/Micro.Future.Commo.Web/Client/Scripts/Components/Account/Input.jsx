@@ -8,6 +8,10 @@ class Input extends React.Component {
 
   render() {
     const {info} = this.props;
+    let requiredNotation = null;
+    if(info.isRequired){
+      requiredNotation = <span className="required"></span>;
+    }
     return <div className='input-container'>
       <label className="input_label" htmlFor={info.label}>
         <span className="label_text">{info.label}</span>
@@ -16,9 +20,10 @@ class Input extends React.Component {
         type={info.type}
         placeholder={info.placeholder}
         value={info.value}
-        className={ 'form-control ' + info.length}
+        className={ 'form-control'}
         onChange={this.changeValue}
         />
+        {requiredNotation}
     </div>
   }
 
