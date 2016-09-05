@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { push } from 'react-router-redux';
 import {signOut} from '../Actions/AccountActions';
+import {makeChain} from '../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -21,6 +22,8 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(push("/updateEnterprise"));
             }else if(key === "signOut"){
                 dispatch(signOut());
+            }else if(key === "makeChain"){
+                dispatch(makeChain());
             }
         }
     };

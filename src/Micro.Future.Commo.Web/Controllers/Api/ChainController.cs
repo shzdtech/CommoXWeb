@@ -73,5 +73,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 _chainManager.ComfirmChain(id, out tradeId);
             }
         }
+
+        [HttpPost]
+        [Route("Maker")]
+        [Authorize(Roles = "Admin")]
+        public void MakeChain()
+        {
+            _matchMakerManger.Make();
+        }
     }
 }

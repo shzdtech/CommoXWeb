@@ -121,3 +121,17 @@ export const manageChain = (chain) => {
         );
     };
 };
+
+const makeChainRequest = () => {
+    const request = $.post(HOST + 'api/chain/Maker');
+    return request;
+}
+
+export const makeChain = () => {
+     return (dispatch) => {
+        return makeChainRequest().then(
+            res => dispatch(push('/chainManager')),
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
