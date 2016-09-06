@@ -14,7 +14,9 @@ import {
     CHANGE_FORM_TYPE,
     SELECT_FORM_ITEM,
     TYPE_FORM_ITEM,
-    RESET_FORM
+    RESET_FORM,
+
+    SHOW_SPINNER
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -129,6 +131,15 @@ export const typeFormItem = (formItem, value) => {
 export const resetForm = () => {
     return {
         type: RESET_FORM
+    };
+};
+
+//spinner
+
+export const showSpinner = (showSpinner) => {
+    return {
+        type: SHOW_SPINNER,
+        showSpinner: showSpinner
     };
 };
 

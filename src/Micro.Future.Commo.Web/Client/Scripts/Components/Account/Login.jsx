@@ -33,7 +33,7 @@ class Login extends React.Component {
     }
 
     cancelLogin() {
-
+        this.props.onCloseForm();
     }
 }
 

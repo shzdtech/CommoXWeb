@@ -18,6 +18,7 @@ import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import auth from '../auth';
 import {ajaxError} from './CommonActions';
+import {showSpinner} from '../Actions';
 
 //account
 export const changeEnterpriseInfo = (keyName, value) => {
@@ -123,13 +124,15 @@ const submitCreateUserRequest = (user) => {
 
 export const submitCreateUser = (user) => {
     return dispatch => {
+        dispatch(showSpinner(true));
         submitCreateUserRequest(user).then(
             res => {
+                dispatch(showSpinner(false));
                 dispatch(submitCreateUserSuccess());
                 dispatch(push('/'));
             },
             error => {
-
+                dispatch(showSpinner(false));
             }
         );
     };
@@ -213,8 +216,8 @@ const updateEnterpriseRequest = (enterpriseInfo) => {
             }
         }
         let value = enterpriseInfo[key].value;
-        if(enterpriseInfo[key].value !== undefined && enterpriseInfo[key].value !== null){
-            model.append(key, enterpriseInfo[key].value === undefined ? 0 :  enterpriseInfo[key].value);
+        if (enterpriseInfo[key].value !== undefined && enterpriseInfo[key].value !== null) {
+            model.append(key, enterpriseInfo[key].value === undefined ? 0 : enterpriseInfo[key].value);
         }
     }
     const request = $.ajax({

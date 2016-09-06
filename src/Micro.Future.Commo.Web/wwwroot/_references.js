@@ -49,6 +49,7 @@
 /// <reference path="../client/scripts/reducers/home.js" />
 /// <reference path="../client/scripts/reducers/index.js" />
 /// <reference path="../client/scripts/reducers/requirements.js" />
+/// <reference path="../client/scripts/reducers/showspinner.js" />
 /// <reference path="../client/scripts/requirementlist.js" />
 /// <reference path="../client/scripts/router/accountrouter.js" />
 /// <reference path="../dist/bundle.js" />
