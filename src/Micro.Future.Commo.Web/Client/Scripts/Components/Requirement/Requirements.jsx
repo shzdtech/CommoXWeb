@@ -67,7 +67,7 @@ class Requirements extends React.Component {
         if (this.props.isDemo) {
             operators = null
         } else {
-            if (requirement.state == 0) {
+            if (requirement.state === 0) {
                 operators = <span className='no-action'>匹配中，请等候...</span>
             } else {
                 operators = <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>;
