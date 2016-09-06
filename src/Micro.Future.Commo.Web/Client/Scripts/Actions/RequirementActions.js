@@ -6,13 +6,14 @@ import {
     ADD_REQUIREMENT_FAILURE,
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
-    FETCH_REQUIREMENT_LIST_FAILURE,
+    FETCH_REQUIREMENT_LIST_FAILURE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux';
 import {ajaxError} from './CommonActions';
+import {resetForm} from '../Actions';
 //requirement
 export const addRequirementRequest = (list, selectedType) => {
     let requirement = {};

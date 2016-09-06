@@ -6,7 +6,7 @@ import InputFilter from '../InputFilter';
 import {TEXT} from '../../Constants/FilterTypes';
 import Category from '../../Models/Category';
 import RequirementType from '../../Models/RequirementType';
-import {addRequirement} from '../../Actions';
+import {addRequirement} from '../../Actions/RequirementActions';
 
 class FomrConfirmation extends React.Component {
 
