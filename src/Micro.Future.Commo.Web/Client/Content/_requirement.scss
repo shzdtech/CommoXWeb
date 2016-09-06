@@ -65,7 +65,6 @@
         }
 
         .requirement-items {
-            // min-height: 355px;
             padding: 10px;
             background: $primary-color-opacity;
 
@@ -90,6 +89,18 @@
             width: 100%;
             background: $white;
             position: relative;
+
+            & > span{
+                text-align: center;
+                margin-top: 23px;
+                text-align: center;
+                display: block;
+                color: $primary-color;
+                font-weight: bold;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
 
             & > a {
                 margin-top: 20px;

@@ -40,6 +40,7 @@ class Requirements extends React.Component {
         if (!requirement) {
             return;
         }
+
         let {requirementId,
             enterpriseName,
             type,
@@ -61,6 +62,17 @@ class Requirements extends React.Component {
             invoiceIssueDateTime,
             invoiceTransferMode,
         } = requirement;
+
+        let operators = null;
+        if (this.props.isDemo) {
+            operators = null
+        } else {
+            if (requirement.state == 0) {
+                operators = <span className='no-action'>匹配中，请等候...</span>
+            } else {
+                operators = <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>;
+            }
+        }
 
         return <div key={requirementId} className='requirement'>
             <div className='requirement-items'>
@@ -84,7 +96,7 @@ class Requirements extends React.Component {
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
             </div>
             <div className='operators'>
-               {this.props.isDemo ? null : <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>}
+                {operators}
             </div>
         </div>;
     }
