@@ -7,7 +7,7 @@ import chainListManager from './chainListManager';
 import filterContentToggled from './filterContentToggled'
 import chains from './chains';
 import forms from './forms';
-import showSpinner from './showSpinner';
+import common from './Common';
 import requirements from './requirements';
 import account from './Account/account';
 import { routerReducer } from 'react-router-redux';
@@ -22,7 +22,7 @@ const reducers = combineReducers({
     requirements,
     forms,
     account,
-    showSpinner,
+    common,
     routing: routerReducer
 });
 

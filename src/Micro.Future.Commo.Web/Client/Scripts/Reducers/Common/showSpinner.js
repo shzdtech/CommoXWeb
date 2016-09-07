@@ -1,4 +1,4 @@
-import {SHOW_SPINNER} from '../Constants/ActionTypes';
+import {SHOW_SPINNER} from '../../Constants/ActionTypes';
 export default (state = false, action) => {
     switch (action.type) {
         case SHOW_SPINNER:

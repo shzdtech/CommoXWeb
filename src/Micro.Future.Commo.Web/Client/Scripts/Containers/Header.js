@@ -8,7 +8,7 @@ import {makeChain} from '../Actions/ChainActions';
 const mapStateToProps = (state, ownProps) => {
     return {
         userInfo: state.account.login,
-        showSpinner: state.showSpinner
+        showSpinner: state.common.showSpinner
     }
 }
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
-import Spinner from './Spinner';
+import Spinner from './Common/Spinner';
+import Toastr from './Common/Toastr';
 
 class Header extends React.Component {
     render() {
@@ -63,6 +64,7 @@ class Header extends React.Component {
                 </div>
             </nav>
             <Spinner shouldSpin={this.props.showSpinner} />
+            <Toastr options={this.props.toastrOptions} />
         </div>
     }
 }
