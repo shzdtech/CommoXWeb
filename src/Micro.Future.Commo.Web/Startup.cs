@@ -113,6 +113,7 @@ namespace Micro.Future.Commo.Web
 
             app.UseStaticFiles();
             app.UseIdentity();
+            app.UseWebSockets();
      
             app.Map("/signalr", map =>
             {
