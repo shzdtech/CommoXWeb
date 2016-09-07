@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {DropdownButton, MenuItem} from 'react-bootstrap';
+import Spinner from './Common/Spinner';
+import Toastr from './Common/Toastr';
 
 class Header extends React.Component {
     render() {
@@ -11,10 +13,12 @@ class Header extends React.Component {
                         <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                             <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
                             <MenuItem divider />
+                            <MenuItem eventKey="makeChain" onSelect={this.props.onSelectDropdown}>撮合</MenuItem>
+                            <MenuItem divider />
                             <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                         </DropdownButton>
                     </li>,
-                        <li><Link to="/chainManager">管理</Link></li>]
+                     <li key="manageChain"><Link to="/chainManager">管理</Link></li>]
                 } else {
                     return [<li key="requirement"><Link to="/requirement">我的需求</Link></li>,
                         <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,
@@ -59,6 +63,8 @@ class Header extends React.Component {
                     </div>
                 </div>
             </nav>
+            <Spinner shouldSpin={this.props.showSpinner} />
+            <Toastr options={this.props.toastrOptions} />
         </div>
     }
 }

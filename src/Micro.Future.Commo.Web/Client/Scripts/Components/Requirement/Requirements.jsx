@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import Masonry from 'react-masonry-component';
+import FilterList from '../FilterList';
 
 const masonryOptions = {
     transitionDuration: 1
@@ -14,12 +15,38 @@ class Requirements extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchRequirements();
+        this.searchByFilter();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.filters.filter((f) => { return f.selected }).length !== this.props.filters.filter((f) => { return f.selected }).length) {
+            this.searchByFilter();
+        }
+    }
+
+    searchByFilter() {
+        let searchCriteria = {
+            pageNo: this.props.pageNo,
+            pageSize: this.props.pageSize
+        };
+        this.props.filters.forEach((f) => {
+            if (f.selected) {
+                if (f.key === 'tradeAmount') {
+                    searchCriteria['startTradeAmount'] = parseFloat(f.selectedItems[0].value) * 0.8;
+                    searchCriteria['endTradeAmount'] = parseFloat(f.selectedItems[0].value) * 1.2;
+                } else {
+                    searchCriteria[f.key] = f.selectedItems[0].value;
+                }
+            }
+        })
+        this.props.searchByFilter(searchCriteria);
     }
 
     render() {
-        const {requirements, isDemo} = this.props;
+        const {requirements, isDemo, filters} = this.props;
         return <div className='requirement-list'>
+            <FilterList filters={filters} />
             {!isDemo && requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
             <Masonry
                 className={'my-gallery-class'} // default ''
@@ -40,6 +67,7 @@ class Requirements extends React.Component {
         if (!requirement) {
             return;
         }
+
         let {requirementId,
             enterpriseName,
             type,
@@ -61,6 +89,17 @@ class Requirements extends React.Component {
             invoiceIssueDateTime,
             invoiceTransferMode,
         } = requirement;
+
+        let operators = null;
+        if (this.props.isDemo) {
+            operators = null
+        } else {
+            if (requirement.state === 0) {
+                operators = <span className='no-action'>匹配中，请等候...</span>
+            } else {
+                operators = <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>;
+            }
+        }
 
         return <div key={requirementId} className='requirement'>
             <div className='requirement-items'>
@@ -84,7 +123,7 @@ class Requirements extends React.Component {
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
             </div>
             <div className='operators'>
-               {this.props.isDemo ? null : <Link to={'/requirement/' + requirementId + '/chains'} className='btn' onClick={() => this.props.fetchChains(requirementId) }>查看匹配详情</Link>}
+                {operators}
             </div>
         </div>;
     }

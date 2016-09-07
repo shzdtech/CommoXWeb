@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
 
 class FormItem extends React.Component {
     constructor() {
@@ -9,7 +8,7 @@ class FormItem extends React.Component {
     render() {
         const {formItem} = this.props;
         return <div className='form-item'>
-            <span className='title'>{formItem.title + ':'}</span>
+            <span className={'title ' + (formItem.isRequired ? 'required' : '')}>{formItem.title}</span>
             <div className='items'>
                 {formItem.items.map((item) => {
                     return <div key={item.id}>

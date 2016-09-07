@@ -71,11 +71,35 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [Route("")]
         [HttpGet]
-        public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements()
+        public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements(RequirementSearchModel searchCriteria)
         {
             var user = await _userManager.GetUserAsync(User);
-            //return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
-            return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
+            var criteria = new RequirementSearchCriteria();
+            criteria.EnterpriseId = user.EnterpriseId;
+            if (searchCriteria != null)
+            {
+                criteria.PageNo = searchCriteria.PageNo;
+                criteria.PageSize = searchCriteria.PageSize;
+                if (searchCriteria.RequirementType != RequirementType.None)
+                {
+                    criteria.RequirementType = searchCriteria.RequirementType;
+                }
+
+                if (searchCriteria.RequirementState != null)
+                {
+                    criteria.RequirementState = searchCriteria.RequirementState;
+                }
+            }
+
+            var searchResult = _requirementManager.SearchRequirements(criteria);
+            var requirements = new List<Models.RequirementInfo>();
+            if (searchResult.Result != null)
+            {
+                requirements.AddRange(searchResult.Result.Select(r => new Models.RequirementInfo(r)));
+            }
+
+            return requirements;
+            //return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
         }
 
         [Route("{id:int}")]
@@ -135,10 +159,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             return requirements;
-
-            //var user = await _userManager.GetUserAsync(User);
-            ////return _requirementManager.QueryRequirements(UserId).Result.Select(r => new Models.RequirementInfo(r));
-            //return _requirementManager.QueryRequirementsByEnterpriseId(user.EnterpriseId, null).Result.Select(r => new Models.RequirementInfo(r));
         }
     }
 }

@@ -13,6 +13,7 @@ class Login extends React.Component {
         const {info} = this.props;
         return <div className='login-form-conatainer'>
             <div className='login-form'>
+                <span className='glyphicon glyphicon-remove' onClick={this.props.onCloseForm}></span>
                 <div className='title'>登录您的帐号</div>
                 <input type="text" className="form-control" ref='email' placeholder='用户邮箱' />
                 <input type="password" className="form-control" ref='password' placeholder='密码'/>
@@ -32,7 +33,7 @@ class Login extends React.Component {
     }
 
     cancelLogin() {
-
+        this.props.onCloseForm();
     }
 }
 

@@ -4,7 +4,8 @@ export default {
         type: 'text',
         legth: 'medium',
         key: 'name',
-        placeholder: '企业名称'
+        placeholder: '企业名称',
+        isRequired: true
     },
     address: {
         label: '企业地址',
@@ -18,21 +19,24 @@ export default {
         type: 'text',
         legth: 'medium',
         key: 'emailAddress',
-        placeholder: '企业邮箱'
+        placeholder: '企业邮箱',
+        isRequired: true
     },
     contacts: {
         label: '联系人',
         type: 'text',
         legth: 'medium',
         key: 'contacts',
-        placeholder: '联系人'
+        placeholder: '联系人',
+        isRequired: true
     },
     mobilePhone:{
         label: '联系方式',
         type: 'text',
         legth: 'medium',
         key: 'mobilePhone',
-        placeholder: '联系人手机号码'
+        placeholder: '联系人手机号码',
+        isRequired: true
     },
     fax:{
         label: '传真',

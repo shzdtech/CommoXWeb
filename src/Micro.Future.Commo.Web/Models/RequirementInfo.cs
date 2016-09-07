@@ -23,6 +23,11 @@ namespace Micro.Future.Commo.Web.Models
         /// </summary>
         public RequirementType Type { get; set; }
 
+        /// <summary>
+        /// 需求状态
+        /// </summary>
+        public RequirementState State { get; set; }
+
         #region 货物相关属性，出资、出货需要填写
 
         /// <summary>
@@ -169,6 +174,7 @@ namespace Micro.Future.Commo.Web.Models
         public RequirementInfo(Business.Abstraction.BizObject.RequirementInfo requirement)
         {
             RequirementId = requirement.RequirementId;
+            State = requirement.State;
             EnterpriseId = requirement.EnterpriseId;
             PaymentType = requirement.PaymentType;
             PaymentDateTime = requirement.PaymentDateTime;

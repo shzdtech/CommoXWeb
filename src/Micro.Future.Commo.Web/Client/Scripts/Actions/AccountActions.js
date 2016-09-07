@@ -18,6 +18,7 @@ import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import auth from '../auth';
 import {ajaxError} from './CommonActions';
+import {showSpinner} from '../Actions';
 
 //account
 export const changeEnterpriseInfo = (keyName, value) => {
@@ -32,7 +33,11 @@ export const changeEnterpriseInfo = (keyName, value) => {
 const registerEnterpriseRequest = (enterpriseInfo) => {
     var model = {};
     for (var key in enterpriseInfo) {
-        model[key] = enterpriseInfo[key].value;
+        if (enterpriseInfo[key].value === undefined) {
+            model[key] = null;
+        } else {
+            model[key] = enterpriseInfo[key].value;
+        }
     }
 
     const request = $.post(HOST + 'api/Enterprise', model);
@@ -119,13 +124,15 @@ const submitCreateUserRequest = (user) => {
 
 export const submitCreateUser = (user) => {
     return dispatch => {
+        dispatch(showSpinner(true));
         submitCreateUserRequest(user).then(
             res => {
+                dispatch(showSpinner(false));
                 dispatch(submitCreateUserSuccess());
                 dispatch(push('/'));
             },
             error => {
-
+                dispatch(showSpinner(false));
             }
         );
     };
@@ -145,7 +152,7 @@ const submitChangePasswordRequest = (password) => {
 
 export const submitChangePasswordSuccess = () => {
     return {
-        type: 　CHANGE_PASSWORD_SUCCESS
+        type: CHANGE_PASSWORD_SUCCESS
     }
 };
 
@@ -201,14 +208,17 @@ export const updateEnterpriseInfo = (keyName, value) => {
 const updateEnterpriseRequest = (enterpriseInfo) => {
     var model = new FormData();
     for (var key in enterpriseInfo) {
-        if(enterpriseInfo[key].type === 'file'){
-            if(enterpriseInfo[key].file[0] !== null &&
-            enterpriseInfo[key].file[0].size > 0 &&
-            enterpriseInfo[key].file[0].type.indexOf('image') > -1){
+        if (enterpriseInfo[key].type === 'file') {
+            if (enterpriseInfo[key].file[0] !== null &&
+                enterpriseInfo[key].file[0].size > 0 &&
+                enterpriseInfo[key].file[0].type.indexOf('image') > -1) {
                 model.append(key, enterpriseInfo[key].file[0]);
             }
         }
-        model.append(key, enterpriseInfo[key].value);
+        let value = enterpriseInfo[key].value;
+        if (enterpriseInfo[key].value !== undefined && enterpriseInfo[key].value !== null) {
+            model.append(key, enterpriseInfo[key].value === undefined ? 0 : enterpriseInfo[key].value);
+        }
     }
     const request = $.ajax({
         type: 'post',

@@ -4,21 +4,24 @@ export default {
         type: 'text',
         key: 'registerNumber',
         length: 'medium',
-        placeholder: '企业注册代码'
+        placeholder: '企业注册代码',
+        isRequired: true
     },
     businessLicense: {
         label: '企业执照',
         type: 'file',
         key: 'businessLicense',
         length: 'medium',
-        placeholder: '上传企业执照照片'
+        placeholder: '上传企业执照照片',
+        isRequired: true
     },
     registerTime: {
         label: '企业注册时间',
         type: 'date',
         key: 'registerTime',
         length: 'medium',
-        placeholder: '企业注册时间'
+        placeholder: '企业注册时间',
+        isRequired: true
     },
     registerCapital: {
         label: '注册资金(￥)',
@@ -39,20 +42,23 @@ export default {
         type: 'text',
         key: 'legalRepresentative',
         length: 'short',
-        placeholder: '法人代表'
+        placeholder: '法人代表',
+        isRequired: true
     },
     invoicedQuantity: {
         label: '开票量',
         type: 'number',
         key: 'invoicedQuantity',
         length: 'short',
-        placeholder: '开票量'
+        placeholder: '开票量',
+        isRequired: true
     },
     businessTypeId: {
         label: '企业类型',
         type: 'select',
         key: 'businessTypeId',
         length: 'short',
+        isRequired: true,
         options: [
             {
                 label: '国有企业',
@@ -77,6 +83,7 @@ export default {
         type: 'select',
         key: 'reputationGrade',
         length: 'short',
+        isRequired: true,
         options: [{
             key: '1',
             value: '1',
@@ -126,6 +133,7 @@ export default {
         type: 'select',
         key: 'paymentMethodId',
         length: 'short',
+        isRequired: true,
         options: [{
             key: '100',
             label: '现金',
@@ -145,6 +153,7 @@ export default {
         type: 'select',
         key: 'registerBankId',
         length: 'short',
+        isRequired: true,
         options: [{
             key: '100',
             value: '100',
@@ -164,6 +173,7 @@ export default {
         type: 'text',
         key: 'registerAccount',
         length: 'short',
-        placeholder: '企业开户账号'
+        placeholder: '企业开户账号',
+        isRequired: true
     }
 };

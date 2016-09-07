@@ -6,13 +6,14 @@ import {
     ADD_REQUIREMENT_FAILURE,
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
-    FETCH_REQUIREMENT_LIST_FAILURE,
+    FETCH_REQUIREMENT_LIST_FAILURE
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux';
 import {ajaxError} from './CommonActions';
+import {resetForm} from '../Actions';
 //requirement
 export const addRequirementRequest = (list, selectedType) => {
     let requirement = {};
@@ -85,8 +86,8 @@ export const receiveRequirement = (requirements) => {
     };
 };
 
-export const fetchRequirementsRequest = () => {
-    const request = $.get(HOST + 'api/requirement');
+export const fetchRequirementsRequest = (searchCriteria) => {
+    const request = $.get(HOST + 'api/requirement', searchCriteria);
     return request;
 };
 
@@ -104,9 +105,9 @@ export const fetchRequirementssFailure = (error) => {
     };
 };
 
-export const fetchRequirements = () => {
+export const fetchRequirements = (searchCriteria) => {
     return (dispatch) => {
-        return fetchRequirementsRequest().then(
+        return fetchRequirementsRequest(searchCriteria).then(
             requirements => dispatch(fetchRequirementsSuccess(requirements)),
             error => ajaxError(dispatch, error)
         );

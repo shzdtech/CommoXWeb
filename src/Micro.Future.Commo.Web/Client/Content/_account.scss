@@ -25,6 +25,16 @@
             width: 20% !important;
         }
     }
+
+    .required::after{
+        content: '  *';
+        color: $red;
+        font-size: 30px;
+        display: inline-block;
+        line-height: 30px;
+        vertical-align: bottom;
+        padding: 0 5px;
+    }
 }
 
 .select-container {
@@ -64,6 +74,19 @@
         padding: 30px 50px;
         background: #fff;
         z-index: 2;
+
+        .glyphicon.glyphicon-remove{
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: $normal-font-color;
+            font-size: 20px;
+            font-weight: lighter;
+
+            &:hover{
+                color: $primary-color;
+            }
+        }
 
         .title {
             text-align: center;

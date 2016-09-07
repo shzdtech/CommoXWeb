@@ -1,7 +1,4 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
-import {typeFormItem} from '../../Actions';
-
 
 class InputFormItem extends React.Component {
     constructor() {
@@ -16,7 +13,7 @@ class InputFormItem extends React.Component {
         }
         return <div className='form-item'>
             <label className="input_label" htmlFor={formItem.title}>
-                <span className="label_text">{formItem.title + ':'}</span>
+                <span className={"label_text " + (formItem.isRequired ? 'required' : '')}>{formItem.title}</span>
             </label>
             <input type="text" className="form-control" value={formItem.value} placeholder={formItem.title}  onChange={(e) => { this.handleValueChange(e) } }/>
         </div>
@@ -27,18 +24,4 @@ class InputFormItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFormItemTyped: (formItem, value) => {
-            dispatch(typeFormItem(formItem, value));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputFormItem);
+export default InputFormItem;

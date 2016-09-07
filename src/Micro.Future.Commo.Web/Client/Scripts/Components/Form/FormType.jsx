@@ -1,7 +1,4 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
-import {changeFormType} from '../../Actions';
-
 
 class FormType extends React.Component {
     constructor() {
@@ -26,18 +23,4 @@ class FormType extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        changeFormType: (formType) => {
-            dispatch(changeFormType(formType));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormType);
+export default FormType;

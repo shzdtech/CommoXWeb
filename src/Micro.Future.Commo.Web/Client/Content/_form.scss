@@ -58,6 +58,17 @@
                 display: inline-block;
                 vertical-align: middle;
                 padding: 0 10px 0 0;
+
+                &.required::after{
+                    content: '*';
+                    color: $red;
+                    font-size: 30px;
+                    display: inline-block;
+                    line-height: 30px;
+                    vertical-align: middle;
+                    padding: 0 5px;
+                    height: 20px;
+                }
             }
 
             .form-item-list {
@@ -84,6 +95,17 @@
                         padding-right: 10px;
                         color: $normal-font-color;
                         font-weight: normal;
+                    }
+
+                    .required::after{
+                            content: '*';
+                            color: $red;
+                            font-size: 30px;
+                            display: inline-block;
+                            line-height: 30px;
+                            vertical-align: middle;
+                            padding: 0 5px;
+                            height: 20px;
                     }
 
                     .form-control {

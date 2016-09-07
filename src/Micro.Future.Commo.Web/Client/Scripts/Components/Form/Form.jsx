@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import RequirementType from '../../Models/RequirementType';
 import FormType from './FormType';
 import FormContent from './FormContent';
@@ -17,22 +18,10 @@ class Form extends React.Component {
         }
 
         return <div className="forms">
-            <FormType main={main} selectedType={selectedType}/>
-            <FormContent list={list} selectedType={selectedType} />
+            <FormType main={main} selectedType={selectedType} changeFormType={this.props.changeFormType}/>
+            <FormContent list={list} selectedType={selectedType} {...this.props.formContentActions} />
         </div>
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        forms: state.forms
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Form);
+module.exports = Form;

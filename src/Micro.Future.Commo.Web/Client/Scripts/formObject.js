@@ -24,6 +24,7 @@ export default {
                 name: '购销',
                 value: RequirementType.Subsidy
             }],
+        isRequired: true,
         multipleSelection: false
     },
     buy: [
@@ -33,7 +34,9 @@ export default {
             key: 'paymentAmount',
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
-            type: TEXT
+            type: TEXT,
+            isRequired: true,
+            valueType: 'number'
         }, {
             id: 2,
             title: '货款支付时间',
@@ -88,6 +91,7 @@ export default {
             filterProperty: FilterProperty.Requirement,
             key: 'productName',
             category: Category.Product,
+            isRequired: true,
             items: [{
                 id: 1,
                 name: '铜',
@@ -245,6 +249,7 @@ export default {
             title: '货物名称',
             filterProperty: FilterProperty.Requirement,
             key: 'productName',
+            isRequired: true,
             category: Category.Product,
             items: [{
                 id: 1,
@@ -276,6 +281,8 @@ export default {
             id: 4,
             title: '货物单价',
             key: 'productPrice',
+            isRequired: true,       
+            valueType: 'number',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -283,6 +290,8 @@ export default {
             id: 5,
             title: '货物数量',
             key: 'productQuantity',
+            isRequired: true,
+            valueType: 'number',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -391,6 +400,8 @@ export default {
             title: '合同总额',
             key: 'tradeAmount',
             category: Category.Contract,
+            isRequired: true,          
+            valueType: 'number',
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         },

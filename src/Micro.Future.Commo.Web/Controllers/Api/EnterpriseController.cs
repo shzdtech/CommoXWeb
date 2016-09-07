@@ -142,8 +142,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
                 enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
                 enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
-                enterpriseInfo.PreviousProfit = model.PreviousProfit;
-                enterpriseInfo.PreviousSales = model.PreviousSales;
+                if (model.PreviousProfit.HasValue)
+                {
+                    enterpriseInfo.PreviousProfit = model.PreviousProfit.Value;
+                };
+                if (model.PreviousSales.HasValue)
+                {
+                    enterpriseInfo.PreviousSales = model.PreviousSales.Value;
+                };
                 enterpriseInfo.RegisterAccount = model.RegisterAccount;
                 enterpriseInfo.RegisterAddress = model.RegisterAddress;
                 enterpriseInfo.RegisterBankId = model.RegisterBankId;

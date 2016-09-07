@@ -6,14 +6,17 @@ import {fetchChains} from '../../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        requirements: state.requirements
+        requirements: state.requirements,
+        filters: state.myFilters,
+        pageNo: 0,
+        pageSize: 100000
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchRequirements: () => {
-            dispatch(fetchRequirements());
+        searchByFilter: (searchCriteria) => {
+            dispatch(fetchRequirements(searchCriteria));
         },
         fetchChains: (requirementId) => {
             dispatch(fetchChains(requirementId));

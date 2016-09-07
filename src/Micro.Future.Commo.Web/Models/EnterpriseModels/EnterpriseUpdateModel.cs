@@ -55,11 +55,11 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         /// <summary>
         /// 上年度营业额
         /// </summary>
-        public double PreviousSales { get; set; }
+        public double? PreviousSales { get; set; }
         /// <summary>
         /// 利润
         /// </summary>
-        public double PreviousProfit { get; set; }
+        public double? PreviousProfit { get; set; }
         /// <summary>
         /// 支付方式
         /// </summary>
