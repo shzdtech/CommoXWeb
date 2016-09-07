@@ -7,10 +7,8 @@ import {fetchChains} from '../Actions/ChainActions';
 const mapStateToProps = (state, ownProps) => {
     return {
         requirements: state.home.requirements,
+        filters: state.filters,
         isDemo: true,
-        selectedFilters: state.filters.filter((f) => {
-            return f.selected
-        }),
         pageNo: 0,
         pageSize: 20
     };

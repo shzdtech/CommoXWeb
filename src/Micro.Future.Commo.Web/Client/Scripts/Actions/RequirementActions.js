@@ -86,8 +86,8 @@ export const receiveRequirement = (requirements) => {
     };
 };
 
-export const fetchRequirementsRequest = () => {
-    const request = $.get(HOST + 'api/requirement');
+export const fetchRequirementsRequest = (searchCriteria) => {
+    const request = $.get(HOST + 'api/requirement', searchCriteria);
     return request;
 };
 
@@ -105,9 +105,9 @@ export const fetchRequirementssFailure = (error) => {
     };
 };
 
-export const fetchRequirements = () => {
+export const fetchRequirements = (searchCriteria) => {
     return (dispatch) => {
-        return fetchRequirementsRequest().then(
+        return fetchRequirementsRequest(searchCriteria).then(
             requirements => dispatch(fetchRequirementsSuccess(requirements)),
             error => ajaxError(dispatch, error)
         );

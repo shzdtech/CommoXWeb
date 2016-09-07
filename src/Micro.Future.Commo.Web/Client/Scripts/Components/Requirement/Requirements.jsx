@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import Masonry from 'react-masonry-component';
+import FilterList from '../FilterList';
 
 const masonryOptions = {
     transitionDuration: 1
@@ -14,12 +15,38 @@ class Requirements extends React.Component {
     }
 
     componentWillMount() {
-        this.props.fetchRequirements();
+        this.searchByFilter();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevProps.filters.filter((f) => { return f.selected }).length !== this.props.filters.filter((f) => { return f.selected }).length) {
+            this.searchByFilter();
+        }
+    }
+
+    searchByFilter() {
+        let searchCriteria = {
+            pageNo: this.props.pageNo,
+            pageSize: this.props.pageSize
+        };
+        this.props.filters.forEach((f) => {
+            if (f.selected) {
+                if (f.key === 'tradeAmount') {
+                    searchCriteria['startTradeAmount'] = parseFloat(f.selectedItems[0].value) * 0.8;
+                    searchCriteria['endTradeAmount'] = parseFloat(f.selectedItems[0].value) * 1.2;
+                } else {
+                    searchCriteria[f.key] = f.selectedItems[0].value;
+                }
+            }
+        })
+        this.props.searchByFilter(searchCriteria);
     }
 
     render() {
-        const {requirements, isDemo} = this.props;
+        const {requirements, isDemo, filters} = this.props;
         return <div className='requirement-list'>
+            <FilterList filters={filters} />
             {!isDemo && requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
             <Masonry
                 className={'my-gallery-class'} // default ''

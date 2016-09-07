@@ -1,5 +1,4 @@
 import {SELECT_FILTER, TYPE_ITEM, REMOVE_FILTER, CHECK_ITEM, TOGGLE_MULTIPLE_SELECTION, TOGGLE_COLLAPSE} from '../Constants/ActionTypes';
-import initialFilters from '../filterList';
 import filterStatus from './filterStatus';
 
 const selectedItems = (state = [], action) => {
@@ -21,8 +20,8 @@ const selectedItems = (state = [], action) => {
             return state;
     }
 };
-const selectedFilters = (state = [], action) =>{
-    
+const selectedFilters = (state = [], action) => {
+
 }
 const filterReducer = (state, action) => {
     switch (action.type) {
@@ -53,19 +52,21 @@ const filterReducer = (state, action) => {
     }
 };
 
-const filters = (state = initialFilters, action) => {
-    switch (action.type) {
-        case CHECK_ITEM:
-        case TYPE_ITEM:
-        case SELECT_FILTER:
-        case REMOVE_FILTER:
-        case TOGGLE_MULTIPLE_SELECTION:
-        case TOGGLE_COLLAPSE:
-            return state.map((s) => {
-                return filterReducer(s, action);
-            });
-        default:
-            return state;
+const filters = (initialFilters) => {
+    return (state = initialFilters, action) => {
+        switch (action.type) {
+            case CHECK_ITEM:
+            case TYPE_ITEM:
+            case SELECT_FILTER:
+            case REMOVE_FILTER:
+            case TOGGLE_MULTIPLE_SELECTION:
+            case TOGGLE_COLLAPSE:
+                return state.map((s) => {
+                    return filterReducer(s, action);
+                });
+            default:
+                return state;
+        }
     }
 };
 

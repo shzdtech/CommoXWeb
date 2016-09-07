@@ -31,6 +31,7 @@
 /// <reference path="../client/scripts/models/category.js" />
 /// <reference path="../client/scripts/models/enterpriseform.js" />
 /// <reference path="../client/scripts/models/filterproperty.js" />
+/// <reference path="../client/scripts/models/myfilterlist.js" />
 /// <reference path="../Client/Scripts/Models/RequirementType.js" />
 /// <reference path="../client/scripts/models/ruletype.js" />
 /// <reference path="../client/scripts/models/updateenterpriseform.js" />

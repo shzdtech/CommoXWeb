@@ -100,7 +100,7 @@ class FilterList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        filters: [...state.filters],
+       // filters: [...state.filters],
         isIn: state.filterContentToggled.isIn
     }
 }
