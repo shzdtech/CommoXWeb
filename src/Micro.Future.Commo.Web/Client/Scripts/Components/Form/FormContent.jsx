@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
-import {addRequirement, resetForm, selectFormItem} from '../../Actions';
-import { push } from 'react-router-redux';
 import InputFormItem from './InputFormItem';
 import FormItem from './FormItem';
 import Category from '../../Models/Category';
@@ -12,7 +10,7 @@ class FormContent extends React.Component {
 
     render() {
 
-        const {list, selectedType, onFormItemSelected} = this.props;
+        const {list, selectedType, onFormItemSelected, onFormItemTyped} = this.props;
 
         let capitals = [];
         let products = [];
@@ -57,7 +55,7 @@ class FormContent extends React.Component {
                                 if (r.valueType === 'number' && (r.value === undefined || r.value === null || !$.isNumeric(r.value))) {
                                     disabled = true;
                                 }
-                                return <InputFormItem key={r.id} formItem = {r} />;
+                                return <InputFormItem key={r.id} formItem = {r} onFormItemTyped={onFormItemTyped}/>;
                             }
                             if (r.isRequired && r.items.filter((f) => { return f.selected }).length === 0) {
                                 disabled = true;
@@ -80,26 +78,4 @@ class FormContent extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSubmitForm: (list, selectedType) => {
-            dispatch(addRequirement(list, selectedType));
-        },
-        resetForm: () => {
-            dispatch(resetForm());
-        },
-        onFormItemSelected: (formItem, item) => {
-            dispatch(selectFormItem(formItem, item));
-        },
-        transferToConfirm: () => {
-            dispatch(push('/formConfirm'));
-        }
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(FormContent);
+module.exports = FormContent;

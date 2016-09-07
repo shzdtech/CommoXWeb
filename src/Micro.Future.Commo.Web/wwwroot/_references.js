@@ -23,6 +23,7 @@
 /// <reference path="../client/scripts/containers/account/updateenterprise.js" />
 /// <reference path="../Client/Scripts/Containers/Chain/ChainList.js" />
 /// <reference path="../Client/Scripts/Containers/Chain/ChainListManager.js" />
+/// <reference path="../client/scripts/containers/form/formconfirmation.js" />
 /// <reference path="../client/scripts/containers/Header.js" />
 /// <reference path="../client/scripts/containers/home.js" />
 /// <reference path="../client/scripts/containers/requirement/requirements.js" />

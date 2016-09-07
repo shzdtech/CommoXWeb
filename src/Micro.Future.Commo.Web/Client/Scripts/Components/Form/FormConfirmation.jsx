@@ -1,8 +1,5 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
 import {Link} from 'react-router';
-import Filter from '../Filter';
-import InputFilter from '../InputFilter';
 import {TEXT} from '../../Constants/FilterTypes';
 import Category from '../../Models/Category';
 import RequirementType from '../../Models/RequirementType';
@@ -99,18 +96,4 @@ class FomrConfirmation extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        forms: state.forms
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onSubmitForm: (list, selectedType) => {
-            dispatch(addRequirement(list, selectedType));
-        }
-    };
-};
-
-module.exports = connect(mapStateToProps, mapDispatchToProps)(FomrConfirmation);
+module.exports = FomrConfirmation;

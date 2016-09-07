@@ -1,7 +1,4 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
-import {typeFormItem} from '../../Actions';
-
 
 class InputFormItem extends React.Component {
     constructor() {
@@ -27,18 +24,4 @@ class InputFormItem extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onFormItemTyped: (formItem, value) => {
-            dispatch(typeFormItem(formItem, value));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(InputFormItem);
+export default InputFormItem;

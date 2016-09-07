@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import { connect } from 'react-redux';
 
 class FormItem extends React.Component {
     constructor() {
