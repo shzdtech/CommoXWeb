@@ -1,7 +1,7 @@
 import {SHOW_TOASTR, HIDE_TOASTR} from '../../Constants/ActionTypes';
 const options = {
     show: false,
-    duation: 5000,
+    duration: 5000,
     autoClose: true
 };
 
