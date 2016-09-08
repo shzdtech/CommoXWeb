@@ -4,11 +4,13 @@ import Header from '../Components/Header';
 import { push } from 'react-router-redux';
 import {signOut} from '../Actions/AccountActions';
 import {makeChain} from '../Actions/ChainActions';
+import {hideToastr} from '../Actions/CommonActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
         userInfo: state.account.login,
-        showSpinner: state.common.showSpinner
+        showSpinner: state.common.showSpinner,
+        toastrOptions: state.common.toastr
     }
 }
 
@@ -26,6 +28,9 @@ const mapDispatchToProps = (dispatch) => {
             }else if(key === "makeChain"){
                 dispatch(makeChain());
             }
+        },
+        hideToastr: () => {
+            dispatch(hideToastr());
         }
     };
 };

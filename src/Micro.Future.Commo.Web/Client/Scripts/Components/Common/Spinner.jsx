@@ -14,7 +14,7 @@ class Spinner extends React.Component {
                 </div>
             </div>
         }
-        return <div></div>;
+        return null;
     }
 }
 

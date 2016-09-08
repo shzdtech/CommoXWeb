@@ -20,6 +20,7 @@ using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Business.MatchMaker.Commo.Config;
 using Micro.Future.Commo.Web.Data;
 using Micro.Future.Commo.Web.Models;
+using Micro.Future.Commo.Web.MiddleWare;
 
 namespace Micro.Future.Commo.Web
 {
@@ -99,7 +100,6 @@ namespace Micro.Future.Commo.Web
             loggerFactory.AddSerilog();
 
             Log.Logger = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Seq(Configuration["Logging:Serilog"]).CreateLogger();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -114,7 +114,8 @@ namespace Micro.Future.Commo.Web
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseWebSockets();
-     
+            app.UseMiddleware<HttpExceptionMiddleware>();
+
             app.Map("/signalr", map =>
             {
                 map.UseCors("AllowAll");

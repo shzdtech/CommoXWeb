@@ -5,16 +5,27 @@ class Toastr extends React.Component {
         super();
     }
 
+    componentDidMount(){
+        const {options, hideToastr} = this.props;
+
+        if(options.autoClose){
+            setTimeout(()=>{
+                hideToastr();
+            }, options.duation);
+        }
+    }
+
     render() {
-        if (this.props.shouldSpin) {
-            return <div className='spinner-container'>
-                <div className='spinner spinner-shrink'>
-                </div>
-                <div className='overlay'>
+        const {options, hideToastr} = this.props;
+        if (this.props.options.show) {
+            return <div className='toast-container'>          
+                <div className={'toast ' + options.toastType} onClick={hideToastr}>
+                 <span className="toast-close-button" role="button" onClick={hideToastr}>×</span>
+                    {options.message}
                 </div>
             </div>
         }
-        return <div></div>;
+        return null;
     }
 }
 

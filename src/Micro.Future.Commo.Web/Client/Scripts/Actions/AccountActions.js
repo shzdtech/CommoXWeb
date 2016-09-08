@@ -98,9 +98,7 @@ export const loginAction = (email, password) => {
                 dispatch(loginSuccess(userInfo));
                 dispatch(push('/'));
             },
-            error => {
-                dispatch(loginFailure(error));
-            }
+            error => ajaxError(dispatch, error)
         );
     };
 };

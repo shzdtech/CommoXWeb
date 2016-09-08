@@ -64,7 +64,7 @@ class Header extends React.Component {
                 </div>
             </nav>
             <Spinner shouldSpin={this.props.showSpinner} />
-            <Toastr options={this.props.toastrOptions} />
+            <Toastr options={this.props.toastrOptions} hideToastr={this.props.hideToastr} />
         </div>
     }
 }

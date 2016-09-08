@@ -1,4 +1,4 @@
-﻿using Micro.Future.Commo.Web.Models;
+using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Models.AccountModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Authentication;
@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Micro.Future.Commo.Web.Exceptions;
 
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
@@ -57,7 +58,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     return new UserInfo(user, roles.ToList());
                 }
             }
-            throw new Exception();
+            throw new BadRequestException("Username or password invalid");
         }
 
         [Route("User")]
