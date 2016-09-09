@@ -12,6 +12,6 @@ export default (state = options, action) => {
         case HIDE_TOASTR:      
             return Object.assign({}, options, {show: false, message: null, toastrType: null});
         default:
-            return options;
+            return state;
     }
 }

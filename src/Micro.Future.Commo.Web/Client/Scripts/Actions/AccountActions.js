@@ -17,7 +17,7 @@ import {
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import auth from '../auth';
-import {ajaxError} from './CommonActions';
+import {ajaxError, showToastr} from './CommonActions';
 import {showSpinner} from '../Actions';
 
 //account
@@ -61,6 +61,12 @@ export const registerEnterprise = (enterpriseInfo) => {
     return (dispatch) => {
         return registerEnterpriseRequest(enterpriseInfo).then(
             response => {
+                dispatch(showToastr({
+                    message: '企业创建成功, 请使用企业邮箱登陆, 初始密码QAZ@wsx3, 请尽快修改密码',
+                    toastType: 'toast-success',
+                    show: true,
+                    autoClose: false
+                }));
                 dispatch(resigterEnterpriseSuccess(response));
                 dispatch(push('/requirements'));
             },
@@ -126,6 +132,12 @@ export const submitCreateUser = (user) => {
         submitCreateUserRequest(user).then(
             res => {
                 dispatch(showSpinner(false));
+                dispatch(showToastr({
+                    message: '用户创建成功, 初始密码QAZ@wsx3, 请尽快修改密码',
+                    toastType: 'toast-success',
+                    show: true,
+                    autoClose: false
+                }));
                 dispatch(submitCreateUserSuccess());
                 dispatch(push('/'));
             },

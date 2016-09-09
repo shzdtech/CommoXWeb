@@ -10,7 +10,7 @@ export const ajaxError = (dispatch, error) => {
             message: error.statusText,
             toastType: 'toast-error',
             show: true
-        }))
+        }));
     }
 };
 
