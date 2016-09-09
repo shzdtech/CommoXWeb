@@ -58,7 +58,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     return new UserInfo(user, roles.ToList());
                 }
             }
-            throw new BadRequestException("Username or password invalid");
+            throw new BadRequestException("Username or password invalid中文");
         }
 
         [Route("User")]
@@ -76,7 +76,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var result = await _userManager.CreateAsync(createdUser, initialPassword);
                 if (result.Succeeded)
                 {
-                    string roleName = "Admin";
+                    string roleName = "User";
                     var isRoleExists = await _roleManager.RoleExistsAsync(roleName);
                     if (!isRoleExists)
                     {
@@ -88,7 +88,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
             else
             {
-                throw new Exception();
+                throw new BadRequestException("Invalid Email");
             }
 
         }
@@ -107,17 +107,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
                     if (!result.Succeeded)
                     {
-                        throw new Exception("密码不符合规范");
+                        throw new BadRequestException("密码复杂度不符合规范");
                     }
                 }
                 else
                 {
-                    throw new Exception("密码不正确");
+                    throw new BadRequestException("密码不正确");
                 }
             }
             else
             {
-                throw new Exception();
+                throw new BadRequestException("输入格式不正确");
             }
         }
 
