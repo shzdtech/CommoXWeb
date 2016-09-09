@@ -10,6 +10,10 @@ class Toastr extends React.Component {
         this.autoHideToastr();
     }
 
+    shouldComponentUpdate(nextProps, nextState){
+        return this.props.options !== nextProps.options;
+    }
+
     componentDidUpdate(prevProps, prevState) {
         this.autoHideToastr();
     }

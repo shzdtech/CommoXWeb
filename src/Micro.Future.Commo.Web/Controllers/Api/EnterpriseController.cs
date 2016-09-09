@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
@@ -97,7 +98,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 }
             }
 
-            throw new Exception();
+            throw new BadRequestException("企业注册失败");
         }
 
         [HttpPost]
@@ -109,7 +110,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var user = await _userManager.GetUserAsync(User);
                 if (user.EnterpriseId != id)
                 {
-                    throw new Exception("Not Allowed");
+                    throw new ArgumentException("Not Allowed");
                 }
 
 
@@ -161,7 +162,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
             else
             {
-                throw new Exception("输入数据不合法");
+                throw new BadRequestException("输入数据不正确");
             }
         }
     }

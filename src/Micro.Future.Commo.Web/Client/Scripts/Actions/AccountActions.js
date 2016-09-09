@@ -143,6 +143,7 @@ export const submitCreateUser = (user) => {
             },
             error => {
                 dispatch(showSpinner(false));
+                ajaxError(dispatch, error)
             }
         );
     };
@@ -178,7 +179,7 @@ export const submitChangePassword = (password) => {
                 dispatch(push('/'));
             },
             error => {
-                //dispatch(loginFailure(error));
+                ajaxError(dispatch, error)
             }
         );
     };
@@ -202,7 +203,7 @@ export const signOut = () => {
                 dispatch(signOutSuccess());
                 dispatch(push('/'));
             },
-            error => { }
+            error => { ajaxError(dispatch, error); }
         )
     };
 };
@@ -262,7 +263,7 @@ export const updateEnterprise = (enterpriseInfo) => {
                 dispatch(updateEnterpriseSuccess(response));
                 dispatch(push('/'));
             },
-            error => dispatch(updateEnterpriseFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };

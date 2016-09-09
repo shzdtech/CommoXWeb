@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Web.Models.RequirementModels;
 using Micro.Future.Commo.Web.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -63,9 +64,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 Rules = requirement.Rules
             };
 
-            var result = _requirementManager.AddRequirementInfo(requirementInfo).Result;
+            var result = _requirementManager.AddRequirementInfo(requirementInfo);
+            if (result.HasError)
+            {
+                throw new BadRequestException(result.Error.Message);
+            }
 
-            requirement.RequirementId = result.RequirementId;
+            requirement.RequirementId = result.Result.RequirementId;
             return requirement;
         }
 

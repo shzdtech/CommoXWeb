@@ -7,7 +7,7 @@ export const ajaxError = (dispatch, error) => {
         dispatch(push('/login'));
     }else{
         dispatch(showToastr({
-            message: error.statusText,
+            message: error.responseJSON.message,
             toastType: 'toast-error',
             show: true
         }));

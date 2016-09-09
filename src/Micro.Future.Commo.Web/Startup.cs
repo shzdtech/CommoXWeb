@@ -21,6 +21,12 @@ using Micro.Future.Business.MatchMaker.Commo.Config;
 using Micro.Future.Commo.Web.Data;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.MiddleWare;
+using System.Globalization;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Micro.Future.Commo.Web.Attributes;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Micro.Future.Commo.Web
 {
@@ -60,19 +66,25 @@ namespace Micro.Future.Commo.Web
                 .AddDefaultTokenProviders();
 
             // Add framework services.
-            services.AddMvc().AddJsonOptions(options=>
+            services.AddMvc().AddJsonOptions(options =>
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             });
 
-            services.AddCors(options => options.AddPolicy("AllowAll", p => {
-                    p.AllowAnyOrigin();
-                    p.AllowAnyHeader();
-                    p.AllowAnyMethod();
-                    p.AllowCredentials();
-                }));
+            services.AddCors(options => options.AddPolicy("AllowAll", p =>
+            {
+                p.AllowAnyOrigin();
+                p.AllowAnyHeader();
+                p.AllowAnyMethod();
+                p.AllowCredentials();
+            }));
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CustomExceptionFilterAttribute());
+            });
 
             services.AddSignalR(options =>
             {
@@ -108,13 +120,27 @@ namespace Micro.Future.Commo.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler(builder =>
+                //{
+                //    builder.Run(
+                //      async context =>
+                //      {
+                //          context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                //          context.Response.ContentType = "application/json";
+
+                //          var error = context.Features.Get<IExceptionHandlerFeature>();
+                //          if (error != null)
+                //          {
+                //              await context.Response.WriteAsync(error.Error.Message).ConfigureAwait(false);
+                //          }
+                //      });
+                //});
             }
 
             app.UseStaticFiles();
             app.UseIdentity();
             app.UseWebSockets();
-            app.UseMiddleware<HttpExceptionMiddleware>();
+            //app.UseMiddleware<HttpExceptionMiddleware>();
 
             app.Map("/signalr", map =>
             {
@@ -122,7 +148,7 @@ namespace Micro.Future.Commo.Web
                 map.RunSignalR();
             });
             app.UseSignalR();
-      
+
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>

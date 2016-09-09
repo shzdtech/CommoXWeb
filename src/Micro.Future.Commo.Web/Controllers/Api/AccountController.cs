@@ -58,7 +58,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     return new UserInfo(user, roles.ToList());
                 }
             }
-            throw new BadRequestException("Username or password invalid中文");
+            throw new BadRequestException("用户名或密码不正确");
         }
 
         [Route("User")]
@@ -82,13 +82,19 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     {
                         await _roleManager.CreateAsync(new IdentityRole() { Name = roleName });
                     }
-
-                    await _userManager.AddToRoleAsync(createdUser, roleName);
+                }
+                else
+                {
+                    var error = result.Errors.FirstOrDefault();
+                    if (error?.Code == "DuplicateUserName")
+                    {
+                        throw new BadRequestException(string.Format("邮箱{0}已注册", model.Email));
+                    }
                 }
             }
             else
             {
-                throw new BadRequestException("Invalid Email");
+                throw new BadRequestException("请使用正确邮箱格式");
             }
 
         }

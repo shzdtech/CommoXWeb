@@ -27,7 +27,6 @@ namespace Micro.Future.Commo.Web.MiddleWare
             catch (HttpException httpException)
             {
                 context.Response.StatusCode = (int)httpException.StatusCode;
-                context.Response.Headers.Add("charset", "gb2312");
                 var responseFeature = context.Features.Get<IHttpResponseFeature>();
                 responseFeature.ReasonPhrase = httpException.Message;
             }
