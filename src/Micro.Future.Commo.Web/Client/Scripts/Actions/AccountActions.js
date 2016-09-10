@@ -70,7 +70,7 @@ export const registerEnterprise = (enterpriseInfo) => {
                 dispatch(resigterEnterpriseSuccess(response));
                 dispatch(push('/requirements'));
             },
-            error => dispatch(resigerEnterpriseFailure(error))
+            error => ajaxError(dispatch, error)
         );
     };
 };

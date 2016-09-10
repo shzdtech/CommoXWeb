@@ -36,7 +36,8 @@ class Requirements extends React.Component {
                     searchCriteria['startTradeAmount'] = parseFloat(f.selectedItems[0].value) * 0.8;
                     searchCriteria['endTradeAmount'] = parseFloat(f.selectedItems[0].value) * 1.2;
                 } else {
-                    searchCriteria[f.key] = f.selectedItems[0].value;
+                    let values = f.selectedItems.map((i) => { return i.value; });
+                    searchCriteria[f.key] = values.join(',');
                 }
             }
         })
@@ -122,7 +123,7 @@ class Requirements extends React.Component {
                 {invoiceValue ? <div className='requirement-item'><span className='title'>开票量：</span><span>{invoiceValue}</span></div> : null}
                 {invoiceIssueDateTime ? <div className='requirement-item'><span className='title'>发票开具时间：</span><span>{invoiceIssueDateTime}</span></div> : null}
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
-                {createTime ? <div className='requirement-item'><span className='title'>创建时间：</span><span>{new Date(createTime).toLocaleDateString()}</span></div> : null}
+                {createTime ? <div className='requirement-item'><span className='title'>创建时间：</span><span>{new Date(createTime).toLocaleString()}</span></div> : null}
             </div>
             <div className='operators'>
                 {operators}

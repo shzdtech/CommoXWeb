@@ -95,10 +95,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                         _logger.LogInformation(3, "User created a new account with password.");
                         return enterpriseInfo;
                     }
+                    else
+                    {
+                        var error = result.Errors.FirstOrDefault();
+                        if (error?.Code == "DuplicateUserName")
+                        {
+                            throw new BadRequestException(string.Format("邮箱{0}已注册", model.EmailAddress));
+                        }
+                    }
                 }
             }
-
-            throw new BadRequestException("企业注册失败");
+            throw new BadRequestException("企业注册失败, 请检查输入是否正确");
         }
 
         [HttpPost]
