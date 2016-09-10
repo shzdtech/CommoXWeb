@@ -88,6 +88,7 @@ class Requirements extends React.Component {
             invoiceValue,
             invoiceIssueDateTime,
             invoiceTransferMode,
+            createTime
         } = requirement;
 
         let operators = null;
@@ -121,6 +122,7 @@ class Requirements extends React.Component {
                 {invoiceValue ? <div className='requirement-item'><span className='title'>开票量：</span><span>{invoiceValue}</span></div> : null}
                 {invoiceIssueDateTime ? <div className='requirement-item'><span className='title'>发票开具时间：</span><span>{invoiceIssueDateTime}</span></div> : null}
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
+                {createTime ? <div className='requirement-item'><span className='title'>创建时间：</span><span>{new Date(createTime).toLocaleDateString()}</span></div> : null}
             </div>
             <div className='operators'>
                 {operators}

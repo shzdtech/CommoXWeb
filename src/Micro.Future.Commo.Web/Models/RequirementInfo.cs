@@ -15,6 +15,11 @@ namespace Micro.Future.Commo.Web.Models
         public int EnterpriseId { get; set; }
 
         /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+
+        /// <summary>
         /// 公司名称
         /// </summary>
         public string EnterpriseName { get; set; }
@@ -198,6 +203,7 @@ namespace Micro.Future.Commo.Web.Models
             WarehouseCity = requirement.WarehouseCity;
             WarehouseAddress1 = requirement.WarehouseAddress1;
             WarehouseAddress2 = requirement.WarehouseAddress2;
+            CreateTime = requirement.CreateTime;
             Rules = requirement.Rules;
         }
     }

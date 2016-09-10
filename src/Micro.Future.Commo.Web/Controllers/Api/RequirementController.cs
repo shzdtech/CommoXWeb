@@ -61,6 +61,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 WarehouseCity = requirement.WarehouseCity,
                 WarehouseAddress1 = requirement.WarehouseAddress1,
                 WarehouseAddress2 = requirement.WarehouseAddress2,
+                CreateTime = DateTime.Now,
                 Rules = requirement.Rules
             };
 
