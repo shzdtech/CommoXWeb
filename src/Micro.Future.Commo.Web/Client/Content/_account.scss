@@ -157,3 +157,25 @@
         text-align: center;
     }
 }
+
+.enterprise-table{
+    color: $normal-font-color;
+
+    .header{
+        color: $white;
+        font-weight: bold;
+    }
+
+    .column{
+        width: 16.666%;
+        display: inline-block; 
+        height: 40px;
+        padding: 10px;
+        border-bottom: 1px solid $grey;
+        vertical-align: middle;
+
+        .btn{
+            margin-right: 10px;
+        }
+    }
+}

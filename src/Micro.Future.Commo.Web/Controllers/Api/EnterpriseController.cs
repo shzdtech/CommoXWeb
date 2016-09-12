@@ -4,6 +4,7 @@ using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -171,6 +172,28 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 throw new BadRequestException("输入数据不正确");
             }
+        }
+
+        [HttpGet]
+        [Route("")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<EnterpriseInfo> Get()
+        {
+            var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.UNAPPROVED);
+            if (result.HasError)
+            {
+                throw new BadRequestException(result.Error.Message);
+            }
+
+            return result.Result;
+        }
+
+        [HttpPost]
+        [Route("{id:int}/State/{state:int}")]
+        [Authorize(Roles = "Admin")]
+        public void AuthenticateEnterprise(int id, EnterpriseStateType state)
+        {
+            _enterpriseManager.UpdateEnterpriseState(id, state);
         }
     }
 }
