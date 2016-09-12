@@ -105,6 +105,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                         }
                     }
                 }
+                else
+                {
+                    throw new BadRequestException(bizResult.Error.Message);
+                }
             }
             throw new BadRequestException("企业注册失败, 请检查输入是否正确");
         }
