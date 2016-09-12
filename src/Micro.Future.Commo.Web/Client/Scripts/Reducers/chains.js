@@ -4,7 +4,8 @@ import {RECEIVE_CHAIN_LIST,
     CONFIRM_CHAIN_SUCCEDD,
     CONFIRM_CHAIN_FAILURE,
     CHANGE_CHAIN_STATUS_SUCCESS,
-    CHANGE_CHAIN_STATUS_FAILURE} from '../Constants/ActionTypes';
+    CHANGE_CHAIN_STATUS_FAILURE,
+    UNLOCK_CHAIN_SUCCESS} from '../Constants/ActionTypes';
 
 const chain = (state = {}, action) => {
     switch (action.type) {
@@ -40,6 +41,7 @@ const chains = (state = [], action) => {
                 return chain(s, action);
             });
         case CHANGE_CHAIN_STATUS_SUCCESS:
+        case UNLOCK_CHAIN_SUCCESS:
             return state.filter((s) => {
                 return s.chainId !== action.chain.chainId;
             });

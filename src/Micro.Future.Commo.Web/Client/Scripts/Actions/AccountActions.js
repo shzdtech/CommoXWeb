@@ -12,7 +12,9 @@ import {
     SIGN_OUT_SUCCESS,
     UPDATE_ENTERPRISE_FORM,
     UPDATE_ENTERPRISE_SUCCESS,
-    UPDATE_ENTERPRISE_FAILURE
+    UPDATE_ENTERPRISE_FAILURE,
+    GET_UNAUTHED_ENTERPRISE_SUCCESS,
+    AUTHENTICATE_ENTERPRISE_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -267,3 +269,52 @@ export const updateEnterprise = (enterpriseInfo) => {
         );
     };
 };
+
+const getUnauthedEnterpriseRequest = () => {
+    return $.get(HOST + 'api/Enterprise');
+};
+
+const getUnauthedEnterpriseSuccess = (enterprises) => {
+    return {
+        type: GET_UNAUTHED_ENTERPRISE_SUCCESS,
+        enterprises: enterprises
+    };
+};
+
+export const getUnauthedEnterprise = () => {
+    return (dispatch) => {
+        return getUnauthedEnterpriseRequest().then(
+            enterprises => {
+                dispatch(getUnauthedEnterpriseSuccess(enterprises));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+}
+
+const authenticateEnterpriseRequest = (enterpriseId, state) => {
+    return $.post(HOST + 'api/Enterprise/' + enterpriseId + '/State/' + state);
+}
+
+const authenticateEnterpriseSuccess = (enterpriseId) => {
+    return {
+        type: AUTHENTICATE_ENTERPRISE_SUCCESS,
+        enterpriseId: enterpriseId
+    }
+}
+
+export const authenticateEnterprise = (enterpriseId, state) => {
+    return (dispatch) => {
+        dispatch(showSpinner(true));
+        return authenticateEnterpriseRequest(enterpriseId, state).then(
+            res => {
+                dispatch(showSpinner(false));
+                dispatch(authenticateEnterpriseSuccess(enterpriseId));
+            },
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}

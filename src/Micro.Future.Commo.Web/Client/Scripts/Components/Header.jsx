@@ -9,7 +9,10 @@ class Header extends React.Component {
         const userPanel = () => {
             if (this.props.userInfo && this.props.userInfo.userName) {
                 if (this.props.userInfo.roles.filter((r) => { return r === 'Admin' }).length > 0) {
-                    return [<li key="userInfo">
+                    return [                      
+                        <li key="authEnterprise"><Link to="/authEnterprise">企业认证</Link></li>,
+                        <li key="manageChain"><Link to="/chainManager">管理</Link></li>,
+                        <li key="userInfo">
                         <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                             <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
                             <MenuItem divider />
@@ -17,8 +20,7 @@ class Header extends React.Component {
                             <MenuItem divider />
                             <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                         </DropdownButton>
-                    </li>,
-                     <li key="manageChain"><Link to="/chainManager">管理</Link></li>]
+                    </li>]
                 } else {
                     return [<li key="requirement"><Link to="/requirement">我的需求</Link></li>,
                         <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,

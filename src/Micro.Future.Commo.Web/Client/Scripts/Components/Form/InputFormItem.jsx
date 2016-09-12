@@ -16,6 +16,7 @@ class InputFormItem extends React.Component {
                 <span className={"label_text " + (formItem.isRequired ? 'required' : '')}>{formItem.title}</span>
             </label>
             <input type="text" className="form-control" value={formItem.value} placeholder={formItem.title}  onChange={(e) => { this.handleValueChange(e) } }/>
+            <span className='unit'>{formItem.unit}</span>
         </div>
     }
 

@@ -6,6 +6,7 @@ import {
     SELECT_CHAIN_TYPE,
     CHANGE_CHAIN_STATUS_SUCCESS,
     CHANGE_CHAIN_STATUS_FAILURE,
+    UNLOCK_CHAIN_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -128,10 +129,31 @@ const makeChainRequest = () => {
 }
 
 export const makeChain = () => {
-     return (dispatch) => {
+    return (dispatch) => {
         return makeChainRequest().then(
             res => dispatch(push('/chainManager')),
             error => ajaxError(dispatch, error)
         );
     };
+};
+
+const unlockChainRequest = (chain) => {
+    const request = $.post(HOST + 'api/chain/' + chain.chainId + '/Unlock');
+    return request;
+};
+
+const unlockChainSuccess = (chain) => {
+    return {
+        type: UNLOCK_CHAIN_SUCCESS,
+        chain: chain
+    };
+};
+
+export const unlockChain = (chain) => {
+    return (dispatch) => {
+        unlockChainRequest(chain).then(
+            res => dispatch(unlockChainSuccess(chain)),
+            error => ajaxError(dispatch, error)
+        );
+    }
 };

@@ -8,7 +8,7 @@ class Chain extends React.Component {
     }
 
     render() {
-        let {chain, confirmChain, manageChain} = this.props;
+        let {chain, confirmChain, manageChain, unlockChain} = this.props;
 
         let className = 'chain';
         let text = '锁定';
@@ -31,6 +31,7 @@ class Chain extends React.Component {
         if (manageChain && (chain.chainStatus === 0 || chain.chainStatus === 1)) {
             operators = <div className='operators'>
                 <span className='btn btn-large' onClick={() => manageChain(chain) }>{text}</span>
+                {chain.chainStatus === 1 ? <span className='btn btn-large' onClick={() => unlockChain(chain) }>解除锁定</span> : null}
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }

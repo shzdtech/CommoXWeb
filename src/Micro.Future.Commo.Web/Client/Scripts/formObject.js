@@ -28,16 +28,7 @@ export default {
         multipleSelection: false
     },
     buy: [
-        {
-            id: 1,
-            title: '资金金额',
-            key: 'paymentAmount',
-            filterProperty: FilterProperty.Requirement,
-            category: Category.Capital,
-            type: TEXT,
-            isRequired: true,
-            valueType: 'number'
-        }, {
+         {
             id: 2,
             title: '货款支付时间',
             key: 'paymentDateTime',
@@ -125,7 +116,19 @@ export default {
             key: 'productQuantity',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            type: TEXT,
+            isRequired: true,          
+            valueType: 'number',
+            unit: '吨'
+        },  {
+            id: 1,
+            title: '货物单价',
+            key: 'productPrice',
+            filterProperty: FilterProperty.Requirement,
+            category: Category.Product,
+            type: TEXT,
+            isRequired: true,
+            valueType: 'number'
         }, {
             id: 10,
             title: '仓库地址',
@@ -169,35 +172,37 @@ export default {
         }, {
             id: 14,
             title: '企业类型',
+            key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
             items: [{
                 id: 1,
                 name: '国有企业',
-                value: '国有企业'
+                value: '1'
             }, {
                     id: 2,
                     name: '私有企业',
-                    value: '私有企业'
+                    value: '2'
                 }, {
                     id: 3,
                     name: '外商独资',
-                    value: '外商独资'
+                    value: '3'
                 }, {
                     id: 4,
                     name: '中外合资',
-                    value: '中外合资'
+                    value: '4'
                 }, {
                     id: 5,
                     name: '港澳独资',
-                    value: '港澳独资'
+                    value: '5'
                 }],
             multipleSelection: true
         },
         {
             id: 15,
-            title: '注册资本',
+            title: '注册资本',           
+            key: 'RegisterCapital',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
@@ -218,6 +223,7 @@ export default {
         }, {
             id: 16,
             title: '注册地',
+            key: 'RegisterCity',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
@@ -294,7 +300,8 @@ export default {
             valueType: 'number',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            type: TEXT,
+            unit: '吨'
         }, {
             id: 6,
             title: '仓库地址',
@@ -338,35 +345,37 @@ export default {
         }, {
             id: 10,
             title: '企业类型',
+            key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
             items: [{
                 id: 1,
                 name: '国有企业',
-                value: '国有企业'
+                value: '1'
             }, {
                     id: 2,
                     name: '私有企业',
-                    value: '私有企业'
+                    value: '2'
                 }, {
                     id: 3,
                     name: '外商独资',
-                    value: '外商独资'
+                    value: '3'
                 }, {
                     id: 4,
                     name: '中外合资',
-                    value: '中外合资'
+                    value: '4'
                 }, {
                     id: 5,
                     name: '港澳独资',
-                    value: '港澳独资'
+                    value: '5'
                 }],
             multipleSelection: true
         },
         {
             id: 11,
             title: '注册资本',
+            key: 'RegisterCapital',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
@@ -387,6 +396,7 @@ export default {
         }, {
             id: 12,
             title: '注册地',
+            key: 'RegisterCity',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
@@ -415,29 +425,30 @@ export default {
         }, {
             id: 3,
             title: '合同上下游企业类型',
+            key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Contract,
             items: [{
                 id: 1,
                 name: '国有企业',
-                value: '国有企业'
+                value: '1'
             }, {
                     id: 2,
                     name: '私有企业',
-                    value: '私有企业'
+                    value: '2'
                 }, {
                     id: 3,
                     name: '外商独资',
-                    value: '外商独资'
+                    value: '3'
                 }, {
                     id: 4,
                     name: '中外合资',
-                    value: '中外合资'
+                    value: '4'
                 }, {
                     id: 5,
                     name: '港澳独资',
-                    value: '港澳独资'
+                    value: '5'
                 }],
             multipleSelection: true
         }, {

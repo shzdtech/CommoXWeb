@@ -5,6 +5,7 @@ using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
 using Micro.Future.Commo.Web.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -106,6 +107,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                         }
                     }
                 }
+                else
+                {
+                    throw new BadRequestException(bizResult.Error.Message);
+                }
             }
             throw new BadRequestException("企业注册失败, 请检查输入是否正确");
         }
@@ -167,6 +172,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.RegisterNumber = model.RegisterNumber;
                 enterpriseInfo.RegisterTime = model.RegisterTime;
                 enterpriseInfo.ReputationGrade = model.ReputationGrade;
+                enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
                 _enterpriseManager.UpdateEnterprise(enterpriseInfo);
             }
             else
@@ -175,6 +181,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
         }
 
+        [HttpGet]
         [Route("")]
         public SenderStatusCode VerifyCode(string phoneOrEmail)
         {
@@ -227,6 +234,28 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             return ret;
+        }
+
+        [HttpGet]
+        [Route("")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<EnterpriseInfo> Get()
+        {
+            var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.UNAPPROVED);
+            if (result.HasError)
+            {
+                throw new BadRequestException(result.Error.Message);
+            }
+
+            return result.Result;
+        }
+
+        [HttpPost]
+        [Route("{id:int}/State/{state:int}")]
+        [Authorize(Roles = "Admin")]
+        public void AuthenticateEnterprise(int id, EnterpriseStateType state)
+        {
+            _enterpriseManager.UpdateEnterpriseState(id, state);
         }
     }
 }
