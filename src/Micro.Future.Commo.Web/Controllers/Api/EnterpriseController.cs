@@ -166,6 +166,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.RegisterNumber = model.RegisterNumber;
                 enterpriseInfo.RegisterTime = model.RegisterTime;
                 enterpriseInfo.ReputationGrade = model.ReputationGrade;
+                enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
                 _enterpriseManager.UpdateEnterprise(enterpriseInfo);
             }
             else

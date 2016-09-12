@@ -305,11 +305,16 @@ const authenticateEnterpriseSuccess = (enterpriseId) => {
 
 export const authenticateEnterprise = (enterpriseId, state) => {
     return (dispatch) => {
+        dispatch(showSpinner(true));
         return authenticateEnterpriseRequest(enterpriseId, state).then(
             res => {
+                dispatch(showSpinner(false));
                 dispatch(authenticateEnterpriseSuccess(enterpriseId));
             },
-            error => ajaxError(dispatch, error)
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
         );
     };
 }
