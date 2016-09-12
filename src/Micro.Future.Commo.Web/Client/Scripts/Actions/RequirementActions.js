@@ -40,10 +40,9 @@ export const addRequirementRequest = (list, selectedType) => {
                 requirement[l.key] = values.join(',');
             } else if (l.filterProperty === FilterProperty.Rule) {
                 requirement.rules.push({
-                    ruleType: l.ruleType,
-                    key: l.title,
+                    key: l.key,
                     value: values.join(','),
-                    operationType: 2
+                    operationType: 1
                 });
             }
         }

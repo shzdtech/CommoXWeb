@@ -8,12 +8,12 @@ class ChainList extends React.Component {
     }
 
     render() {
-        let {chains, confirmChain, manageChain} = this.props;
+        let {chains, confirmChain, manageChain, unlockChain} = this.props;
         return <div className='chain-list'>
             {chains && chains.length > 0 ? <div className='title'>匹配详情：</div> : null}
             {
                 chains.map((chain) => {
-                    return <Chain key={chain.chainId} chain={chain} confirmChain={confirmChain} manageChain={manageChain}/>;
+                    return <Chain key={chain.chainId} chain={chain} confirmChain={confirmChain} manageChain={manageChain} unlockChain={unlockChain}/>;
                 })
             }
         </div>;

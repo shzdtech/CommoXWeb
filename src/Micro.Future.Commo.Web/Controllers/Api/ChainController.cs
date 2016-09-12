@@ -75,6 +75,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpPost]
+        [Route("{id:int}/Unlock")]
+        [Authorize(Roles = "Admin")]
+        public void UnlockChain(int id)
+        {
+            _chainManager.UnlockChain(id);
+        }
+
+        [HttpPost]
         [Route("Maker")]
         [Authorize(Roles = "Admin")]
         public void MakeChain()
