@@ -4,6 +4,7 @@ using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Web.Models;
 using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
+using Micro.Future.Commo.Web.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     [Route("api/Enterprise")]
     public class EnterpriseController : Controller
     {
+        public const int CODESEND_TIMEOUT = 5000;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -171,6 +173,60 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 throw new BadRequestException("输入数据不正确");
             }
+        }
+
+        [Route("")]
+        public SenderStatusCode VerifyCode(string phoneOrEmail)
+        {
+            SenderStatusCode ret = SenderStatusCode.Failed;
+            try
+            {
+                if (_enterpriseManager.EmailHasBeenRegistered(phoneOrEmail))
+                {
+                    return SenderStatusCode.UserExist;
+                }
+
+                bool isEmail = phoneOrEmail.Contains("@");
+                if (isEmail)
+                {
+                    if (_enterpriseManager.HasExceedLimitationPerDay(phoneOrEmail))
+                    {
+                        ret = SenderStatusCode.ExceedLimitation;
+                    }
+                    else if (_enterpriseManager.CanResend(phoneOrEmail))
+                    {
+                        var sendTask = _emailSender.SendSingleEmailAsync(phoneOrEmail, "注册邮件", MailTemplate.Register);
+                        if (sendTask.Wait(CODESEND_TIMEOUT))
+                        {
+                            _enterpriseManager.SaveEmailVerifyCode(sendTask.Result.RequestId, phoneOrEmail, sendTask.Result.VerifyCode, sendTask.Result.SendTime);
+                            ret = SenderStatusCode.OK;
+                        }
+                    }
+                }
+                else
+                {
+                    //if (_smsVerifyCodeDbCtx.HasExceedLimitationPerDay(phoneOrEmail))
+                    //{
+                    //    ret = SenderStatusCode.ExceedLimitation;
+                    //}
+                    //else if (_smsVerifyCodeDbCtx.CanResend(phoneOrEmail))
+                    //{
+                    //    _logger.LogInformation("Send SMS to " + phoneOrEmail);
+                    //    var sendTask = _smsSender.SendSmsAsync(phoneOrEmail, "");
+                    //    if (sendTask.Wait(CODESEND_TIMEOUT))
+                    //    {
+                    //        _smsVerifyCodeDbCtx.SaveSMSVerifyCode(sendTask.Result.Task_Id, phoneOrEmail, sendTask.Result.Verify_Code, sendTask.Result.Send_Time);
+                    //        ret = SenderStatusCode.OK;
+                    //    }
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+            }
+
+            return ret;
         }
     }
 }

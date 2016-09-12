@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Micro.Future.Commo.Web.Attributes;
 using Microsoft.AspNetCore.Mvc;
+using Micro.Future.Commo.Web.Utilities;
 
 namespace Micro.Future.Commo.Web
 {
@@ -92,8 +93,37 @@ namespace Micro.Future.Commo.Web
             });
 
             // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddSingleton<IEmailSender>(new AliYunEmailSender(
+               new EmailOptions
+               {
+                   SMTP = Configuration["Email:SMTP"],
+                   PORT = int.Parse(Configuration["Email:Port"]),
+                   UseSSL = bool.Parse(Configuration["Email:UseSSL"]),
+                   SingleSender = Configuration["Email:Single:Sender"],
+                   SinglePassword = Configuration["Email:Single:Password"],
+                   BatchSender = Configuration["Email:Batch:Sender"],
+                   BatchPassword = Configuration["Email:Batch:Password"],
+                   MailTemplates = new Dictionary<MailTemplate, string>()
+                   {
+                        { MailTemplate.Register, Configuration["Email:Template:Register"] },
+                        { MailTemplate.ForgotPassword, Configuration["Email:Template:ForgotPassword"] }
+                   }
+               }));
+
+            services.AddSingleton<ISmsSender, AliYunSmsSender>();
+            services.Configure<AliYunSmsOptions>(s =>
+            {
+                s.SmsGateway = Configuration["AliYunSMS:SmsGateway"];
+                s.Action = Configuration["AliYunSMS:Action"];
+                s.AccessKeyId = Configuration["AliYunSMS:AccessKeyId"];
+                s.AccessKeySecret = Configuration["AliYunSMS:AccessKeySecret"];
+                s.Format = Configuration["AliYunSMS:Format"];
+                s.SignatureMethod = Configuration["AliYunSMS:SignatureMethod"];
+                s.SignatureVersion = Configuration["AliYunSMS:SignatureVersion"];
+                s.SignName = Configuration["AliYunSMS:SignName"];
+                s.TemplateCode = Configuration["AliYunSMS:TemplateCode"];
+                s.Version = Configuration["AliYunSMS:Version"];
+            });
 
             services.AddMatchMakerSystem(new MatcherConfig());
             services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = Configuration.GetConnectionString("DefaultConnection") });

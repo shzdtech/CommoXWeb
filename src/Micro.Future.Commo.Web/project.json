@@ -2,6 +2,7 @@
   "userSecretsId": "aspnet-Micro.Future.Commo.Web-ed3bbb30-a4f9-40ff-9095-90cd030f9e51",
 
   "dependencies": {
+    "MailKit": "1.4.2.1",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
