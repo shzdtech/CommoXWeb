@@ -187,14 +187,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpGet]
         [Route("Email/VerifyCode")]
-        public SenderStatusCode VerifyCode(string phoneOrEmail)
+        public void VerifyCode(string phoneOrEmail)
         {
-            SenderStatusCode ret = SenderStatusCode.Failed;
             try
             {
                 if (_enterpriseManager.EmailHasBeenRegistered(phoneOrEmail))
                 {
-                    return SenderStatusCode.UserExist;
+                    throw new BadRequestException("此邮箱已注册");
                 }
 
                 bool isEmail = phoneOrEmail.Contains("@");
@@ -202,7 +201,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 {
                     if (_enterpriseManager.HasExceedLimitationPerDay(phoneOrEmail))
                     {
-                        ret = SenderStatusCode.ExceedLimitation;
+                        throw new BadRequestException("验证码发送超过当日限制");
                     }
                     else if (_enterpriseManager.CanResend(phoneOrEmail))
                     {
@@ -210,7 +209,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                         if (sendTask.Wait(CODESEND_TIMEOUT))
                         {
                             _enterpriseManager.SaveEmailVerifyCode(sendTask.Result.RequestId, phoneOrEmail, sendTask.Result.VerifyCode, sendTask.Result.SendTime);
-                            ret = SenderStatusCode.OK;
                         }
                     }
                 }
@@ -235,9 +233,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
+                throw new BadRequestException("验证码发送失败");
             }
-
-            return ret;
         }
 
         [HttpGet]
