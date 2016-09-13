@@ -182,7 +182,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Email/VerifyCode")]
         public SenderStatusCode VerifyCode(string phoneOrEmail)
         {
             SenderStatusCode ret = SenderStatusCode.Failed;

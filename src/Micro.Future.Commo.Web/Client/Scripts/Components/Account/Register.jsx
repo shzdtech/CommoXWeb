@@ -11,7 +11,7 @@ class Register extends React.Component {
     render() {
         let list = [];
         let disabled = false;
-        const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm} = this.props;
+        const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm, getVerficationCode} = this.props;
         for (var key in enterpriseInfo) {
             let info = enterpriseInfo[key];
             if(info.isRequired && (info.value === undefined ||　info.value === null || info.value === '')){
@@ -19,7 +19,7 @@ class Register extends React.Component {
             }
             if (info.type === 'text' || info.type === 'date' || info.type === 'file' || info.type === 'number') {
                 if(info.key === 'emailAddress'){
-                    list.push(<EmailVerfication info={info} onChangeForm={onChangeEnterpriseForm} key={key} />)
+                    list.push(<EmailVerfication info={info} onChangeForm={onChangeEnterpriseForm} key={key} getVerficationCode={getVerficationCode} />)
                 }else{
                     list.push(<Input key={key} info={info} onChangeForm={onChangeEnterpriseForm} />);
                 }

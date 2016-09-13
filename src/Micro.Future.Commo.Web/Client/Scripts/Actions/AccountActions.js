@@ -14,7 +14,8 @@ import {
     UPDATE_ENTERPRISE_SUCCESS,
     UPDATE_ENTERPRISE_FAILURE,
     GET_UNAUTHED_ENTERPRISE_SUCCESS,
-    AUTHENTICATE_ENTERPRISE_SUCCESS
+    AUTHENTICATE_ENTERPRISE_SUCCESS,
+    GET_VERFICATION_CODE_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -310,6 +311,38 @@ export const authenticateEnterprise = (enterpriseId, state) => {
             res => {
                 dispatch(showSpinner(false));
                 dispatch(authenticateEnterpriseSuccess(enterpriseId));
+            },
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}
+
+const getVerficationCodeRequest = (email) => {
+    return $.get(HOST + 'api/Enterprise/Email/VerifyCode?phoneOrEmail' + email);
+};
+
+const getVerficationCodeSuccess = ()=>{
+    return {
+        type: GET_VERFICATION_CODE_SUCCESS
+    };
+};
+
+export const getVerficationCode = (email) => {
+    return (dispatch) => {
+        dispatch(showSpinner(true));
+        return getVerficationCodeRequest(email).then(
+            res => {
+                dispatch(showSpinner(false));
+                dispatch(showToastr({
+                    message: '验证码已发送',
+                    toastType: 'toast-success',
+                    show: true,
+                    autoClose: false
+                }));
+                dispatch(getVerficationCodeSuccess());
             },
             error => {
                 dispatch(showSpinner(false));

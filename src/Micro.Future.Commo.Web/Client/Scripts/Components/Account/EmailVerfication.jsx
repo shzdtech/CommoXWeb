@@ -10,7 +10,7 @@ class EmailVerfication extends React.Component {
   render() {
 
     return <Input {...this.props}>
-        <span className='btn'>获取验证码</span>
+        <span className='btn' onClick={this.props.getVerficationCode}>获取验证码</span>
     </Input>
   }
 
