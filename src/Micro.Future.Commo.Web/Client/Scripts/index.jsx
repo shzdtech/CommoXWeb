@@ -2,6 +2,7 @@ import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
+import objectAssignPolyfill from './Util/objectAssignPolyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Containers/Home';
@@ -24,6 +25,8 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 require('signalr');
 import '../Content/site.scss';
+
+objectAssignPolyfill();
 
 class App extends React.Component{
     render(){
