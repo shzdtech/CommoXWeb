@@ -22,11 +22,11 @@ export default {
         placeholder: '企业邮箱',
         isRequired: true
     },
-    verficationCodes:{
+    verficationCode:{
         label: '验证码',
         type: 'text',
         legth: 'medium',
-        key: 'verficationCodes',
+        key: 'verficationCode',
         placeholder: '查看邮箱获取验证码',
         isRequired: true
     },
