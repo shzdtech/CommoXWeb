@@ -2,6 +2,7 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { Link} from 'react-router';
 import Input from './Input';
+import validateEmail from '../../Util/validateEmail';
 
 class CreateUser extends React.Component {
     constructor() {
@@ -16,7 +17,7 @@ class CreateUser extends React.Component {
             length: 'medium',
             placehodler: '请输入您的邮箱'
         };
-        let isValid = this.validateEmail(this.props.newUser.email);
+        let isValid = validateEmail(this.props.newUser.email);
 
         return <div className='create-user-container'>
             <Input info={u} onChangeForm={this.props.onChangeForm} />
@@ -25,11 +26,6 @@ class CreateUser extends React.Component {
                     onClick={() => { isValid && this.props.submitCreateUser(this.props.newUser) } }>提交</span>
             </div>
         </div>
-    }
-
-    validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
     }
 }
 
