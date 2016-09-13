@@ -22,6 +22,14 @@ export default {
         placeholder: '企业邮箱',
         isRequired: true
     },
+    verficationCodes:{
+        label: '验证码',
+        type: 'text',
+        legth: 'medium',
+        key: 'verficationCodes',
+        placeholder: '查看邮箱获取验证码',
+        isRequired: true
+    },
     contacts: {
         label: '联系人',
         type: 'text',

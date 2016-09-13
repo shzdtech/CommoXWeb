@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from './Input';
+import EmailVerfication from './EmailVerfication';
 import Dropdown from './Dropdown';
 
 class Register extends React.Component {
@@ -17,7 +18,11 @@ class Register extends React.Component {
                 disabled = true;
             }
             if (info.type === 'text' || info.type === 'date' || info.type === 'file' || info.type === 'number') {
-                list.push(<Input key={key} info={info} onChangeForm={onChangeEnterpriseForm} />);
+                if(info.key === 'emailAddress'){
+                    list.push(<EmailVerfication info={info} onChangeForm={onChangeEnterpriseForm} key={key} />)
+                }else{
+                    list.push(<Input key={key} info={info} onChangeForm={onChangeEnterpriseForm} />);
+                }
             } else if (info.type === 'select') {
                 list.push(<Dropdown key={key} info={info} onChangeEnterpriseForm={onChangeEnterpriseForm} />);
             }

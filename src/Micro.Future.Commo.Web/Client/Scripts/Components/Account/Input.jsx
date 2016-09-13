@@ -24,6 +24,7 @@ class Input extends React.Component {
         onChange={this.changeValue}
         />
         {requiredNotation}
+        {this.props.children}
     </div>
   }
 
