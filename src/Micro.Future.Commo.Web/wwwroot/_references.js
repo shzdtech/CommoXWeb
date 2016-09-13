@@ -59,6 +59,7 @@
 /// <reference path="../client/scripts/reducers/requirements.js" />
 /// <reference path="../client/scripts/requirementlist.js" />
 /// <reference path="../client/scripts/router/AccountRouter.js" />
+/// <reference path="../client/scripts/util/validateemail.js" />
 /// <reference path="../dist/bundle.js" />
 /// <reference path="../dist/vendor.js" />
 /// <reference path="../gulpfile.js" />
