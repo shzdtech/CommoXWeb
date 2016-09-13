@@ -60,6 +60,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             if (ModelState.IsValid)
             {
+                if (!_enterpriseManager.CheckEmailVerifyCode(model.EmailAddress, model.VerificationCode))
+                {
+                    throw new BadRequestException("验证码不正确");
+                }
                 EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
                 enterpriseInfo.Name = model.Name;
                 enterpriseInfo.Contacts = model.Contacts;

@@ -42,8 +42,8 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         /// </summary>
         public string Fax { get; set; }
 
-        //[Required]
-        //[Display(Name = "注册码")]
-        //public string VerificationCode { get; set; }
+        [Required]
+        [Display(Name = "注册码")]
+        public string VerificationCode { get; set; }
     }
 }
