@@ -321,7 +321,7 @@ export const authenticateEnterprise = (enterpriseId, state) => {
 }
 
 const getVerficationCodeRequest = (email) => {
-    return $.get(HOST + 'api/Enterprise/Email/VerifyCode?phoneOrEmail' + email);
+    return $.get(HOST + 'api/Enterprise/Email/VerifyCode?phoneOrEmail=' + email);
 };
 
 const getVerficationCodeSuccess = ()=>{
@@ -339,7 +339,7 @@ export const getVerficationCode = (email) => {
                 dispatch(showToastr({
                     message: '验证码已发送',
                     toastType: 'toast-success',
-                    show: true,
+                    show: false,
                     autoClose: false
                 }));
                 dispatch(getVerficationCodeSuccess());

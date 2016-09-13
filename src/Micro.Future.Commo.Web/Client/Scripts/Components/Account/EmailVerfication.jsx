@@ -26,7 +26,7 @@ class EmailVerfication extends React.Component {
 
     tick() {
         var btn = this.refs.getVerficationCode;
-        let tickCount = 10;
+        let tickCount = 120;
         $(btn).addClass('disabled');
         let ticker = setInterval(() => {
             $(btn).text('获取验证码(' + tickCount + ')')
