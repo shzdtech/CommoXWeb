@@ -76,17 +76,16 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
                 if (!bizResult.HasError && bizResult.Result > 0)
                 {
-                    string initialPassword = "QAZ@wsx3";
                     var user = new ApplicationUser
                     {
                         UserName = model.EmailAddress,
                         PhoneNumber = model.MobilePhone,
                         Email = model.EmailAddress,
                         EnterpriseId = bizResult.Result,
-                        InitialPassword = initialPassword
+                        InitialPassword = model.Password
                     };
 
-                    var result = await _userManager.CreateAsync(user, initialPassword);
+                    var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
                         string roleName = "Administrator";
@@ -104,11 +103,20 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     }
                     else
                     {
-                        var error = result.Errors.FirstOrDefault();
-                        if (error?.Code == "DuplicateUserName")
+                        string message = "企业管理员创建失败";
+                        if (result.Errors.Any(e => e.Code == "PasswordTooShort" ||
+                                               e.Code == "PasswordRequiresNonAlphanumeric" ||
+                                               e.Code == "PasswordRequiresLower" ||
+                                               e.Code == "PasswordRequiresUpper"))
                         {
-                            throw new BadRequestException(string.Format("邮箱{0}已注册", model.EmailAddress));
+                            message = "密码复杂度不足， 密码长度不少于8位，并且包含数字，大小字母写或符号";
                         }
+                        else if (result.Errors.Any(e => e.Code == "DuplicateUserName"))
+                        {
+                            message = string.Format("邮箱{0}已注册", model.EmailAddress);
+                        }
+
+                        throw new BadRequestException(message);
                     }
                 }
                 else

@@ -45,5 +45,12 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         [Required]
         [Display(Name = "注册码")]
         public string VerificationCode { get; set; }
+
+        /// <summary>
+        /// 登录密码
+        /// </summary>
+        [Required]
+        [Display(Name = "登录密码")]
+        public string Password { get; set; }
     }
 }

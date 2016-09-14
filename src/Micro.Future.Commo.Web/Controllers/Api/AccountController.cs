@@ -70,10 +70,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 var user = await _userManager.GetUserAsync(User);
 
-                string initialPassword = "QAZ@wsx3";
-                var createdUser = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = user.EnterpriseId, InitialPassword = initialPassword };
+                var createdUser = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = user.EnterpriseId, InitialPassword = model.Password };
 
-                var result = await _userManager.CreateAsync(createdUser, initialPassword);
+                var result = await _userManager.CreateAsync(createdUser, model.Password);
                 if (result.Succeeded)
                 {
                     string roleName = "User";
@@ -85,11 +84,20 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 }
                 else
                 {
-                    var error = result.Errors.FirstOrDefault();
-                    if (error?.Code == "DuplicateUserName")
+                    string message = "用户创建失败";
+                    if (result.Errors.Any(e => e.Code == "PasswordTooShort" ||
+                                           e.Code == "PasswordRequiresNonAlphanumeric" ||
+                                           e.Code == "PasswordRequiresLower" ||
+                                           e.Code == "PasswordRequiresUpper"))
                     {
-                        throw new BadRequestException(string.Format("邮箱{0}已注册", model.Email));
+                        message = "密码复杂度不足， 密码长度不少于8位，并且包含数字，大小字母写或符号";
                     }
+                    else if (result.Errors.Any(e => e.Code == "DuplicateUserName"))
+                    {
+                        message = string.Format("邮箱{0}已注册", model.Email);
+                    }
+
+                    throw new BadRequestException(message);
                 }
             }
             else

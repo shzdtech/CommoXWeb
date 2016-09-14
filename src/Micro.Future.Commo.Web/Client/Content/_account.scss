@@ -1,5 +1,6 @@
 .input-container {
     padding: 10px;
+    color: $normal-font-color;
 
     .input_label {
         width: 15%;
@@ -10,7 +11,6 @@
 
     .form-control {
         display: inline-block !important;
-        color: $normal-font-color;
         width: 20% !important;
 
         &.long {
@@ -24,6 +24,10 @@
         &.short {
             width: 20% !important;
         }
+    }
+
+    .error{
+        color: $red;
     }
 
     .required::after{
@@ -120,16 +124,17 @@
     padding: 20px 0;
 
     .input-container {
-        width: 60%;
+        width: 80%;
         display: inline-block;
 
         .form-control {
-            width: 80% !important;
+            width: 40% !important;
         }
     }
 
     .create-user-operators {
-        display: inline-block;
+        text-align: center;
+        margin-top: 20px;
     }
 }
 

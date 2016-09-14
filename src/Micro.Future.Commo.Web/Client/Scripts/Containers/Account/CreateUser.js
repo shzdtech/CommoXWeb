@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CreateUser from '../../Components/Account/CreateUser'
-import {typeUserEmail, submitCreateUser} from '../../Actions/AccountActions';
+import {changeCreateUserForm, submitCreateUser} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => {
         submitCreateUser: (user)=>{
             dispatch(submitCreateUser(user));
         },
-        onChangeForm: (key, newValue) => {
-            dispatch(typeUserEmail(newValue.value));
+        onChangeCreateUserForm: (key, newValue) => {
+            dispatch(changeCreateUserForm(key, newValue));
         },
     };
 };

@@ -11,13 +11,21 @@ class Register extends React.Component {
     render() {
         let list = [];
         let disabled = false;
+        let errorCount = 0;
         const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm, getVerficationCode} = this.props;
+        if(enterpriseInfo['password'].value !== enterpriseInfo['confirmPassword'].value){
+            enterpriseInfo['confirmPassword'].labelError = '密码不一致';
+            errorCount++;
+        }else{
+             enterpriseInfo['confirmPassword'].labelError = null;
+        }
+
         for (var key in enterpriseInfo) {
             let info = enterpriseInfo[key];
-            if(info.isRequired && (info.value === undefined ||　info.value === null || info.value === '')){
+            if((info.isRequired && (info.value === undefined ||　info.value === null || info.value === '')) || errorCount > 0){
                 disabled = true;
             }
-            if (info.type === 'text' || info.type === 'date' || info.type === 'file' || info.type === 'number') {
+            if (info.type === 'text' || info.type === 'date' || info.type === 'file' || info.type === 'number' || info.type === 'password') {
                 if(info.key === 'emailAddress'){
                     list.push(<EmailVerfication info={info} onChangeForm={onChangeEnterpriseForm} key={key} getVerficationCode={getVerficationCode} />)
                 }else{

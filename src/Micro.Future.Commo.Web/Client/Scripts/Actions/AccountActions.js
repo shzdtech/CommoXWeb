@@ -5,7 +5,7 @@ import {
     REGISTER_ENTERPRISE_FAILURE,
     LOGIN_SUCCESS,
     LOGIN_FAILURE,
-    TYPE_NEW_USER_EMAIL,
+    CHANGE_NEW_USER_FORM,
     CREATE_NEW_USER_SUCCESS,
     TYPE_PASSWORD_MODEL,
     CHANGE_PASSWORD_SUCCESS,
@@ -65,7 +65,7 @@ export const registerEnterprise = (enterpriseInfo) => {
         return registerEnterpriseRequest(enterpriseInfo).then(
             response => {
                 dispatch(showToastr({
-                    message: '企业创建成功, 请使用企业邮箱登陆, 初始密码QAZ@wsx3, 请尽快修改密码',
+                    message: '企业创建成功, 请使用企业邮箱登录',
                     toastType: 'toast-success',
                     show: true,
                     autoClose: false
@@ -112,12 +112,13 @@ export const loginAction = (email, password) => {
     };
 };
 
-export const typeUserEmail = (email) => {
+export const changeCreateUserForm = (key, value) => {
     return {
-        type: TYPE_NEW_USER_EMAIL,
-        email: email
-    };
-};
+        type: CHANGE_NEW_USER_FORM,
+        keyName: key,
+        value: value
+    }
+}
 
 export const submitCreateUserSuccess = () => {
     return {
@@ -126,7 +127,7 @@ export const submitCreateUserSuccess = () => {
 };
 
 const submitCreateUserRequest = (user) => {
-    return $.post(HOST + 'api/Account/User', user);
+    return $.post(HOST + 'api/Account/User', {email: user.email.value, password: user.password.value});
 };
 
 export const submitCreateUser = (user) => {
@@ -136,10 +137,10 @@ export const submitCreateUser = (user) => {
             res => {
                 dispatch(showSpinner(false));
                 dispatch(showToastr({
-                    message: '用户创建成功, 初始密码QAZ@wsx3, 请尽快修改密码',
+                    message: '用户创建成功',
                     toastType: 'toast-success',
                     show: true,
-                    autoClose: false
+                    autoClose: true
                 }));
                 dispatch(submitCreateUserSuccess());
                 dispatch(push('/'));

@@ -32,6 +32,7 @@
 /// <reference path="../client/scripts/filterlist.js" />
 /// <reference path="../client/scripts/formobject.js" />
 /// <reference path="../client/scripts/models/category.js" />
+/// <reference path="../client/scripts/models/createuserform.js" />
 /// <reference path="../client/scripts/models/enterpriseform.js" />
 /// <reference path="../client/scripts/models/filterproperty.js" />
 /// <reference path="../client/scripts/models/myfilterlist.js" />

@@ -24,6 +24,8 @@ class Input extends React.Component {
         onChange={this.changeValue}
         />
         {requiredNotation}
+        <span className='description'>{info.sufix}</span>
+        <span className='error'>{info.labelError}</span>
         {this.props.children}
     </div>
   }
