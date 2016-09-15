@@ -238,7 +238,12 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     //}
                 }
             }
-            catch (Exception ex)
+            catch (BadRequestException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw;
+            }
+            catch(Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
                 throw new BadRequestException("验证码发送失败");
