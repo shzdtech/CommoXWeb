@@ -271,5 +271,18 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             _enterpriseManager.UpdateEnterpriseState(id, state);
         }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        [Authorize]
+        public async Task<EnterpriseInfo> GetEnterpriseId(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user.EnterpriseId != id)
+            {
+                throw new ForbiddenException("您没有权限获取该企业信息");
+            }
+            return _enterpriseManager.QueryEnterpriseInfo(id);
+        }
     }
 }

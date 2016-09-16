@@ -5,6 +5,10 @@ import Spinner from './Common/Spinner';
 import Toastr from './Common/Toastr';
 
 class Header extends React.Component {
+    componentDidMount(){
+        this.props.checkEnterpriseAuthenticated();
+    }
+
     render() {
         const userPanel = () => {
             if (this.props.userInfo && this.props.userInfo.userName) {

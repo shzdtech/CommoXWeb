@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { push } from 'react-router-redux';
-import {signOut} from '../Actions/AccountActions';
+import {signOut, checkEnterpriseAuthenticated} from '../Actions/AccountActions';
 import {makeChain} from '../Actions/ChainActions';
 import {hideToastr} from '../Actions/CommonActions';
 
@@ -31,6 +31,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         hideToastr: () => {
             dispatch(hideToastr());
+        },
+        checkEnterpriseAuthenticated: () => {
+            dispatch(checkEnterpriseAuthenticated());
         }
     };
 };

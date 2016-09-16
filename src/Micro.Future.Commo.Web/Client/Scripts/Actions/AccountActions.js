@@ -15,7 +15,8 @@ import {
     UPDATE_ENTERPRISE_FAILURE,
     GET_UNAUTHED_ENTERPRISE_SUCCESS,
     AUTHENTICATE_ENTERPRISE_SUCCESS,
-    GET_VERFICATION_CODE_SUCCESS
+    GET_VERFICATION_CODE_SUCCESS,
+    NO_NEED_ROUTE
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -104,6 +105,14 @@ export const loginAction = (email, password) => {
     return dispatch => {
         loginRequest(email, password).then(
             userInfo => {
+                if (userInfo.enterpriseId > 0 && !userInfo.enterpriseAuthenticated) {
+                    dispatch(showToastr({
+                        message: '企业未认证，请及时提交认证信息，否则将无法提交需求',
+                        toastType: 'toast-warning',
+                        show: true,
+                        autoClose: false
+                    }));
+                }
                 dispatch(loginSuccess(userInfo));
                 dispatch(push('/'));
             },
@@ -127,7 +136,7 @@ export const submitCreateUserSuccess = () => {
 };
 
 const submitCreateUserRequest = (user) => {
-    return $.post(HOST + 'api/Account/User', {email: user.email.value, password: user.password.value});
+    return $.post(HOST + 'api/Account/User', { email: user.email.value, password: user.password.value });
 };
 
 export const submitCreateUser = (user) => {
@@ -325,7 +334,7 @@ const getVerficationCodeRequest = (email) => {
     return $.get(HOST + 'api/Enterprise/Email/VerifyCode?phoneOrEmail=' + email);
 };
 
-const getVerficationCodeSuccess = ()=>{
+const getVerficationCodeSuccess = () => {
     return {
         type: GET_VERFICATION_CODE_SUCCESS
     };
@@ -351,4 +360,39 @@ export const getVerficationCode = (email) => {
             }
         );
     };
+}
+
+const getEnterpriseRequest = (enterpriseId) => {
+    return $.get(HOST + 'api/Enterprise/' + enterpriseId);
+};
+
+export const checkEnterpriseAuthenticated = () => {
+    let userInfo = auth.getUserInfo();
+    if (userInfo && !userInfo.enterpriseAuthenticated && userInfo.enterpriseId > 0) {
+        return (dispatch) => {
+            return getEnterpriseRequest(userInfo.enterpriseId).then(
+                enterpriseInfo => {
+                    if (enterpriseInfo.enterpriseAuthenticated) {
+                        userInfo.enterpriseAuthenticated = true;
+                        auth.setUserInfo(userInfo);
+                    } else if(userInfo.enterpriseId > 0){
+                        dispatch(showToastr({
+                            message: '企业未认证，请及时提交认证信息，否则将无法提交需求',
+                            toastType: 'toast-warning',
+                            show: true,
+                            autoClose: false
+                        }));
+                    }
+                    dispatch(getVerficationCodeSuccess());
+                },
+                error => {
+                    ajaxError(dispatch, error);
+                }
+            );
+        };
+    }else{
+        return {
+            type: NO_NEED_ROUTE
+        };
+    }
 }

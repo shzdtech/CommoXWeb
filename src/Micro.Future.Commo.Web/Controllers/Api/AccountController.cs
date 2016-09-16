@@ -12,6 +12,7 @@ using Micro.Future.Commo.Web.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Micro.Future.Commo.Web.Exceptions;
+using Micro.Future.Commo.Business.Abstraction.BizInterface;
 
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
@@ -24,6 +25,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IEnterpriseManager _enterpriseManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -31,6 +33,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            IEnterpriseManager enterpriseManager,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
@@ -38,6 +41,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             _roleManager = roleManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _enterpriseManager = enterpriseManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -55,7 +59,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     var roles = await _userManager.GetRolesAsync(user);
-                    return new UserInfo(user, roles.ToList());
+                    var userInfo = new UserInfo(user, roles.ToList());
+                    if (userInfo.EnterpriseId > 0)
+                    {
+                        var enterprise = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
+                        userInfo.EnterpriseAuthenticated = enterprise.EnterpriseState == Business.Abstraction.BizObject.EnterpriseStateType.APPROVED;
+                    }
+                    return userInfo;
                 }
             }
             throw new BadRequestException("用户名或密码不正确");
