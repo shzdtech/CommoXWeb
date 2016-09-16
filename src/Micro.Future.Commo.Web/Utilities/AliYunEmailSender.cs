@@ -15,7 +15,8 @@ namespace Micro.Future.Commo.Web.Utilities
     public enum MailTemplate
     {
         Register = 1,
-        ForgotPassword = 2
+        ForgotPassword = 2,
+        ChainConfirmed = 3
     }
 
 

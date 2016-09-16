@@ -13,10 +13,10 @@ class Register extends React.Component {
         let disabled = false;
         let errorCount = 0;
         const {enterpriseInfo, onChangeEnterpriseForm, onSubmitEnterpriseForm, getVerficationCode} = this.props;
-        if(enterpriseInfo['password'].value !== enterpriseInfo['confirmPassword'].value){
+        if(enterpriseInfo['password'] && enterpriseInfo['confirmPassword'] && enterpriseInfo['password'].value !== enterpriseInfo['confirmPassword'].value){
             enterpriseInfo['confirmPassword'].labelError = '密码不一致';
             errorCount++;
-        }else{
+        }else if(enterpriseInfo['confirmPassword']){
              enterpriseInfo['confirmPassword'].labelError = null;
         }
 

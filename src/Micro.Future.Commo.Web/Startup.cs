@@ -106,7 +106,8 @@ namespace Micro.Future.Commo.Web
                    MailTemplates = new Dictionary<MailTemplate, string>()
                    {
                         { MailTemplate.Register, Configuration["Email:Template:Register"] },
-                        { MailTemplate.ForgotPassword, Configuration["Email:Template:ForgotPassword"] }
+                        { MailTemplate.ForgotPassword, Configuration["Email:Template:ForgotPassword"] },
+                        { MailTemplate.ChainConfirmed, Configuration["Email:Template:ChainConfirmed"] }
                    }
                }));
 

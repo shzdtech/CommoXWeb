@@ -107,7 +107,7 @@ export const loginAction = (email, password) => {
             userInfo => {
                 if (userInfo.enterpriseId > 0 && !userInfo.enterpriseAuthenticated) {
                     dispatch(showToastr({
-                        message: '企业未认证，请及时提交认证信息，否则将无法提交需求',
+                        message: '企业未认证通过，请及时提交认证信息，否则将无法提交需求',
                         toastType: 'toast-warning',
                         show: true,
                         autoClose: false
@@ -377,7 +377,7 @@ export const checkEnterpriseAuthenticated = () => {
                         auth.setUserInfo(userInfo);
                     } else if(userInfo.enterpriseId > 0){
                         dispatch(showToastr({
-                            message: '企业未认证，请及时提交认证信息，否则将无法提交需求',
+                            message: '企业未认证通过，请及时提交认证信息，否则将无法提交需求',
                             toastType: 'toast-warning',
                             show: true,
                             autoClose: false
