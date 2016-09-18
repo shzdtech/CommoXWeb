@@ -64,7 +64,7 @@ class FomrConfirmation extends React.Component {
                                     </div> : null;
                             } else {
 
-                                let values = r.items.filter((item) => { return item.selected; }).map((i) => { return i.value; });
+                                let values = r.items.filter((item) => { return item.selected; }).map((i) => { return i.name; });
                                 return values.length > 0 ? <div key={r.id} className='form-item'>
                                     <span className='form-item-title'>{r.title}</span>
                                     <span className='form-item-value'>{values}</span>
