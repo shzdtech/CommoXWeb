@@ -60,26 +60,27 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpPost]
         [Route("{id:int}/Status/{status:int}")]
         [Authorize(Roles = "Admin")]
-        public void ChangeChainStatus(int id, ChainStatusType status)
+        public async Task ChangeChainStatus(int id, ChainStatusType status)
         {
-            
+            var user = await _GetUser();
             if (status == ChainStatusType.OPEN)
             {
-                _chainManager.LockChain(id);
+                _chainManager.LockChain(user.Id, id);
             }
             else if (status == ChainStatusType.LOCKED)
             {
                 int tradeId;
-                _chainManager.ComfirmChain(id, out tradeId);
+                _chainManager.ComfirmChain(user.Id, id, out tradeId);
             }
         }
 
         [HttpPost]
         [Route("{id:int}/Unlock")]
         [Authorize(Roles = "Admin")]
-        public void UnlockChain(int id)
+        public async Task UnlockChain(int id)
         {
-            _chainManager.UnlockChain(id);
+            var user = await _GetUser();
+            _chainManager.UnlockChain(user.Id, id);
         }
 
         [HttpPost]

@@ -31,5 +31,11 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             _userManager = userManager;
         }
+
+        protected async Task<ApplicationUser> _GetUser()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return user;
+        }
     }
 }
