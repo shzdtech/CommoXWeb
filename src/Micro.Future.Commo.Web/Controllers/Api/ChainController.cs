@@ -1,5 +1,7 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Services;
+using Micro.Future.Commo.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +20,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private IRequirementManager _requirementManager;
         private IChainManager _chainManager;
         private IMatchMakerManager _matchMakerManger;
+        private IEnterpriseManager _enterpriseManager = null;
+        private readonly IEmailSender _emailSender;
 
-        public ChainController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager, IMatchMakerManager matchMakerManger)
+        public ChainController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager, IMatchMakerManager matchMakerManger, IEnterpriseManager enterpriseManager, IEmailSender emailSender)
             :base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;
             _matchMakerManger = matchMakerManger;
+            _enterpriseManager = enterpriseManager;
+            _emailSender = emailSender;
         }
 
         //[HttpPost]
@@ -63,15 +69,45 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public async Task ChangeChainStatus(int id, ChainStatusType status)
         {
             var user = await _GetUser();
+            bool updateSuccess = false;
             if (status == ChainStatusType.OPEN)
             {
-                _chainManager.LockChain(user.Id, id);
+                updateSuccess = _chainManager.LockChain(user.Id, id);
             }
             else if (status == ChainStatusType.LOCKED)
             {
                 int tradeId;
-                _chainManager.ComfirmChain(user.Id, id, out tradeId);
+                updateSuccess = _chainManager.ComfirmChain(user.Id, id, out tradeId);
             }
+
+            if(updateSuccess)
+            {
+                SendChainMessage(id, status);
+            }
+        }
+
+        private void SendChainMessage(int chainId, ChainStatusType status)
+        {
+            var chainInfo = _chainManager.GetChainInfo(chainId);
+            if (chainInfo != null && chainInfo.Requirements != null && chainInfo.Requirements.Count > 0)
+            {
+                foreach (var requirement in chainInfo.Requirements)
+                {
+                    var enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(requirement.EnterpriseId);
+                    if (enterpriseInfo != null && string.IsNullOrWhiteSpace(enterpriseInfo.EmailAddress))
+                    {
+                        SendChainOperateMail(status, chainInfo, requirement, enterpriseInfo);
+                    }
+                }
+            }
+        }
+
+        private void SendChainOperateMail(ChainStatusType status, RequirementChainInfo chainInfo, RequirementInfo requirement, EnterpriseInfo enterpriseInfo)
+        {
+            bool isConfirm = status == ChainStatusType.CONFIRMED ? true : false;
+            string subject = isConfirm ? "撮合链确认邮件" : "撮合链锁定右键";
+            MailTemplate template = isConfirm ? MailTemplate.ChainConfirmed : MailTemplate.ChainLocked;
+            _emailSender.SendSingleEmailAsync(enterpriseInfo.EmailAddress, subject, template);
         }
 
         [HttpPost]

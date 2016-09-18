@@ -16,7 +16,8 @@ namespace Micro.Future.Commo.Web.Utilities
     {
         Register = 1,
         ForgotPassword = 2,
-        ChainConfirmed = 3
+        ChainConfirmed = 3,
+        ChainLocked = 4
     }
 
 

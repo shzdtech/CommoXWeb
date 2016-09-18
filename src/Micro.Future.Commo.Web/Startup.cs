@@ -107,7 +107,8 @@ namespace Micro.Future.Commo.Web
                    {
                         { MailTemplate.Register, Configuration["Email:Template:Register"] },
                         { MailTemplate.ForgotPassword, Configuration["Email:Template:ForgotPassword"] },
-                        { MailTemplate.ChainConfirmed, Configuration["Email:Template:ChainConfirmed"] }
+                        { MailTemplate.ChainConfirmed, Configuration["Email:Template:ChainConfirmed"] },
+                       { MailTemplate.ChainLocked, Configuration["Email:Template:ChainLocked"] }
                    }
                }));
 
