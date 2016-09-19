@@ -5,6 +5,7 @@ import updateEnterprise from './updateEnterprise';
 import authEnterprises from './authEnterprises'
 import newUser from './newUser';
 import password from './password';
+import resetPassword from './resetPassword';
 
 const account = combineReducers({
     login,
@@ -12,7 +13,8 @@ const account = combineReducers({
     updateEnterprise,
     authEnterprises,
     newUser,
-    password
+    password,
+    resetPassword
 });
 
 export default account;

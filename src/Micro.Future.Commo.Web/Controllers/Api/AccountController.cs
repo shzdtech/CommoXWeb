@@ -13,12 +13,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Business.Abstraction.BizInterface;
+using Micro.Future.Commo.Web.Utilities;
 
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
     [Route("api/Account")]
     public class AccountController : Controller
     {
+        public const int CODESEND_TIMEOUT = 5000;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -26,6 +28,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private readonly ILogger _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEnterpriseManager _enterpriseManager;
+       
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -144,6 +147,71 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 throw new BadRequestException("输入格式不正确");
             }
         }
+
+        [Route("ResetPassword")]
+        [HttpPost]
+        public async Task ResetPassword(ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (!_enterpriseManager.CheckEmailVerifyCode(model.Email, model.VerificationCode))
+                {
+                    throw new BadRequestException("验证码不正确");
+                }
+
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null)
+                {
+                    throw new BadRequestException("用户不存在");
+                }
+                await _userManager.RemovePasswordAsync(user);
+                var result = await _userManager.AddPasswordAsync(user, model.Password);
+                if (!result.Succeeded)
+                {
+                    throw new BadRequestException("密码复杂度不符合规范");
+                }
+            }
+            else
+            {
+                throw new BadRequestException("输入格式不正确");
+            }
+        }
+
+        [HttpGet]
+        [Route("Email/VerifyCode")]
+        public void VerifyCode(string phoneOrEmail)
+        {
+            try
+            {
+                bool isEmail = phoneOrEmail.Contains("@");
+                if (isEmail)
+                {
+                    if (_enterpriseManager.HasExceedLimitationPerDay(phoneOrEmail))
+                    {
+                        throw new BadRequestException("验证码发送超过当日限制");
+                    }
+                    else if (_enterpriseManager.CanResend(phoneOrEmail))
+                    {
+                        var sendTask = _emailSender.SendSingleEmailAsync(phoneOrEmail, "重置密码", MailTemplate.ForgotPassword);
+                        if (sendTask.Wait(CODESEND_TIMEOUT))
+                        {
+                            _enterpriseManager.SaveEmailVerifyCode(sendTask.Result.RequestId, phoneOrEmail, sendTask.Result.VerifyCode, sendTask.Result.SendTime);
+                        }
+                    }
+                }
+            }
+            catch (BadRequestException ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                throw new BadRequestException("验证码发送失败");
+            }
+        }
+
 
         [Route("SignOut")]
         [HttpPost]

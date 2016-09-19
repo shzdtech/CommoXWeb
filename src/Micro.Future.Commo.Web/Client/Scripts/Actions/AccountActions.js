@@ -9,6 +9,7 @@ import {
     CREATE_NEW_USER_SUCCESS,
     TYPE_PASSWORD_MODEL,
     CHANGE_PASSWORD_SUCCESS,
+    CHANGE_RESET_PASSWORD_FORM,
     SIGN_OUT_SUCCESS,
     UPDATE_ENTERPRISE_FORM,
     UPDATE_ENTERPRISE_SUCCESS,
@@ -70,10 +71,10 @@ export const registerEnterprise = (enterpriseInfo) => {
                     message: '企业创建成功, 请使用企业邮箱登录',
                     toastType: 'toast-success',
                     show: true,
-                    autoClose: false
+                    autoClose: ftrue
                 }));
                 dispatch(resigterEnterpriseSuccess(response));
-                dispatch(push('/requirements'));
+                dispatch(push('/'));
             },
             error => ajaxError(dispatch, error)
         );
@@ -413,6 +414,79 @@ export const getEnterprise = () => {
                 dispatch(getEnterpriseSuccess(enterpriseInfo));
             },
             error => {
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}
+
+
+export const changeResetPasswordForm = (keyName, value) => {
+    return {
+        type: CHANGE_RESET_PASSWORD_FORM,
+        keyName: keyName,
+        value: value
+    };
+};
+
+
+const resetPasswordRequest = (form) => {
+    var model = {};
+    for (var key in form) {
+        if (form[key].value === undefined) {
+            model[key] = null;
+        } else {
+            model[key] = form[key].value;
+        }
+    }
+
+    const request = $.post(HOST + 'api/Account/ResetPassword', model);
+    return request;
+};
+
+export const resetPassword = (form) => {
+    return (dispatch) => {
+        return resetPasswordRequest(form).then(
+            response => {
+                dispatch(showToastr({
+                    message: '密码重设成功, 请登录',
+                    toastType: 'toast-success',
+                    show: true,
+                    autoClose: true
+                }));
+                dispatch(push('/login'));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+}
+
+const getResetPasswordVerficationCodeRequest = (email) => {
+    return $.get(HOST + 'api/Account/Email/VerifyCode?phoneOrEmail=' + email);
+};
+
+const getResetPasswordVerficationCodeSuccess = () => {
+    return {
+        type: GET_VERFICATION_CODE_SUCCESS
+    };
+};
+
+export const getResetPasswordVerficationCode = (email) => {
+    return (dispatch) => {
+        dispatch(showSpinner(true));
+        return getResetPasswordVerficationCodeRequest(email).then(
+            res => {
+                dispatch(showSpinner(false));
+                dispatch(showToastr({
+                    message: '验证码已发送',
+                    toastType: 'toast-success',
+                    show: false,
+                    autoClose: false
+                }));
+                dispatch(getResetPasswordVerficationCodeSuccess());
+            },
+            error => {
+                dispatch(showSpinner(false));
                 ajaxError(dispatch, error);
             }
         );

@@ -116,6 +116,10 @@
         .no-account {
             text-align: right;
             color: $normal-font-color;
+
+            &>a:first-child{
+                float: left;
+            }
         }
     }
 }
@@ -158,6 +162,13 @@
     }
 
     .change-password-operators {
+        margin-top: 20px;
+        text-align: center;
+    }
+}
+
+.reset-password-container{
+    .reset-password-operators {
         margin-top: 20px;
         text-align: center;
     }
