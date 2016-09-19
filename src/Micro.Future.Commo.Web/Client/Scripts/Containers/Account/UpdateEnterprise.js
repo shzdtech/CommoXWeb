@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Register from '../../Components/Account/Register';
-import {updateEnterpriseInfo, updateEnterprise} from '../../Actions/AccountActions';
+import {updateEnterpriseInfo, updateEnterprise, getEnterprise} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSubmitEnterpriseForm: (enterpriseInfo) => {
             dispatch(updateEnterprise(enterpriseInfo));
+        },
+        componentRendered: () => {
+            dispatch(getEnterprise());
         }
     };
 };

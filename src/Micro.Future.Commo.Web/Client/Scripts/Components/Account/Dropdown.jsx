@@ -11,14 +11,6 @@ class Dropdown extends React.Component {
 
     render() {
         const {info} = this.props;
-        let selectedLabel = '请选择...';
-        info.options.forEach((o) => {
-            if (info.value === o.value) {
-                selectedLabel = o.label;
-                console.log(o.label);
-                return true;
-            }
-        })
         let requiredNotation = null;
         if (info.isRequired) {
             requiredNotation = <span className="required"></span>;

@@ -8,6 +8,10 @@ class Register extends React.Component {
         super();
     }
 
+    componentDidMount(){
+            this.props.componentRendered && this.props.componentRendered();
+    }
+
     render() {
         let list = [];
         let disabled = false;

@@ -9,24 +9,36 @@ class Input extends React.Component {
   render() {
     const {info} = this.props;
     let requiredNotation = null;
-    if(info.isRequired){
+    if (info.isRequired) {
       requiredNotation = <span className="required"></span>;
     }
-    return <div className='input-container'>
-      <label className="input_label" htmlFor={info.label}>
-        <span className="label_text">{info.label}</span>
-      </label>
-      <input
+    let input =  <input
         type={info.type}
         placeholder={info.placeholder}
         value={info.value}
         className={ 'form-control'}
         onChange={this.changeValue}
+        files={info.file}
         />
-        {requiredNotation}
-        <span className='description'>{info.sufix}</span>
-        <span className='error'>{info.labelError}</span>
-        {this.props.children}
+    if (info.type === 'file') {
+      input = <input
+        type={info.type}
+        placeholder={info.placeholder}
+        className={ 'form-control'}
+        onChange={this.changeValue}
+        files={info.file}
+        />
+    }
+
+    return <div className='input-container'>
+      <label className="input_label" htmlFor={info.label}>
+        <span className="label_text">{info.label}</span>
+      </label>
+      {input}
+      {requiredNotation}
+      <span className='description'>{info.sufix}</span>
+      <span className='error'>{info.labelError}</span>
+      {this.props.children}
     </div>
   }
 

@@ -16,6 +16,7 @@ import {
     GET_UNAUTHED_ENTERPRISE_SUCCESS,
     AUTHENTICATE_ENTERPRISE_SUCCESS,
     GET_VERFICATION_CODE_SUCCESS,
+    GET_ENTERPRISE_SUCCESS,
     NO_NEED_ROUTE
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
@@ -375,7 +376,7 @@ export const checkEnterpriseAuthenticated = () => {
                     if (enterpriseInfo.enterpriseAuthenticated) {
                         userInfo.enterpriseAuthenticated = true;
                         auth.setUserInfo(userInfo);
-                    } else if(userInfo.enterpriseId > 0){
+                    } else if (userInfo.enterpriseId > 0) {
                         dispatch(showToastr({
                             message: '企业未认证通过，请及时提交认证信息，否则将无法提交需求',
                             toastType: 'toast-warning',
@@ -390,9 +391,30 @@ export const checkEnterpriseAuthenticated = () => {
                 }
             );
         };
-    }else{
+    } else {
         return {
             type: NO_NEED_ROUTE
         };
     }
+}
+
+const getEnterpriseSuccess = (enterpriseInfo) => {
+    return {
+        type: GET_ENTERPRISE_SUCCESS,
+        enterpriseInfo: enterpriseInfo
+    }
+}
+
+export const getEnterprise = () => {
+    return (dispatch) => {
+        let userInfo = auth.getUserInfo();
+        return getEnterpriseRequest(userInfo.enterpriseId).then(
+            enterpriseInfo => {
+                dispatch(getEnterpriseSuccess(enterpriseInfo));
+            },
+            error => {
+                ajaxError(dispatch, error);
+            }
+        );
+    };
 }
