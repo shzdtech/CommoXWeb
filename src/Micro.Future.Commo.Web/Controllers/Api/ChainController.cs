@@ -82,32 +82,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
             if (updateSuccess)
             {
-                SendChainMessage(id, status);
+                _SendChainMessage(id, status);
             }
-        }
-
-        private void SendChainMessage(int chainId, ChainStatusType status)
-        {
-            var chainInfo = _chainManager.GetChainInfo(chainId);
-            if (chainInfo != null && chainInfo.Requirements != null && chainInfo.Requirements.Count > 0)
-            {
-                foreach (var requirement in chainInfo.Requirements)
-                {
-                    var enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(requirement.EnterpriseId);
-                    if (enterpriseInfo != null && string.IsNullOrWhiteSpace(enterpriseInfo.EmailAddress))
-                    {
-                        SendChainOperateMail(status, chainInfo, requirement, enterpriseInfo);
-                    }
-                }
-            }
-        }
-
-        private void SendChainOperateMail(ChainStatusType status, RequirementChainInfo chainInfo, RequirementInfo requirement, EnterpriseInfo enterpriseInfo)
-        {
-            bool isConfirm = status == ChainStatusType.CONFIRMED ? true : false;
-            string subject = isConfirm ? "撮合链确认邮件" : "撮合链锁定右键";
-            MailTemplate template = isConfirm ? MailTemplate.ChainConfirmed : MailTemplate.ChainLocked;
-            _emailSender.SendSingleEmailAsync(enterpriseInfo.EmailAddress, subject, template);
         }
 
         [HttpPost]
@@ -147,5 +123,33 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             _chainManager.ReplaceRequirementsForChain(id, new List<int>() { 0 }, new List<int>() { requirementId });
         }
+
+        #region Private
+
+        private void _SendChainMessage(int chainId, ChainStatusType status)
+        {
+            var chainInfo = _chainManager.GetChainInfo(chainId);
+            if (chainInfo != null && chainInfo.Requirements != null && chainInfo.Requirements.Count > 0)
+            {
+                foreach (var requirement in chainInfo.Requirements)
+                {
+                    var enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(requirement.EnterpriseId);
+                    if (enterpriseInfo != null && string.IsNullOrWhiteSpace(enterpriseInfo.EmailAddress))
+                    {
+                        _SendChainOperateMail(status, chainInfo, requirement, enterpriseInfo);
+                    }
+                }
+            }
+        }
+
+        private void _SendChainOperateMail(ChainStatusType status, RequirementChainInfo chainInfo, RequirementInfo requirement, EnterpriseInfo enterpriseInfo)
+        {
+            bool isConfirm = status == ChainStatusType.CONFIRMED ? true : false;
+            string subject = isConfirm ? "撮合链确认邮件" : "撮合链锁定右键";
+            MailTemplate template = isConfirm ? MailTemplate.ChainConfirmed : MailTemplate.ChainLocked;
+            _emailSender.SendSingleEmailAsync(enterpriseInfo.EmailAddress, subject, template);
+        }
+
+        #endregion
     }
 }
