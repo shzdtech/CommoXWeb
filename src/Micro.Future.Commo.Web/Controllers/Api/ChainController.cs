@@ -24,7 +24,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         private readonly IEmailSender _emailSender;
 
         public ChainController(UserManager<Models.ApplicationUser> userManager, IRequirementManager requirementManager, IChainManager chainManager, IMatchMakerManager matchMakerManger, IEnterpriseManager enterpriseManager, IEmailSender emailSender)
-            :base(userManager)
+            : base(userManager)
         {
             _requirementManager = requirementManager;
             _chainManager = chainManager;
@@ -80,7 +80,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 updateSuccess = _chainManager.ComfirmChain(user.Id, id, out tradeId);
             }
 
-            if(updateSuccess)
+            if (updateSuccess)
             {
                 SendChainMessage(id, status);
             }
@@ -125,6 +125,27 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public void MakeChain()
         {
             _matchMakerManger.Make();
+        }
+
+        [HttpGet]
+        [Route("{id:int}/Requirment/{index:int}/Replacement")]
+        public IEnumerable<Models.RequirementInfo> GetReplacement(int id, int index)
+        {
+            var result = _chainManager.FindReplacedRequirementsForChain(id, index);
+            var requirements = new List<Models.RequirementInfo>();
+            if (requirements != null)
+            {
+                requirements = result.Select(r => new Models.RequirementInfo(r)).ToList();
+            }
+
+            return requirements;
+        }
+
+        [HttpPost]
+        [Route("{id:int}/Requirment/{requirementId:int}")]
+        public void ReplaceRequirement(int id, int requirementId)
+        {
+            _chainManager.ReplaceRequirementsForChain(id, new List<int>() { 0 }, new List<int>() { requirementId });
         }
     }
 }

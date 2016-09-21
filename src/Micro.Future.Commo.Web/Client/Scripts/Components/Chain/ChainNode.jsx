@@ -9,7 +9,7 @@ class ChainNode extends React.Component {
     }
 
     render() {
-        let {requirement, chain} = this.props;
+        let {requirement, chain, index} = this.props;
         let {requirementId,
             enterpriseId,
             enterpriseName,
@@ -33,14 +33,20 @@ class ChainNode extends React.Component {
             invoiceTransferMode,
             accept
         } = requirement;
-        
+
         let isMyRequest = false;//temp, will remove if not used in the future
         let operators = null;
         let operatorsOverlay = null;
-        if (isMyRequest && !chain.reject && !accept) {
+        // if (isMyRequest && !chain.reject && !accept) {
+        //     operators = <div className='operators'>
+        //         <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, true) }>确认</span>
+        //         <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, false) }>拒绝</span>
+        //     </div>
+        //     operatorsOverlay = <div className='operators-overlay'></div>
+        // }
+        if (chain.chainStatus === 1) {
             operators = <div className='operators'>
-                <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, true) }>确认</span>
-                <span className='btn btn-large' onClick={() => this.confirmChain(chain.chainId, requirementId, false) }>拒绝</span>
+                <span className='btn btn-large' onClick={() => this.props.getRequirementReplacement(chain.chainId, index) }>替换</span>
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }

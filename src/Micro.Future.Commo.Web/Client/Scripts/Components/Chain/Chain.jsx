@@ -8,7 +8,7 @@ class Chain extends React.Component {
     }
 
     render() {
-        let {chain, confirmChain, manageChain, unlockChain} = this.props;
+        let {chain, confirmChain, manageChain, unlockChain, getRequirementReplacement} = this.props;
 
         let className = 'chain';
         let text = '锁定';
@@ -33,19 +33,21 @@ class Chain extends React.Component {
                 <span className='btn btn-large' onClick={() => manageChain(chain) }>{text}</span>
                 {chain.chainStatus === 1 ? <span className='btn btn-large' onClick={() => unlockChain(chain) }>解除锁定</span> : null}
             </div>
-            operatorsOverlay = <div className='operators-overlay'></div>
+          //  operatorsOverlay = <div className='operators-overlay'></div>
         }
 
         return <div className={className}>
             {operators}
             {operatorsOverlay}
             {
-                this.props.chain.requirements.map((requirement) => {
+                this.props.chain.requirements.map((requirement, index) => {
                     return <ChainNode key={requirement.requirementId}
                         chainId={chain.chainId}
                         chain={chain}
                         requirement={requirement}
-                        confirmChain={confirmChain} />;
+                        confirmChain={confirmChain}
+                        getRequirementReplacement={getRequirementReplacement}
+                        index={index} />;
                 })
             }
         </div>;

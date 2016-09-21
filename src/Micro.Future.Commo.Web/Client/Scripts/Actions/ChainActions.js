@@ -6,7 +6,8 @@ import {
     SELECT_CHAIN_TYPE,
     CHANGE_CHAIN_STATUS_SUCCESS,
     CHANGE_CHAIN_STATUS_FAILURE,
-    UNLOCK_CHAIN_SUCCESS
+    UNLOCK_CHAIN_SUCCESS,
+    GET_REQUIREMENT_REPLACEMENT_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -157,3 +158,27 @@ export const unlockChain = (chain) => {
         );
     }
 };
+
+const getRequirementReplacementReq = (chainId, index) => {
+    const request = $.get(HOST + 'api/chain/' + chainId + '/Requirment/'+ index +'/Replacement');
+    return request;
+}
+
+const getRequirementReplacementSuccess = (chainId, index, requirements) => {
+    console.log('chainId:'+chainId + ' index:' + index);
+    return {
+        type: GET_REQUIREMENT_REPLACEMENT_SUCCESS,
+        chainId: chainId,
+        index: index,
+        requirements: requirements
+    }
+}
+
+export const getRequirementReplacement = (chainId, index) => {
+    return (dispatch) => {
+        getRequirementReplacementReq(chainId, index).then(
+            requirements => dispatch(getRequirementReplacementSuccess(chainId, index, requirements)),
+            error => ajaxError(dispatch, error)
+        );
+    }
+}
