@@ -46,7 +46,7 @@ class ChainNode extends React.Component {
         // }
         if (chain.chainStatus === 1) {
             operators = <div className='operators'>
-                <span className='btn btn-large' onClick={() => this.props.getRequirementReplacement(chain.chainId, index) }>替换</span>
+                <span className='btn btn-large' onClick={() => this.props.getRequirementReplacement(chain.chainId, index, requirementId) }>替换</span>
             </div>
             operatorsOverlay = <div className='operators-overlay'></div>
         }

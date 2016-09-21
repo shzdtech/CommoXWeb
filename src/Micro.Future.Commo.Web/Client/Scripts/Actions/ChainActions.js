@@ -7,7 +7,10 @@ import {
     CHANGE_CHAIN_STATUS_SUCCESS,
     CHANGE_CHAIN_STATUS_FAILURE,
     UNLOCK_CHAIN_SUCCESS,
-    GET_REQUIREMENT_REPLACEMENT_SUCCESS
+    GET_REQUIREMENT_REPLACEMENT_SUCCESS,
+    CANCEL_REPLACE_REQUIREMENT,
+    COMPLETE_REPLACE_REQUIREMENT,
+    REPLACE_REQUIREMENT_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -160,24 +163,63 @@ export const unlockChain = (chain) => {
 };
 
 const getRequirementReplacementReq = (chainId, index) => {
-    const request = $.get(HOST + 'api/chain/' + chainId + '/Requirment/'+ index +'/Replacement');
+    const request = $.get(HOST + 'api/chain/' + chainId + '/Requirment/' + index + '/Replacement');
     return request;
 }
 
-const getRequirementReplacementSuccess = (chainId, index, requirements) => {
-    console.log('chainId:'+chainId + ' index:' + index);
+const getRequirementReplacementSuccess = (chainId, index, requirementId, requirements) => {
+    console.log('chainId:' + chainId + ' index:' + index);
     return {
         type: GET_REQUIREMENT_REPLACEMENT_SUCCESS,
         chainId: chainId,
         index: index,
+        requirementId: requirementId,
         requirements: requirements
     }
 }
 
-export const getRequirementReplacement = (chainId, index) => {
+export const getRequirementReplacement = (chainId, index, requirementId) => {
     return (dispatch) => {
         getRequirementReplacementReq(chainId, index).then(
-            requirements => dispatch(getRequirementReplacementSuccess(chainId, index, requirements)),
+            requirements => dispatch(getRequirementReplacementSuccess(chainId, index, requirementId, requirements)),
+            error => ajaxError(dispatch, error)
+        );
+    }
+}
+
+export const cancelReplaceRequirement = () => {
+    return {
+        type: CANCEL_REPLACE_REQUIREMENT
+    }
+}
+
+export const completeReplaceRequirement = () => {
+    return {
+        type: COMPLETE_REPLACE_REQUIREMENT
+    }
+}
+
+const replaceRequirementReq = (chainId, index, requirementId) => {
+    const request = $.post(HOST + 'api/chain/' + chainId + '/Index/' + index + '/NewRequirment/' + requirementId);
+    return request;
+}
+
+const replaceRequirementSuccess = (chainId, index, requirement) => {
+    return {
+        type: REPLACE_REQUIREMENT_SUCCESS,
+        index: index,
+        requirement: requirement,
+        chainId: chainId
+    }
+}
+
+export const replaceRequirementAction = (chainId, index, requirement) => {
+    return (dispatch) => {
+        replaceRequirementReq(chainId, index, requirement.requirementId).then(
+            res => {
+                dispatch(completeReplaceRequirement())
+                dispatch(replaceRequirementSuccess(chainId, index, requirement));
+            },
             error => ajaxError(dispatch, error)
         );
     }

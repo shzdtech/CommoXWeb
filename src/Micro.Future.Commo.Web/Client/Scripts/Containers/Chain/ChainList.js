@@ -3,7 +3,7 @@ import ChainList from '../../Components/Chain/ChainList';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        chains: state.chains
+        chains: state.chain.chains
     };
 };
 

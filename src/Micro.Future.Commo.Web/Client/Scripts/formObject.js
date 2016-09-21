@@ -171,7 +171,7 @@ export default {
             type: TEXT
         }, {
             id: 14,
-            title: '企业类型',
+            title: '对方企业类型',
             key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -203,7 +203,7 @@ export default {
             id: 15,
             title: '注册资本',           
             key: 'RegisterCapital',
-            filterProperty: FilterProperty.Rule,
+            filterProperty: FilterProperty.Requirement,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
             items: [{
@@ -224,7 +224,7 @@ export default {
             id: 16,
             title: '注册地',
             key: 'RegisterCity',
-            filterProperty: FilterProperty.Rule,
+            filterProperty: FilterProperty.Requirement,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
             multipleSelection: false,
@@ -344,7 +344,7 @@ export default {
             type: TEXT
         }, {
             id: 10,
-            title: '企业类型',
+            title: '对方企业类型',
             key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,

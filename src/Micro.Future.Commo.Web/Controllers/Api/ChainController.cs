@@ -118,10 +118,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpPost]
-        [Route("{id:int}/Requirment/{requirementId:int}")]
-        public void ReplaceRequirement(int id, int requirementId)
+        [Route("{id:int}/Index/{index:int}/NewRequirment/{requirementId:int}")]
+        public void ReplaceRequirement(int id, int index, int requirementId)
         {
-            _chainManager.ReplaceRequirementsForChain(id, new List<int>() { 0 }, new List<int>() { requirementId });
+            _chainManager.ReplaceRequirementsForChain(id, new List<int>() { index }, new List<int>() { requirementId });
         }
 
         #region Private

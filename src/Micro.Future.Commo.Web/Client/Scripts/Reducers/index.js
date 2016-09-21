@@ -3,9 +3,8 @@ import home from './home';
 import commonFilterList from '../filterList';
 import myFilterList from '../Models/MyFilterList';
 import filters from './filters';
-import chainListManager from './chainListManager';
+import chain from './Chain';
 import filterContentToggled from './filterContentToggled'
-import chains from './chains';
 import forms from './forms';
 import common from './Common';
 import requirements from './requirements';
@@ -17,8 +16,7 @@ const reducers = combineReducers({
     filters: filters(commonFilterList),
     myFilters: filters(myFilterList),
     filterContentToggled,
-    chains,
-    chainListManager,
+    chain,
     requirements,
     forms,
     account,

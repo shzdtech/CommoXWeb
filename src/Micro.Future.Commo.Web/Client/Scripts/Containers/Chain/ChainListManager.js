@@ -5,13 +5,17 @@ import {selectChainListType,
     confirmChain,
     manageChain,
     unlockChain,
-    getRequirementReplacement} from '../../Actions/ChainActions';
+    getRequirementReplacement,
+    cancelReplaceRequirement,
+    replaceRequirementAction
+} from '../../Actions/ChainActions';
 import ChainListManager from '../../Components/Chain/ChainListManager';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        formItem: state.chainListManager,
-        chains: state.chains
+        formItem: state.chain.chainListManager,
+        chains: state.chain.chains,
+        replaceRequirement: state.chain.replaceRequirement
     };
 };
 
@@ -25,7 +29,9 @@ const mapDispatchToProps = (dispatch) => {
         confirmChain: (chainId, requirementId, accept) => dispatch(confirmChain(chainId, requirementId, accept)),
         manageChain: (chain) => dispatch(manageChain(chain)),
         unlockChain: (chain) => dispatch(unlockChain(chain)),
-        getRequirementReplacement: (chainId, requirementId) => dispatch(getRequirementReplacement(chainId, requirementId))
+        getRequirementReplacement: (chainId, index, requirementId) => dispatch(getRequirementReplacement(chainId, index, requirementId)),
+        cancelReplaceRequirement: ()=>dispatch(cancelReplaceRequirement()),
+        replaceRequirementAction: (chainId, index, requirement) => dispatch(replaceRequirementAction(chainId, index, requirement))
     };
 };
 

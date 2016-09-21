@@ -1,4 +1,4 @@
-import {SELECT_CHAIN_TYPE} from '../Constants/ActionTypes';
+import {SELECT_CHAIN_TYPE} from '../../Constants/ActionTypes';
 
 let initChainListType = {
     title: '匹配状态',

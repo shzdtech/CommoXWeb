@@ -1,0 +1,62 @@
+.popup-conatainer{
+    position: fixed;
+    top: 70px;
+    left: 25%;
+    width: 50%;
+    z-index: 102;
+    background: $white;
+    padding: 0 10px 20px 10px;
+    height: calc(100vh - 90px);
+
+    .header{
+        background: $white;
+        border-bottom: 1px solid $normal-font-color;
+        padding: 10px;
+        text-align: center;
+        color: $normal-font-color;
+
+        .glyphicon-remove{
+            position: absolute;
+            cursor: pointer;
+            top: 10px;
+            right: 10px;
+
+            &:hover{
+                color: $primary-color;
+            }
+        }
+    }
+
+    .popup-content{
+        height: calc(100% - 40px);
+        overflow-y: auto;
+
+         &::-webkit-scrollbar-track {
+            background: #cccbcb;
+        }
+
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $primary-color-opacity;
+        }
+
+            &::-webkit-scrollbar-thumb:window-inactive {
+                background: $primary-color-opacity;
+            }
+    }
+}
+
+.popup-overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: $normal-font-color;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    z-index: 101;
+}
