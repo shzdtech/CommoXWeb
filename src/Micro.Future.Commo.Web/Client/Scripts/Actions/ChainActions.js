@@ -15,6 +15,7 @@ import {
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import {ajaxError} from './CommonActions';
+import {showSpinner} from '../Actions';
 
 
 //chain actions
@@ -180,9 +181,16 @@ const getRequirementReplacementSuccess = (chainId, index, requirementId, require
 
 export const getRequirementReplacement = (chainId, index, requirementId) => {
     return (dispatch) => {
+        dispatch(showSpinner(true));
         getRequirementReplacementReq(chainId, index).then(
-            requirements => dispatch(getRequirementReplacementSuccess(chainId, index, requirementId, requirements)),
-            error => ajaxError(dispatch, error)
+            requirements => {
+                dispatch(showSpinner(false));
+                dispatch(getRequirementReplacementSuccess(chainId, index, requirementId, requirements));
+            },
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
         );
     }
 }
