@@ -134,6 +134,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
                     if (!result.Succeeded)
                     {
+                        await _userManager.AddPasswordAsync(user, model.Password);
                         throw new BadRequestException("密码复杂度不符合规范");
                     }
                 }
