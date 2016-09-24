@@ -7,6 +7,9 @@ module.exports = {
     entry: [
         'bootstrap-loader',
         "./Client/Scripts/index.jsx"],
+    parserOptions: {
+        sourceType: 'module'
+    },
     output: {
         filename: "./wwwroot/dist/bundle.js"
     },
