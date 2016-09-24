@@ -30,16 +30,16 @@ class Header extends React.Component {
                         <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,
                         <li key="userInfo">
                             <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
-                             {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
+                                {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
+                                <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>: null}
+                                {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
                                 <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem> : null}
+                                <MenuItem divider />
                                 <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
-                                <MenuItem divider />
-                                <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>
-                                <MenuItem divider />
                                 <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                             </DropdownButton>
                         </li>]
-                }
+        }
             } else {
                 return [
                     <li key="login"><Link to="/login">登录</Link></li>,
