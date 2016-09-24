@@ -64,64 +64,71 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 {
                     throw new BadRequestException("验证码不正确");
                 }
-                EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
-                enterpriseInfo.Name = model.Name;
-                enterpriseInfo.Contacts = model.Contacts;
-                enterpriseInfo.EmailAddress = model.EmailAddress;
-                enterpriseInfo.MobilePhone = model.MobilePhone;
-                enterpriseInfo.Address = model.Address;
-                enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
-                enterpriseInfo.CreateTime = DateTime.Now;
 
-                var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
-                if (!bizResult.HasError && bizResult.Result > 0)
+                var user = new ApplicationUser
                 {
-                    var user = new ApplicationUser
+                    UserName = model.EmailAddress,
+                    PhoneNumber = model.MobilePhone,
+                    Email = model.EmailAddress,
+                    //EnterpriseId = bizResult.Result,
+                    InitialPassword = model.Password
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    string roleName = "Administrator";
+                    var isRoleExists = await _roleManager.RoleExistsAsync(roleName);
+                    if (!isRoleExists)
                     {
-                        UserName = model.EmailAddress,
-                        PhoneNumber = model.MobilePhone,
-                        Email = model.EmailAddress,
-                        EnterpriseId = bizResult.Result,
-                        InitialPassword = model.Password
-                    };
+                        await _roleManager.CreateAsync(new IdentityRole() { Name = roleName });
+                    }
 
-                    var result = await _userManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
+                    await _userManager.AddToRoleAsync(user, roleName);
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User created a new account with password.");
+
+                    EnterpriseInfo enterpriseInfo = new EnterpriseInfo();
+                    enterpriseInfo.Name = model.Name;
+                    enterpriseInfo.Contacts = model.Contacts;
+                    enterpriseInfo.EmailAddress = model.EmailAddress;
+                    enterpriseInfo.MobilePhone = model.MobilePhone;
+                    enterpriseInfo.Address = model.Address;
+                    enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
+                    enterpriseInfo.CreateTime = DateTime.Now;
+
+                    var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
+                    if (!bizResult.HasError && bizResult.Result > 0)
                     {
-                        string roleName = "Administrator";
-                        var isRoleExists = await _roleManager.RoleExistsAsync(roleName);
-                        if (!isRoleExists)
-                        {
-                            await _roleManager.CreateAsync(new IdentityRole() { Name = roleName });
-                        }
+                        ApplicationUser userInfo = await _userManager.FindByEmailAsync(user.Email);
+                        userInfo.EnterpriseId = bizResult.Result;
+                        await _userManager.UpdateAsync(userInfo);
 
-                        await _userManager.AddToRoleAsync(user, roleName);
-
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation(3, "User created a new account with password.");
-                        return enterpriseInfo;
                     }
                     else
                     {
-                        string message = "企业管理员创建失败";
-                        if (result.Errors.Any(e => e.Code == "PasswordTooShort" ||
-                                               e.Code == "PasswordRequiresNonAlphanumeric" ||
-                                               e.Code == "PasswordRequiresLower" ||
-                                               e.Code == "PasswordRequiresUpper"))
-                        {
-                            message = "密码复杂度不足， 密码长度不少于8位，并且包含数字，大小字母写或符号";
-                        }
-                        else if (result.Errors.Any(e => e.Code == "DuplicateUserName"))
-                        {
-                            message = string.Format("邮箱{0}已注册", model.EmailAddress);
-                        }
-
-                        throw new BadRequestException(message);
+                        throw new BadRequestException(bizResult.Error.Message);
                     }
+
+                    return enterpriseInfo;
                 }
                 else
                 {
-                    throw new BadRequestException(bizResult.Error.Message);
+                    string message = "企业管理员创建失败";
+                    if (result.Errors.Any(e => e.Code == "PasswordTooShort" ||
+                                           e.Code == "PasswordRequiresNonAlphanumeric" ||
+                                           e.Code == "PasswordRequiresLower" ||
+                                           e.Code == "PasswordRequiresUpper"))
+                    {
+                        message = "密码复杂度不足， 密码长度不少于8位，并且包含数字，大小字母写或符号";
+                    }
+                    else if (result.Errors.Any(e => e.Code == "DuplicateUserName"))
+                    {
+                        message = string.Format("邮箱{0}已注册", model.EmailAddress);
+                    }
+
+                    throw new BadRequestException(message);
                 }
             }
             throw new BadRequestException("企业注册失败, 请检查输入是否正确");

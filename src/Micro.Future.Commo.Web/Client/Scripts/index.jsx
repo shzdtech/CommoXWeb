@@ -26,6 +26,8 @@ import reducers from './reducers';
 require('signalr');
 import '../Content/site.scss';
 
+$.ajaxSetup({cache:false});
+
 objectAssignPolyfill();
 
 class App extends React.Component{
