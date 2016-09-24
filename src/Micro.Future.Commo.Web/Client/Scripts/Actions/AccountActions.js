@@ -71,7 +71,7 @@ export const registerEnterprise = (enterpriseInfo) => {
                     message: '企业创建成功, 请使用企业邮箱登录',
                     toastType: 'toast-success',
                     show: true,
-                    autoClose: ftrue
+                    autoClose: true
                 }));
                 dispatch(resigterEnterpriseSuccess(response));
                 dispatch(push('/'));

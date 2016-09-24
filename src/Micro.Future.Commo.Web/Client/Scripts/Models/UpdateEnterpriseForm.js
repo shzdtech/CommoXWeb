@@ -60,15 +60,27 @@ export default {
         length: 'short',
         isRequired: true,
         options: [
-            {
-                label: '国有企业',
-                key: '1',
-                value: 1
+        {
+                id: 1,
+                key: '国有企业',
+                value: '1'
             }, {
-                label: '合资企业',
-                key: '2',
-                value: 2
-            }
+                    id: 2,
+                    key: '私有企业',
+                    value: '2'
+                }, {
+                    id: 3,
+                    key: '外商独资',
+                    value: '3'
+                }, {
+                    id: 4,
+                    key: '中外合资',
+                    value: '4'
+                }, {
+                    id: 5,
+                    key: '港澳独资',
+                    value: '5'
+                }
         ]
     },
     businessRange: {
