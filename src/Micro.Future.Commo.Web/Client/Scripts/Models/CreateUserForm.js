@@ -1,10 +1,10 @@
 export default {
     email: {
-        label: '企业登录邮箱',
+        label: '登录邮箱',
         type: 'text',
         legth: 'medium',
         key: 'email',
-        placeholder: '企业邮箱',
+        placeholder: '邮箱',
         isRequired: true
     },
     password: {
