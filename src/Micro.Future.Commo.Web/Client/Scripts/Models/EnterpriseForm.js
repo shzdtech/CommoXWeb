@@ -59,7 +59,7 @@ export default {
         legth: 'medium',
         key: 'password',
         placeholder: '请输入登录密码',
-        sufix: '密码长度不少于8位，并且包含数字，大小字母写或符号',
+        sufix: '建议密码长度不少于8位，并且包含数字，大小字母写或符号',
         isRequired: true
     },
     confirmPassword:{

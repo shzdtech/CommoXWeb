@@ -25,7 +25,7 @@ class ChangePassword extends React.Component {
             return <Input key={l.key} info={l} onChangeForm={this.props.onChangeForm} />
         })
         return <div className='change-password-container'>
-            <div className="instruction">密码长度不少于8位，并且包含数字，大小字母写或符号</div>
+            <div className="instruction">建议密码长度不少于8位，并且包含数字，大小字母写或符号</div>
             {inputs}
             {error}
             <div className='change-password-operators'>

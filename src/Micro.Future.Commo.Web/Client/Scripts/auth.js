@@ -1,17 +1,17 @@
 module.exports = {
     getUserInfo() {
-        return $.parseJSON(localStorage.getItem('userInfo'));
+        return $.parseJSON(sessionStorage.getItem('userInfo'));
     },
 
     loggedIn() {
-        return localStorage.userInfo !== undefined && localStorage.userInfo !== null;
+        return sessionStorage.userInfo !== undefined && sessionStorage.userInfo !== null;
     },
 
     setUserInfo(userInfo) {
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
     },
 
     removeUserInfo(){
-        localStorage.removeItem('userInfo');
+        sessionStorage.removeItem('userInfo');
     }
 }

@@ -61,25 +61,25 @@ export default {
         isRequired: true,
         options: [
         {
-                key: 1,
+                key: '1',
                 label: '国有企业',
-                value: '1'
+                value: 1
             }, {
-                   key: 2,
+                   key: '2',
                     label: '私有企业',
-                    value: '2'
+                    value: 2
                 }, {
-                    key: 3,
+                    key: '3',
                     label: '外商独资',
-                    value: '3'
+                    value: 3
                 }, {
-                    key: 4,
+                    key: '4',
                     label: '中外合资',
-                    value: '4'
+                    value: 4
                 }, {
-                    key: 5,
+                    key: '5',
                     label: '港澳独资',
-                    value: '5'
+                    value: 5
                 }
         ]
     },
