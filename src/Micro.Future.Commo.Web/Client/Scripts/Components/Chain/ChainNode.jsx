@@ -52,9 +52,10 @@ class ChainNode extends React.Component {
         }
 
         return (<div className={!chain.reject && accept ? 'chain-node accept' : 'chain-node'}>
-            {enterpriseId ? <div className='title'><span>企业编号：</span><span>{enterpriseId}</span></div> : null}
             <div className='title'>{enterpriseName}</div>
+            {requirementId ? <div className='title'><span>需求ID: </span><span>{requirementId}</span></div> : null}
             {type ? <div className='title'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销') }</span></div> : null}
+            {enterpriseId ? <div className='sub-title'><span>企业编号：</span><span>{enterpriseId}</span></div> : null}
             {paymentAmount ? <div className='sub-title'><span>资金金额: </span><span>{paymentAmount}</span></div> : null}
             {paymentDateTime ? <div className='sub-title'><span>货款支付时间: </span><span>{paymentDateTime}</span></div> : null}
             {paymentType ? <div className='sub-title'><span>支付方式: </span><span>{paymentType}</span></div> : null}

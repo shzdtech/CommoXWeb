@@ -59,7 +59,7 @@ class Header extends React.Component {
                         </div>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse" aria-expanded="false">
-                        <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="icon-delete"></span></div>
+                        <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span className="icon-delete"></span></div>
                         <ul className='nav navbar-nav navbar-left'>
                             <li><Link to="/">首页</Link></li>
                         </ul>
