@@ -262,3 +262,4 @@ src/Micro.Future.Commo.Web/wwwroot/js/site.min.js
 src/Micro.Future.Commo.Web/89889688147bd7575d6327160d64e760.svg
 src/Micro.Future.Commo.Web/Properties/PublishProfiles/commo.web-publish.ps1
 src/Micro.Future.Commo.Web/Properties/PublishProfiles/publish-module.psm1
+src/Micro.Future.Commo.Web/Properties/PublishProfiles/commoweb-publish.ps1
