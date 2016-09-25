@@ -109,7 +109,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             var result = _chainManager.FindReplacedRequirementsForChain(id, index);
             var requirements = new List<Models.RequirementInfo>();
-            if (requirements != null)
+            if (result != null)
             {
                 requirements = result.Select(r => new Models.RequirementInfo(r)).ToList();
             }

@@ -14,7 +14,7 @@ import {
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
-import {ajaxError} from './CommonActions';
+import {ajaxError, showToastr} from './CommonActions';
 import {showSpinner} from '../Actions';
 
 
@@ -185,7 +185,16 @@ export const getRequirementReplacement = (chainId, index, requirementId) => {
         getRequirementReplacementReq(chainId, index).then(
             requirements => {
                 dispatch(showSpinner(false));
-                dispatch(getRequirementReplacementSuccess(chainId, index, requirementId, requirements));
+                if (requirements.length > 0) {
+                    dispatch(getRequirementReplacementSuccess(chainId, index, requirementId, requirements));
+                } else {
+                    dispatch(showToastr({
+                        message: '未找到可替代的需求，请稍后重试',
+                        toastType: 'toast-info',
+                        show: true,
+                        autoClose: true
+                    }))
+                }
             },
             error => {
                 dispatch(showSpinner(false));
