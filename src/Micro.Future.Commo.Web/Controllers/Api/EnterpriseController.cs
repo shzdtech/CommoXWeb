@@ -131,7 +131,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     throw new BadRequestException(message);
                 }
             }
-            throw new BadRequestException("企业注册失败, 请检查输入是否正确");
+
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToArray();
+            throw new BadRequestException(string.Join("\r\n", allErrors));
         }
 
         [HttpPost]
@@ -196,7 +198,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
             else
             {
-                throw new BadRequestException("输入数据不正确");
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToArray();
+                throw new BadRequestException(string.Join("\r\n", allErrors));
             }
         }
 
@@ -250,7 +253,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 _logger.LogError(ex.Message, ex);
                 throw;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
                 throw new BadRequestException("验证码发送失败");

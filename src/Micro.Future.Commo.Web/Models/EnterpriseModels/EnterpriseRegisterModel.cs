@@ -32,8 +32,8 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         [Display(Name = "企业邮箱")]
         public string EmailAddress { get; set; }
 
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "您的联系方式不能为空")]
+        [Phone(ErrorMessage = "您的电话号码格式不正确")]
         [Display(Name = "联系方式")]
         public string MobilePhone { get; set; }
 
@@ -42,14 +42,14 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         /// </summary>
         public string Fax { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "您的注册码不正确")]
         [Display(Name = "注册码")]
         public string VerificationCode { get; set; }
 
         /// <summary>
         /// 登录密码
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "您输入的密码不符合规范")]
         [Display(Name = "登录密码")]
         public string Password { get; set; }
     }
