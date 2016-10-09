@@ -108,7 +108,7 @@ let invoiceValues = [{
         name: '百万元版',
         value: '百万元版'
     }, {
-        id: 3,
+        id: 5,
         name: '千万元版',
         value: '千万元版'
     }];
@@ -126,7 +126,7 @@ let paymentTypes = [{
         name: '信用证',
         value: '信用证'
     }, {
-        id: 3,
+        id: 4,
         name: '商业承兑汇票',
         value: '商业承兑汇票'
     }];
@@ -319,7 +319,7 @@ export default {
             id: 18,
             title: '经营范围',
             key: 'businessRange',
-            category: Category.Contract,
+            category: Category.Enterprise,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }
@@ -543,7 +543,7 @@ export default {
             id: 24,
             title: '经营范围',
             key: 'businessRange',
-            category: Category.Contract,
+            category: Category.Enterprise,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }
@@ -729,7 +729,7 @@ export default {
             id: 19,
             title: '经营范围',
             key: 'businessRange',
-            category: Category.Contract,
+            category: Category.Enterprise,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         },
