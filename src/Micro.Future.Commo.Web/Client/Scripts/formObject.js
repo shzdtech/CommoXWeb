@@ -277,13 +277,20 @@ export default {
             multipleSelection: true
         }, {
             id: 14,
+            title: '开票面额',
+            key: 'invoiceValue',
+            category: Category.Invoice,
+            filterProperty: FilterProperty.Requirement,
+            items: [...invoiceValues]
+        }, {
+            id: 15,
             title: '开票量',
             key: 'invoicedQuantity',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 15,
+            id: 16,
             title: '开票要求',
             key: '',
             category: Category.Invoice,
@@ -302,21 +309,21 @@ export default {
                     value: '不限'
                 }]
         }, {
-            id: 16,
+            id: 17,
             title: '开票时间',
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 17,
+            id: 18,
             title: '发票交接方式',
             key: 'invoiceTransferMode',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 18,
+            id: 19,
             title: '经营范围',
             key: 'businessRange',
             category: Category.Enterprise,
@@ -462,7 +469,7 @@ export default {
                     name: '否',
                     value: false
                 }]
-        }, {
+        },{
             id: 15,
             title: '开票面额',
             key: 'invoiceValue',
@@ -471,43 +478,13 @@ export default {
             items: [...invoiceValues]
         }, {
             id: 16,
-            title: '开票时间',
-            key: 'invoiceIssueDateTime',
-            category: Category.Invoice,
-            filterProperty: FilterProperty.Requirement,
-            type: TEXT
-        }, {
-            id: 17,
-            title: '发票交接方式',
-            key: 'invoiceTransferMode',
-            category: Category.Invoice,
-            filterProperty: FilterProperty.Requirement,
-            type: TEXT
-        }, {
-            id: 18,
-            title: '合同下游企业类型',
-            key: 'EnterpriseType',
-            filterProperty: FilterProperty.Rule,
-            ruleType: RuleType.Enterprise,
-            category: Category.Enterprise,
-            items: [...enterpriseTypes],
-            multipleSelection: true
-        },  {
-            id: 19,
-            title: '开票面额',
-            key: 'invoiceValue',
-            category: Category.Invoice,
-            filterProperty: FilterProperty.Requirement,
-            items: [...invoiceValues]
-        }, {
-            id: 20,
             title: '开票量',
             key: 'invoicedQuantity',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 21,
+            id: 17,
             title: '开票要求',
             key: '',
             category: Category.Invoice,
@@ -526,21 +503,30 @@ export default {
                     value: '不限'
                 }]
         }, {
-            id: 22,
+            id: 18,
             title: '开票时间',
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 23,
+            id: 19,
             title: '发票交接方式',
             key: 'invoiceTransferMode',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
-            id: 24,
+            id: 20,
+            title: '合同下游企业类型',
+            key: 'EnterpriseType',
+            filterProperty: FilterProperty.Rule,
+            ruleType: RuleType.Enterprise,
+            category: Category.Enterprise,
+            items: [...enterpriseTypes],
+            multipleSelection: true
+        }, {
+            id: 21,
             title: '经营范围',
             key: 'businessRange',
             category: Category.Enterprise,
