@@ -8,7 +8,7 @@
 
         .title {
             color: $normal-font-color;
-            width: 100px;
+            width: 120px;
             display: inline-block;
         }
 
@@ -16,10 +16,11 @@
             list-style-type: none;
             display: inline-block;
             padding: 0;
+            width: calc(100% - 130px);
 
             & > div {
                 display: inline-block;
-                margin: 0 30px 0 0;
+                margin: 5px 30px 5px 0;
 
                 .item {
                     padding: 6px 15px;
@@ -54,7 +55,7 @@
 
             .title {
                 color: $normal-font-color;
-                width: 100px;
+                width: 120px;
                 display: inline-block;
                 vertical-align: middle;
                 padding: 0 10px 0 0;
@@ -91,7 +92,7 @@
                     }
 
                     .input_label {
-                        width: 100px;
+                        width: 120px;
                         padding-right: 10px;
                         color: $normal-font-color;
                         font-weight: normal;
