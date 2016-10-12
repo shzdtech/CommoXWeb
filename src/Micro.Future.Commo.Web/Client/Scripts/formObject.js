@@ -172,28 +172,28 @@ export default {
         }, {
             id: 3,
             title: '开户银行名称',
-            key: '',
+            key: 'paymentBankName',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 4,
             title: '银行帐号',
-            key: '',
+            key: 'paymentBankAccount',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 5,
             title: '银行行号',
-            key: '',
+            key: 'paymentBankId',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 6,
             title: '开户银行地址',
-            key: '',
+            key: 'paymentBankAddress',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -201,7 +201,7 @@ export default {
             id: 7,
             title: '已开通电子票口',
             filterProperty: FilterProperty.Requirement,
-            key: '',
+            key: 'isAcceptanceBillETicket',
             category: Category.Capital,
             items: [{
                 id: 1,
@@ -269,7 +269,7 @@ export default {
         }, {
             id: 13,
             title: '上游企业类型',
-            key: 'EnterpriseType',
+            key: 'enterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
@@ -292,7 +292,7 @@ export default {
         }, {
             id: 16,
             title: '开票要求',
-            key: '',
+            key: 'invoiceRequirement',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             items: [{
@@ -389,7 +389,7 @@ export default {
         }, {
             id: 6,
             title: '电子仓单',
-            key: '',
+            key: 'eWarehouseReceipt',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -403,7 +403,7 @@ export default {
         },  {
             id: 8,
             title: '交易要求',
-            key: '',
+            key: 'productTransferMode',
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
             items: [{
@@ -429,28 +429,28 @@ export default {
         }, {
             id: 10,
             title: '开户银行名称',
-            key: '',
+            key: 'paymentBankName',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 11,
             title: '银行帐号',
-            key: '',
+            key: 'paymentBankAccount',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 12,
             title: '银行行号',
-            key: '',
+            key: 'paymentBankId',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 13,
             title: '开户银行地址',
-            key: '',
+            key: 'paymentBankAddress',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -458,7 +458,7 @@ export default {
             id: 14,
             title: '已开通电子票口',
             filterProperty: FilterProperty.Requirement,
-            key: '',
+            key: 'isAcceptanceBillETicket',
             category: Category.Capital,
             items: [{
                 id: 1,
@@ -486,7 +486,7 @@ export default {
         }, {
             id: 17,
             title: '开票要求',
-            key: '',
+            key: 'invoiceRequirement',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             items: [{
@@ -547,7 +547,7 @@ export default {
         }, {
             id: 2,
             title: '合同上游企业需求',
-            key: 'EnterpriseType',
+            key: 'enterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Contract,
@@ -556,7 +556,7 @@ export default {
         }, {
             id: 3,
             title: '合同下游企业需求',
-            key: 'EnterpriseType',
+            key: 'enterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Contract,
@@ -573,7 +573,7 @@ export default {
             id: 5,
             title: '支付风控',
             filterProperty: FilterProperty.Requirement,
-            key: '',
+            key: 'paymentRiskControl',
             category: Category.Capital,
             items: [{
                 id: 1,
@@ -587,28 +587,28 @@ export default {
         }, {
             id: 6,
             title: '开户银行名称',
-            key: '',
+            key: 'paymentBankName',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 7,
             title: '银行帐号',
-            key: '',
+            key: 'paymentBankAccount',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 8,
             title: '银行行号',
-            key: '',
+            key: 'paymentBankId',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         }, {
             id: 9,
             title: '开户银行地址',
-            key: '',
+            key: 'paymentBankAddress',
             category: Category.Capital,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
@@ -616,7 +616,7 @@ export default {
             id: 10,
             title: '已开通电子票口',
             filterProperty: FilterProperty.Requirement,
-            key: '',
+            key: 'isAcceptanceBillETicket',
             category: Category.Capital,
             items: [{
                 id: 1,
@@ -640,7 +640,7 @@ export default {
             id: 13,
             title: '货物交接方式',
             filterProperty: FilterProperty.Requirement,
-            key: '',
+            key: 'productTransferMode',
             category: Category.Product,
             isRequired: true,
             items: [{
@@ -681,7 +681,7 @@ export default {
         }, {
             id: 16,
             title: '开票要求',
-            key: '',
+            key: 'invoiceRequirement',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             items: [{

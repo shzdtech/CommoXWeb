@@ -23,6 +23,13 @@ export default {
         placeholder: '企业注册时间',
         isRequired: true
     },
+    invoiceMaterial: {
+        label: '企业开票资料',
+        type: 'text',
+        key: 'invoiceMaterial',
+        length: 'medium',
+        placeholder: '企业开票资料',
+    },
     registerCapital: {
         label: '注册资金(￥)',
         type: 'text',
@@ -53,6 +60,13 @@ export default {
         placeholder: '开票量',
         isRequired: true
     },
+    maxTradeAmountPerMonth: {
+        label: '每月最大交易量',
+        type: 'number',
+        key: 'maxTradeAmountPerMonth',
+        length: 'short',
+        placeholder: '每月最大交易量'
+    },
     businessTypeId: {
         label: '企业类型',
         type: 'select',
@@ -60,27 +74,27 @@ export default {
         length: 'short',
         isRequired: true,
         options: [
-        {
+            {
                 key: '1',
                 label: '国有企业',
                 value: 1
             }, {
-                   key: '2',
-                    label: '私有企业',
-                    value: 2
-                }, {
-                    key: '3',
-                    label: '外商独资',
-                    value: 3
-                }, {
-                    key: '4',
-                    label: '中外合资',
-                    value: 4
-                }, {
-                    key: '5',
-                    label: '港澳独资',
-                    value: 5
-                }
+                key: '2',
+                label: '私有企业',
+                value: 2
+            }, {
+                key: '3',
+                label: '外商独资',
+                value: 3
+            }, {
+                key: '4',
+                label: '中外合资',
+                value: 4
+            }, {
+                key: '5',
+                label: '港澳独资',
+                value: 5
+            }
         ]
     },
     businessRange: {
@@ -180,6 +194,22 @@ export default {
                 label: '中国农业银行'
             }]
     },
+    isAcceptanceBillETicket: {
+        label: '是否开通电子票口',
+        type: 'select',
+        key: 'isAcceptanceBillETicket',
+        length: 'short',
+        isRequired: true,
+        options: [{
+            key: '1',
+            value: true,
+            label: '是'
+        }, {
+                key: '2',
+                value: false,
+                label: '否'
+            }]
+    },
     registerAccount: {
         label: '企业开户账号',
         type: 'text',
@@ -187,5 +217,12 @@ export default {
         length: 'short',
         placeholder: '企业开户账号',
         isRequired: true
+    },
+    registerWarehouse: {
+        label: '企业开户仓库 ',
+        type: 'text',
+        key: 'registerWarehouse',
+        length: 'short',
+        placeholder: '企业开户仓库'
     }
 };

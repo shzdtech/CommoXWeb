@@ -178,6 +178,12 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
                 enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
                 enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
+                enterpriseInfo.InvoiceMaterial = model.InvoiceMaterial;
+                enterpriseInfo.RegisterWarehouse = model.RegisterWarehouse;
+                enterpriseInfo.MaxTradeAmountPerMonth = model.MaxTradeAmountPerMonth;
+                if (model.IsAcceptanceBillETicket.HasValue) {
+                    enterpriseInfo.IsAcceptanceBillETicket = (model.IsAcceptanceBillETicket.HasValue;
+                }
                 if (model.PreviousProfit.HasValue)
                 {
                     enterpriseInfo.PreviousProfit = model.PreviousProfit.Value;

@@ -25,6 +25,7 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         [Display(Name = "企业注册时间")]
         [Required(ErrorMessage = "企业注册时间不能为空")]
         public DateTime RegisterTime { get; set; }
+
         /// <summary>
         /// 注册资金
         /// </summary>
@@ -98,5 +99,17 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         /// 营业执照等证件保存路径
         /// </summary>
         public string LicenseImagePath { get; set; }
+
+        //企业开票资料
+        public string InvoiceMaterial { get; set; }
+
+        //企业开户仓库
+        public string RegisterWarehouse { get; set; }
+        //每月最大交易量
+        public string MaxTradeAmountPerMonth { get; set; }
+        /// <summary>
+        /// 是否开通银承电子票口
+        /// </summary>
+        public bool? IsAcceptanceBillETicket { get; set; }
     }
 }
