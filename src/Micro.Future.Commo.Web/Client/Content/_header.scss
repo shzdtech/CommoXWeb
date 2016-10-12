@@ -1,6 +1,10 @@
 .header {
     width: 100%;
     background: $primary-color;
+    height: 50px;
+    position: fixed;
+    top:0;
+    left: 0;
 
     nav {
         max-width: 1170px;

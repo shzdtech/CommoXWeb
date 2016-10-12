@@ -33,9 +33,10 @@ objectAssignPolyfill();
 class App extends React.Component{
     render(){
         console.log(this.props);
+        let className = this.props.location.pathname === '/' ? 'home' : 'container main-wrapper';
         return <div>
         <Header />
-        <div className='container main-wrapper'>
+        <div className={className}>
             {this.props.children}
         </div>
         </div>

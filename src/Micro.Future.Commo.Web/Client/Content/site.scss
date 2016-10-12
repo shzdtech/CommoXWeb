@@ -5,6 +5,7 @@
 @import 'spinner';
 @import 'header';
 @import 'checkbox';
+@import 'home';
 @import 'filter';
 @import 'requirement';
 @import 'chain';
@@ -19,4 +20,5 @@ body{
     min-height: calc(100vh - 80px);
     background: #fff;
     padding: 20px;
+    margin-top: 70px;
 }

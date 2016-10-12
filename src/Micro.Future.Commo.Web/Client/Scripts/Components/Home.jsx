@@ -1,5 +1,6 @@
 import React from 'react';
 import Requirements from './Requirement/Requirements';
+import MainSlider from './Common/MainSlider';
 
 class Home extends React.Component {
     constructor() {
@@ -8,7 +9,10 @@ class Home extends React.Component {
 
     render() {
         return <div>
-            <Requirements {...this.props} />
+            <MainSlider />
+            <div className='container main-wrapper'>
+                <Requirements {...this.props} />
+            </div>
         </div>;
     }
 }

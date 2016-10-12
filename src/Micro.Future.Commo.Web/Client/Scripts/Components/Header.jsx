@@ -49,7 +49,7 @@ class Header extends React.Component {
         }
 
         return <div className='header'>
-            <nav className='navbar navbar-default'>
+            <nav className='navbar navbar-default navbar-fixed-top'>
                 <div className='container'>
                     <div className="navbar-header">
                         <div className="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
