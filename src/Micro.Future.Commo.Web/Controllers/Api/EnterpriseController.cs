@@ -182,7 +182,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.RegisterWarehouse = model.RegisterWarehouse;
                 enterpriseInfo.MaxTradeAmountPerMonth = model.MaxTradeAmountPerMonth;
                 if (model.IsAcceptanceBillETicket.HasValue) {
-                    enterpriseInfo.IsAcceptanceBillETicket = (model.IsAcceptanceBillETicket.HasValue;
+                    enterpriseInfo.IsAcceptanceBillETicket = model.IsAcceptanceBillETicket.HasValue;
                 }
                 if (model.PreviousProfit.HasValue)
                 {
