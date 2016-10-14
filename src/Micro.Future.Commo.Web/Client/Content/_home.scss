@@ -107,4 +107,48 @@
             margin-bottom: 20px;
         }
     }
+
+    .finance-tab{
+        background: #e74c3c;
+        color: $white;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        .tab-title{
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 10px;
+        }
+
+        .tab-sub-title{
+            font-size: 18px;
+            text-align: center;
+            padding: 5px 10px;
+        }
+
+         .finance-list{
+             padding: 50px 30px;
+
+             .finance-item{
+                 padding: 10px 10px;
+                 border-left: 5px solid $white;
+                 margin-bottom: 20px;
+                 
+                 .title{
+                     font-size: 25px;
+                 }
+
+                 .description{
+                     font-size: 12px;
+                 }
+
+                 .col{
+                     width: 50%;
+                     display: inline-block;
+                     padding: 5px;
+                 }
+             }
+         }
+    }
 }
