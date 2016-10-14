@@ -1,8 +1,110 @@
-.home{
-    background: $white;
+.home {
+    background: #f7f7f7;
     margin-top: 50px;
-    
-    .image-gallery{
-        margin-bottom: 20px;
+
+    .main-tab {
+        padding: 50px 0 50px 0;
+
+        .main-tab-header {
+            color: $primary-color;
+            font-size: 25px;
+            font-weight: bold;
+            padding: 5px 0;
+            border-bottom: 3px solid $primary-color;
+        }
+
+        .main-tab-content {
+        }
+    }
+
+    .main-wrapper {
+        margin-top: 20px;
+        min-height: 200px;
+    }
+
+    .price-tab {
+        .main-tab {
+            .main-tab-header {
+                color: #34495e;
+                border-color: #34495e;
+            }
+        }
+
+        .external-links {
+            list-style: none;
+            width: 100%;
+            //background: rgba(0, 48, 89, 0.3);
+            color: $white;
+            font-size: 22px;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                padding: 10px 20px;
+
+                a {
+                    text-decoration: none;
+                    color: #34495e;
+                }
+            }
+        }
+
+        .price-table {
+            border: 1px solid #34495e;
+
+            .price-header {
+                font-size: 18px;
+                color: white;
+                background: #34495e;
+
+                span {
+                    width: 15%;
+                    display: inline-block;
+                    padding: 10px 0 10px 10px;
+
+                    &.name {
+                        width: 20%;
+                    }
+                }
+            }
+
+            .price-content {
+                font-size: 16px;
+                color: white;
+
+                & > div {
+                    border-top: 1px solid $white;
+
+                    span {
+                        width: 15%;
+                        display: inline-block;
+                        padding: 10px 0 10px 10px;
+                        color: #34495e;
+
+                        &.name {
+                            width: 20%;
+                            color: $white;
+                            background: #34495e;
+                        }
+
+                        &.increase {
+                            color: $red;
+                        }
+
+                        &.decrease {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .requirement-tab {
+        background: $white;
+
+        .main-tab-header {
+            margin-bottom: 20px;
+        }
     }
 }
