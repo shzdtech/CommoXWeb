@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { Link} from 'react-router';
 import Tab from '../Common/Tab';
 
-var acceptanceBill=[{
+var acceptanceBill = [{
     name: ''
 }]
 
@@ -11,51 +11,67 @@ class AcceptanceBillTab extends React.Component {
     constructor() {
         super();
     }
-
     render() {
-        return <div className='finance-tab'>
-            <div className='tab-title'>商业汇票贴现</div>
+        return <div className='acceptance-bill-tab'>
+            <div className='tab-title'>银行承兑汇票</div>
+
             <div className='container finance-list'>
-                <div className="col-md-6 finance-item">
-                    <div className="col">
-                        <div className='title'>理财一号</div>
-                        <div className='description'>稳健型 代号8906 投资期限1年</div>
-                    </div>
-                     <div className="col">
-                        <div className='title'>4.00%</div>
-                        <div className='description'>预计年化收益</div>
-                    </div>
-                </div>
-                <div className="col-md-6 finance-item">
-                    <div className="col">
-                        <div className='title'>美元天天金</div>
-                        <div className='description'>进取型 代号6941 投资期限30天</div>
-                    </div>
-                     <div className="col">
-                        <div className='title'>10.00%</div>
-                        <div className='description'>预计年化收益</div>
-                    </div>
-                </div>
-                <div className="col-md-6 finance-item">
-                    <div className="col">
-                        <div className='title'>新人专享937号</div>
-                        <div className='description'>固定收益 投资期限176天</div>
-                    </div>
-                     <div className="col">
-                        <div className='title'>8.00%</div>
-                        <div className='description'>预计年化收益</div>
-                    </div>
-                </div>
-                <div className="col-md-6 finance-item">
-                    <div className="col">
-                        <div className='title'>大赢家</div>
-                        <div className='description'>进取型 代号6941 投资期限176天</div>
-                    </div>
-                     <div className="col">
-                        <div className='title'>6.20%</div>
-                        <div className='description'>预计年化收益</div>
-                    </div>
-                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td className='left'>
+                                开票行
+                            </td>
+                            <td>
+                                票面金额（单位：万）
+                            </td>
+                            <td>
+                                票据种类
+                            </td>
+                            <td>
+                                出票日期
+                            </td>
+                            <td>
+                                到期日
+                            </td>
+                            <td>
+                                年化贴息
+                            </td>
+                            <td>
+                                贴息
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className='left'>中国工商银行</td>
+                            <td>1000</td>
+                            <td>纸票</td>
+                            <td>2016-10-10</td>
+                            <td>2018-10-09</td>
+                            <td>8.79%</td>
+                            <td>1.2%</td>
+                        </tr>
+                         <tr>
+                            <td className='left'>中国工商银行</td>
+                            <td>1000</td>
+                            <td>纸票</td>
+                            <td>2016-10-10</td>
+                            <td>2018-10-09</td>
+                            <td>8%</td>
+                            <td>1%</td>
+                        </tr>
+                         <tr>
+                            <td className='left'>中国工商银行</td>
+                            <td>1000</td>
+                            <td>纸票</td>
+                            <td>2016-10-10</td>
+                            <td>2018-10-09</td>
+                            <td>8%</td>
+                            <td>1%</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     }

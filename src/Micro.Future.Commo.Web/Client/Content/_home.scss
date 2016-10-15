@@ -108,18 +108,18 @@
         }
     }
 
-    .finance-tab{
-        background: #e74c3c;
-        color: $white;
-        padding-top: 50px;
-        padding-bottom: 50px;
-
-        .tab-title{
+ .tab-title{
             font-size: 25px;
             font-weight: bold;
             text-align: center;
             padding: 5px 10px;
         }
+
+    .finance-tab{
+        background: #e74c3c;
+        color: $white;
+        padding-top: 50px;
+        padding-bottom: 50px;
 
         .tab-sub-title{
             font-size: 18px;
@@ -150,5 +150,33 @@
                  }
              }
          }
+    }
+
+    .acceptance-bill-tab{
+        padding: 50px 0 80px 0; 
+        color: $white;
+        background: #34495e;
+
+        table{
+            width: 100%;
+            font-size: 20px;
+            
+            tr{
+                border-bottom: 1px solid $normal-font-color;
+
+                td{
+                    padding: 5px 10px;
+                    text-align: center;
+
+                    &.left{
+                        text-align: left;
+                    }
+                }
+            }
+
+            thead{
+                font-weight: bold;
+            }
+        }
     }
 }
