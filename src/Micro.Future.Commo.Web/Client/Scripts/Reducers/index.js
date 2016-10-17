@@ -9,6 +9,7 @@ import forms from './forms';
 import common from './Common';
 import requirements from './requirements';
 import account from './Account/account';
+import admin from './Admin';
 import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
@@ -21,6 +22,7 @@ const reducers = combineReducers({
     forms,
     account,
     common,
+    admin,
     routing: routerReducer
 });
 

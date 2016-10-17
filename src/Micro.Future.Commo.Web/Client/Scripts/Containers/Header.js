@@ -27,7 +27,11 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(signOut());
             }else if(key === "makeChain"){
                 dispatch(makeChain());
-            }
+            }else if(key=== "financeManage"){
+                dispatch(push("/financeManage"));
+            }else if(key === "acceptanceManage"){
+                dispatch(push("/acceptanceManage"));
+            }   
         },
         hideToastr: () => {
             dispatch(hideToastr());

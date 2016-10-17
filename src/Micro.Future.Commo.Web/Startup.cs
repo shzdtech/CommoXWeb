@@ -139,6 +139,9 @@ namespace Micro.Future.Commo.Web
             services.AddSingleton<IMatchMakerManager, MatchMakerManager>();
             services.AddSingleton<IEnterpriseManager, EnterpriseManager>();
             services.AddSingleton<IRequirementManager, RequirementManager>();
+
+            //services.AddSingleton<IAcceptanceManager, >();
+            services.AddSingleton<IFinancialProductManager, FinancialProductManager>();
             services.AddSingleton<IChainManager, ChainManager>();
 
         }

@@ -15,7 +15,13 @@ class Header extends React.Component {
                 if (this.props.userInfo.roles.filter((r) => { return r === 'Admin' }).length > 0) {
                     return [                      
                         <li key="authEnterprise"><Link to="/authEnterprise">企业认证</Link></li>,
-                        <li key="manageChain"><Link to="/chainManager">管理</Link></li>,
+                        <li key="manageChain"><Link to="/chainManager">撮合管理</Link></li>,
+                        <li key="finance">
+                        <DropdownButton title="金融产品管理" id="bg-nested-dropdown" >
+                            <MenuItem eventKey="financeManage" onSelect={this.props.onSelectDropdown}>银行理财产品</MenuItem>
+                            <MenuItem eventKey="acceptanceManage" onSelect={this.props.onSelectDropdown}>银行承兑汇票</MenuItem>
+                        </DropdownButton>
+                    </li>,
                         <li key="userInfo">
                         <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                             <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
