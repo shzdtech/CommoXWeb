@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
     [Route("api/Acceptance")]
-    [Authorize(Roles = "Admin")]
     public class AcceptanceContoller : BaseController
     {
         private IAcceptanceManager _acceptanceManager;

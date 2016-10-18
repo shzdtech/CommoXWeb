@@ -3,15 +3,28 @@ import { push } from 'react-router-redux';
 import { Link} from 'react-router';
 import Tab from '../Common/Tab';
 
-var acceptanceBill = [{
-    name: ''
-}]
-
 class AcceptanceBillTab extends React.Component {
     constructor() {
         super();
     }
+
+    componentDidMount() {
+        this.props.fetchAcceptanceList();
+    }
+
     render() {
+        let {acceptanceList} = this.props;
+        let list = acceptanceList.map((acceptance) => {
+            return <tr>
+                <td className='left'>{acceptance.bankName}}</td>
+                <td>{acceptance.amount}</td>
+                <td>{acceptance.acceptanceType}</td>
+                <td>{acceptance.drawTime}</td>
+                <td>{acceptance.dueDate}</td>
+                <td>6%</td>
+                <td>1.2%</td>
+            </tr>
+        });
         return <div className='acceptance-bill-tab'>
             <div className='tab-title'>银行承兑汇票</div>
 
@@ -43,33 +56,7 @@ class AcceptanceBillTab extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className='left'>中国工商银行</td>
-                            <td>1000</td>
-                            <td>纸票</td>
-                            <td>2016-10-10</td>
-                            <td>2018-10-09</td>
-                            <td>8.79%</td>
-                            <td>1.2%</td>
-                        </tr>
-                         <tr>
-                            <td className='left'>中国工商银行</td>
-                            <td>1000</td>
-                            <td>纸票</td>
-                            <td>2016-10-10</td>
-                            <td>2018-10-09</td>
-                            <td>8%</td>
-                            <td>1%</td>
-                        </tr>
-                         <tr>
-                            <td className='left'>中国工商银行</td>
-                            <td>1000</td>
-                            <td>纸票</td>
-                            <td>2016-10-10</td>
-                            <td>2018-10-09</td>
-                            <td>8%</td>
-                            <td>1%</td>
-                        </tr>
+                        {list}
                     </tbody>
                 </table>
             </div>

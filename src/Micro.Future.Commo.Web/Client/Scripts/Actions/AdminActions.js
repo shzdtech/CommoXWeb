@@ -2,9 +2,11 @@ import {
     CHANGE_ACCEPTANCE_FORM,
     SUBMIT_ACCEPTANCE_FORM,
     SUBMIT_ACCEPTANCE_FORM_SUCCESS,
+    FETCH_ACCEPTANCE_LIST_SUCCESS,
     CHANGE_FINANCE_FORM,
     SUBMIT_FINANCE_FORM,
-    SUBMIT_FINANCE_FORM_SUCCESS
+    SUBMIT_FINANCE_FORM_SUCCESS,
+    FETCH_FINANCE_LIST_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -96,6 +98,53 @@ export const submitAcceptance = (financeInfo) => {
                     autoClose: true
                 }));
                 dispatch(submitAcceptanceSuccess(response));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+const fetchAcceptanceRequest = () => {
+    const request = $.get(HOST + 'api/Acceptance');
+    return request;
+};
+
+const fetchAcceptanceSuccess = (acceptanceList) => {
+    return {
+        type: FETCH_ACCEPTANCE_LIST_SUCCESS,
+        acceptanceList: acceptanceList
+    };
+};
+
+export const fetchAcceptance = () => {
+    return (dispatch) => {
+        return fetchAcceptanceRequest().then(
+            response => {
+                dispatch(fetchAcceptanceSuccess(response));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+
+const fetchFinanceRequest = () => {
+    const request = $.get(HOST + 'api/Finance');
+    return request;
+};
+
+const fetchFinanceSuccess = (financeInfoList) => {
+    return {
+        type: FETCH_ACCEPTANCE_LIST_SUCCESS,
+        financeInfoList: financeInfoList
+    };
+};
+
+export const fetchFinance = () => {
+    return (dispatch) => {
+        return fetchFinanceRequest().then(
+            response => {
+                dispatch(fetchFinanceSuccess(response));
             },
             error => ajaxError(dispatch, error)
         );

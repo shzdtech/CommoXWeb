@@ -1,9 +1,9 @@
 import React from 'react';
 import MainSlider from './Common/MainSlider';
 import PriceTab from './Home/PriceTab';
-import FinanceTab from './Home/FinanceTab';
+import FinanceTab from '../Containers/Home/FinanceTab';
 import RequirementTab from './Home/RequirementTab';
-import AcceptanceBillTab from './Home/AcceptanceBillTab';
+import AcceptanceBillTab from '../Containers/Home/AcceptanceBillTab';
 
 class Home extends React.Component {
     constructor() {

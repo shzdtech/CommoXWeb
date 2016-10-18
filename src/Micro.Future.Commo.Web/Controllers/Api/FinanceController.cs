@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace Micro.Future.Commo.Web.Controllers.Api
 {
     [Route("api/Finance")]
-    [Authorize(Roles = "Admin")]
     public class FinanceController : BaseController
     {
         private IFinancialProductManager _financialProductManager;
