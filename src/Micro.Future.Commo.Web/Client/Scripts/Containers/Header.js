@@ -16,22 +16,26 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSelectDropdown: (key, event)=>{
-            if(key === "createUser"){
+        onSelectDropdown: (key, event) => {
+            if (key === "createUser") {
                 dispatch(push("/createuser"));
-            }else if(key === "changePassword"){
+            } else if (key === "changePassword") {
                 dispatch(push("/changepassword"));
-            }else if(key === "updateEnterprise"){
+            } else if (key === "updateEnterprise") {
                 dispatch(push("/updateEnterprise"));
-            }else if(key === "signOut"){
+            } else if (key === "signOut") {
                 dispatch(signOut());
-            }else if(key === "makeChain"){
+            } else if (key === "makeChain") {
                 dispatch(makeChain());
-            }else if(key=== "financeManage"){
+            } else if (key === "financeManage") {
                 dispatch(push("/financeManage"));
-            }else if(key === "acceptanceManage"){
+            } else if (key === "acceptanceManage") {
                 dispatch(push("/acceptanceManage"));
-            }   
+            } else if (key === "chainManager") {
+                dispatch(push("/chainManager"));
+            } else if (key === "createChainManually"){
+                dispatch(push("/createChain"));
+            }
         },
         hideToastr: () => {
             dispatch(hideToastr());

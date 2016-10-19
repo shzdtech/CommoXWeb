@@ -62,6 +62,7 @@
 /// <reference path="../client/scripts/reducers/admin/index.js" />
 /// <reference path="../Client/Scripts/Reducers/Chain/chainListManager.js" />
 /// <reference path="../Client/Scripts/Reducers/Chain/chains.js" />
+/// <reference path="../client/scripts/reducers/chain/createchainstate.js" />
 /// <reference path="../Client/Scripts/Reducers/Chain/index.js" />
 /// <reference path="../Client/Scripts/Reducers/Chain/replaceRequirement.js" />
 /// <reference path="../client/scripts/reducers/common/index.js" />

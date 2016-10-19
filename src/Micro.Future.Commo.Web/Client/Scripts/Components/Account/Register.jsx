@@ -36,7 +36,7 @@ class Register extends React.Component {
                     list.push(<Input key={key} info={info} onChangeForm={onChangeEnterpriseForm} />);
                 }
             } else if (info.type === 'select') {
-                list.push(<Dropdown key={key} info={info} onChangeEnterpriseForm={onChangeEnterpriseForm} />);
+                list.push(<Dropdown key={key} info={info} onChangeForm={onChangeEnterpriseForm} />);
             }
         }
         return <div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { Link} from 'react-router';
 import Input from '../Account/Input';
-import DropDown from '../Account/DropDown';
+import Dropdown from '../Account/Dropdown';
 
 class AcceptanceManager extends React.Component {
     constructor() {

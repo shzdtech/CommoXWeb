@@ -9,6 +9,7 @@ import Home from './Containers/Home';
 import Header from './Containers/Header';
 import ChainList from './Containers/Chain/ChainList';
 import ChainListManger from './Containers/Chain/ChainListManager';
+import CreateChain from './Containers/Chain/CreateChain';
 import AcceptanceManager from './Containers/Admin/AcceptanceManager';
 import FinanceManager from './Containers/Admin/FinanceManager';
 import AddRequirement from './Components/AddRequirement';
@@ -81,6 +82,7 @@ ReactDOM.render(
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>           
                 {AccountRouter}
                 <Route path="/chainManager" component={ChainListManger} />
+                <Route path="/createChain" component={CreateChain} />
                 <Route path="/acceptanceManage" component={AcceptanceManager} />
                 <Route path="/financeManage" component={FinanceManager} />
                 <Route path="*" component={Requirements} />

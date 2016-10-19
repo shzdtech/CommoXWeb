@@ -29,7 +29,7 @@ class Dropdown extends React.Component {
     }
 
     changeSelected(val) {
-        this.props.onChangeEnterpriseForm(this.props.info.key, Object.assign({}, this.props.info, { value: val.value }));
+        this.props.onChangeForm(this.props.info.key, Object.assign({}, this.props.info, { value: val.value }));
     }
 
     onBlur(e) {

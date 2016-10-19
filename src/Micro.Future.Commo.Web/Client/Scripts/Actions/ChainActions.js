@@ -10,8 +10,9 @@ import {
     GET_REQUIREMENT_REPLACEMENT_SUCCESS,
     CANCEL_REPLACE_REQUIREMENT,
     COMPLETE_REPLACE_REQUIREMENT,
-    REPLACE_REQUIREMENT_SUCCESS
-} from '../Constants/ActionTypes';
+    REPLACE_REQUIREMENT_SUCCESS,
+    ADD_CREATE_CHAIN_ELEMENT,
+    REMOVE_CREATE_CHAIN_ELEMENT} from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import {ajaxError, showToastr} from './CommonActions';
@@ -239,5 +240,43 @@ export const replaceRequirementAction = (chainId, index, requirement) => {
             },
             error => ajaxError(dispatch, error)
         );
+    }
+}
+
+
+export const createChainWithNewRequirement = () => {
+    return {
+
+    };
+};
+
+export const createChainWithSelect = () => {
+    return {
+
+    };
+};
+
+export const createChainWithRandomOne = () => {
+    return {
+        type: ADD_CREATE_CHAIN_ELEMENT,
+        node: {
+            type: 2
+        }
+    };
+};
+
+export const createChainWithRandomMore = () => {
+    return {
+        type: ADD_CREATE_CHAIN_ELEMENT,
+        node: {
+            type: 3
+        }
+    };
+};
+
+export const removeChainNodeFromTempChain = (index) => {
+    return {
+        type: REMOVE_CREATE_CHAIN_ELEMENT,
+        index: index
     }
 }
