@@ -267,11 +267,25 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Unauthed")]
         [Authorize(Roles = "Admin")]
         public IEnumerable<EnterpriseInfo> Get()
         {
             var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.UNAPPROVED);
+            if (result.HasError)
+            {
+                throw new BadRequestException(result.Error.Message);
+            }
+
+            return result.Result;
+        }
+
+        [HttpGet]
+        [Route("")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<EnterpriseInfo> GetAll()
+        {
+            var result = _enterpriseManager.QueryEnterprises(null, null);
             if (result.HasError)
             {
                 throw new BadRequestException(result.Error.Message);

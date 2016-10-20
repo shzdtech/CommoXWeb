@@ -52,6 +52,7 @@
 /// <reference path="../client/scripts/models/updateenterpriseform.js" />
 /// <reference path="../Client/Scripts/Reducers/Account/account.js" />
 /// <reference path="../client/scripts/reducers/account/authenterprises.js" />
+/// <reference path="../client/scripts/reducers/account/enterpriselist.js" />
 /// <reference path="../Client/Scripts/Reducers/Account/login.js" />
 /// <reference path="../client/scripts/reducers/account/newuser.js" />
 /// <reference path="../client/scripts/reducers/account/password.js" />

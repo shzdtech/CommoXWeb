@@ -15,6 +15,7 @@ import {
     UPDATE_ENTERPRISE_SUCCESS,
     UPDATE_ENTERPRISE_FAILURE,
     GET_UNAUTHED_ENTERPRISE_SUCCESS,
+    GET_ALL_ENTERPRISE_SUCCESS,
     AUTHENTICATE_ENTERPRISE_SUCCESS,
     GET_VERFICATION_CODE_SUCCESS,
     GET_ENTERPRISE_SUCCESS,
@@ -284,7 +285,7 @@ export const updateEnterprise = (enterpriseInfo) => {
 };
 
 const getUnauthedEnterpriseRequest = () => {
-    return $.get(HOST + 'api/Enterprise');
+    return $.get(HOST + 'api/Enterprise/Unauthed');
 };
 
 const getUnauthedEnterpriseSuccess = (enterprises) => {
@@ -299,6 +300,29 @@ export const getUnauthedEnterprise = () => {
         return getUnauthedEnterpriseRequest().then(
             enterprises => {
                 dispatch(getUnauthedEnterpriseSuccess(enterprises));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+}
+
+
+const getAllEnterpriseRequest = () => {
+    return $.get(HOST + 'api/Enterprise');
+};
+
+const getAllEnterpriseSuccess = (enterprises) => {
+    return {
+        type: GET_ALL_ENTERPRISE_SUCCESS,
+        enterprises: enterprises
+    };
+};
+
+export const getAllEnterprise = () => {
+    return (dispatch) => {
+        return getUnauthedEnterpriseRequest().then(
+            enterprises => {
+                dispatch(getAllEnterpriseSuccess(enterprises));
             },
             error => ajaxError(dispatch, error)
         );

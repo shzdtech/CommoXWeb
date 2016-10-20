@@ -132,6 +132,7 @@ let paymentTypes = [{
     }];
 
 export default {
+    createFor: 0,
     selectedType: RequirementType.Buy,
     main: {
         id: 1,

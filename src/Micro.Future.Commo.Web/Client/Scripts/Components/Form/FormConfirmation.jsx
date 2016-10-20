@@ -4,6 +4,7 @@ import {TEXT} from '../../Constants/FilterTypes';
 import Category from '../../Models/Category';
 import RequirementType from '../../Models/RequirementType';
 import {addRequirement} from '../../Actions/RequirementActions';
+import Dropdown from './../Account/Dropdown';
 
 class FomrConfirmation extends React.Component {
 
@@ -11,9 +12,32 @@ class FomrConfirmation extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        if(this.props.forms.createFor === 1){
+            this.props.fetchEnterpriseList();
+        }
+    }
+
     render() {
 
         const {main, selectedType, buy, sell, subsidy} = this.props.forms;
+
+        let dropdown= null;
+        if(main.createFor === 1){
+            var options = enterpriseList.map((e)=>{
+                return {
+                    label: e.name,
+                    key: e.enterpriseId,
+                    value: e.enterpriseId
+                }
+            });
+            var info = {
+                options: options,
+                label: "请添加需求的企业"
+            };
+
+            dropdown = <Dropdown key={key} info={info} onChangeForm={onChangeEnterpriseSelection} />
+        }
 
         let list = null;
         if (selectedType === RequirementType.Buy) {
@@ -88,6 +112,7 @@ class FomrConfirmation extends React.Component {
                 </div>
             </div>
                 {view}
+                {dropdown}
                 <div className="operators">
                 <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType) }>我同意提交需求>></a>
                 <Link to='/addRequirement' className='calloff'>返回</Link></div>
