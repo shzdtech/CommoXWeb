@@ -94,41 +94,41 @@ let products = [{
 let invoiceValues = [{
     id: 1,
     name: '千元版',
-    value: '千元版'
+    value: 1
 }, {
         id: 2,
         name: '万元版',
-        value: '万元版'
+        value: 2
     }, {
         id: 3,
         name: '十万元版',
-        value: '十万元版'
+        value: 3
     }, {
         id: 4,
         name: '百万元版',
-        value: '百万元版'
+        value: 4
     }, {
         id: 5,
         name: '千万元版',
-        value: '千万元版'
+        value: 5
     }];
 
 let paymentTypes = [{
     id: 1,
     name: '电汇（现金）',
-    value: '电汇（现金）'
+    value: 1
 }, {
         id: 2,
         name: '银行电子汇票',
-        value: '银行电子汇票'
+        value: 2
     }, {
         id: 3,
         name: '信用证',
-        value: '信用证'
+        value: 3
     }, {
         id: 4,
         name: '商业承兑汇票',
-        value: '商业承兑汇票'
+        value: 4
     }];
 
 export default {
@@ -400,26 +400,28 @@ export default {
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
-        },  {
-            id: 8,
-            title: '交易要求',
-            key: 'productTransferMode',
-            filterProperty: FilterProperty.Requirement,
-            category: Category.Capital,
-            items: [{
-                id: 1,
-                name: '先货后款',
-                value: '先货后款'
-            }, {
-                    id: 2,
-                    name: '款到出货',
-                    value: '款到出货'
-                }, {
-                    id: 3,
-                    name: '不限',
-                    value: '不限'
-                }]
-        }, {
+        },  
+        //{
+        //     id: 8,
+        //     title: '交易要求',
+        //     key: 'productTransferMode',
+        //     filterProperty: FilterProperty.Requirement,
+        //     category: Category.Capital,
+        //     items: [{
+        //         id: 1,
+        //         name: '先货后款',
+        //         value: '先货后款'
+        //     }, {
+        //             id: 2,
+        //             name: '款到出货',
+        //             value: '款到出货'
+        //         }, {
+        //             id: 3,
+        //             name: '不限',
+        //             value: '不限'
+        //         }]
+        // }, 
+        {
             id: 9,
             title: '支付方式',
             filterProperty: FilterProperty.Requirement,
@@ -578,11 +580,11 @@ export default {
             items: [{
                 id: 1,
                 name: '需自主收付',
-                value: '需自主收付'
+                value: 1
             }, {
                     id: 2,
                     name: '需自主收付',
-                    value: '不需自主收付'
+                    value: 0
                 }]
         }, {
             id: 6,
@@ -646,15 +648,15 @@ export default {
             items: [{
                 id: 1,
                 name: '入库过户',
-                value: '入库过户'
+                value: 1
             }, {
                     id: 2,
                     name: '委托过户',
-                    value: '委托过户'
+                    value: 2
                 }, {
                     id: 3,
                     name: '提单背书',
-                    value: '提单背书'
+                    value: 3
                 }],
             multipleSelection: true
         }, {
@@ -687,15 +689,15 @@ export default {
             items: [{
                 id: 1,
                 name: '款货后票',
-                value: '款货后票'
+                value: 1
             }, {
                     id: 2,
                     name: '款货（实提数）后票',
-                    value: '款货（实提数）后票'
+                    value: 2
                 }, {
                     id: 3,
                     name: '不限',
-                    value: '不限'
+                    value: 0
                 }]
         }, {
             id: 17,

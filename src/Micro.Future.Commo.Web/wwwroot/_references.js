@@ -28,6 +28,7 @@
 /// <reference path="../client/scripts/containers/admin/financemanager.js" />
 /// <reference path="../Client/Scripts/Containers/Chain/ChainList.js" />
 /// <reference path="../Client/Scripts/Containers/Chain/ChainListManager.js" />
+/// <reference path="../client/scripts/containers/chain/createchain.js" />
 /// <reference path="../Client/Scripts/Containers/Form/Form.js" />
 /// <reference path="../client/scripts/containers/form/formconfirmation.js" />
 /// <reference path="../client/scripts/containers/Header.js" />
