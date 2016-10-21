@@ -135,7 +135,7 @@ const fetchFinanceRequest = () => {
 
 const fetchFinanceSuccess = (financeInfoList) => {
     return {
-        type: FETCH_ACCEPTANCE_LIST_SUCCESS,
+        type: FETCH_FINANCE_LIST_SUCCESS,
         financeInfoList: financeInfoList
     };
 };

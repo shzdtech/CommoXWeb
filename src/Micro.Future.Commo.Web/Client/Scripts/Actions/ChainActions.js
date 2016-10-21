@@ -12,7 +12,8 @@ import {
     COMPLETE_REPLACE_REQUIREMENT,
     REPLACE_REQUIREMENT_SUCCESS,
     ADD_CREATE_CHAIN_ELEMENT,
-    REMOVE_CREATE_CHAIN_ELEMENT} from '../Constants/ActionTypes';
+    REMOVE_CREATE_CHAIN_ELEMENT,
+    CREATE_CHAIN_WITH_NEW_REQUIREMENT} from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import {ajaxError, showToastr} from './CommonActions';
@@ -246,7 +247,7 @@ export const replaceRequirementAction = (chainId, index, requirement) => {
 
 export const createChainWithNewRequirement = () => {
     return {
-
+        type: CREATE_CHAIN_WITH_NEW_REQUIREMENT
     };
 };
 

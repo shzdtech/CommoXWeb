@@ -6,7 +6,8 @@ import {
     ADD_REQUIREMENT_FAILURE,
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
-    FETCH_REQUIREMENT_LIST_FAILURE
+    FETCH_REQUIREMENT_LIST_FAILURE,
+    ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -15,7 +16,7 @@ import { push } from 'react-router-redux';
 import {ajaxError} from './CommonActions';
 import {resetForm} from '../Actions';
 //requirement
-export const addRequirementRequest = (list, selectedType) => {
+export const addRequirementRequest = (list, selectedType, enterpriseId) => {
     let requirement = {};
     requirement.rules = [];
     requirement.type = selectedType;
@@ -47,7 +48,9 @@ export const addRequirementRequest = (list, selectedType) => {
             }
         }
     });
-
+    if (enterpriseId) {
+        requirement.enterpriseId = enterpriseId;
+    }
     return $.post(HOST + 'api/Requirement', requirement);
 };
 
@@ -65,13 +68,25 @@ export const addRequirementFailure = (error) => {
     };
 };
 
-export const addRequirement = (list, selectedType) => {
+export const addRequirementForCreateChainSuccess = (requirement) => {
+    return {
+        type: ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
+        requirement: requirement
+    }
+}
+
+export const addRequirement = (list, selectedType, enterpriseId) => {
     return (dispatch) => {
-        return addRequirementRequest(list, selectedType).then(
+        return addRequirementRequest(list, selectedType, enterpriseId).then(
             requirement => {
-                dispatch(addRequirementSuccess(requirement));
                 dispatch(resetForm());
-                dispatch(push('/requirements'));
+                if (enterpriseId) {
+                    dispatch(addRequirementForCreateChainSuccess(requirement));
+                    dispatch(push('/createChain'));
+                } else {            
+                    dispatch(addRequirementSuccess(requirement));
+                    dispatch(push('/requirements'));
+                }
             },
             error => ajaxError(dispatch, error)
         );

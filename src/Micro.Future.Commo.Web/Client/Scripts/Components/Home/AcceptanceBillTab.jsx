@@ -15,8 +15,8 @@ class AcceptanceBillTab extends React.Component {
     render() {
         let {acceptanceList} = this.props;
         let list = acceptanceList.map((acceptance) => {
-            return <tr>
-                <td className='left'>{acceptance.bankName}}</td>
+            return <tr key={acceptance.acceptanceId}>
+                <td className='left'>{acceptance.bankName}</td>
                 <td>{acceptance.amount}</td>
                 <td>{acceptance.acceptanceType}</td>
                 <td>{acceptance.drawTime}</td>

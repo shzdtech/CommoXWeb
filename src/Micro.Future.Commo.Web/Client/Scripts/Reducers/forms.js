@@ -1,5 +1,5 @@
 import formObject from '../formObject';
-import {CHANGE_FORM_TYPE, SELECT_FORM_ITEM, TYPE_FORM_ITEM, RESET_FORM} from '../Constants/ActionTypes';
+import {CHANGE_FORM_TYPE, SELECT_FORM_ITEM, TYPE_FORM_ITEM, RESET_FORM, CREATE_CHAIN_WITH_NEW_REQUIREMENT} from '../Constants/ActionTypes';
 import RequirementType from '../Models/RequirementType';
 
 const getSelectedFormType = (selectedType) => {
@@ -46,7 +46,7 @@ const forms = (state = formObject, action) => {
                 }
             });
 
-            let newState = Object.assign({}, state, );
+            let newState = Object.assign({}, state);
             newState[typeName] = newList;
             return newState;
         }
@@ -66,6 +66,9 @@ const forms = (state = formObject, action) => {
         }
         case RESET_FORM: {
             return formObject;
+        }
+        case CREATE_CHAIN_WITH_NEW_REQUIREMENT:{
+            return Object.assign({}, state, {createFor: 1})
         }
         default:
             return state;

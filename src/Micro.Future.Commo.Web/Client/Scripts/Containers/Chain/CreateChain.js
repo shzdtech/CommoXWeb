@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import CreateChain from '../../Components/Chain/CreateChain';
+import { push } from 'react-router-redux';
 import {createChainWithNewRequirement,
     createChainWithSelect,
     createChainWithRandomOne,
@@ -15,7 +16,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        createRequirement: () => dispatch(createChainWithNewRequirement()),
+        createRequirement: () => {
+            dispatch(createChainWithNewRequirement());
+            dispatch(push("/addRequirement"))
+        },
         selectRequirement: () => dispatch(createChainWithSelect()),
         randomOne: () => dispatch(createChainWithRandomOne()),
         randomMore: () => dispatch(createChainWithRandomMore()),

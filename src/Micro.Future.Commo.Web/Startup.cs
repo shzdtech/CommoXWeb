@@ -28,6 +28,7 @@ using Microsoft.AspNetCore.Http;
 using Micro.Future.Commo.Web.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Micro.Future.Commo.Web.Utilities;
+using Micro.Future.Business.MongoDB.Commo.Config;
 
 namespace Micro.Future.Commo.Web
 {
@@ -38,7 +39,8 @@ namespace Micro.Future.Commo.Web
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("MongoConf.json", optional: true);
 
             if (env.IsDevelopment())
             {
@@ -134,15 +136,22 @@ namespace Micro.Future.Commo.Web
                 s.Version = Configuration["AliYunSMS:Version"];
             });
 
-            services.AddMatchMakerSystem(new MatcherConfig());
-            services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() { ConnectionString = Configuration.GetConnectionString("DefaultConnection") });
-            services.AddSingleton<IMatchMakerManager, MatchMakerManager>();
-            services.AddSingleton<IEnterpriseManager, EnterpriseManager>();
-            services.AddSingleton<IRequirementManager, RequirementManager>();
 
-            //services.AddSingleton<IAcceptanceManager, >();
-            services.AddSingleton<IFinancialProductManager, FinancialProductManager>();
-            services.AddSingleton<IChainManager, ChainManager>();
+            MongoDBConfig.load(Configuration.GetSection("mongoconfig"));
+
+            services.AddBizServices(new Business.Abstraction.BizObject.BizServiceOptions() {
+                ConnectionString = Configuration.GetConnectionString("DefaultConnection")
+            });
+
+            services.AddMatchMakerSystem(new MatcherConfig());
+
+            services.AddTransient<IMatchMakerManager, MatchMakerManager>();
+            services.AddTransient<IEnterpriseManager, EnterpriseManager>();
+            services.AddTransient<IRequirementManager, RequirementManager>();
+
+            services.AddTransient<IAcceptanceManager, AcceptanceManager>();
+            services.AddTransient<IFinancialProductManager, FinancialProductManager>();
+            services.AddTransient<IChainManager, ChainManager>();
 
         }
 

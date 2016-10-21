@@ -1,9 +1,23 @@
-import {GET_ALL_ENTERPRISE_SUCCESS} from '../../Constants/ActionTypes';
+import {GET_ALL_ENTERPRISE_SUCCESS, CHANGE_ENTERPRISE_SELECTION} from '../../Constants/ActionTypes';
 
-const enterpriseList = (state = [], action) => {
+const enterpriseList = (state = {}, action) => {
     switch (action.type) {
         case GET_ALL_ENTERPRISE_SUCCESS: {
-            return action.enterprises;
+            var options = action.enterprises.map((e)=>{
+                return {
+                    label: e.name,
+                    key: e.enterpriseId.toString(),
+                    value: e.enterpriseId
+                }
+            });
+            var info = {
+                options: options,
+                label: "请添加需求的企业"
+            };
+            return info;
+        }
+        case CHANGE_ENTERPRISE_SELECTION: {
+            return Object.assign({}, action.value);
         }
         default:
             return state;

@@ -14,7 +14,7 @@ class FinanceTab extends React.Component {
     render() {
         let {financeInfoList} = this.props;
         var list = financeInfoList.map((f)=>{
-            return  <div className="col-md-6 finance-item">
+            return  <div className="col-md-6 finance-item" key={f.productId}>
                     <div className="col">
                         <div className='title'>{f.bankAddress}}</div>
                         <div className='description'>投资期限{f.productTerm}天</div>

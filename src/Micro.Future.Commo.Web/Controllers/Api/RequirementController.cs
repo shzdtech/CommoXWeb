@@ -33,12 +33,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpPost]
         public async Task<Models.RequirementInfo> AddRequirement(Models.RequirementInfo requirement)
         {
-            var user = await _userManager.GetUserAsync(User);
             var requirementInfo = new RequirementInfo
             {
                 UserId = UserId,
                 RequirementId = requirement.RequirementId,
-                EnterpriseId = user.EnterpriseId,
                 PaymentType = requirement.PaymentType,
                 PaymentDateTime = requirement.PaymentDateTime,
                 PaymentAmount = requirement.PaymentAmount,
@@ -65,6 +63,18 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 Rules = requirement.Rules
             };
 
+            if (requirement.EnterpriseId > 0)
+            {
+                requirementInfo.EnterpriseId = requirement.EnterpriseId;
+                requirementInfo.OpUserId = UserId;
+            }
+            else
+            {
+                var user = await _userManager.GetUserAsync(User);
+                requirement.EnterpriseId = user.EnterpriseId;
+            }
+
+            
             var result = _requirementManager.AddRequirementInfo(requirementInfo);
             if (result.HasError)
             {

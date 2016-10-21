@@ -16,6 +16,7 @@ import {
     UPDATE_ENTERPRISE_FAILURE,
     GET_UNAUTHED_ENTERPRISE_SUCCESS,
     GET_ALL_ENTERPRISE_SUCCESS,
+    CHANGE_ENTERPRISE_SELECTION,
     AUTHENTICATE_ENTERPRISE_SUCCESS,
     GET_VERFICATION_CODE_SUCCESS,
     GET_ENTERPRISE_SUCCESS,
@@ -320,13 +321,20 @@ const getAllEnterpriseSuccess = (enterprises) => {
 
 export const getAllEnterprise = () => {
     return (dispatch) => {
-        return getUnauthedEnterpriseRequest().then(
+        return getAllEnterpriseRequest().then(
             enterprises => {
                 dispatch(getAllEnterpriseSuccess(enterprises));
             },
             error => ajaxError(dispatch, error)
         );
     };
+}
+
+export  const changeEnterpriseSelection = (key, newValue) => {
+    return {
+        type: CHANGE_ENTERPRISE_SELECTION,
+        value: newValue
+    }
 }
 
 const authenticateEnterpriseRequest = (enterpriseId, state) => {

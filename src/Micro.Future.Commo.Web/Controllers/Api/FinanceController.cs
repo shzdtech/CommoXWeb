@@ -29,9 +29,15 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpGet]
         [Route("")]
-        public void Get()
+        public IEnumerable<FinancialProductInfo> Get()
         {
-            _financialProductManager.QueryAllFinancialProducts();
+           var list =  _financialProductManager.QueryAllFinancialProducts();
+            if (list == null)
+            {
+                list = new List<FinancialProductInfo>();
+            }
+
+            return list;
         }
     }
 }

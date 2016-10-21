@@ -29,9 +29,15 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpGet]
         [Route("")]
-        public void Get()
+        public IEnumerable<AcceptanceInfo> Get()
         {
-            _acceptanceManager.QueryAllAcceptance();
+            var list = _acceptanceManager.QueryAllAcceptance();
+            if (list == null)
+            {
+                list = new List<AcceptanceInfo>();
+            }
+
+            return list;
         }
     }
 }

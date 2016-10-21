@@ -20,23 +20,14 @@ class FomrConfirmation extends React.Component {
 
     render() {
 
-        const {main, selectedType, buy, sell, subsidy} = this.props.forms;
+        const {main, selectedType, buy, sell, subsidy, createFor} = this.props.forms;
+        const {enterpriseList} = this.props;
 
         let dropdown= null;
-        if(main.createFor === 1){
-            var options = enterpriseList.map((e)=>{
-                return {
-                    label: e.name,
-                    key: e.enterpriseId,
-                    value: e.enterpriseId
-                }
-            });
-            var info = {
-                options: options,
-                label: "请添加需求的企业"
-            };
+        if(createFor === 1){
+            
 
-            dropdown = <Dropdown key={key} info={info} onChangeForm={onChangeEnterpriseSelection} />
+            dropdown = <Dropdown key={1} info={enterpriseList} onChangeForm={this.props.onChangeEnterpriseSelection} />
         }
 
         let list = null;
@@ -114,7 +105,7 @@ class FomrConfirmation extends React.Component {
                 {view}
                 {dropdown}
                 <div className="operators">
-                <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType) }>我同意提交需求>></a>
+                <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType, enterpriseList.value) }>我同意提交需求>></a>
                 <Link to='/addRequirement' className='calloff'>返回</Link></div>
         </div>
 

@@ -2,7 +2,8 @@ import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import FormConfirmation from '../../Components/Form/FormConfirmation';
 import {addRequirement} from '../../Actions/RequirementActions';
-import {getAllEnterprise} from '../../Actions/AccountActions';
+import {getAllEnterprise, changeEnterpriseSelection} from '../../Actions/AccountActions';
+
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -13,11 +14,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSubmitForm: (list, selectedType) => {
-            dispatch(addRequirement(list, selectedType));
+        onSubmitForm: (list, selectedType, enterpriseId) => {
+            dispatch(addRequirement(list, selectedType, enterpriseId));
         },
         fetchEnterpriseList: () => {
             dispatch(getAllEnterprise());
+        },
+        onChangeEnterpriseSelection: (key, newValue) => {
+            dispatch(changeEnterpriseSelection(key, newValue));
         }
     };
 };
