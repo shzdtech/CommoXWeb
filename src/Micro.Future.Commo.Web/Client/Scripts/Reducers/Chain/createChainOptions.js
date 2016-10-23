@@ -16,7 +16,7 @@ let defaultOptions = [
     {
         id: 2,
         title: '固定位置',
-        key: 'fixedLength',
+        key: 'fixedPosition',
         items: [{
             id: 1,
             name: '是',
@@ -29,7 +29,7 @@ let defaultOptions = [
     }, {
         id: 3,
         title: '最大长度',
-        key: 'fixedLength',   
+        key: 'maxLength',   
         placeholder: '如需要设置最大长度，请输入最大长度',
         type: TEXT
     }]

@@ -147,7 +147,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
             if (chainInfo == null)
             {
-                throw new BadRequestException("请选择需求暂时无法匹配成功");
+                throw new BadRequestException("您所选择的需求暂时无法匹配成功");
             }
 
             return new Models.ChainInfo(chainInfo);
