@@ -394,13 +394,14 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
     });
 
     options.requirements = list;
-
-    return submitCreateChainRequest(options).then(
-        chain => {
-            dispatch(submitCreateChainSuccess(chain));
-            dispatch(push('/chainManager'));
-        },
-        error => ajaxError(dispatch, error)
-    );
-
+    
+    return (dispatch) => {
+        return submitCreateChainRequest(options).then(
+            chain => {
+                dispatch(submitCreateChainSuccess(chain));
+                dispatch(push('/chainManager'));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    }
 }
