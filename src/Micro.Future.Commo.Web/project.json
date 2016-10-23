@@ -105,6 +105,7 @@
       "wwwroot",
       "Views",
       "appsettings.json",
+      "MongoConf.json",
       "web.config"
     ]
   },
