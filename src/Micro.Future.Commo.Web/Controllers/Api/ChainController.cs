@@ -1,5 +1,6 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizInterface;
 using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Web.Exceptions;
 using Micro.Future.Commo.Web.Services;
 using Micro.Future.Commo.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -122,6 +123,34 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public void ReplaceRequirement(int id, int index, int requirementId)
         {
             _chainManager.ReplaceRequirementsForChain(id, new List<int>() { index }, new List<int>() { requirementId });
+        }
+
+        [HttpPost]
+        [Route("Manual")]
+        public Models.ChainInfo CreateChainManually(Models.CreateChainOptions options)
+        {
+            if (options.Requirements == null || options.Requirements.Count == 0)
+            {
+                throw new BadRequestException("请选择需求");
+            }
+
+            RequirementChainInfo chainInfo;
+
+            if (options.Requirements.Contains(-1) || options.Requirements.Contains(0))
+            {
+                chainInfo = _chainManager.AutoMatchRequirements(UserId, options.Requirements, options.FixedLength, options.FixedPosition, options.MaxLength.HasValue ? options.MaxLength.Value : 6);
+            }
+            else
+            {
+                chainInfo = _chainManager.CreateChain(options.Requirements, UserId);
+            }
+
+            if (chainInfo == null)
+            {
+                throw new BadRequestException("请选择需求暂时无法匹配成功");
+            }
+
+            return new Models.ChainInfo(chainInfo);
         }
 
         #region Private

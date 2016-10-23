@@ -5,12 +5,21 @@ import {createChainWithNewRequirement,
     createChainWithSelect,
     createChainWithRandomOne,
     createChainWithRandomMore,
-    removeChainNodeFromTempChain
+    removeChainNodeFromTempChain,
+    cancelSelectRequirement,
+    selectRequirementAction,       
+    selectCreateChainOption,
+    typeCreateChainOption,
+    resetCreateChainOption,
+    submitCreateChain
 } from '../../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        createChainState: state.chain.createChainState
+        createChainState: state.chain.createChainState,
+        selectRequirement: state.chain.selectRequirement,
+        filters: state.selectRequirementFilters,
+        createChainOptions: state.chain.createChainOptions
     };
 };
 
@@ -20,10 +29,18 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(createChainWithNewRequirement());
             dispatch(push("/addRequirement"))
         },
-        selectRequirement: () => dispatch(createChainWithSelect()),
+        createChainWithSelectAction: (searchCriteria) => dispatch(createChainWithSelect(searchCriteria)),
         randomOne: () => dispatch(createChainWithRandomOne()),
         randomMore: () => dispatch(createChainWithRandomMore()),
-        removeChainNode: (index) => dispatch(removeChainNodeFromTempChain(index))
+        removeChainNode: (index) => dispatch(removeChainNodeFromTempChain(index)),
+        cancelSelectRequirement: () => dispatch(cancelSelectRequirement()),
+        selectRequirementAction: (chainId, index, requirement) =>{
+            dispatch(selectRequirementAction(chainId, index, requirement));
+            dispatch(cancelSelectRequirement());
+        },
+        onCreateChainOptionTyped: (formItem, value)=>dispatch(typeCreateChainOption(formItem, value)), 
+        onCreateChainOptionSelected: (formItem, item) => dispatch(selectCreateChainOption(formItem, item)),
+        submitCreateChain: (createChainState, createChainOptions) => dispatch(submitCreateChain(createChainState, createChainOptions))
     }
 };
 

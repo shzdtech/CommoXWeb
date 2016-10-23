@@ -16,6 +16,7 @@ const reducers = combineReducers({
     home,
     filters: filters(commonFilterList),
     myFilters: filters(myFilterList),
+    selectRequirementFilters: filters(commonFilterList),
     filterContentToggled,
     chain,
     requirements,

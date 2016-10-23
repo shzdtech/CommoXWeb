@@ -13,11 +13,20 @@ import {
     REPLACE_REQUIREMENT_SUCCESS,
     ADD_CREATE_CHAIN_ELEMENT,
     REMOVE_CREATE_CHAIN_ELEMENT,
-    CREATE_CHAIN_WITH_NEW_REQUIREMENT} from '../Constants/ActionTypes';
+    CREATE_CHAIN_WITH_NEW_REQUIREMENT,
+    CREATE_CAHIN_WITH_SELECT_REQUIREMENT_SUCCESS,
+    RESET_SELECT_REQUIREMENT,
+    SELECT_REQUIREMENT_TO_CREATE,
+    SELECT_CREATE_CHAIN_OPTION_ITEM,
+    TYPE_CREATE_CHAIN_OPTION_ITEM,
+    RESET_CREATE_CHAIN_OPTION_FORM,
+    CREATE_CHAIN_MANUALLY_SUCCESS
+} from '../Constants/ActionTypes';
+import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
 import {ajaxError, showToastr} from './CommonActions';
-import {showSpinner} from '../Actions';
+import {showSpinner, resetFilter} from '../Actions';
 
 
 //chain actions
@@ -251,9 +260,37 @@ export const createChainWithNewRequirement = () => {
     };
 };
 
-export const createChainWithSelect = () => {
-    return {
+export const fetchSelectRequirementsRequest = (searchCriteria) => {
+    searchCriteria = Object.assign({}, searchCriteria, { pageNo: 0, pageSize: 100 });
+    const request = $.get(HOST + 'api/requirement/SearchResult', searchCriteria);
+    return request;
+};
 
+export const fetchSelectRequirementsSuccess = (requirements) => {
+    return {
+        type: CREATE_CAHIN_WITH_SELECT_REQUIREMENT_SUCCESS,
+        requirements: requirements
+    };
+};
+
+export const createChainWithSelect = (searchCriteria) => {
+    return (dispatch) => {
+        return fetchSelectRequirementsRequest(searchCriteria).then(
+            requirements => {
+                if (requirements && requirements.length > 0) {
+                    dispatch(fetchSelectRequirementsSuccess(requirements));
+                } else {
+                    dispatch(showToastr({
+                        message: "没有需求可供选择",
+                        toastType: 'toast-warning',
+                        show: true
+                    }));
+                    dispatch(resetFilter());
+                }
+
+            },
+            error => ajaxError(dispatch, error)
+        );
     };
 };
 
@@ -280,4 +317,90 @@ export const removeChainNodeFromTempChain = (index) => {
         type: REMOVE_CREATE_CHAIN_ELEMENT,
         index: index
     }
+}
+
+
+export const cancelSelectRequirement = () => {
+    return {
+        type: RESET_SELECT_REQUIREMENT
+    }
+}
+
+export const selectRequirementAction = (chain, index, requirement) => {
+    return {
+        type: SELECT_REQUIREMENT_TO_CREATE,
+        requirement: requirement
+    }
+}
+
+
+export const selectCreateChainOption = (formItem, item) => {
+    return {
+        type: SELECT_CREATE_CHAIN_OPTION_ITEM,
+        formItem: formItem,
+        item: item
+    };
+};
+
+export const typeCreateChainOption = (formItem, value) => {
+    return {
+        type: TYPE_CREATE_CHAIN_OPTION_ITEM,
+        formItem: formItem,
+        value: value
+    }
+};
+
+export const resetCreateChainOption = () => {
+    return {
+        type: RESET_CREATE_CHAIN_OPTION_FORM
+    };
+};
+
+const submitCreateChainRequest = (model) => {
+    const request = $.post(HOST + 'api/chain/Manual', model);
+    return request;
+}
+
+const submitCreateChainSuccess = (chain) => {
+    return {
+        type: CREATE_CHAIN_MANUALLY_SUCCESS
+    }
+}
+
+
+export const submitCreateChain = (createChainState, createChainOptions) => {
+
+    let list = [];
+    createChainState.map((s) => {
+        if (s.type === 1) {
+            list.push(s.requirement.requirementId);
+        } else if (s.type === 2) {
+            list.push(-1);
+        } else if (s.type === 3) {
+            list.push(0);
+        }
+    });
+
+    var options = {};
+    createChainOptions.map((l) => {
+        if (l.type === TEXT) {
+            if (l.value !== undefined && l.value !== null && l.value !== '') {
+                options[l.key] = l.value;
+            }
+        } else {
+            let values = l.items.filter((item) => { return item.selected; }).map((i) => { return i.value; });
+            options[l.key] = values[0];
+        }
+    });
+
+    options.requirements = list;
+
+    return submitCreateChainRequest(options).then(
+        chain => {
+            dispatch(submitCreateChainSuccess(chain));
+            dispatch(push('/chainManager'));
+        },
+        error => ajaxError(dispatch, error)
+    );
+
 }

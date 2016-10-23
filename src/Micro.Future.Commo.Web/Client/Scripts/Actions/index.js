@@ -4,6 +4,7 @@ import {
     TOGGLE_COLLAPSE,
     SELECT_FILTER,
     REMOVE_FILTER,
+    RESET_FILTER,
     TYPE_ITEM,
     CHECK_ITEM,
     SEARCH_BY_FILTER_SUCCESS,
@@ -68,6 +69,12 @@ export const removeFilter = (filter) => {
     return {
         type: REMOVE_FILTER,
         filter: filter
+    };
+};
+
+export const resetFilter = () => {
+    return {
+        type: RESET_FILTER
     };
 };
 

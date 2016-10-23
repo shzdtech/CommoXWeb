@@ -1,4 +1,10 @@
-import {SELECT_FILTER, TYPE_ITEM, REMOVE_FILTER, CHECK_ITEM, TOGGLE_MULTIPLE_SELECTION, TOGGLE_COLLAPSE} from '../Constants/ActionTypes';
+import {SELECT_FILTER,
+    RESET_FILTER,
+    TYPE_ITEM, 
+    REMOVE_FILTER,
+    CHECK_ITEM,
+    TOGGLE_MULTIPLE_SELECTION, 
+    TOGGLE_COLLAPSE} from '../Constants/ActionTypes';
 import filterStatus from './filterStatus';
 
 const selectedItems = (state = [], action) => {
@@ -64,6 +70,8 @@ const filters = (initialFilters) => {
                 return state.map((s) => {
                     return filterReducer(s, action);
                 });
+            case RESET_FILTER:
+                return initialFilters;
             default:
                 return state;
         }
