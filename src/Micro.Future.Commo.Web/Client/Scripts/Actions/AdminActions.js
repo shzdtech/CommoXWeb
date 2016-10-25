@@ -31,16 +31,7 @@ export const changeAcceptanceInfo = (keyName, value) => {
     };
 };
 
-const submitFinanceRequest = (financeInfo) => {
-    var model = {};
-    for (var key in financeInfo) {
-        if (financeInfo[key].value === undefined) {
-            model[key] = null;
-        } else {
-            model[key] = financeInfo[key].value;
-        }
-    }
-
+const submitFinanceRequest = (model) => {
     const request = $.post(HOST + 'api/Finance', model);
     return request;
 };
@@ -53,17 +44,20 @@ const submitFinanceSuccess = (financeInfo) => {
 };
 
 export const submitFinance = (financeInfo) => {
+    var model = {};
+    for (var key in financeInfo) {
+        if (financeInfo[key].value === undefined) {
+            model[key] = null;
+        } else {
+            model[key] = financeInfo[key].value;
+        }
+    }
+
     return (dispatch) => {
         return submitFinanceRequest(financeInfo).then(
             response => {
-                dispatch(showToastr({
-                    message: '产品添加成功，请至首页查看',
-                    toastType: 'toast-success',
-                    show: true,
-                    autoClose: true
-                }));
-                dispatch(submitFinanceSuccess(financeInfo));
-                financeInfo.productId = response;
+                model.productId = response;
+                dispatch(submitFinanceSuccess(model));
             },
             error => ajaxError(dispatch, error)
         );
@@ -72,16 +66,7 @@ export const submitFinance = (financeInfo) => {
 
 
 const submitAcceptanceRequest = (acceptanceInfo) => {
-    var model = {};
-    for (var key in acceptanceInfo) {
-        if (acceptanceInfo[key].value === undefined) {
-            model[key] = null;
-        } else {
-            model[key] = acceptanceInfo[key].value;
-        }
-    }
-
-    const request = $.post(HOST + 'api/Acceptance', model);
+    const request = $.post(HOST + 'api/Acceptance', acceptanceInfo);
     return request;
 };
 
@@ -93,17 +78,20 @@ const submitAcceptanceSuccess = (acceptanceInfo) => {
 };
 
 export const submitAcceptance = (acceptanceInfo) => {
+    var model = {};
+    for (var key in acceptanceInfo) {
+        if (acceptanceInfo[key].value === undefined) {
+            model[key] = null;
+        } else {
+            model[key] = acceptanceInfo[key].value;
+        }
+    }
+
     return (dispatch) => {
-        return submitAcceptanceRequest(acceptanceInfo).then(
+        return submitAcceptanceRequest(model).then(
             response => {
-                dispatch(showToastr({
-                    message: '产品添加成功，请至首页查看',
-                    toastType: 'toast-success',
-                    show: true,
-                    autoClose: true
-                }));
-                acceptanceInfo.acceptanceId = response;
-                dispatch(submitAcceptanceSuccess(acceptanceInfo));
+                model.acceptanceId = response;
+                dispatch(submitAcceptanceSuccess(model));
             },
             error => ajaxError(dispatch, error)
         );
@@ -157,10 +145,10 @@ export const fetchFinance = () => {
     };
 };
 
-const deleteFinanceSuccess = (id)=> {
+const deleteFinanceSuccess = (id) => {
     return {
         type: DELETE_FINANCE_SUCCESS,
-        finaceId: id
+        financeId: id
     }
 }
 
@@ -182,7 +170,7 @@ export const deleteFinance = (id) => {
     };
 };
 
-const deleteAcceptanceSuccess = (id)=> {
+const deleteAcceptanceSuccess = (id) => {
     return {
         type: DELETE_ACCEPTANCE_SUCCESS,
         acceptanceId: id

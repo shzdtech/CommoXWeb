@@ -34,8 +34,8 @@ class FinanceManager extends React.Component {
         let rows = financeInfoList.map((f) => {
             return <tr key={f.productId}>
                 <td>{f.bankAddress}</td>
-                <td>{f.productTerm} </td>
-                <td>{f.productYield} </td>
+                <td>{f.productTerm}天 </td>
+                <td>{f.productYield}% </td>
                 <td><span className='btn' onClick={()=> this.props.onDelete(f.productId)}>删除</span></td>
             </tr>
         })

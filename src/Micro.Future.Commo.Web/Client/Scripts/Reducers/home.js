@@ -55,14 +55,14 @@ const home = (state = { requirements: [], financeInfoList: [], acceptanceList: [
         case DELETE_ACCEPTANCE_SUCCESS: {
             return Object.assign({}, state, {
                 acceptanceList: state.acceptanceList.filter((f) => {
-                    f.acceptanceId != action.id
+                    return f.acceptanceId !== action.acceptanceId
                 })
             });
         }
         case DELETE_FINANCE_SUCCESS: {
              return Object.assign({}, state, {
                 financeInfoList: state.financeInfoList.filter((f) => {
-                    f.acceptanceId != action.id
+                    return f.productId !== action.financeId
                 })
             });
         }

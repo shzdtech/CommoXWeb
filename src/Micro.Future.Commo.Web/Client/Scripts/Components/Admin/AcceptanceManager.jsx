@@ -34,7 +34,7 @@ class AcceptanceManager extends React.Component {
         let rows = acceptanceList.map((acceptance) => {
             return <tr key={acceptance.acceptanceId}>
                 <td className='left'>{acceptance.bankName}</td>
-                <td>{acceptance.amount}</td>
+                <td>{acceptance.amount}万</td>
                 <td>{acceptance.acceptanceType}</td>
                 <td>{acceptance.drawTime}</td>
                 <td>{acceptance.dueDate}</td>

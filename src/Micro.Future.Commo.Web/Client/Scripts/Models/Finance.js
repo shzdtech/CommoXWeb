@@ -2,7 +2,7 @@ export default {
     bankAddress: {
         label: '银行所在地',
         type: 'text',
-        legth: 'medium',
+        length: 'medium',
         key: 'bankAddress',
         placeholder: '请输入银行所在地',
         isRequired: true
@@ -10,7 +10,7 @@ export default {
     productTerm: {
         label: '产品期限(天)',
         type: 'number',
-        legth: 'medium',
+        length: 'medium',
         key: 'productTerm',
         placeholder: '请输入产品期限',
         isRequired: true
@@ -18,7 +18,7 @@ export default {
     productYield: {
         label: '年华收益率(%)',
         type: 'number',
-        legth: 'medium',
+        length: 'medium',
         key: 'productYield',
         placeholder: '请输入年华收益率',
         isRequired: true
