@@ -285,7 +285,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Authorize(Roles = "Admin")]
         public IEnumerable<EnterpriseInfo> GetAll()
         {
-            var result = _enterpriseManager.QueryEnterprises(null, null);
+            var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.APPROVED);
             if (result.HasError)
             {
                 throw new BadRequestException(result.Error.Message);

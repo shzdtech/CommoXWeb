@@ -71,7 +71,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             else
             {
                 var user = await _userManager.GetUserAsync(User);
-                requirement.EnterpriseId = user.EnterpriseId;
+                requirementInfo.EnterpriseId = user.EnterpriseId;
             }
 
             
