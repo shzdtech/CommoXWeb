@@ -22,9 +22,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("")]
-        public void Create(AcceptanceInfo info)
+        public int Create(AcceptanceInfo info)
         {
-            _acceptanceManager.CreateAcceptance(info);
+            return _acceptanceManager.CreateAcceptance(info);
         }
 
         [HttpGet]
@@ -38,6 +38,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             return list;
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public void Delete(int id)
+        {
+            _acceptanceManager.DeleteAcceptance(id);
         }
     }
 }

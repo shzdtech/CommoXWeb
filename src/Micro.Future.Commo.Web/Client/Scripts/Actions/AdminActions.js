@@ -6,7 +6,9 @@ import {
     CHANGE_FINANCE_FORM,
     SUBMIT_FINANCE_FORM,
     SUBMIT_FINANCE_FORM_SUCCESS,
-    FETCH_FINANCE_LIST_SUCCESS
+    FETCH_FINANCE_LIST_SUCCESS,
+    DELETE_ACCEPTANCE_SUCCESS,
+    DELETE_FINANCE_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -43,9 +45,10 @@ const submitFinanceRequest = (financeInfo) => {
     return request;
 };
 
-const submitFinanceSuccess = () => {
+const submitFinanceSuccess = (financeInfo) => {
     return {
-        type: SUBMIT_FINANCE_FORM_SUCCESS
+        type: SUBMIT_FINANCE_FORM_SUCCESS,
+        financeInfo: financeInfo
     };
 };
 
@@ -59,7 +62,8 @@ export const submitFinance = (financeInfo) => {
                     show: true,
                     autoClose: true
                 }));
-                dispatch(submitFinanceSuccess(response));
+                dispatch(submitFinanceSuccess(financeInfo));
+                financeInfo.productId = response;
             },
             error => ajaxError(dispatch, error)
         );
@@ -81,15 +85,16 @@ const submitAcceptanceRequest = (acceptanceInfo) => {
     return request;
 };
 
-const submitAcceptanceSuccess = () => {
+const submitAcceptanceSuccess = (acceptanceInfo) => {
     return {
-        type: SUBMIT_ACCEPTANCE_FORM_SUCCESS
+        type: SUBMIT_ACCEPTANCE_FORM_SUCCESS,
+        acceptanceInfo: acceptanceInfo
     };
 };
 
-export const submitAcceptance = (financeInfo) => {
+export const submitAcceptance = (acceptanceInfo) => {
     return (dispatch) => {
-        return submitAcceptanceRequest(financeInfo).then(
+        return submitAcceptanceRequest(acceptanceInfo).then(
             response => {
                 dispatch(showToastr({
                     message: '产品添加成功，请至首页查看',
@@ -97,7 +102,8 @@ export const submitAcceptance = (financeInfo) => {
                     show: true,
                     autoClose: true
                 }));
-                dispatch(submitAcceptanceSuccess(response));
+                acceptanceInfo.acceptanceId = response;
+                dispatch(submitAcceptanceSuccess(acceptanceInfo));
             },
             error => ajaxError(dispatch, error)
         );
@@ -145,6 +151,56 @@ export const fetchFinance = () => {
         return fetchFinanceRequest().then(
             response => {
                 dispatch(fetchFinanceSuccess(response));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+const deleteFinanceSuccess = (id)=> {
+    return {
+        type: DELETE_FINANCE_SUCCESS,
+        finaceId: id
+    }
+}
+
+const deleteFinanceRequest = (id) => {
+    return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Finance/' + id
+    });
+}
+
+export const deleteFinance = (id) => {
+    return (dispatch) => {
+        return deleteFinanceRequest(id).then(
+            response => {
+                dispatch(deleteFinanceSuccess(id));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+const deleteAcceptanceSuccess = (id)=> {
+    return {
+        type: DELETE_ACCEPTANCE_SUCCESS,
+        acceptanceId: id
+    }
+}
+
+const deleteAcceptanceRequest = (id) => {
+    return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Acceptance/' + id
+    });
+}
+
+export const deleteAcceptance = (id) => {
+    return (dispatch) => {
+        return deleteAcceptanceRequest(id).then(
+            response => {
+                dispatch(deleteAcceptanceSuccess(id));
             },
             error => ajaxError(dispatch, error)
         );

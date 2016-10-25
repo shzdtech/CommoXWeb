@@ -11,9 +11,6 @@ const financeInfo = (state = finance, action) => {
             newState[action.keyName] = action.value;
             return newState;
         }
-        case SUBMIT_FINANCE_FORM_SUCCESS: {
-            return enterpriseForm;
-        }
         default:
             return state;
     }

@@ -22,9 +22,9 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("")]
-        public void Create(FinancialProductInfo info)
+        public int Create(FinancialProductInfo info)
         {
-            _financialProductManager.CreateFinancialProduct(info);
+            return _financialProductManager.CreateFinancialProduct(info);
         }
 
         [HttpGet]
@@ -38,6 +38,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             return list;
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public void Delete(int id)
+        {
+            _financialProductManager.DeleteFinancialProduct(id);
         }
     }
 }

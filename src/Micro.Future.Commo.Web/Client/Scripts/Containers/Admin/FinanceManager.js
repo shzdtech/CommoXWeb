@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FinanceManager from '../../Components/Admin/FinanceManager';
-import {changeFinanceInfo, submitFinance} from '../../Actions/AdminActions';
+import {changeFinanceInfo, submitFinance, deleteFinance, fetchFinance} from '../../Actions/AdminActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        financeInfo: state.admin.financeInfo
+        financeInfo: state.admin.financeInfo,
+        financeInfoList: state.home.financeInfoList || []
     }
 }
 
@@ -16,6 +17,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         onSubmit: (financeInfo) => {
             dispatch(submitFinance(financeInfo));
+        },
+        onDelete: (id) => {
+            dispatch(deleteFinance(id));
+        },
+        fetchFinance : () => {
+            dispatch(fetchFinance());
         }
     };
 };

@@ -435,3 +435,26 @@
     }
 
 }
+
+.finance-list {
+    table{
+        margin: 0 auto;
+        
+        thead{
+            background: #34495e;
+            color: $white;
+            font-weight: bold;
+
+            td{
+                padding: 10px 15px;
+            }
+        }
+
+        tbody{
+            color: $normal-font-color;
+            td{
+                padding: 10px 15px;
+            }
+        }
+    }
+}
