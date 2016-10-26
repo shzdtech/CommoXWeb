@@ -98,7 +98,7 @@ class CreateChain extends React.Component {
                 <div className="btn" onClick={this.props.createRequirement}>创建</div>
                 <div className="btn" onClick={() => this.props.createChainWithSelectAction({}) }>选择</div>
                 <div className="btn" onClick={this.props.randomOne}>随机匹配一个</div>
-                <div className="btn" onClick={this.props.randomMore}>随机匹配多个</div>
+                <div className="btn" onClick={this.props.randomMore}>随机匹配任意个</div>
             </div>
             <div className='new-chain-list'>
                 {list}

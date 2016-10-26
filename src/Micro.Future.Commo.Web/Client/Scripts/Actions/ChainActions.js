@@ -327,9 +327,30 @@ export const cancelSelectRequirement = () => {
 }
 
 export const selectRequirementAction = (chain, index, requirement) => {
-    return {
-        type: SELECT_REQUIREMENT_TO_CREATE,
-        requirement: requirement
+
+    return (dispatch, getState) => {
+        const state = getState();
+        const createChainState = state.chain.createChainState;
+        if (requirement.type === 1 && createChainState.length > 0 && createChainState[0].requirement && createChainState[0].requirement.type == 1) {
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个采购客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        } else if (requirement.type === 2 && createChainState.length > 0 && 
+            createChainState[createChainState.length - 1 ].requirement
+         && createChainState[createChainState.length - 1].requirement.type == 2) {
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个销售客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        }
+
+        return dispatch({
+            type: SELECT_REQUIREMENT_TO_CREATE,
+            requirement: requirement
+        })
     }
 }
 
@@ -381,6 +402,17 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
         }
     });
 
+    if(createChainState.length > 0){
+        if((createChainState[0].type === 1 && createChainState[0].requirement.type !== 1) || createChainState[0].type === 3){
+            list.unshift(-1);
+        }
+
+        if((createChainState[createChainState.length -1].type === 1 && 
+        createChainState[createChainState.length -1].requirement.type !== 2) || createChainState[createChainState.length -1 ].type === 3){
+            list.push(-1);
+        }
+    }
+
     var options = {};
     createChainOptions.map((l) => {
         if (l.type === TEXT) {
@@ -394,7 +426,7 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
     });
 
     options.requirements = list;
-    
+
     return (dispatch) => {
         return submitCreateChainRequest(options).then(
             chain => {

@@ -13,8 +13,8 @@ import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux';
-import {ajaxError} from './CommonActions';
-import {resetForm} from '../Actions';
+import {ajaxError, showToastr} from './CommonActions';
+import {resetForm, showSpinner} from '../Actions';
 //requirement
 export const addRequirementRequest = (list, selectedType, enterpriseId) => {
     let requirement = {};
@@ -76,14 +76,31 @@ export const addRequirementForCreateChainSuccess = (requirement) => {
 }
 
 export const addRequirement = (list, selectedType, enterpriseId) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         return addRequirementRequest(list, selectedType, enterpriseId).then(
             requirement => {
                 dispatch(resetForm());
                 if (enterpriseId) {
-                    dispatch(addRequirementForCreateChainSuccess(requirement));
+                    const createChainState = getState().chain.createChainState;
+                    if (requirement.type === 1 && createChainState.length > 0 && createChainState[0].requirement && createChainState[0].requirement.type == 1) {
+                        dispatch(showToastr({
+                            message: "一条匹配链中只可以存在一个采购客户",
+                            toastType: 'toast-error',
+                            show: true
+                        }));
+                    } else if (requirement.type === 2 && createChainState.length > 0 &&
+                        createChainState[createChainState.length - 1].requirement
+                        && createChainState[createChainState.length - 1].requirement.type == 2) {
+                        dispatch(showToastr({
+                            message: "一条匹配链中只可以存在一个销售客户",
+                            toastType: 'toast-error',
+                            show: true
+                        }));
+                    } else {
+                        dispatch(addRequirementForCreateChainSuccess(requirement));
+                    }
                     dispatch(push('/createChain'));
-                } else {            
+                } else {
                     dispatch(addRequirementSuccess(requirement));
                     dispatch(push('/requirements'));
                 }
