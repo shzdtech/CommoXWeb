@@ -77,35 +77,45 @@ export const addRequirementForCreateChainSuccess = (requirement) => {
 
 export const addRequirement = (list, selectedType, enterpriseId) => {
     return (dispatch, getState) => {
+        const createChainState = getState().chain.createChainState;
+        if (selectedType === 1 && createChainState.length > 0 && createChainState[0].requirement && createChainState[0].requirement.type == 1) {
+            dispatch(push('/createChain'));
+            dispatch(resetForm());
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个采购客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        } else if (selectedType === 2 && createChainState.length > 0 &&
+            createChainState[createChainState.length - 1].requirement
+            && createChainState[createChainState.length - 1].requirement.type == 2) {
+            dispatch(push('/createChain'));
+            dispatch(resetForm());
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个销售客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        }
+        dispatch(showSpinner(true));
+
         return addRequirementRequest(list, selectedType, enterpriseId).then(
             requirement => {
+                dispatch(showSpinner(false));
                 dispatch(resetForm());
                 if (enterpriseId) {
-                    const createChainState = getState().chain.createChainState;
-                    if (requirement.type === 1 && createChainState.length > 0 && createChainState[0].requirement && createChainState[0].requirement.type == 1) {
-                        dispatch(showToastr({
-                            message: "一条匹配链中只可以存在一个采购客户",
-                            toastType: 'toast-error',
-                            show: true
-                        }));
-                    } else if (requirement.type === 2 && createChainState.length > 0 &&
-                        createChainState[createChainState.length - 1].requirement
-                        && createChainState[createChainState.length - 1].requirement.type == 2) {
-                        dispatch(showToastr({
-                            message: "一条匹配链中只可以存在一个销售客户",
-                            toastType: 'toast-error',
-                            show: true
-                        }));
-                    } else {
-                        dispatch(addRequirementForCreateChainSuccess(requirement));
-                    }
+                    dispatch(addRequirementForCreateChainSuccess(requirement));
+
                     dispatch(push('/createChain'));
                 } else {
                     dispatch(addRequirementSuccess(requirement));
                     dispatch(push('/requirements'));
                 }
             },
-            error => ajaxError(dispatch, error)
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
         );
     };
 };
