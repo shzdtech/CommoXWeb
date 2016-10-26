@@ -1,6 +1,11 @@
 .forms {
     padding: 0 20px;
 
+    .back-to {
+        padding: 0 0 5px 0;
+        border-bottom: 1px solid $normal-font-color;
+    }
+
     .form-type {
         color: $normal-font-color;
         padding: 10px 0;

@@ -25,8 +25,6 @@ class FomrConfirmation extends React.Component {
 
         let dropdown= null;
         if(createFor === 1){
-            
-
             dropdown = <Dropdown key={1} info={enterpriseList} onChangeForm={this.props.onChangeEnterpriseSelection} />
         }
 
