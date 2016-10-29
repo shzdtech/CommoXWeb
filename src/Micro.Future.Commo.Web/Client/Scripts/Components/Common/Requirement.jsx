@@ -24,6 +24,7 @@ class Requirement extends React.Component {
             tradeProfit,
             businessRange,
             invoiceValue,
+            invoicedQuantity,
             invoiceIssueDateTime,
             invoiceTransferMode,
             createTime
@@ -47,7 +48,8 @@ class Requirement extends React.Component {
                 {tradeAmount ? <div className='requirement-item'><span className='title'>合同总金额：</span><span>{tradeAmount}</span></div> : null}
                 {tradeProfit ? <div className='requirement-item'><span className='title'>合同利润：</span><span>{tradeProfit}</span></div> : null}
                 {businessRange ? <div className='requirement-item'><span className='title'>业务范围：</span><span>{businessRange}</span></div> : null}
-                {invoiceValue ? <div className='requirement-item'><span className='title'>开票量：</span><span>{invoiceValue}</span></div> : null}
+                {invoiceValue ? <div className='requirement-item'><span className='title'>开票面额：</span><span>{invoiceValue}</span></div> : null}
+                {invoicedQuantity ? <div className='requirement-item'><span className='title'>开票量：</span><span>{invoicedQuantity}</span></div> : null}
                 {invoiceIssueDateTime ? <div className='requirement-item'><span className='title'>发票开具时间：</span><span>{invoiceIssueDateTime}</span></div> : null}
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
                 {createTime ? <div className='requirement-item'><span className='title'>创建时间：</span><span>{new Date(createTime).toLocaleString() }</span></div> : null}

@@ -30,6 +30,7 @@ export const addRequirementRequest = (list, selectedType, enterpriseId) => {
                     requirement.rules.push({
                         ruleType: l.ruleType,
                         key: l.title,
+                        directionType: l.ruleDirectionType,
                         value: l.value,
                         operationType: 2
                     });

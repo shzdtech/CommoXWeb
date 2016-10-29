@@ -42,6 +42,22 @@ export default {
             }
         ]
     },
+    yearSubsidies:{
+        label: '年化贴息(%)',
+        type: 'text',
+        length: 'medium',
+        key: 'yearSubsidies',
+        placeholder: '请输入年化贴息',
+        isRequired: true
+    },
+    subsidies:{
+        label: '贴息(%)',
+        type: 'text',
+        length: 'medium',
+        key: 'subsidies',
+        placeholder: '请输入贴息',
+        isRequired: true
+    },
     drawTime: {
         label: '出票时间',
         type: 'date',

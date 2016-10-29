@@ -553,6 +553,7 @@ export default {
             key: 'enterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
+            ruleDirectionType: 1, 
             category: Category.Contract,
             items: [...enterpriseTypes],
             multipleSelection: true
@@ -560,6 +561,7 @@ export default {
             id: 3,
             title: '合同下游企业需求',
             key: 'enterpriseType',
+            ruleDirectionType: 2, 
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
             category: Category.Contract,
@@ -636,7 +638,6 @@ export default {
             filterProperty: FilterProperty.Requirement,
             key: 'productName',
             category: Category.Product,
-            isRequired: true,
             items: products,
             multipleSelection: true
         }, {
@@ -645,7 +646,6 @@ export default {
             filterProperty: FilterProperty.Requirement,
             key: 'productTransferMode',
             category: Category.Product,
-            isRequired: true,
             items: [{
                 id: 1,
                 name: '入库过户',

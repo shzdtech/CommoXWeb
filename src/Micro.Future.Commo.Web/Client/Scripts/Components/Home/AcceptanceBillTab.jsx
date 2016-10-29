@@ -21,8 +21,8 @@ class AcceptanceBillTab extends React.Component {
                 <td>{acceptance.acceptanceType}</td>
                 <td>{acceptance.drawTime}</td>
                 <td>{acceptance.dueDate}</td>
-                <td>6%</td>
-                <td>1.2%</td>
+                <td>{acceptance.yearSubsidies}%</td>
+                <td>{acceptance.subsidies}%</td>
             </tr>
         });
         return <div className='acceptance-bill-tab'>
@@ -48,10 +48,10 @@ class AcceptanceBillTab extends React.Component {
                                 到期日
                             </td>
                             <td>
-                                年化贴息
+                                年化贴息(%)
                             </td>
                             <td>
-                                贴息
+                                贴息(%)
                             </td>
                         </tr>
                     </thead>

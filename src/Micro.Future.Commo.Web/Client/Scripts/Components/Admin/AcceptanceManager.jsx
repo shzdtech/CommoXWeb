@@ -38,8 +38,8 @@ class AcceptanceManager extends React.Component {
                 <td>{acceptance.acceptanceType}</td>
                 <td>{acceptance.drawTime}</td>
                 <td>{acceptance.dueDate}</td>
-                <td></td>
-                <td></td>
+                <td>{acceptance.yearSubsidies}%</td>
+                <td>{acceptance.subsidies}%</td>
                 <td><span className='btn' onClick={() => this.props.onDelete(acceptance.acceptanceId) }>删除</span></td>
             </tr>
         });
@@ -70,10 +70,10 @@ class AcceptanceManager extends React.Component {
                                 到期日
                             </td>
                             <td>
-                                年化贴息
+                                年化贴息(%)
                             </td>
                             <td>
-                                贴息
+                                贴息(%)
                             </td>
                             <td>
                             </td>
