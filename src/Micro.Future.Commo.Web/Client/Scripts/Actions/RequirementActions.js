@@ -44,6 +44,7 @@ export const addRequirementRequest = (list, selectedType, enterpriseId) => {
                 requirement.rules.push({
                     key: l.key,
                     value: values.join(','),
+                    directionType: l.ruleDirectionType,
                     operationType: 1
                 });
             }
