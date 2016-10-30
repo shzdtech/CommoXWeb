@@ -21,11 +21,7 @@ let defaultOptions = [
             id: 1,
             name: '是',
             value: true
-        }, {
-                id: 2,
-                name: '否',
-                value: true
-            }]
+        }]
     }, {
         id: 3,
         title: '最大长度',

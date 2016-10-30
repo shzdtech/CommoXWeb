@@ -18,9 +18,9 @@ class AcceptanceBillTab extends React.Component {
             return <tr key={acceptance.acceptanceId}>
                 <td className='left'>{acceptance.bankName}</td>
                 <td>{acceptance.amount}</td>
-                <td>{acceptance.acceptanceType}</td>
-                <td>{acceptance.drawTime}</td>
-                <td>{acceptance.dueDate}</td>
+                <td>{acceptance.acceptanceType === 1 ? '电票' : '纸票'}</td>
+                <td>{new Date(acceptance.drawTime).toLocaleDateString()}</td>
+                <td>{new Date(acceptance.dueDate).toLocaleDateString()}</td>
                 <td>{acceptance.yearSubsidies}%</td>
                 <td>{acceptance.subsidies}%</td>
             </tr>

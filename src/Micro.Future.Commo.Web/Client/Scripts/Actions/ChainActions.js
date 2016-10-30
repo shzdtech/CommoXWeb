@@ -337,9 +337,9 @@ export const selectRequirementAction = (chain, index, requirement) => {
                 toastType: 'toast-error',
                 show: true
             }));
-        } else if (requirement.type === 2 && createChainState.length > 0 && 
-            createChainState[createChainState.length - 1 ].requirement
-         && createChainState[createChainState.length - 1].requirement.type == 2) {
+        } else if (requirement.type === 2 && createChainState.length > 0 &&
+            createChainState[createChainState.length - 1].requirement
+            && createChainState[createChainState.length - 1].requirement.type == 2) {
             return dispatch(showToastr({
                 message: "一条匹配链中只可以存在一个销售客户",
                 toastType: 'toast-error',
@@ -402,13 +402,13 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
         }
     });
 
-    if(createChainState.length > 0){
-        if((createChainState[0].type === 1 && createChainState[0].requirement.type !== 1) || createChainState[0].type === 3){
+    if (createChainState.length > 0) {
+        if ((createChainState[0].type === 1 && createChainState[0].requirement.type !== 1) || createChainState[0].type === 3) {
             list.unshift(-1);
         }
 
-        if((createChainState[createChainState.length -1].type === 1 && 
-        createChainState[createChainState.length -1].requirement.type !== 2) || createChainState[createChainState.length -1 ].type === 3){
+        if ((createChainState[createChainState.length - 1].type === 1 &&
+            createChainState[createChainState.length - 1].requirement.type !== 2) || createChainState[createChainState.length - 1].type === 3) {
             list.push(-1);
         }
     }
@@ -432,6 +432,11 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
             chain => {
                 dispatch(submitCreateChainSuccess(chain));
                 dispatch(push('/chainManager'));
+                dispatch(selectChainListType({
+                    id: 2,
+                    name: '已锁定',
+                    value: 1
+                }));
             },
             error => ajaxError(dispatch, error)
         );
