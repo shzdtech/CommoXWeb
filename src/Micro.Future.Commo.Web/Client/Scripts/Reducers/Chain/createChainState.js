@@ -1,5 +1,5 @@
 import { ADD_CREATE_CHAIN_ELEMENT, REMOVE_CREATE_CHAIN_ELEMENT, ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
-    SELECT_REQUIREMENT_TO_CREATE} from '../../Constants/ActionTypes';
+    SELECT_REQUIREMENT_TO_CREATE, RESET_CREATE_CHAIN} from '../../Constants/ActionTypes';
 
 const createChainState = (state = [], action) => {
     switch (action.type) {
@@ -27,6 +27,9 @@ const createChainState = (state = [], action) => {
             } else {
                 return [...state, { type: 1, requirement: action.requirement }];
             }
+        }
+        case RESET_CREATE_CHAIN:{
+            return [];
         }
         default:
             return state;

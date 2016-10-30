@@ -20,7 +20,8 @@ import {
     SELECT_CREATE_CHAIN_OPTION_ITEM,
     TYPE_CREATE_CHAIN_OPTION_ITEM,
     RESET_CREATE_CHAIN_OPTION_FORM,
-    CREATE_CHAIN_MANUALLY_SUCCESS
+    CREATE_CHAIN_MANUALLY_SUCCESS,
+    RESET_CREATE_CHAIN
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -437,8 +438,16 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
                     name: '已锁定',
                     value: 1
                 }));
+                dispatch(resetCreateChain());
+                dispatch(resetCreateChainOption())
             },
             error => ajaxError(dispatch, error)
         );
     }
 }
+
+export const resetCreateChain = ()=>{
+    return {
+        type: RESET_CREATE_CHAIN
+    };
+};
