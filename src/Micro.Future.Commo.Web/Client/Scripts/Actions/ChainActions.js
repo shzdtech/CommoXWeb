@@ -75,9 +75,16 @@ export const fetchChainsByTypeRequest = (typeId) => {
 
 export const fetchChainsByType = (typeId) => {
     return (dispatch) => {
+        dispatch(showSpinner(true));
         return fetchChainsByTypeRequest(typeId).then(
-            chains => dispatch(fetchChainsSuccess(chains)),
-            error => dispatch(fetchChainsFailure(error))
+            chains => {
+                dispatch(showSpinner(false));
+                dispatch(fetchChainsSuccess(chains))
+            },
+            error => {
+                dispatch(showSpinner(false));
+                dispatch(fetchChainsFailure(error))
+            }
         );
     };
 };
@@ -279,7 +286,7 @@ export const createChainWithSelect = (searchCriteria) => {
         return fetchSelectRequirementsRequest(searchCriteria).then(
             requirements => {
                 if (requirements && requirements.length > 0) {
-                    dispatch(fetchSelectRequirementsSuccess(requirements));
+                    dispatch(fetchSelectRequirementsSuccess(requirements.filter((r) => { return r.state > 0; })));
                 } else {
                     dispatch(showToastr({
                         message: "没有需求可供选择",
@@ -446,7 +453,7 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
     }
 }
 
-export const resetCreateChain = ()=>{
+export const resetCreateChain = () => {
     return {
         type: RESET_CREATE_CHAIN
     };

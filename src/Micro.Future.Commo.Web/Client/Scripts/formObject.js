@@ -269,10 +269,10 @@ export default {
             type: TEXT
         }, {
             id: 13,
-            title: '上游企业类型',
+            title: '下游企业类型',
             key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
-            ruleDirectionType: 1, 
+            ruleDirectionType: 2, 
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
 
@@ -523,10 +523,10 @@ export default {
             type: TEXT
         }, {
             id: 20,
-            title: '合同下游企业类型',
+            title: '合同上游企业类型',
             key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
-            ruleDirectionType: 2, 
+            ruleDirectionType: 1, 
             ruleType: RuleType.Enterprise,
             category: Category.Enterprise,
             items: [...enterpriseTypes],
@@ -552,7 +552,7 @@ export default {
             type: TEXT
         }, {
             id: 2,
-            title: '合同上游企业需求',
+            title: '合同上游企业类型',
             key: 'EnterpriseType',
             filterProperty: FilterProperty.Rule,
             ruleType: RuleType.Enterprise,
@@ -562,7 +562,7 @@ export default {
             multipleSelection: true
         }, {
             id: 3,
-            title: '合同下游企业需求',
+            title: '合同下游企业类型',
             key: 'EnterpriseType',
             ruleDirectionType: 2, 
             filterProperty: FilterProperty.Rule,
