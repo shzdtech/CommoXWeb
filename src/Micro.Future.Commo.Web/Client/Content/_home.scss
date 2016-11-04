@@ -180,4 +180,14 @@
             }
         }
     }
+
+    .basis-tab{
+        padding: 40px 40px 60px 40px;;
+        background: $white;
+
+        .basis-chart{
+            height: 500px;
+            width: 100%;
+        }
+    }
 }
