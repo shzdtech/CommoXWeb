@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react';
 import InputFormItem from './InputFormItem';
+import DatePickerFormItem from './DatePickerFormItem';
 import FormItem from './FormItem';
 import Category from '../../Models/Category';
-import {TEXT} from '../../Constants/FilterTypes';
+import {TEXT, DATE} from '../../Constants/FilterTypes';
 import {Link} from 'react-router';
 
 class FormContent extends React.Component {
@@ -55,6 +56,8 @@ class FormContent extends React.Component {
                                     disabled = true;
                                 }
                                 return <InputFormItem key={r.id} formItem = {r} onFormItemTyped={onFormItemTyped}/>;
+                            }else if(r.type === DATE){
+                                return <DatePickerFormItem key={r.id} formItem = {r} onFormItemTyped={onFormItemTyped}/>;
                             }
                             if (r.isRequired && r.items.filter((f) => { return f.selected }).length === 0) {
                                 disabled = true;

@@ -162,7 +162,7 @@ export default {
             key: 'paymentDateTime',
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
-            type: TEXT
+            type: DATE
         }, {
             id: 2,
             title: '支付方式',
@@ -317,7 +317,7 @@ export default {
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            type: DATE
         }, {
             id: 18,
             title: '发票交接方式',
@@ -513,7 +513,7 @@ export default {
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            type: DATE
         }, {
             id: 19,
             title: '发票交接方式',
@@ -709,7 +709,7 @@ export default {
             key: 'invoiceIssueDateTime',
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            type: DATE
         }, {
             id: 18,
             title: '发票交接方式',

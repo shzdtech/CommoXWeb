@@ -19,7 +19,7 @@ class DateInput extends React.Component {
             requiredNotation = <span className="required"></span>;
         }
 
-        let selectedDate = moment();
+        let selectedDate = null;
         if(info.value){
             selectedDate = moment(info.value);
         }

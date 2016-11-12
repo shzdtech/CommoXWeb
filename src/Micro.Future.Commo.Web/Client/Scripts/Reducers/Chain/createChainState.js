@@ -23,7 +23,7 @@ const createChainState = (state = [], action) => {
                 state[state.length - 1].requirement
                 && state[state.length - 1].requirement.type == 2) {
                 return [...state.slice(0, state.length - 1),
-                    { type: 1, requirement: action.requirement }, state[length - 1]];
+                    { type: 1, requirement: action.requirement }, state[state.length - 1]];
             } else {
                 return [...state, { type: 1, requirement: action.requirement }];
             }
