@@ -7,6 +7,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Containers/Home';
 import Header from './Containers/Header';
+import Footer from './Components/Common/Footer';
 import ChainList from './Containers/Chain/ChainList';
 import ChainListManger from './Containers/Chain/ChainListManager';
 import CreateChain from './Containers/Chain/CreateChain';
@@ -42,6 +43,7 @@ class App extends React.Component{
         <div className={className}>
             {this.props.children}
         </div>
+        <Footer />
         </div>
     }
 }
@@ -85,7 +87,7 @@ ReactDOM.render(
                 <Route path="/createChain" component={CreateChain} />
                 <Route path="/acceptanceManage" component={AcceptanceManager} />
                 <Route path="/financeManage" component={FinanceManager} />
-                <Route path="*" component={Requirements} />
+                <Route path="*" component={Home} />
             </Route>
         </Router>
     </Provider>,

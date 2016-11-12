@@ -269,7 +269,7 @@ export const createChainWithNewRequirement = () => {
 };
 
 export const fetchSelectRequirementsRequest = (searchCriteria) => {
-    searchCriteria = Object.assign({}, searchCriteria, { pageNo: 0, pageSize: 100 });
+    searchCriteria = Object.assign({}, searchCriteria, { pageNo: 0, pageSize: 10000 });
     const request = $.get(HOST + 'api/requirement/SearchResult', searchCriteria);
     return request;
 };

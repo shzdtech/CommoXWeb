@@ -54,7 +54,7 @@ export const submitFinance = (financeInfo) => {
     }
 
     return (dispatch) => {
-        return submitFinanceRequest(financeInfo).then(
+        return submitFinanceRequest(model).then(
             response => {
                 model.productId = response;
                 dispatch(submitFinanceSuccess(model));
