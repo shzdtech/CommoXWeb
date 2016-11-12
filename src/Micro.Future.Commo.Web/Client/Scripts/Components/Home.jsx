@@ -18,7 +18,6 @@ class Home extends React.Component {
             <BasisTab />
             <FinanceTab />
             <AcceptanceBillTab />
-            <RequirementTab {...this.props}/>
         </div>;
     }
 }
