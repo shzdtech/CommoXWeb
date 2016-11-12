@@ -2,6 +2,7 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { Link} from 'react-router';
 import Input from '../Account/Input';
+import DateInput from '../Account/DateInput';
 import Dropdown from '../Account/Dropdown';
 
 class AcceptanceManager extends React.Component {
@@ -24,9 +25,11 @@ class AcceptanceManager extends React.Component {
             if ((info.isRequired && (info.value === undefined || info.value === null || info.value === ''))) {
                 disabled = true;
             }
-            if (info.type === 'text' || info.type === 'date' || info.type === 'number' || info.type === 'password') {
+            if (info.type === 'text' || info.type === 'number' || info.type === 'password') {
                 list.push(<Input key={key} info={info} onChangeForm={onChangeForm} />);
-            } else if (info.type === 'select') {
+            } else if(info.type === 'date'){
+                 list.push(<DateInput key={key} info={info} onChangeForm={onChangeForm} />);
+            }else if (info.type === 'select') {
                 list.push(<Dropdown key={key} info={info} onChangeForm={onChangeForm} />);
             }
         }
