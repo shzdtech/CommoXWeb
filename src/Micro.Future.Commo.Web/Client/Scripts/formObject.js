@@ -1,4 +1,4 @@
-import {TEXT, DATE} from './Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from './Constants/FilterTypes';
 import RequirementType from './Models/RequirementType';
 import FilterProperty from './Models/FilterProperty';
 import RuleType from './Models/RuleType';
@@ -163,6 +163,13 @@ export default {
             filterProperty: FilterProperty.Requirement,
             category: Category.Capital,
             type: DATE
+        },  {
+            id: 20,
+            title: '资金金额',
+            key: 'paymentAmount',
+            filterProperty: FilterProperty.Requirement,
+            category: Category.Capital,
+            type: LABEL
         }, {
             id: 2,
             title: '支付方式',

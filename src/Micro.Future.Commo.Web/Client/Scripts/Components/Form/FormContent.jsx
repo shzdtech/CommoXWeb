@@ -2,8 +2,9 @@ import React, {PropTypes} from 'react';
 import InputFormItem from './InputFormItem';
 import DatePickerFormItem from './DatePickerFormItem';
 import FormItem from './FormItem';
+import LabelItem from './LabelItem';
 import Category from '../../Models/Category';
-import {TEXT, DATE} from '../../Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from '../../Constants/FilterTypes';
 import {Link} from 'react-router';
 
 class FormContent extends React.Component {
@@ -48,6 +49,10 @@ class FormContent extends React.Component {
                     <div className='form-item-list'>
                         {m.items.map(function (r) {
 
+                            if(r.key === 'paymentAmount' && list[11].value && list[10].value){
+                                r.value = list[11].value * list[10].value;
+                            }
+
                             if (r.type === TEXT) {
                                 if (r.isRequired && (r.value === undefined || r.value === null || r.value === '')) {
                                     disabled = true;
@@ -58,6 +63,8 @@ class FormContent extends React.Component {
                                 return <InputFormItem key={r.id} formItem = {r} onFormItemTyped={onFormItemTyped}/>;
                             }else if(r.type === DATE){
                                 return <DatePickerFormItem key={r.id} formItem = {r} onFormItemTyped={onFormItemTyped}/>;
+                            }else if(r.type === LABEL){
+                                return  r.value ? <LabelItem key={r.id} formItem = {r} /> : null;
                             }
                             if (r.isRequired && r.items.filter((f) => { return f.selected }).length === 0) {
                                 disabled = true;

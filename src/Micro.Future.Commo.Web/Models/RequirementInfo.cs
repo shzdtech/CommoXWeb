@@ -237,6 +237,7 @@ namespace Micro.Future.Commo.Web.Models
             RequirementId = requirement.RequirementId;
             State = requirement.State;
             EnterpriseId = requirement.EnterpriseId;
+            EnterpriseName = requirement.EnterpriseName;
             PaymentType = requirement.PaymentType;
             PaymentDateTime = requirement.PaymentDateTime;
             PaymentAmount = requirement.PaymentAmount;
