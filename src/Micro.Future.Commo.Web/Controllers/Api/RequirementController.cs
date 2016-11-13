@@ -96,6 +96,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 criteria.PageNo = searchCriteria.PageNo;
                 criteria.PageSize = searchCriteria.PageSize;
+                criteria.OrderByFields = new List<OrderByInfo> { new OrderByInfo { Field = "CreateTime", OrderBy = "desc" } };
                 if (searchCriteria.RequirementType != RequirementType.None)
                 {
                     criteria.RequirementType = searchCriteria.RequirementType;
