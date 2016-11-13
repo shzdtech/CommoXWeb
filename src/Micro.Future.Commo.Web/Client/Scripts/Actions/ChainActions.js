@@ -286,7 +286,7 @@ export const createChainWithSelect = (searchCriteria) => {
         return fetchSelectRequirementsRequest(searchCriteria).then(
             requirements => {
                 if (requirements && requirements.length > 0) {
-                    dispatch(fetchSelectRequirementsSuccess(requirements.filter((r) => { return r.state > 0; })));
+                    dispatch(fetchSelectRequirementsSuccess(requirements.filter((r) => { return r.state === 0; })));
                 } else {
                     dispatch(showToastr({
                         message: "没有需求可供选择",
@@ -399,27 +399,6 @@ const submitCreateChainSuccess = (chain) => {
 
 export const submitCreateChain = (createChainState, createChainOptions) => {
 
-    let list = [];
-    createChainState.map((s) => {
-        if (s.type === 1) {
-            list.push(s.requirement.requirementId);
-        } else if (s.type === 2) {
-            list.push(-1);
-        } else if (s.type === 3) {
-            list.push(0);
-        }
-    });
-
-    if (createChainState.length > 0) {
-        if ((createChainState[0].type === 1 && createChainState[0].requirement.type !== 1) || createChainState[0].type === 3) {
-            list.unshift(-1);
-        }
-
-        if ((createChainState[createChainState.length - 1].type === 1 &&
-            createChainState[createChainState.length - 1].requirement.type !== 2) || createChainState[createChainState.length - 1].type === 3) {
-            list.push(-1);
-        }
-    }
 
     var options = {};
     createChainOptions.map((l) => {
@@ -432,6 +411,28 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
             options[l.key] = values[0];
         }
     });
+
+    let list = [];
+    createChainState.map((s) => {
+        if (s.type === 1) {
+            list.push(s.requirement.requirementId);
+        } else if (s.type === 2) {
+            list.push(-1);
+        } else if (s.type === 3) {
+            list.push(0);
+        }
+    });
+
+    if (createChainState.length > 0 && !options.forceCreate) {
+        if ((createChainState[0].type === 1 && createChainState[0].requirement.type !== 1) || createChainState[0].type === 3) {
+            list.unshift(-1);
+        }
+
+        if ((createChainState[createChainState.length - 1].type === 1 &&
+            createChainState[createChainState.length - 1].requirement.type !== 2) || createChainState[createChainState.length - 1].type === 3) {
+            list.push(-1);
+        }
+    }
 
     options.requirements = list;
 

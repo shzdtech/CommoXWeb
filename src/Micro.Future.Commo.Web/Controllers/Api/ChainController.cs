@@ -136,13 +136,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
             RequirementChainInfo chainInfo;
 
-            if (options.Requirements.Contains(-1) || options.Requirements.Contains(0))
+            if (options.ForceCreate)
             {
-                chainInfo = _chainManager.AutoMatchRequirements(UserId, options.Requirements, options.FixedLength, options.FixedPosition, options.MaxLength.HasValue ? options.MaxLength.Value : 6);
+                chainInfo = _chainManager.CreateChain(options.Requirements, UserId);
             }
             else
             {
-                chainInfo = _chainManager.CreateChain(options.Requirements, UserId);
+                chainInfo = _chainManager.AutoMatchRequirements(UserId, options.Requirements, options.FixedLength, options.FixedPosition, options.MaxLength.HasValue ? options.MaxLength.Value : 6);
             }
 
             if (chainInfo == null)

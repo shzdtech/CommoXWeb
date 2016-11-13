@@ -19,6 +19,7 @@ class Header extends React.Component {
                             <DropdownButton title="撮合管理" id="bg-nested-dropdown" key="finance">
                             <MenuItem eventKey="chainManager" onSelect={this.props.onSelectDropdown}>现有撮合管理</MenuItem>
                             <MenuItem eventKey="makeChain" onSelect={this.props.onSelectDropdown}>立刻撮合</MenuItem>
+                            <MenuItem eventKey="matchChainManually" onSelect={this.props.onSelectDropdown}>手动撮合</MenuItem>
                             <MenuItem eventKey="createChainManually" onSelect={this.props.onSelectDropdown}>手动创建</MenuItem>
                         </DropdownButton>
                         </li>,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { push } from 'react-router-redux';
 import {signOut, checkEnterpriseAuthenticated} from '../Actions/AccountActions';
-import {makeChain} from '../Actions/ChainActions';
+import {makeChain, typeCreateChainOption} from '../Actions/ChainActions';
 import {hideToastr} from '../Actions/CommonActions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -34,6 +34,14 @@ const mapDispatchToProps = (dispatch) => {
             } else if (key === "chainManager") {
                 dispatch(push("/chainManager"));
             } else if (key === "createChainManually"){
+                dispatch(typeCreateChainOption({
+                    id: 4
+                }, true));
+                dispatch(push("/createChain"));
+            } else if(key === "matchChainManually"){
+                 dispatch(typeCreateChainOption({
+                    id: 4
+                }, false));
                 dispatch(push("/createChain"));
             }
         },

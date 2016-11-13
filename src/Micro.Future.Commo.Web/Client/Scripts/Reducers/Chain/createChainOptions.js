@@ -28,6 +28,10 @@ let defaultOptions = [
         key: 'maxLength',   
         placeholder: '如需要设置最大长度，请输入最大长度',
         type: TEXT
+    },{
+        id: 4,
+        key: 'forceCreate',
+        type: TEXT
     }]
 
 const formItem = (state = {}, action) => {

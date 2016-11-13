@@ -37,9 +37,22 @@ class CreateChain extends React.Component {
 
     render() {
         let {filters, cancelSelectRequirement, selectRequirementAction,
-            createChainWithSelectAction, selectRequirement, createChainState, createChainOptions, 
+            createChainWithSelectAction, selectRequirement, createChainState, createChainOptions,
             onCreateChainOptionTyped, onCreateChainOptionSelected} = this.props;
         let overlay = <div className="overlay"></div>
+
+        let forceCreate = false;
+        let fixedPosition = false;
+        createChainOptions.forEach((o) => {
+            if (o.key === 'forceCreate') {
+                forceCreate = o.value;
+            }
+
+            if (o.key === 'fixedPosition') {
+                let item = o.items.filter((i) => { return i.selected });
+                fixedPosition = item.length > 0 && item[0].value;
+            }
+        });
 
         let popup = null;
         if (selectRequirement && selectRequirement.requirements && selectRequirement.requirements.length > 0) {
@@ -50,13 +63,20 @@ class CreateChain extends React.Component {
                 selectRequirementAction={selectRequirementAction}/>
         }
 
-        var createChainOptionsView = createChainOptions.map((r) => {
-            if (r.type === TEXT) {
-                return <InputFormItem key={r.id} formItem = {r} onFormItemTyped={onCreateChainOptionTyped}/>;
-            }
+        let createChainOptionsView = null;
+        if (!forceCreate) {
+            createChainOptionsView = createChainOptions.map((r) => {
+                if (r.key === 'forceCreate') {
+                    return null;
+                }
 
-            return <FormItem key={r.id} formItem = {r} onFormItemSelected={onCreateChainOptionSelected} />;
-        });
+                if (r.type === TEXT) {
+                    return <InputFormItem key={r.id} formItem = {r} onFormItemTyped={onCreateChainOptionTyped}/>;
+                }
+
+                return <FormItem key={r.id} formItem = {r} onFormItemSelected={onCreateChainOptionSelected} />;
+            });
+        }
 
         let list = createChainState.map((s, index) => {
             if (s.type === 1) {
@@ -94,22 +114,24 @@ class CreateChain extends React.Component {
         })
 
         return <div className='create-chain-container'>
-            <div className="actions">
-                <div className="btn" onClick={this.props.createRequirement}>创建</div>
-                <div className="btn" onClick={() => this.props.createChainWithSelectAction({}) }>选择</div>
-                <div className="btn" onClick={this.props.randomOne}>随机匹配一个</div>
-                <div className="btn" onClick={this.props.randomMore}>随机匹配任意个</div>
+            <div className='forms'>
+                {createChainOptionsView}
             </div>
-            <div className='new-chain-list'>
-                {list}
+            <div className='create-chain-view'>
+                <div className="actions">
+                    <div className="btn" onClick={this.props.createRequirement}>创建</div>
+                    <div className="btn" onClick={() => this.props.createChainWithSelectAction({}) }>选择</div>
+                    { forceCreate || !fixedPosition ? null : <div className="btn" onClick={this.props.randomOne}>随机匹配一个</div>}
+                    { forceCreate || !fixedPosition ? null : <div className="btn" onClick={this.props.randomMore}>随机匹配任意个</div>}
+                </div>
+                <div className='new-chain-list'>
+                    {list}
+                </div>
             </div>
             {popup}
-            <div className='forms'>
-            {createChainOptionsView}
-            </div>
             <div className='operators'>
                 <a className={'btn btn-large ' }
-                    onClick={() => {this.props.submitCreateChain(createChainState, createChainOptions) } }>确定</a>
+                    onClick={() => { this.props.submitCreateChain(createChainState, createChainOptions) } }>确定</a>
             </div>
         </div>
     }
