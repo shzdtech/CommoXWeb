@@ -73,6 +73,7 @@ class Header extends React.Component {
                         <div className="close-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span className="icon-delete"></span></div>
                         <ul className='nav navbar-nav navbar-left'>
                             <li><Link to="/">首页</Link></li>
+                            <li><Link to="/marketQuotation">行情</Link></li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             {userPanel() }

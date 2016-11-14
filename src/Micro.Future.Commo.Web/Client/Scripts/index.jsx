@@ -6,6 +6,7 @@ import objectAssignPolyfill from './Util/objectAssignPolyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Containers/Home';
+import MarketQuotation from './Containers/MarketQuotation';
 import Header from './Containers/Header';
 import Footer from './Components/Common/Footer';
 import ChainList from './Containers/Chain/ChainList';
@@ -37,7 +38,7 @@ objectAssignPolyfill();
 class App extends React.Component{
     render(){
         console.log(this.props);
-        let className = this.props.location.pathname === '/' ? 'home' : 'container main-wrapper';
+        let className = this.props.location.pathname === '/' || this.props.location.pathname === '/marketQuotation' ? 'home' : 'container main-wrapper';
         return <div>
         <Header />
         <div className={className}>
@@ -76,6 +77,7 @@ ReactDOM.render(
         <Router history={history}>
             <Route path='/' component={App} >
                 <IndexRoute component={Home} />
+                <Route path="/marketQuotation" component={MarketQuotation} />
                 <Route path="/addRequirement" component={Form} />
                 <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
                 </Route>
