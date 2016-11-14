@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {TEXT, LABEL} from '../../Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from '../../Constants/FilterTypes';
 import Category from '../../Models/Category';
 import RequirementType from '../../Models/RequirementType';
 import {addRequirement} from '../../Actions/RequirementActions';
@@ -69,7 +69,7 @@ class FomrConfirmation extends React.Component {
                     <div className='title'>{m.title}</div>
                     <div className='form-item-list'>
                         {m.items.map(function (r) {
-                            if (r.type === TEXT || r.type === LABEL) {
+                            if (r.type === TEXT || r.type === LABEL || r.type === DATE) {
                                 return r.value !== undefined && r.value !== null && r.value !== '' ?
                                     <div key={r.id} className='form-item'>
                                         <span className='form-item-title'>{r.title}</span>

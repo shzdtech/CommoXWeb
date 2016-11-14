@@ -9,7 +9,7 @@ import {
     FETCH_REQUIREMENT_LIST_FAILURE,
     ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS
 } from '../Constants/ActionTypes';
-import {TEXT} from '../Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux';
@@ -22,7 +22,7 @@ export const addRequirementRequest = (list, selectedType, enterpriseId) => {
     requirement.type = selectedType;
     list.forEach((l) => {
 
-        if (l.type === TEXT) {
+        if (l.type === TEXT || l.type === DATE || l.type === LABEL) {
             if (l.value !== undefined && l.value !== null && l.value !== '') {
                 if (l.filterProperty === FilterProperty.Requirement) {
                     requirement[l.key] = l.value;
@@ -111,7 +111,7 @@ export const addRequirement = (list, selectedType, enterpriseId) => {
                     dispatch(push('/createChain'));
                 } else {
                     dispatch(addRequirementSuccess(requirement));
-                    dispatch(push('/requirements'));
+                    dispatch(push('/requirement'));
                 }
             },
             error => {

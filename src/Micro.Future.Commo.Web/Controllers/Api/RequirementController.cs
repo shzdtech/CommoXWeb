@@ -150,6 +150,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.RequirementInfo> SearchRequirements(RequirementSearchModel searchCriteria)
         {
             var criteria = new RequirementSearchCriteria();
+            criteria.OrderByFields = new List<OrderByInfo> { new OrderByInfo { Field = "CreateTime", OrderBy = "desc" } };
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductName))
                 criteria.ProductName = searchCriteria.ProductName;
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductType))
