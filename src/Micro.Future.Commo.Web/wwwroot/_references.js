@@ -34,6 +34,7 @@
 /// <reference path="../client/scripts/containers/Header.js" />
 /// <reference path="../client/scripts/containers/home.js" />
 /// <reference path="../client/scripts/containers/home/acceptancebilltab.js" />
+/// <reference path="../client/scripts/containers/home/basistab.js" />
 /// <reference path="../client/scripts/containers/home/financetab.js" />
 /// <reference path="../client/scripts/containers/marketquotation.js" />
 /// <reference path="../client/scripts/containers/requirement/Requirements.js" />

@@ -1,6 +1,6 @@
 import React from 'react';
 import PriceTab from './Home/PriceTab';
-import BasisTab from './Home/BasisTab';
+import BasisTab from '../Containers/Home/BasisTab';
 import FinanceTab from '../Containers/Home/FinanceTab';
 import RequirementTab from './Home/RequirementTab';
 import AcceptanceBillTab from '../Containers/Home/AcceptanceBillTab';

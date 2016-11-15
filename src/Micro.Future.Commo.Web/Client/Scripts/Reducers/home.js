@@ -1,6 +1,37 @@
 import {SEARCH_BY_FILTER_SUCCESS, FETCH_FINANCE_LIST_SUCCESS, FETCH_ACCEPTANCE_LIST_SUCCESS,
     DELETE_ACCEPTANCE_SUCCESS, DELETE_FINANCE_SUCCESS, SUBMIT_FINANCE_FORM_SUCCESS,
-    SUBMIT_ACCEPTANCE_FORM_SUCCESS} from '../Constants/ActionTypes';
+    SUBMIT_ACCEPTANCE_FORM_SUCCESS, SELECT_PRODUCT_CODE} from '../Constants/ActionTypes';
+
+const productCodeDropDown = {
+        label: '产品名称',
+        type: 'select',
+        key: 'productCode',
+        length: 'short',
+        value: 'CU',
+        options: [
+            {
+                key: '1',
+                label: '铜',
+                value: 'CU'
+            }, {
+                key: '2',
+                label: '铝',
+                value: 'AL'
+            }, {
+                key: '3',
+                label: '锌',
+                value: 'ZN'
+            }, {
+                key: '4',
+                label: '铁',
+                value: 'I'
+            }, {
+                key: '5',
+                label: '焦煤',
+                value: 'JM'
+            }
+        ]
+    }
 
 const requirements = (state = [], action) => {
     switch (action.type) {
@@ -39,7 +70,11 @@ const acceptanceList = (state = [], action) => {
 };
 
 
-const home = (state = { requirements: [], financeInfoList: [], acceptanceList: [] }, action) => {
+const home = (state = { requirements: [], 
+    financeInfoList: [], 
+    acceptanceList: [],
+    productCodeDropDown: productCodeDropDown
+ }, action) => {
     switch (action.type) {
         case SEARCH_BY_FILTER_SUCCESS: {
             return Object.assign({}, state, { requirements: requirements(state.requirements, action) });
@@ -65,6 +100,9 @@ const home = (state = { requirements: [], financeInfoList: [], acceptanceList: [
                     return f.productId !== action.financeId
                 })
             });
+        }
+        case SELECT_PRODUCT_CODE: {
+            return Object.assign({}, state, {productCodeDropDown: action.value})
         }
         default:
             return state;

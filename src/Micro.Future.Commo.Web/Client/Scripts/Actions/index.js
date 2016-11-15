@@ -17,6 +17,8 @@ import {
     TYPE_FORM_ITEM,
     RESET_FORM,
 
+    SELECT_PRODUCT_CODE,
+
     SHOW_SPINNER
 } from '../Constants/ActionTypes';
 import {TEXT} from '../Constants/FilterTypes';
@@ -150,5 +152,13 @@ export const showSpinner = (showSpinner) => {
     };
 };
 
+
+//basis
+export const selectProductCode = (keyName, value) => {
+    return {
+        type: SELECT_PRODUCT_CODE,
+        value: value
+    };
+};
 
 

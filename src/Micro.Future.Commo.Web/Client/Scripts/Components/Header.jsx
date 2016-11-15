@@ -53,8 +53,8 @@ class Header extends React.Component {
         }
             } else {
                 return [
-                    <li key="login"><Link to="/login">登录</Link></li>,
-                    <li key="register"><Link to="/register">注册</Link></li>
+                    <li key="login" className='small'><Link to="/login">登录</Link></li>,
+                    <li key="register" className='small'><Link to="/register">注册</Link></li>
                 ];
             }
         }

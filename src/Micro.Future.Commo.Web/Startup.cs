@@ -152,6 +152,7 @@ namespace Micro.Future.Commo.Web
             services.AddTransient<IAcceptanceManager, AcceptanceManager>();
             services.AddTransient<IFinancialProductManager, FinancialProductManager>();
             services.AddTransient<IChainManager, ChainManager>();
+            services.AddTransient<IBasisManager, BasisManager>();
 
         }
 
