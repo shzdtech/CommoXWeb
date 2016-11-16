@@ -1,0 +1,78 @@
+.contact-side-bar{
+    position: fixed;
+    width: 105px;
+    top: calc(50% - 120px);
+    right: -80px;
+    z-index: 999;
+    transition: right 0.3s;
+
+    &.open{
+        right: 0;
+        transition: right 0.3s;
+    }
+
+    .contact-title{
+        font-size: 20px;
+        width: 24px;
+        background: $primary-color;
+        border-radius: 3px 0 0 3px;
+        display: inline-block;
+        line-height: 1.1em;
+        color: $white;
+        padding: 5px 0 5px 2px;
+        vertical-align: middle;
+        margin-right: 1px;
+    }
+
+    ul{
+        list-style: none;
+        width: 80px;
+        height: 240px;
+        padding: 0;
+        vertical-align: middle;
+        display: inline-block;
+
+        li{
+           a{ 
+               -moz-opacity:0.8;
+               filter:alpha(opacity=80);
+               opacity:0.8;
+               display: block;
+               width: 80px;
+               height: 80px;
+               text-decoration: none; 
+               padding: 10px;
+               
+                &:hover{
+                    -moz-opacity: 1;
+                    filter:alpha(opacity=100);
+                    opacity:1;
+               }
+
+               &.finance{
+                   background: #3398CC;
+               }
+
+               &.basis{
+                   background: #ff3366;
+               }
+
+               &.acceptance{
+                   background: #ff6633;
+               }
+
+               span{
+                   font-size: 15px;
+                   display: block;
+                   text-align: center;
+                   color: $white;
+
+                   &.glyphicon{
+                       font-size: 30px;
+                       margin-bottom: 10px;
+                   }
+               }
+           }
+        }
+    }
+}
