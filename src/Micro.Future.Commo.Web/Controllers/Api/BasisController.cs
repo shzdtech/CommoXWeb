@@ -29,8 +29,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public string GetBasisByProduct(string productCode)
         {
             return _basisManager.QueryBasisInfos(_productExchangeMapping[productCode], productCode,
-                DateTime.Now.AddMonths(-1).AddDays(-8).ToString("yyyy-MM-dd hh:mm:ss"),
-                DateTime.Now.AddMonths(-1).AddDays(-1).ToString("yyyy-MM-dd hh:mm:ss"));
+                DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd hh:mm:ss"),
+                DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd hh:mm:ss"));
         }
     }
 }

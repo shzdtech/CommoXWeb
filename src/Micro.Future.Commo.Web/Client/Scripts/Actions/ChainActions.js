@@ -440,7 +440,6 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
         return submitCreateChainRequest(options).then(
             chain => {
                 dispatch(submitCreateChainSuccess(chain));
-                dispatch(push('/chainManager'));
                 dispatch(selectChainListType(options.forceCreate ? {
                     id: 3,
                     name: '已确认',
@@ -450,6 +449,7 @@ export const submitCreateChain = (createChainState, createChainOptions) => {
                         name: '已锁定',
                         value: 1
                     }));
+                dispatch(push('/chainManager'));
                 dispatch(resetCreateChain());
                 dispatch(resetCreateChainOption())
             },

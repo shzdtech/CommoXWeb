@@ -60,6 +60,33 @@ export default {
         placeholder: '开票量',
         isRequired: true
     },
+    invoiceValue: {
+        label: '开票面额',
+        type: 'select',
+        key: 'invoiceValue',
+        length: 'short',
+        options: [{
+            key: '1',
+            label: '千元版',
+            value: 1
+        }, {
+                key: '2',
+                label: '万元版',
+                value: 2
+            }, {
+                key: '3',
+                label: '十万元版',
+                value: 3
+            }, {
+                key: '4',
+                label: '百万元版',
+                value: 4
+            }, {
+                key: '5',
+                label: '千万元版',
+                value: 5
+            }]
+    },
     maxTradeAmountPerMonth: {
         label: '每月最大交易量',
         type: 'number',
@@ -193,6 +220,13 @@ export default {
                 value: 102,
                 label: '中国农业银行'
             }]
+    },
+    paymentBankAddress: {
+        label: '开户行地址',
+        type: 'text',
+        key: 'paymentBankAddress',
+        length: 'medium',
+        placeholder: '开户行地址'
     },
     isAcceptanceBillETicket: {
         label: '是否开通电子票口',

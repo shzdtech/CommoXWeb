@@ -111,5 +111,14 @@ namespace Micro.Future.Commo.Web.Models.EnterpriseModels
         /// 是否开通银承电子票口
         /// </summary>
         public bool? IsAcceptanceBillETicket { get; set; }
+
+        /// <summary>
+        /// 发票面额
+        /// </summary>
+        public string InvoiceValue { get; set; }
+        /// 地址
+        /// </summary>
+        public string PaymentBankAddress { get; set; }
+
     }
 }

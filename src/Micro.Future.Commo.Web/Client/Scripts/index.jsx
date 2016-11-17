@@ -19,6 +19,10 @@ import Requirements from './Containers/Requirement/Requirements';
 import Form from './Containers/Form/Form';
 import FormConfirmation from './Containers/Form/FormConfirmation';
 import AccountRouter from './Router/AccountRouter';
+
+import BillTrade from './Components/Trade/BillTrade';
+import FundTrade from './Components/Trade/FundTrade';
+
 import auth from './auth';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
@@ -39,6 +43,9 @@ class App extends React.Component{
     render(){
         console.log(this.props);
         let className = this.props.location.pathname === '/' || this.props.location.pathname === '/marketQuotation' ? 'home' : 'container main-wrapper';
+        if(this.props.location.pathname === '/billTrade' || this.props.location.pathname === '/fundTrade'){
+            className='trade';
+        }
         return <div>
         <Header />
         <div className={className}>
@@ -89,6 +96,8 @@ ReactDOM.render(
                 <Route path="/createChain" component={CreateChain} />
                 <Route path="/acceptanceManage" component={AcceptanceManager} />
                 <Route path="/financeManage" component={FinanceManager} />
+                <Route path='/billTrade' component={BillTrade} />
+                <Route path='/fundTrade' component={FundTrade} />
                 <Route path="*" component={Home} />
             </Route>
         </Router>
