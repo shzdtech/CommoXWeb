@@ -5,8 +5,12 @@ class FundTrade extends React.Component {
         super();
     }
 
-    render() {  
-        
+    componentDidMount() {
+        this.props.fetchFinance()
+    }
+
+    render() {
+
         let book = require('../../../Content/images/book.png');
         let fundtrade = require('../../../Content/images/fundtrade.png');
         let arrow = require('../../../Content/images/arrow.png');
@@ -31,6 +35,21 @@ class FundTrade extends React.Component {
                         <img src={fundtrade} />
                     </li>
                 </ul>
+            </div>
+             <div className='container invest-info'>
+             <div className='invest-info-title'>
+                理财产品
+             </div>
+                {
+                    this.props.financeInfoList.map((f)=>{
+                        return <div className='invest-item'>
+                            <span>{f.productYield}%</span>
+                            <span className='item-title'>年华收益率</span>
+                        </div>
+                    })
+                }
+
+                <div className='clearfix'></div>
             </div>
         </div>
     }

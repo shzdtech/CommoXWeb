@@ -20,8 +20,8 @@ import Form from './Containers/Form/Form';
 import FormConfirmation from './Containers/Form/FormConfirmation';
 import AccountRouter from './Router/AccountRouter';
 
-import BillTrade from './Components/Trade/BillTrade';
-import FundTrade from './Components/Trade/FundTrade';
+import BillTrade from './Containers/Trade/BillTrade';
+import FundTrade from './Containers/Trade/FundTrade';
 
 import auth from './auth';
 import { Provider } from 'react-redux'

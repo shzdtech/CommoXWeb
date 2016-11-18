@@ -5,6 +5,10 @@ class BillTrade extends React.Component {
         super();
     }
 
+    componentDidMount() {
+        this.props.fetchAcceptance();
+    }
+
     render() {
         let book = require('../../../Content/images/book.png');
         let billtrade = require('../../../Content/images/billtrade.png');
@@ -29,6 +33,21 @@ class BillTrade extends React.Component {
                         <img src={billtrade} />
                     </li>
                 </ul>
+            </div>
+            <div className='container invest-info'>
+             <div className='invest-info-title'>
+                承兑产品
+             </div>
+                {
+                    this.props.acceptanceList.map((f)=>{
+                        return <div className='invest-item'>
+                            <span>{f.subsidies}%</span>
+                            <span className='item-title'>贴息</span>
+                        </div>
+                    })
+                }
+
+                <div className='clearfix'></div>
             </div>
         </div>
     }
