@@ -38,7 +38,7 @@ class AcceptanceManager extends React.Component {
             return <tr key={acceptance.acceptanceId}>
                 <td className='left'>{acceptance.bankName}</td>
                 <td>{acceptance.amount}万</td>
-                <td>{acceptance.acceptanceType === 1 ? '电票' : '纸票'}</td>
+                <td>{acceptance.acceptanceType === 1 ? '国股' : acceptance.acceptanceType === 2 ? '城商' : '农商'}</td>
                 <td>{new Date(acceptance.drawTime).toLocaleDateString()}</td>
                 <td>{new Date(acceptance.dueDate).toLocaleDateString()}</td>
                 <td>{acceptance.yearSubsidies}%</td>
@@ -73,10 +73,7 @@ class AcceptanceManager extends React.Component {
                                 到期日
                             </td>
                             <td>
-                                年化贴息(%)
-                            </td>
-                            <td>
-                                贴息(%)
+                                贴息(年)
                             </td>
                             <td>
                             </td>

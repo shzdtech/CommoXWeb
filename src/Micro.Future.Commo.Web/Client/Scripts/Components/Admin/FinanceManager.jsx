@@ -52,7 +52,7 @@ class FinanceManager extends React.Component {
                         <tr>
                             <td>银行所在地</td>
                             <td>产品期限(天)</td>
-                            <td>年华收益率(%)</td>
+                            <td>年化收益率(%)</td>
                             <td></td>
                         </tr>
                     </thead>

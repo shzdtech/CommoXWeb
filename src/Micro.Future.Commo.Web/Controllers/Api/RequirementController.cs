@@ -82,6 +82,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             requirement.RequirementId = result.Result.RequirementId;
+            requirement.EnterpriseName = result.Result.EnterpriseName;
             return requirement;
         }
 
@@ -179,4 +180,5 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return requirements;
         }
     }
+
 }

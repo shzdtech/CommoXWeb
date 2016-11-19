@@ -35,7 +35,7 @@ class BasisTab extends React.Component {
 
     fetchData(productCode) {
         $.get(HOST + 'api/Basis?productCode=' + productCode).then((res) => {
-            let data = JSON.parse(res);
+            let data = $.parseJSON(res);
             let dataGroup = this.groupByArray(data, 'DATETIME');
             this.renderChart(dataGroup);
         })

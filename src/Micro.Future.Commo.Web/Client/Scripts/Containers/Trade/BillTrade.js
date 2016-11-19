@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import BillTrade from '../../Components/Trade/BillTrade';
-import {fetchAcceptance} from '../../Actions/AdminActions';
+import {setPaymentMethod} from '../../Actions/RequirementActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        acceptanceList: state.home.acceptanceList || []
+       
     }
 }
 
@@ -13,6 +14,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         fetchAcceptance : () => {
             dispatch(fetchAcceptance());
+        },
+        startBillTrade: ()=>{
+            dispatch(setPaymentMethod(4));
+            dispatch(push('addRequirement'));
         }
     };
 };

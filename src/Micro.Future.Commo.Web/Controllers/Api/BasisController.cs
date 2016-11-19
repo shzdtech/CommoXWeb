@@ -30,7 +30,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         {
             return _basisManager.QueryBasisInfos(_productExchangeMapping[productCode], productCode,
                 DateTime.Now.AddDays(-8).ToString("yyyy-MM-dd hh:mm:ss"),
-                DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd hh:mm:ss"));
+                DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
         }
     }
 }

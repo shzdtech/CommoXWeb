@@ -13,6 +13,7 @@ import {createChainWithNewRequirement,
     resetCreateChainOption,
     submitCreateChain
 } from '../../Actions/ChainActions';
+import {resetForm} from '../../Actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -26,6 +27,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createRequirement: () => {
+            dispatch(resetForm());
             dispatch(createChainWithNewRequirement());
             dispatch(push("/addRequirement"))
         },

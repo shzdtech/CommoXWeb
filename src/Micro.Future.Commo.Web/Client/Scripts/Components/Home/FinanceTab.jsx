@@ -26,8 +26,8 @@ class FinanceTab extends React.Component {
                 </div>
         })
         return <div className='finance-tab'>
-            <div className='tab-title'>轻松理财，共享未来</div>
-            <div className='tab-sub-title'>投资理财无忧，多种理财产品火爆热销中...</div>
+            <div className='tab-title'>大额理财，共赢未来</div>
+            <div className='tab-sub-title'></div>
             <div className='container finance-list'>             
                 {list}
             </div>

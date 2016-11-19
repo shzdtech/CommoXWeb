@@ -596,7 +596,7 @@ export default {
                 value: 1
             }, {
                     id: 2,
-                    name: '需自主收付',
+                    name: '不需自主收付',
                     value: 0
                 }]
         }, {

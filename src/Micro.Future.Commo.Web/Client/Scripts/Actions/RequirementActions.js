@@ -7,7 +7,8 @@ import {
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
     FETCH_REQUIREMENT_LIST_FAILURE,
-    ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS
+    ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
+    SET_PAYMENT_METHOD
 } from '../Constants/ActionTypes';
 import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -156,5 +157,13 @@ export const fetchRequirements = (searchCriteria) => {
         );
     };
 };
+
+export const setPaymentMethod = (paymentTypeId) =>{
+    return {
+        type: SET_PAYMENT_METHOD,
+        paymentTypeId: paymentTypeId
+    };
+};
+
 
 

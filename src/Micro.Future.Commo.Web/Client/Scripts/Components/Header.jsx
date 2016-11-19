@@ -48,7 +48,7 @@ class Header extends React.Component {
                         </li>]
                 } else {
                     return [<li key="requirement"><Link to="/requirement">我的需求</Link></li>,
-                        <li key="addrequirement"><Link to="/addRequirement">添加新需求</Link></li>,
+                        <li key="addrequirement"><a onClick={()=>this.props.addRequirement()}>添加新需求</a></li>,
                         <li key="userInfo">
                             <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?

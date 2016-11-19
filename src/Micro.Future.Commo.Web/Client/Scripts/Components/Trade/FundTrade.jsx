@@ -6,7 +6,8 @@ class FundTrade extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchFinance()
+        this.props.fetchFinance();
+        this.props.fetchAcceptance();
     }
 
     render() {
@@ -32,26 +33,44 @@ class FundTrade extends React.Component {
                         <img src={arrow} />
                     </li>
                     <li className="li3">
-                        <img src={fundtrade} />
+                        <a onClick={this.startFundTrade.bind(this)}>
+                            <img src={fundtrade} />
+                        </a>
                     </li>
                 </ul>
             </div>
              <div className='container invest-info'>
              <div className='invest-info-title'>
-                理财产品
+                产品列表
              </div>
+                <div className='finance-list'>
+                <div className='title'>年化收益率</div>
                 {
                     this.props.financeInfoList.map((f)=>{
-                        return <div className='invest-item'>
+                        return <div className='invest-item' key={f.productId}>
                             <span>{f.productYield}%</span>
-                            <span className='item-title'>年华收益率</span>
                         </div>
                     })
                 }
+                </div>
+                <div className='acceptance-list'>
+                <div className='title'>贴息(年)</div>
+                {
+                    this.props.acceptanceList.map((f)=>{
+                        return <div className='invest-item' key={f.acceptanceId}>
+                            <span>{f.subsidies}%</span>
+                        </div>
+                    })
+                }
+                </div>
 
                 <div className='clearfix'></div>
             </div>
         </div>
+    }
+
+    startFundTrade(){
+        this.props.startFundTrade();
     }
 }
 

@@ -27,8 +27,7 @@ import auth from './auth';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory, IndexRoute, Link} from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { routerMiddleware, routerActions } from 'react-router-redux';
+import { syncHistoryWithStore, routerMiddleware, routerActions } from 'react-router-redux';
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
@@ -66,12 +65,6 @@ class App extends React.Component{
 //   }
 // }
 
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.account.login, // how to get the user state
-  redirectAction: routerActions.replace, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
-})
-
 const rm = routerMiddleware(browserHistory);
 
 let store = createStore(reducers,
@@ -79,13 +72,19 @@ let store = createStore(reducers,
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.account.login, // how to get the user state
+  redirectAction: routerActions.replace, // the redux action to dispatch for redirect
+  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+});
+
 ReactDOM.render(
     <Provider store = {store}>
         <Router history={history}>
             <Route path='/' component={App} >
                 <IndexRoute component={Home} />
                 <Route path="/marketQuotation" component={MarketQuotation} />
-                <Route path="/addRequirement" component={Form} />
+                <Route path="/addRequirement" component={UserIsAuthenticated(Form)} />
                 <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
                 </Route>
                 <Route path="/formConfirm" component={FormConfirmation}>

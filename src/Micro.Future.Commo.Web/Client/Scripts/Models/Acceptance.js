@@ -25,20 +25,24 @@ export default {
         isRequired: true
     },
     acceptanceType: {
-        label: '票据类型',
+        label: '开票行类别',
         type: 'select',
         length: 'medium',
         key: 'acceptanceType',
-        placeholder: '请选择票据类型',
+        placeholder: '请选择开票行类别',
         isRequired: true,
         options: [{
-            key: '电票',
+            key: '国股',
             value: 1,
-            label: '电票'
+            label: '国股'
         }, {
-                key: '纸票',
+                key: '城商',
                 value: 2,
-                label: '纸票'
+                label: '城商'
+            },{
+                key: '农商',
+                value: 3,
+                label: '农商'
             }
         ]
     },

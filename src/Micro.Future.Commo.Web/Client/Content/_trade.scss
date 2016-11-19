@@ -39,13 +39,25 @@
             
             li{
                 display: inline-block;
+
+                a{
+                    display: block;
+                    cursor: pointer;
+
+                    img{
+                        filter: grayscale(100%);
+
+                        &:hover{
+                            filter: grayscale(0);
+                        }
+                    }
+                }
             }
         }
     }
 
     .invest-info{
         padding: 20px;
-        text-align: center;
 
         .invest-info-title{
             font-size: 30px;
@@ -53,6 +65,12 @@
             padding: 20px 20px 0 0;
             color: $warning-color;
             border-bottom: 2px solid $warning-color;
+        }
+
+        .title{
+            color: $red;
+            font-size: 25px;
+            margin-top: 20px;
         }
 
         .invest-item{

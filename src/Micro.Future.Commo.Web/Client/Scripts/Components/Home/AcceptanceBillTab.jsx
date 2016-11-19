@@ -18,10 +18,9 @@ class AcceptanceBillTab extends React.Component {
             return <tr key={acceptance.acceptanceId}>
                 <td className='left'>{acceptance.bankName}</td>
                 <td>{acceptance.amount}</td>
-                <td>{acceptance.acceptanceType === 1 ? '电票' : '纸票'}</td>
+                <td>{acceptance.acceptanceType === 1 ? '国股' : (acceptance.acceptanceType === 2 ? '城商' : '农商')}</td>
                 <td>{new Date(acceptance.drawTime).toLocaleDateString()}</td>
                 <td>{new Date(acceptance.dueDate).toLocaleDateString()}</td>
-                <td>{acceptance.yearSubsidies}%</td>
                 <td>{acceptance.subsidies}%</td>
             </tr>
         });
@@ -39,7 +38,7 @@ class AcceptanceBillTab extends React.Component {
                                 票面金额（单位：万）
                             </td>
                             <td>
-                                票据种类
+                                开票行类别
                             </td>
                             <td>
                                 出票日期
@@ -48,10 +47,7 @@ class AcceptanceBillTab extends React.Component {
                                 到期日
                             </td>
                             <td>
-                                年化贴息(%)
-                            </td>
-                            <td>
-                                贴息(%)
+                                贴息(年)
                             </td>
                         </tr>
                     </thead>

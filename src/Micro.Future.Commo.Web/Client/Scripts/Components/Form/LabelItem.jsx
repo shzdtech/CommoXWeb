@@ -13,7 +13,7 @@ class LabelItem extends React.Component {
                 <span className={"label_text " + (formItem.isRequired ? 'required' : '')}>{formItem.title}</span>
             </label>
             <label className="input_label" htmlFor={formItem.key}>
-                <span className="label_text">{formItem.value}</span>
+                <span className="label_text">{formItem.label ? formItem.label : formItem.value}</span>
             </label>
         </div>
     }

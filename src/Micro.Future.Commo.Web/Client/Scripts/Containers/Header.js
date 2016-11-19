@@ -5,6 +5,7 @@ import { push } from 'react-router-redux';
 import {signOut, checkEnterpriseAuthenticated} from '../Actions/AccountActions';
 import {makeChain, typeCreateChainOption} from '../Actions/ChainActions';
 import {hideToastr} from '../Actions/CommonActions';
+import {resetForm} from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -33,13 +34,14 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(push("/acceptanceManage"));
             } else if (key === "chainManager") {
                 dispatch(push("/chainManager"));
-            } else if (key === "createChainManually"){
+            } else if (key === "createChainManually") {
                 dispatch(typeCreateChainOption({
                     id: 4
                 }, true));
                 dispatch(push("/createChain"));
-            } else if(key === "matchChainManually"){
-                 dispatch(typeCreateChainOption({
+            } else if (key === "matchChainManually") {
+                
+                dispatch(typeCreateChainOption({
                     id: 4
                 }, false));
                 dispatch(push("/createChain"));
@@ -50,6 +52,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         checkEnterpriseAuthenticated: () => {
             dispatch(checkEnterpriseAuthenticated());
+        },
+        addRequirement: ()=> {
+            dispatch(resetForm());
+            dispatch(push('addRequirement'));
         }
     };
 };

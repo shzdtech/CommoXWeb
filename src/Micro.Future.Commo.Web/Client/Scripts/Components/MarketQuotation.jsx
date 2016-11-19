@@ -1,5 +1,5 @@
 import React from 'react';
-import PriceTab from './Home/PriceTab';
+//import PriceTab from './Home/PriceTab';
 import BasisTab from '../Containers/Home/BasisTab';
 import FinanceTab from '../Containers/Home/FinanceTab';
 import RequirementTab from './Home/RequirementTab';
@@ -13,7 +13,6 @@ class MarketQuotation extends React.Component {
 
     render() {
         return <div>
-            <PriceTab />
             <BasisTab />
             <FinanceTab />
             <AcceptanceBillTab />

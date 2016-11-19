@@ -73,7 +73,7 @@ class FomrConfirmation extends React.Component {
                                 return r.value !== undefined && r.value !== null && r.value !== '' ?
                                     <div key={r.id} className='form-item'>
                                         <span className='form-item-title'>{r.title}</span>
-                                        <span className='form-item-value'>{r.value}</span>
+                                        <span className='form-item-value'>{r.label ? r.label : r.value}</span>
                                     </div> : null;
                             } else {
 

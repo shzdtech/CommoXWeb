@@ -1,5 +1,7 @@
 import formObject from '../formObject';
-import {CHANGE_FORM_TYPE, SELECT_FORM_ITEM, TYPE_FORM_ITEM, RESET_FORM, CREATE_CHAIN_WITH_NEW_REQUIREMENT} from '../Constants/ActionTypes';
+import {CHANGE_FORM_TYPE, SELECT_FORM_ITEM, TYPE_FORM_ITEM, RESET_FORM, CREATE_CHAIN_WITH_NEW_REQUIREMENT, SET_PAYMENT_METHOD} from '../Constants/ActionTypes';
+import {LABEL} from '../Constants/FilterTypes';
+
 import RequirementType from '../Models/RequirementType';
 
 const getSelectedFormType = (selectedType) => {
@@ -60,15 +62,54 @@ const forms = (state = formObject, action) => {
                 }
             });
 
-            let newState = Object.assign({}, state, );
+            let newState = Object.assign({}, state);
             newState[typeName] = newList;
             return newState;
         }
         case RESET_FORM: {
             return formObject;
         }
-        case CREATE_CHAIN_WITH_NEW_REQUIREMENT:{
-            return Object.assign({}, state, {createFor: 1})
+        case CREATE_CHAIN_WITH_NEW_REQUIREMENT: {
+            return Object.assign({}, state, { createFor: 1 })
+        }
+        case SET_PAYMENT_METHOD: {
+            let paymentType = null;
+            switch (action.paymentTypeId) {
+                case 1:
+                    paymentType = '电汇（现金）';
+                    break;
+                case 2:
+                    paymentType = '银行电子汇票';
+                    break;
+                case 3:
+                    paymentType = '信用证';
+                    break;
+                case 4: 
+                    paymentType = '商业承兑汇票';
+                    break;
+                default: 
+                    paymentType = null;
+                    break;
+
+            }
+
+            let newState = Object.assign({}, state);
+            let setPaymentType = (r)=>{
+                return r.map((i) => {
+                    if(i.key === 'paymentType'){
+                        return Object.assign({}, i, {value: action.paymentTypeId, label: paymentType, type: LABEL});
+                    }
+                    else{
+                        return i;
+                    }
+                });
+            }
+
+            newState.buy = setPaymentType(newState.buy);
+            newState.sell = setPaymentType(newState.sell);
+            newState.subsidy = setPaymentType(newState.subsidy);
+
+            return newState;
         }
         default:
             return state;
