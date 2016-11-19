@@ -40,32 +40,28 @@ class FundTrade extends React.Component {
                 </ul>
             </div>
              <div className='container invest-info'>
-             <div className='invest-info-title'>
-                产品列表
-             </div>
-                <div className='finance-list'>
-                <div className='title'>年化收益率</div>
-                {
-                    this.props.financeInfoList.map((f)=>{
-                        return <div className='invest-item' key={f.productId}>
-                            <span>{f.productYield}%</span>
-                        </div>
-                    })
-                }
+                <div className='invest-tab'>
+                    <div className='title'>年化收益率</div>
+                    {
+                        this.props.financeInfoList.map((f)=>{
+                            return <div className='invest-item' key={f.productId}>
+                                <span>{f.productYield}%</span>
+                            </div>
+                        })
+                    }
                 </div>
-                <div className='acceptance-list'>
-                <div className='title'>贴息(年)</div>
-                {
-                    this.props.acceptanceList.map((f)=>{
-                        return <div className='invest-item' key={f.acceptanceId}>
-                            <span>{f.subsidies}%</span>
-                        </div>
-                    })
-                }
+                <div className='invest-tab'>
+                    <div className='title'>贴息(年)</div>
+                    {
+                        this.props.acceptanceList.map((f)=>{
+                            return <div className='invest-item' key={f.acceptanceId}>
+                                <span>{f.subsidies}%</span>
+                            </div>
+                        })
+                    }
                 </div>
-
                 <div className='clearfix'></div>
-            </div>
+                </div>
         </div>
     }
 

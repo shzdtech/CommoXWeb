@@ -12,9 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchAcceptance : () => {
-            dispatch(fetchAcceptance());
-        },
+       
         startBillTrade: ()=>{
             dispatch(setPaymentMethod(4));
             dispatch(push('addRequirement'));
