@@ -14,10 +14,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
     public class AcceptanceContoller : BaseController
     {
         private IAcceptanceManager _acceptanceManager;
-        public AcceptanceContoller(UserManager<Models.ApplicationUser> userManager, IAcceptanceManager acceptanceManager)
+        private IAcceptanceBankManager _acceptanceBankManager;
+
+        public AcceptanceContoller(UserManager<Models.ApplicationUser> userManager, IAcceptanceManager acceptanceManager,
+            IAcceptanceBankManager acceptanceBankManager)
             : base(userManager)
         {
             _acceptanceManager = acceptanceManager;
+            _acceptanceBankManager = acceptanceBankManager;
         }
 
         [HttpPost]
@@ -45,6 +49,33 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public void Delete(int id)
         {
             _acceptanceManager.DeleteAcceptance(id);
+        }
+
+        [HttpGet]
+        [Route("Bank")]
+        public IList<AcceptanceBankInfo> GetBanks()
+        {
+            var list = _acceptanceBankManager.QueryAllBanks();
+            if (list == null)
+            {
+                list = new List<AcceptanceBankInfo>();
+            }
+
+            return list;
+        }
+
+        [HttpDelete]
+        [Route("Bank/{id:int}")]
+        public void DeleteBank(int id)
+        {
+            _acceptanceBankManager.DeleteBank(id);
+        }
+
+        [HttpPost]
+        [Route("Bank")]
+        public AcceptanceBankInfo CreateBank(AcceptanceBankInfo info)
+        {
+            return _acceptanceBankManager.CreateBank(info);
         }
     }
 }

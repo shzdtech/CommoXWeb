@@ -8,7 +8,12 @@ import {
     SUBMIT_FINANCE_FORM_SUCCESS,
     FETCH_FINANCE_LIST_SUCCESS,
     DELETE_ACCEPTANCE_SUCCESS,
-    DELETE_FINANCE_SUCCESS
+    DELETE_FINANCE_SUCCESS,
+
+    CHANGE_ACCEPTANCE_BANK_FORM,
+    SUBMIT_ACCEPTANCE_BANK_FORM_SUCCESS,
+    FETCH_ACCEPTANCE_BANK_LIST_SUCCESS,
+    DELETE_ACCEPTANCE_BANK_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -189,6 +194,96 @@ export const deleteAcceptance = (id) => {
         return deleteAcceptanceRequest(id).then(
             response => {
                 dispatch(deleteAcceptanceSuccess(id));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+
+export const changeAcceptanceBankInfo = (keyName, value) => {
+    return {
+        type: CHANGE_ACCEPTANCE_BANK_FORM,
+        keyName: keyName,
+        value: value
+    };
+};
+
+const submitAcceptanceBankRequest = (acceptanceBankInfo) => {
+    const request = $.post(HOST + 'api/Acceptance/Bank', acceptanceBankInfo);
+    return request;
+};
+
+const submitAcceptanceBankSuccess = (acceptanceBankInfo) => {
+    return {
+        type: SUBMIT_ACCEPTANCE_BANK_FORM_SUCCESS,
+        acceptanceBankInfo: acceptanceBankInfo
+    };
+};
+
+export const submitAcceptanceBank = (acceptanceBankInfo) => {
+    var model = {};
+    for (var key in acceptanceBankInfo) {
+        if (acceptanceBankInfo[key].value === undefined) {
+            model[key] = null;
+        } else {
+            model[key] = acceptanceBankInfo[key].value;
+        }
+    }
+
+    return (dispatch) => {
+        return submitAcceptanceBankRequest(model).then(
+            response => {
+                dispatch(submitAcceptanceBankSuccess(response));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+const fetchAcceptanceBankRequest = () => {
+    const request = $.get(HOST + 'api/Acceptance/Bank');
+    return request;
+};
+
+const fetchAcceptanceBankSuccess = (acceptanceBankList) => {
+    return {
+        type: FETCH_ACCEPTANCE_BANK_LIST_SUCCESS,
+        acceptanceBankList: acceptanceBankList
+    };
+};
+
+export const fetchAcceptanceBank = () => {
+    return (dispatch) => {
+        return fetchAcceptanceBankRequest().then(
+            response => {
+                dispatch(fetchAcceptanceBankSuccess(response));
+            },
+            error => ajaxError(dispatch, error)
+        );
+    };
+};
+
+
+const deleteAcceptanceBankSuccess = (id) => {
+    return {
+        type: DELETE_ACCEPTANCE_BANK_SUCCESS,
+        bankId: id
+    }
+}
+
+const deleteAcceptanceBankRequest = (id) => {
+    return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Acceptance/Bank/' + id
+    });
+}
+
+export const deleteAcceptanceBank = (id) => {
+    return (dispatch) => {
+        return deleteAcceptanceBankRequest(id).then(
+            response => {
+                dispatch(deleteAcceptanceBankSuccess(id));
             },
             error => ajaxError(dispatch, error)
         );

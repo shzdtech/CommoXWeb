@@ -3,6 +3,8 @@ import LogMonitor from 'redux-devtools-log-monitor';
 import DockMonitor from 'redux-devtools-dock-monitor';
 
 import objectAssignPolyfill from './Util/objectAssignPolyfill';
+import arrayFindPolyfill from './Util/arrayFindPolyfill';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Containers/Home';
@@ -13,6 +15,7 @@ import ChainList from './Containers/Chain/ChainList';
 import ChainListManger from './Containers/Chain/ChainListManager';
 import CreateChain from './Containers/Chain/CreateChain';
 import AcceptanceManager from './Containers/Admin/AcceptanceManager';
+import AcceptanceBankManager from './Containers/Admin/AcceptanceBankManager';
 import FinanceManager from './Containers/Admin/FinanceManager';
 import AddRequirement from './Components/AddRequirement';
 import Requirements from './Containers/Requirement/Requirements';
@@ -22,6 +25,8 @@ import AccountRouter from './Router/AccountRouter';
 
 import BillTrade from './Containers/Trade/BillTrade';
 import FundTrade from './Containers/Trade/FundTrade';
+
+import ManageTrade from './Containers/Order/ManageTrade';
 
 import auth from './auth';
 import { Provider } from 'react-redux'
@@ -37,6 +42,7 @@ import '../Content/site.scss';
 $.ajaxSetup({cache:false});
 
 objectAssignPolyfill();
+arrayFindPolyfill();
 
 class App extends React.Component{
     render(){
@@ -91,9 +97,11 @@ ReactDOM.render(
                 </Route>
                 <Route path="/requirement/:requirementId/chains" component={ChainList}/>           
                 {AccountRouter}
+                <Route path="/manageTrade" component={ManageTrade} />
                 <Route path="/chainManager" component={ChainListManger} />
                 <Route path="/createChain" component={CreateChain} />
-                <Route path="/acceptanceManage" component={AcceptanceManager} />
+                <Route path="/acceptanceManage" component={AcceptanceManager} />           
+                <Route path="/acceptanceBankManage" component={AcceptanceBankManager} />
                 <Route path="/financeManage" component={FinanceManager} />
                 <Route path='/billTrade' component={BillTrade} />
                 <Route path='/fundTrade' component={FundTrade} />

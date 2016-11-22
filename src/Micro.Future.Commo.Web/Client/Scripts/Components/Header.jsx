@@ -24,7 +24,12 @@ class Header extends React.Component {
             if (this.props.userInfo && this.props.userInfo.userName) {
                 if (this.props.userInfo.roles.filter((r) => { return r === 'Admin' }).length > 0) {
                     return [
-                        <li key="authEnterprise"><Link to="/authEnterprise">企业认证</Link></li>,
+                        <li key="enterpriseManage">
+                             <DropdownButton title="企业管理" id="bg-nested-dropdown" key="enterprise">
+                                <MenuItem eventKey="authEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem>
+                                <MenuItem eventKey="manageTrade" onSelect={this.props.onSelectDropdown}>企业订单</MenuItem>
+                            </DropdownButton>
+                        </li>,
                         <li key="manageChain">
                             <DropdownButton title="撮合管理" id="bg-nested-dropdown" key="finance">
                                 <MenuItem eventKey="chainManager" onSelect={this.props.onSelectDropdown}>现有撮合管理</MenuItem>
@@ -37,6 +42,7 @@ class Header extends React.Component {
                             <DropdownButton title="金融产品管理" id="bg-nested-dropdown" key="finance">
                                 <MenuItem eventKey="financeManage" onSelect={this.props.onSelectDropdown}>银行理财产品</MenuItem>
                                 <MenuItem eventKey="acceptanceManage" onSelect={this.props.onSelectDropdown}>银行承兑汇票</MenuItem>
+                                <MenuItem eventKey="acceptanceBankManage" onSelect={this.props.onSelectDropdown}>贴票行管理</MenuItem>
                             </DropdownButton>
                         </li>,
                         <li key="userInfo">

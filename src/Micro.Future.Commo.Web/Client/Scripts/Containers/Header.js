@@ -18,7 +18,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSelectDropdown: (key, event) => {
-            if (key === "createUser") {
+            if(key === "authEnterprise"){
+                dispatch(push("/authEnterprise"));
+            }else if(key === "manageTrade"){
+                dispatch(push("/manageTrade"));
+            }else if (key === "createUser") {
                 dispatch(push("/createuser"));
             } else if (key === "changePassword") {
                 dispatch(push("/changepassword"));
@@ -32,6 +36,8 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(push("/financeManage"));
             } else if (key === "acceptanceManage") {
                 dispatch(push("/acceptanceManage"));
+            } else if (key === "acceptanceBankManage") {
+                dispatch(push("/acceptanceBankManage"));
             } else if (key === "chainManager") {
                 dispatch(push("/chainManager"));
             } else if (key === "createChainManually") {

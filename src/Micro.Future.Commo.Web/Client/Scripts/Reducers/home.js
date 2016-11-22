@@ -1,6 +1,10 @@
 import {SEARCH_BY_FILTER_SUCCESS, FETCH_FINANCE_LIST_SUCCESS, FETCH_ACCEPTANCE_LIST_SUCCESS,
     DELETE_ACCEPTANCE_SUCCESS, DELETE_FINANCE_SUCCESS, SUBMIT_FINANCE_FORM_SUCCESS,
-    SUBMIT_ACCEPTANCE_FORM_SUCCESS, SELECT_PRODUCT_CODE} from '../Constants/ActionTypes';
+    SUBMIT_ACCEPTANCE_FORM_SUCCESS, SELECT_PRODUCT_CODE,
+    SUBMIT_ACCEPTANCE_BANK_FORM_SUCCESS,
+    FETCH_ACCEPTANCE_BANK_LIST_SUCCESS,
+    DELETE_ACCEPTANCE_BANK_SUCCESS
+} from '../Constants/ActionTypes';
 
 const productCodeDropDown = {
         label: '产品名称',
@@ -69,10 +73,24 @@ const acceptanceList = (state = [], action) => {
     }
 };
 
+const acceptanceBankList = (state = [], action) => {
+    switch (action.type) {
+        case FETCH_ACCEPTANCE_BANK_LIST_SUCCESS: {
+            return action.acceptanceBankList;
+        }
+        case SUBMIT_ACCEPTANCE_BANK_FORM_SUCCESS: {
+            return [...state, action.acceptanceBankInfo]
+        }
+        default:
+            return state;
+    }
+};
+
 
 const home = (state = { requirements: [], 
     financeInfoList: [], 
     acceptanceList: [],
+    acceptanceBankList: [],
     productCodeDropDown: productCodeDropDown
  }, action) => {
     switch (action.type) {
@@ -98,6 +116,17 @@ const home = (state = { requirements: [],
              return Object.assign({}, state, {
                 financeInfoList: state.financeInfoList.filter((f) => {
                     return f.productId !== action.financeId
+                })
+            });
+        }
+        case SUBMIT_ACCEPTANCE_BANK_FORM_SUCCESS:
+        case FETCH_ACCEPTANCE_BANK_LIST_SUCCESS: {
+            return Object.assign({}, state, { acceptanceBankList: acceptanceBankList(state.acceptanceBankList, action) });
+        }
+        case DELETE_ACCEPTANCE_BANK_SUCCESS: {
+            return Object.assign({}, state, {
+                acceptanceBankList: state.acceptanceBankList.filter((f) => {
+                    return f.bankId !== action.bankId
                 })
             });
         }

@@ -5,23 +5,23 @@ import Input from '../Account/Input';
 import DateInput from '../Account/DateInput';
 import Dropdown from '../Account/Dropdown';
 
-class AcceptanceManager extends React.Component {
+class AcceptanceBankManager extends React.Component {
     constructor() {
         super();
     }
 
     componentDidMount() {
-        this.props.fetchAcceptance();
+        this.props.fetchAcceptanceBank();
     }
 
     render() {
         let list = [];
         let disabled = false;
 
-        const {acceptanceInfo, onSubmit, onChangeForm, acceptanceList} = this.props;
+        const {acceptanceBankInfo, onSubmit, onChangeForm, acceptanceBankList} = this.props;
 
-        for (var key in acceptanceInfo) {
-            let info = acceptanceInfo[key];
+        for (var key in acceptanceBankInfo) {
+            let info = acceptanceBankInfo[key];
             if ((info.isRequired && (info.value === undefined || info.value === null || info.value === ''))) {
                 disabled = true;
             }
@@ -34,22 +34,20 @@ class AcceptanceManager extends React.Component {
             }
         }
 
-        let rows = acceptanceList.map((acceptance) => {
-            return <tr key={acceptance.acceptanceId}>
+        let rows = acceptanceBankList.map((acceptance) => {
+            return <tr key={acceptance.bankId}>
                 <td className='left'>{acceptance.bankName}</td>
-                <td>{acceptance.amount}万</td>
-                <td>{acceptance.acceptanceType === 1 ? '国股' : acceptance.acceptanceType === 2 ? '城商' : '农商'}</td>
-                <td>{new Date(acceptance.drawTime).toLocaleDateString()}</td>
-                <td>{new Date(acceptance.dueDate).toLocaleDateString()}</td>
-                <td>{acceptance.subsidies}%</td>
-                <td><span className='btn' onClick={() => this.props.onDelete(acceptance.acceptanceId) }>删除</span></td>
+                <td>{acceptance.bankType === 1 ? '国股' : acceptance.acceptanceType === 2 ? '城商' : '农商'}</td>
+                <td>{acceptance.bankPrice}%</td>
+                <td>{acceptance.acceptanceType === 1 ? '大票' : '小票'}</td>
+                <td><span className='btn' onClick={() => this.props.onDelete(acceptance.bankId) }>删除</span></td>
             </tr>
         });
 
         return <div>
             {list}
             <div className='register-operators'>
-                <span className={'btn btn-large submit ' + (disabled ? 'disabled' : '') }  onClick={() => { if (!disabled) { onSubmit(acceptanceInfo) } } }>提交</span>
+                <span className={'btn btn-large submit ' + (disabled ? 'disabled' : '') }  onClick={() => { if (!disabled) { onSubmit(acceptanceBankInfo) } } }>提交</span>
                 <span className='btn btn-large calloff' >取消</span>
             </div>
             <div className='container finance-list'>
@@ -57,24 +55,19 @@ class AcceptanceManager extends React.Component {
                     <thead>
                         <tr>
                             <td className='left'>
-                                开票行
+                                贴票行
                             </td>
                             <td>
-                                票面金额（单位：万）
+                               开票行类别
+                            </td>
+                            <td>
+                                银行报价(贴现利率)
                             </td>
                             <td>
                                 票据种类
                             </td>
                             <td>
-                                出票日期
-                            </td>
-                            <td>
-                                到期日
-                            </td>
-                            <td>
-                                贴息(年)
-                            </td>
-                            <td>
+
                             </td>
                         </tr>
                     </thead>
@@ -87,4 +80,4 @@ class AcceptanceManager extends React.Component {
     }
 }
 
-module.exports = AcceptanceManager;
+module.exports = AcceptanceBankManager;

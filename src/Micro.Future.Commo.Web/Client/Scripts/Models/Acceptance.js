@@ -46,14 +46,6 @@ export default {
             }
         ]
     },
-    yearSubsidies:{
-        label: '年化贴息(%)',
-        type: 'text',
-        length: 'medium',
-        key: 'yearSubsidies',
-        placeholder: '请输入年化贴息',
-        isRequired: true
-    },
     subsidies:{
         label: '贴息(%)',
         type: 'text',
