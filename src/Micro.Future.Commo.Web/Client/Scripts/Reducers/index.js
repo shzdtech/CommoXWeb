@@ -10,6 +10,7 @@ import common from './Common';
 import requirements from './requirements';
 import account from './Account/account';
 import admin from './Admin';
+import trade from './Trade';
 import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
@@ -24,6 +25,7 @@ const reducers = combineReducers({
     account,
     common,
     admin,
+    trade,
     routing: routerReducer
 });
 

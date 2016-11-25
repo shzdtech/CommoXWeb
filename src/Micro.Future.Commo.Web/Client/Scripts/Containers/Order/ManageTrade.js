@@ -1,22 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ManageTrade from '../../Components/Order/ManageTrade';
-import {getAllTrades, authenticateEnterprise} from '../../Actions/TradeActions';
+import {fetchTradeByType, selectTradeState, updateTradeState, fetchMyTradeByType} from '../../Actions/TradeActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        trades: state.trade.trades
+        trades: state.trade.trades,
+        formItem: state.trade.tradeManager,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAllTrades: () => {
-            dispatch(getAllTrades());
+         onFormItemSelected: (formItem, item) => {
+            dispatch(selectTradeState(item));
+            if(formItem.isMine){
+                dispatch(fetchMyTradeByType(item.value));
+            }else{                
+                dispatch(fetchTradeByType(item.value));
+            }
         },
-        authenticateEnterprise: (enterpriseId, state) => {
-            dispatch(authenticateEnterprise(enterpriseId, state));
-        }
+        updateToNextState: (tradeId, newstate) => {
+            dispatch(updateTradeState(tradeId, newstate));
+        } 
     };
 };
 

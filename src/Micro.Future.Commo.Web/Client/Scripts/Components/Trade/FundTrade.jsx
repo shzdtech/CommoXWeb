@@ -7,7 +7,6 @@ class FundTrade extends React.Component {
 
     componentDidMount() {
         this.props.fetchFinance();
-        this.props.fetchAcceptance();
     }
 
     render() {
@@ -50,16 +49,7 @@ class FundTrade extends React.Component {
                         })
                     }
                 </div>
-                <div className='invest-tab'>
-                    <div className='title'>贴息(年)</div>
-                    {
-                        this.props.acceptanceList.map((f)=>{
-                            return <div className='invest-item' key={f.acceptanceId}>
-                                <span>{f.subsidies}%</span>
-                            </div>
-                        })
-                    }
-                </div>
+               
                 <div className='clearfix'></div>
                 </div>
         </div>

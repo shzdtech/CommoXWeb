@@ -6,7 +6,7 @@ class BillTrade extends React.Component {
     }
 
     componentDidMount() {
-        
+        this.props.fetchAcceptance();
     }
 
     render() {
@@ -30,16 +30,28 @@ class BillTrade extends React.Component {
                         <img src={arrow} />
                     </li>
                     <li className="li3">
-                        <a onClick={this.startBillTrade.bind(this)}>
+                        <a onClick={this.startBillTrade.bind(this) }>
                             <img src={billtrade} />
                         </a>
                     </li>
                 </ul>
             </div>
+            <div className='container invest-info'>
+                <div className='invest-tab'>
+                    <div className='title'>贴息(年) </div>
+                    {
+                        this.props.acceptanceList.map((f) => {
+                            return <div className='invest-item' key={f.acceptanceId}>
+                                <span>{f.subsidies}%</span>
+                            </div>
+                        })
+                    }
+                </div>
+            </div>
         </div>
     }
 
-    startBillTrade(){
+    startBillTrade() {
         this.props.startBillTrade();
     }
 }

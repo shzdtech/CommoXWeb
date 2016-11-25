@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 import { push } from 'react-router-redux';
 import {signOut, checkEnterpriseAuthenticated} from '../Actions/AccountActions';
 import {makeChain, typeCreateChainOption} from '../Actions/ChainActions';
+import {setSelectEnterpriseTrade, setSelectAdminTrade} from '../Actions/TradeActions';
 import {hideToastr} from '../Actions/CommonActions';
 import {resetForm} from '../Actions';
 
@@ -21,6 +22,7 @@ const mapDispatchToProps = (dispatch) => {
             if(key === "authEnterprise"){
                 dispatch(push("/authEnterprise"));
             }else if(key === "manageTrade"){
+                dispatch(setSelectAdminTrade());
                 dispatch(push("/manageTrade"));
             }else if (key === "createUser") {
                 dispatch(push("/createuser"));
@@ -51,6 +53,9 @@ const mapDispatchToProps = (dispatch) => {
                     id: 4
                 }, false));
                 dispatch(push("/createChain"));
+            }else if(key === 'myTrades'){
+                dispatch(setSelectEnterpriseTrade());
+                dispatch(push('manageTrade'));
             }
         },
         hideToastr: () => {

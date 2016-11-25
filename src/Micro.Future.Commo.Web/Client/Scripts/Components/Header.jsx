@@ -62,6 +62,8 @@ class Header extends React.Component {
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
                                     <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem> : null}
                                 <MenuItem divider />
+                                <MenuItem eventKey="myTrades" onSelect={this.props.onSelectDropdown}>我的订单</MenuItem>
+                                <MenuItem divider />
                                 <MenuItem eventKey="changePassword" onSelect={this.props.onSelectDropdown}>修改密码</MenuItem>
                                 <MenuItem eventKey="signOut" onSelect={this.props.onSelectDropdown}>退出</MenuItem>
                             </DropdownButton>

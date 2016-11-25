@@ -5,6 +5,7 @@ import { Link} from 'react-router';
 import Tab from '../Common/Tab';
 import Dropdown from '../Account/Dropdown';
 import {HOST} from '../../appSettings';
+import moment from 'moment';
 
 class BasisTab extends React.Component {
     constructor() {
@@ -36,7 +37,9 @@ class BasisTab extends React.Component {
     fetchData(productCode) {
         $.get(HOST + 'api/Basis?productCode=' + productCode).then((res) => {
             let data = $.parseJSON(res);
-            let dataGroup = this.groupByArray(data, 'DATETIME');
+            let dataGroup = this.groupByArray(data, (d) =>{
+                return d._id.split(' ')[0].split('_')[1];
+            });
             this.renderChart(dataGroup);
         })
     }
@@ -59,14 +62,14 @@ class BasisTab extends React.Component {
         let dataRange = [];
         if (dataGroup.length > 0) {
             dataGroup[0].values.forEach((v) => {
-                dataRange.push(v.contract);
+                dataRange.push(v.CONTRACT);
             });
         }
         let datasets = [];
         dataGroup.forEach((r, index) => {
             let color = colors[index % colors.length];
             datasets.push({
-                label: r.key.split(' ')[0],
+                label: moment(r.key).format('YYYY-MM-DD'),
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: color,
