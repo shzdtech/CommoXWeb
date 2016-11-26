@@ -1,8 +1,10 @@
 import {SELECT_TRADE_STATE, SET_SELECT_ENTERPRISE_TRADE, SET_SELECT_ADMIN_TRADE} from '../../Constants/ActionTypes';
+import auth from '../../auth';
+let userInfo = auth.getUserInfo();
 
 let initTradeStates = {
     title: '交易状态',
-    isMine: false,
+    isMine: userInfo && userInfo.roles.filter((r) => { return r === 'Admin' }).length === 0,
     items: [{
         id: 1,
         name: '签署合同',
