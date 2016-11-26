@@ -88,6 +88,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [Route("")]
         [HttpGet]
+        [Authorize()]
         public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements(RequirementSearchModel searchCriteria)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -129,6 +130,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [Route("{id:int}/Chains")]
         [HttpGet]
+        [Authorize()]
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = new List<RequirementChainInfo>();

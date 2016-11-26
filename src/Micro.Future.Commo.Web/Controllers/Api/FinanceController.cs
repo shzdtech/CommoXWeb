@@ -22,6 +22,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("")]
+        [Authorize(Roles = "Admin")]
         public int Create(FinancialProductInfo info)
         {
             return _financialProductManager.CreateFinancialProduct(info);
@@ -42,6 +43,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpDelete]
         [Route("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public void Delete(int id)
         {
             _financialProductManager.DeleteFinancialProduct(id);

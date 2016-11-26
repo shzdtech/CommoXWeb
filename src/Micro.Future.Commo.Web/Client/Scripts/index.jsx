@@ -28,6 +28,8 @@ import FundTrade from './Containers/Trade/FundTrade';
 
 import ManageTrade from './Containers/Order/ManageTrade';
 
+import {showToastr} from './Actions/CommonActions';
+
 import auth from './auth';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux';
@@ -39,25 +41,25 @@ import reducers from './reducers';
 require('signalr');
 import '../Content/site.scss';
 
-$.ajaxSetup({cache:false});
+$.ajaxSetup({ cache: false });
 
 objectAssignPolyfill();
 arrayFindPolyfill();
 
-class App extends React.Component{
-    render(){
+class App extends React.Component {
+    render() {
         //console.log(this.props);
         //console.log(this.props.location.query);
         let className = this.props.location.pathname === '/' || this.props.location.pathname === '/marketQuotation' ? 'home' : 'container main-wrapper';
-        if(this.props.location.pathname === '/billTrade' || this.props.location.pathname === '/fundTrade'){
-            className='trade';
+        if (this.props.location.pathname === '/billTrade' || this.props.location.pathname === '/fundTrade') {
+            className = 'trade';
         }
         return <div>
-        <Header />
-        <div className={className}>
-            {this.props.children}
-        </div>
-        <Footer />
+            <Header />
+            <div className={className}>
+                {this.props.children}
+            </div>
+            <Footer />
         </div>
     }
 }
@@ -80,9 +82,24 @@ let store = createStore(reducers,
 const history = syncHistoryWithStore(browserHistory, store)
 
 const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.account.login, // how to get the user state
-  redirectAction: routerActions.replace, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+    authSelector: state => state.account.login, // how to get the user state
+    redirectAction: routerActions.replace, // the redux action to dispatch for redirect
+    wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+});
+
+const UserIsAdmin = UserAuthWrapper({
+    authSelector: state => state.account.login,
+    failureRedirectPath: '/',
+    predicate: user => user && user.isAdmin,
+    redirectAction: (newLoc) => (dispatch) => {
+        browserHistory.replace(newLoc);
+        dispatch(showToastr({
+            message: '您没有此操作的权限',
+            toastType: 'toast-warning',
+            show: true,
+            autoClose: true
+        }));
+    }
 });
 
 ReactDOM.render(
@@ -91,19 +108,19 @@ ReactDOM.render(
             <Route path='/' component={App} >
                 <IndexRoute component={Home} />
                 <Route path="/marketQuotation" component={MarketQuotation} />
-                <Route path="/addRequirement" component={UserIsAuthenticated(Form)} />
-                <Route path="/requirement" component={UserIsAuthenticated(Requirements)}>
+                <Route path="/addRequirement" component={UserIsAuthenticated(Form) } />
+                <Route path="/requirement" component={UserIsAuthenticated(Requirements) }>
                 </Route>
                 <Route path="/formConfirm" component={FormConfirmation}>
                 </Route>
-                <Route path="/requirement/:requirementId/chains" component={ChainList}/>           
+                <Route path="/requirement/:requirementId/chains" component={ChainList}/>
                 {AccountRouter}
-                <Route path="/manageTrade" component={ManageTrade} />
-                <Route path="/chainManager" component={ChainListManger} />
-                <Route path="/createChain" component={CreateChain} />
-                <Route path="/acceptanceManage" component={AcceptanceManager} />           
-                <Route path="/acceptanceBankManage" component={AcceptanceBankManager} />
-                <Route path="/financeManage" component={FinanceManager} />
+                <Route path="/manageTrade" component={UserIsAuthenticated(ManageTrade)} />
+                <Route path="/chainManager" component={UserIsAuthenticated(UserIsAdmin(ChainListManger))} />
+                <Route path="/createChain" component={UserIsAuthenticated(UserIsAdmin(CreateChain))} />
+                <Route path="/acceptanceManage" component={UserIsAuthenticated(UserIsAdmin(AcceptanceManager))} />
+                <Route path="/acceptanceBankManage" component={UserIsAuthenticated(UserIsAdmin(AcceptanceBankManager))} />
+                <Route path="/financeManage" component={UserIsAuthenticated(UserIsAdmin(FinanceManager))} />
                 <Route path='/billTrade' component={BillTrade} />
                 <Route path='/fundTrade' component={FundTrade} />
                 <Route path="*" component={Home} />

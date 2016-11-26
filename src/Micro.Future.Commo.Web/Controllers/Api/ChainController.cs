@@ -53,6 +53,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpGet]
         [Route("Status/{statusId:int}/Chains")]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
             var chainList = _chainManager.QueryAllChains(statusId).Result;
@@ -106,6 +107,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpGet]
         [Route("{id:int}/Requirment/{index:int}/Replacement")]
+        [Authorize(Roles = "Admin")]
         public IEnumerable<Models.RequirementInfo> GetReplacement(int id, int index)
         {
             var result = _chainManager.FindReplacedRequirementsForChain(id, index);
@@ -120,6 +122,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("{id:int}/Index/{index:int}/NewRequirment/{requirementId:int}")]
+        [Authorize(Roles = "Admin")]
         public void ReplaceRequirement(int id, int index, int requirementId)
         {
             _chainManager.ReplaceRequirementsForChain(id, new List<int>() { index }, new List<int>() { requirementId });
@@ -127,6 +130,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("Manual")]
+        [Authorize(Roles = "Admin")]
         public Models.ChainInfo CreateChainManually(Models.CreateChainOptions options)
         {
             if (options.Requirements == null || options.Requirements.Count == 0)

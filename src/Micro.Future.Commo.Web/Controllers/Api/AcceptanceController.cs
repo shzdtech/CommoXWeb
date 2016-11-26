@@ -26,6 +26,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("")]
+        [Authorize(Roles = "Admin")]
         public int Create(AcceptanceInfo info)
         {
             return _acceptanceManager.CreateAcceptance(info);
@@ -46,6 +47,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpDelete]
         [Route("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public void Delete(int id)
         {
             _acceptanceManager.DeleteAcceptance(id);
@@ -66,6 +68,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpDelete]
         [Route("Bank/{id:int}")]
+        [Authorize(Roles = "Admin")]
         public void DeleteBank(int id)
         {
             _acceptanceBankManager.DeleteBank(id);
@@ -73,6 +76,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("Bank")]
+        [Authorize(Roles = "Admin")]
         public AcceptanceBankInfo CreateBank(AcceptanceBankInfo info)
         {
             return _acceptanceBankManager.CreateBank(info);

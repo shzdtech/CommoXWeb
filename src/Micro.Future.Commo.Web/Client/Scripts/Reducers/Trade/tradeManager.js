@@ -4,7 +4,7 @@ let userInfo = auth.getUserInfo();
 
 let initTradeStates = {
     title: '交易状态',
-    isMine: userInfo && userInfo.roles.filter((r) => { return r === 'Admin' }).length === 0,
+    isMine: userInfo && !userInfo.isAdmin,
     items: [{
         id: 1,
         name: '签署合同',

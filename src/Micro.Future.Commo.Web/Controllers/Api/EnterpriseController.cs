@@ -138,6 +138,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("{id:int}")]
+        [Authorize()]
         public async Task UpdateEnterprise(int id, EnterpriseUpdateModel model)
         {
             if (ModelState.IsValid)
