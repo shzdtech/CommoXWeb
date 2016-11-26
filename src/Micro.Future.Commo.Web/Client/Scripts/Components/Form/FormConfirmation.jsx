@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {TEXT} from '../../Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from '../../Constants/FilterTypes';
 import Category from '../../Models/Category';
 import RequirementType from '../../Models/RequirementType';
 import {addRequirement} from '../../Actions/RequirementActions';
+import Dropdown from './../Account/Dropdown';
 
 class FomrConfirmation extends React.Component {
 
@@ -11,9 +12,21 @@ class FomrConfirmation extends React.Component {
         super(props);
     }
 
+    componentDidMount(){
+        if(this.props.forms.createFor === 1){
+            this.props.fetchEnterpriseList();
+        }
+    }
+
     render() {
 
-        const {main, selectedType, buy, sell, subsidy} = this.props.forms;
+        const {main, selectedType, buy, sell, subsidy, createFor} = this.props.forms;
+        const {enterpriseList} = this.props;
+
+        let dropdown= null;
+        if(createFor === 1){
+            dropdown = <Dropdown key={1} info={enterpriseList} onChangeForm={this.props.onChangeEnterpriseSelection} />
+        }
 
         let list = null;
         if (selectedType === RequirementType.Buy) {
@@ -56,11 +69,11 @@ class FomrConfirmation extends React.Component {
                     <div className='title'>{m.title}</div>
                     <div className='form-item-list'>
                         {m.items.map(function (r) {
-                            if (r.type === TEXT) {
+                            if (r.type === TEXT || r.type === LABEL || r.type === DATE) {
                                 return r.value !== undefined && r.value !== null && r.value !== '' ?
                                     <div key={r.id} className='form-item'>
                                         <span className='form-item-title'>{r.title}</span>
-                                        <span className='form-item-value'>{r.value}</span>
+                                        <span className='form-item-value'>{r.label ? r.label : r.value}</span>
                                     </div> : null;
                             } else {
 
@@ -88,8 +101,9 @@ class FomrConfirmation extends React.Component {
                 </div>
             </div>
                 {view}
+                {dropdown}
                 <div className="operators">
-                <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType) }>我同意提交需求>></a>
+                <a className='submit' onClick={() => this.props.onSubmitForm(list, selectedType, enterpriseList.value) }>我同意提交需求>></a>
                 <Link to='/addRequirement' className='calloff'>返回</Link></div>
         </div>
 

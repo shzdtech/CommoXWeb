@@ -1,0 +1,196 @@
+.trade{
+     background: #f2f2f2;
+     margin-top: 50px;
+     min-height: calc(100vh - 50px);
+
+     .jumbotron{
+         width: 100%;
+         height: 400px;
+         background: url('./images/trade.jpg') no-repeat top center;
+         background-size: cover;
+         overflow: hidden;
+
+         .container{
+             padding: 40px 15%;
+             p{
+                 color: $white;
+                 font-size: 35px;
+
+                 span{
+                     color: $warning-color;
+
+                     &.strong{
+                         font-size: 40px;
+                     }
+                 }
+
+                 &.description{
+                     font-size: 30px;
+                 }
+             }
+        } 
+     }
+
+    .billstep{
+        text-align: center;
+        ul{
+            list-style: none;
+            margin: 0;
+            
+            li{
+                display: inline-block;
+
+                a{
+                    display: block;
+                    cursor: pointer;
+
+                    img{
+                        filter: grayscale(100%);
+
+                        &:hover{
+                            filter: grayscale(0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .invest-info{
+        padding: 20px;
+
+        .invest-info-title{
+            font-size: 30px;
+            text-align: left;
+            padding: 20px 20px 0 0;
+            color: $warning-color;
+            border-bottom: 2px solid $warning-color;
+        }
+
+        .invest-tab{
+            width: 100%;
+            padding: 0 40px;
+            float: left;
+
+            .title{
+                color: $warning-color;
+                font-size: 25px;
+                margin-top: 20px;
+                padding-left: 20px;
+                border-bottom: 2px solid $warning-color;
+            }
+
+            .invest-item{
+                width: 100%;
+                border-bottom: 1px solid $warning-color;
+
+                span{
+                    display: block;
+                    text-align: left;
+                    color: $warning-color;
+                    font-size: 35px;
+                    font-weight: bold;
+                    padding: 20px;
+                    line-height: 1em;
+
+                    &.item-title{
+                        font-size: 20px;
+                        padding-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.trade-list-manager-container {
+
+    .form-item {
+        color: $normal-font-color;
+        padding: 10px 0;
+        border-bottom: 1px solid $normal-font-color;
+
+        .items {
+            list-style-type: none;
+            display: inline-block;
+            padding: 0;
+
+            & > div {
+                display: inline-block;
+                margin: 0 15px;
+
+                .item {
+                    padding: 6px 15px;
+                    border-radius: 3px;
+                    text-decoration: none;
+                    border: 1px solid $normal-font-color;
+                    color: $normal-font-color;
+                    display: inline-block;
+
+
+                    &:hover {
+                        background: $white;
+                        color: $primary-color;
+                        border: 1px solid $primary-color;
+                        cursor: pointer;
+                    }
+
+                    &.active {
+                        color: $white;
+                        background: $primary-color;
+                        border: 1px solid $primary-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .trade-list-container {
+        padding: 20px 0;
+
+        .trade-node{
+            border: 1px solid #daf3ff;
+            margin-bottom: 20px;
+
+            table{
+                width: 100%;
+                thead{
+                    tr{
+                        background: #daf3ff;
+                         td{
+                            padding: 5px 10px;
+
+                            span{
+                                padding: 5px 15px;
+
+                                &.trade-title,
+                                &.trade-state{
+                                    font-weight: bold;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                tbody{
+                    tr{
+                        td{
+                            padding: 10px;
+                            border: 1px solid #daf3ff;
+
+                            &.no-border{
+                                border:none;
+                            }
+
+                            div{
+                                padding: 5px 15px;
+                            }
+                        }
+                    }
+                }
+               
+            }
+        }
+    }
+}

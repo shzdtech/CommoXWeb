@@ -4,6 +4,7 @@ import {
     TOGGLE_COLLAPSE,
     SELECT_FILTER,
     REMOVE_FILTER,
+    RESET_FILTER,
     TYPE_ITEM,
     CHECK_ITEM,
     SEARCH_BY_FILTER_SUCCESS,
@@ -15,6 +16,8 @@ import {
     SELECT_FORM_ITEM,
     TYPE_FORM_ITEM,
     RESET_FORM,
+
+    SELECT_PRODUCT_CODE,
 
     SHOW_SPINNER
 } from '../Constants/ActionTypes';
@@ -68,6 +71,12 @@ export const removeFilter = (filter) => {
     return {
         type: REMOVE_FILTER,
         filter: filter
+    };
+};
+
+export const resetFilter = () => {
+    return {
+        type: RESET_FILTER
     };
 };
 
@@ -142,4 +151,14 @@ export const showSpinner = (showSpinner) => {
         showSpinner: showSpinner
     };
 };
+
+
+//basis
+export const selectProductCode = (keyName, value) => {
+    return {
+        type: SELECT_PRODUCT_CODE,
+        value: value
+    };
+};
+
 

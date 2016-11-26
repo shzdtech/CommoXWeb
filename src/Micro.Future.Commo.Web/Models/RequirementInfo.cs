@@ -1,4 +1,5 @@
 ﻿using Micro.Future.Commo.Business.Abstraction.BizObject;
+using Micro.Future.Commo.Business.Abstraction.BizObject.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,7 +108,7 @@ namespace Micro.Future.Commo.Web.Models
         /// <summary>
         /// 支付方式
         /// </summary>
-        public string PaymentType { get; set; }
+        public PaymentMethodType PaymentType { get; set; }
         #endregion
 
         #region 购销
@@ -152,7 +153,7 @@ namespace Micro.Future.Commo.Web.Models
         /// <summary>
         /// 发票面额
         /// </summary>
-        public string InvoiceValue { get; set; }
+        public InvoiceValueType InvoiceValue { get; set; }
 
         /// <summary>
         /// 发票开具时间
@@ -165,8 +166,63 @@ namespace Micro.Future.Commo.Web.Models
         public string InvoiceTransferMode { get; set; }
 
         public bool IsMyRequest { get; set; }
-        
+
         #endregion
+
+
+        #region 1.1 新增属性
+
+
+        /// <summary>
+        /// 电子仓单 - new
+        /// </summary>
+        public string EWarehouseReceipt { get; set; }
+
+        /// <summary>
+        /// 支付银行开户行名称 - new
+        /// </summary>
+        public string PaymentBankName { get; set; }
+
+        /// <summary>
+        /// 支付银行帐号 - new
+        /// </summary>
+        public string PaymentBankAccount { get; set; }
+
+        /// <summary>
+        /// 支付银行行号 - new
+        /// </summary>
+        public int PaymentBankId { get; set; }
+
+        /// <summary>
+        /// 支付银行地址 - new
+        /// </summary>
+        public string PaymentBankAddress { get; set; }
+
+        /// <summary>
+        /// 支付银行是否开通银承电子票口  - new
+        /// </summary>
+        public bool IsAcceptanceBillETicket { get; set; }
+
+        /// <summary>
+        /// 支付风控 - new
+        /// </summary>
+        public RiskControlType PaymentRiskControl { get; set; }
+
+
+        /// <summary>
+        /// 开票要求 - new
+        /// </summary>
+        public InvoiceRequirementType InvoiceRequirement { get; set; }
+
+
+        /// <summary>
+        /// 货物交接方式 - new
+        /// </summary>
+        public ProductTransferType ProductTransferMode { get; set; }
+
+
+        #endregion
+
         /// <summary>
         /// 需求的撮合规则
         /// </summary>
@@ -181,6 +237,7 @@ namespace Micro.Future.Commo.Web.Models
             RequirementId = requirement.RequirementId;
             State = requirement.State;
             EnterpriseId = requirement.EnterpriseId;
+            EnterpriseName = requirement.EnterpriseName;
             PaymentType = requirement.PaymentType;
             PaymentDateTime = requirement.PaymentDateTime;
             PaymentAmount = requirement.PaymentAmount;
@@ -204,6 +261,17 @@ namespace Micro.Future.Commo.Web.Models
             WarehouseAddress1 = requirement.WarehouseAddress1;
             WarehouseAddress2 = requirement.WarehouseAddress2;
             CreateTime = requirement.CreateTime;
+
+            EWarehouseReceipt = requirement.EWarehouseReceipt;
+            PaymentBankName = requirement.PaymentBankName;
+            PaymentBankAccount = requirement.PaymentBankAccount;
+            PaymentBankId = requirement.PaymentBankId;
+            PaymentBankAddress = requirement.PaymentBankAddress;
+            IsAcceptanceBillETicket = requirement.IsAcceptanceBillETicket;
+            PaymentRiskControl = requirement.PaymentRiskControl;
+            InvoiceRequirement = requirement.InvoiceRequirement;
+            ProductTransferMode = requirement.ProductTransferMode;
+
             Rules = requirement.Rules;
         }
     }

@@ -18,7 +18,6 @@ class Input extends React.Component {
         value={info.value}
         className={ 'form-control'}
         onChange={this.changeValue}
-        files={info.file}
         />
     if (info.type === 'file') {
       input = <input

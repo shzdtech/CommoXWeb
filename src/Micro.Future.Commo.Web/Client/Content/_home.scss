@@ -1,0 +1,216 @@
+.home {
+    background: #f7f7f7;
+    margin-top: 50px;
+    min-height: calc(100vh - 50px);
+
+    .main-tab {
+        padding: 50px 0 50px 0;
+
+        .main-tab-header {
+            color: $primary-color;
+            font-size: 25px;
+            font-weight: bold;
+            padding: 5px 0;
+            border-bottom: 3px solid $primary-color;
+        }
+    }
+
+    .main-wrapper {
+        margin-top: 20px;
+        min-height: 200px;
+    }
+
+    .price-tab {
+        .main-tab {
+            .main-tab-header {
+                color: #34495e;
+                border-color: #34495e;
+            }
+        }
+
+        .external-links {
+            list-style: none;
+            width: 100%;
+            //background: rgba(0, 48, 89, 0.3);
+            color: $white;
+            font-size: 22px;
+            padding: 0;
+
+            li {
+                display: inline-block;
+                padding: 10px 20px;
+
+                a {
+                    text-decoration: none;
+                    color: #34495e;
+                }
+            }
+        }
+
+        .price-table {
+            border: 1px solid #34495e;
+
+            .price-header {
+                font-size: 18px;
+                color: white;
+                background: #34495e;
+
+                span {
+                    width: 15%;
+                    display: inline-block;
+                    padding: 10px 0 10px 10px;
+
+                    &.name {
+                        width: 20%;
+                    }
+                }
+            }
+
+            .price-content {
+                font-size: 16px;
+                color: white;
+
+                & > div {
+                    border-top: 1px solid $white;
+
+                    span {
+                        width: 15%;
+                        display: inline-block;
+                        padding: 10px 0 10px 10px;
+                        color: #34495e;
+
+                        &.name {
+                            width: 20%;
+                            color: $white;
+                            background: #34495e;
+                        }
+
+                        &.increase {
+                            color: $red;
+                        }
+
+                        &.decrease {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .requirement-tab {
+        background: $white;
+
+        .main-tab-header {
+            margin-bottom: 20px;
+        }
+    }
+
+ .tab-title{
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 10px;
+        }
+
+    .finance-tab{
+        background: #e74c3c;
+        color: $white;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        .tab-sub-title{
+            font-size: 18px;
+            text-align: center;
+            padding: 5px 10px;
+        }
+
+         .finance-list{
+             padding: 50px 30px;
+
+             .finance-item{
+                 padding: 5px;
+                 border-left: 5px solid $white;
+                 margin-bottom: 20px;
+                 
+                 .title{
+                     font-size: 22px;
+                 }
+
+                 .description{
+                     font-size: 12px;
+                     padding: 4px;
+                 }
+
+                 .col{
+                     width: 50%;
+                     display: inline-block;
+                     padding: 5px;
+                 }
+             }
+         }
+    }
+
+    .acceptance-bill-tab{
+        padding: 50px 0 80px 0; 
+        color: $white;
+        background: #34495e;
+
+        .acceptance-bank-container{
+            margin-top: 40px;
+        }
+
+        table{
+            width: 100%;
+            font-size: 20px;
+            
+            tr{
+                border-bottom: 1px solid $normal-font-color;
+
+                td{
+                    padding: 5px 10px;
+                    text-align: center;
+
+                    &.left{
+                        text-align: left;
+                    }
+                }
+            }
+
+            thead{
+                font-weight: bold;
+            }
+        }
+    }
+
+    .basis-tab{
+        padding: 40px 40px 60px 40px;;
+        background: $white;
+
+        .basis-chart{
+            height: 500px;
+            width: 100%;
+        }
+    }
+
+    .partner-tab{
+        padding: 30px 0 0 0;
+
+        .part-info{
+            h1{
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+            ul{
+                list-style: none;
+
+                li{
+                    float: left;
+                    margin: 10px 15px 10px 0;
+                    border: 1px solid #ccc;
+                }
+            }
+        }
+    }
+}

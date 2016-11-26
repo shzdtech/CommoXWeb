@@ -1,0 +1,80 @@
+.footer{
+    width: 100%;
+    background: #001c3a;
+    color: $white;
+    height: 200px;
+
+    .footer-info{
+        max-width: 1170px;
+        margin: 0 auto;
+
+        .webmap{
+            width: 473px;
+            float: left;
+
+            ul{
+                
+                li{
+                    width: 73px;
+                    float: left;
+                    color: #fff;
+                    font-family: "黑体";
+                    display: block;
+                    margin-right: 80px;
+
+                     h1 {
+                        font-weight: normal;
+                        font-size: 18px;
+                        margin-bottom: 7px;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: #fff;
+                        font-family: "黑体";
+                        font-size: 14px;
+                        line-height: 28px;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .foot-phone{
+            width: 223px;
+            height: 139px;
+            float: right;
+
+            div {
+                
+                height: 20px;
+                color: #fff;
+                line-height: 20px;
+                font-size: 18px;
+
+                span{
+                    padding-right: 10px;
+                }
+            }
+
+            p{
+                font-size: 35px;
+                padding: 18px 0 16px 0;
+            }
+
+            & > span {
+                font-size: 14px;
+                color: #5b6e82;
+            }
+        }
+
+        .copyright{
+            border-top: #304963 solid 1px;
+            width: 100%;
+            font-size: 12px;
+            text-align: center;
+            color: #fff;
+            padding: 10px 0 0 0;
+        }
+    }
+}

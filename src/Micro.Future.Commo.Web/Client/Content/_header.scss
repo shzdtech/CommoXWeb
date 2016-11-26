@@ -1,6 +1,11 @@
 .header {
     width: 100%;
     background: $primary-color;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
 
     nav {
         max-width: 1170px;
@@ -10,11 +15,52 @@
         border-radius: 0;
         border: none;
 
+        &.navbar-default{
+            .navbar-nav {
+               & > li {
+
+                       & > a {
+                            color: $white;
+                            font-size: 20px;
+
+                            &:hover{
+                                color:$white !important;
+                                border-bottom: 3px solid $warning-color; 
+                                padding-bottom: 12px;
+                            }
+                        }
+                    }
+                }
+        }
+
         .navbar-nav {
             li {
+
+                &.small{
+
+                    a{
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        border: 1px solid $white;
+                        border-radius: 3px;
+                        margin: 10px 10px 0 0;
+
+                        &:hover{
+                            border: 1px solid $warning-color; 
+                            color: $warning-color;
+                            padding-bottom: 5px;
+                        }
+                    }
+                }
+
                 a {
                     color: $white;
                     font-size: 20px;
+
+                    &:focus,
+                    &:hover{
+                        color: $white !important;
+                    }
                 }
             }
         }

@@ -11,7 +11,10 @@ class ChainListManager extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onFormItemSelected(this.props.formItem, this.props.formItem.items[0]);
+        let selectedItem = this.props.formItem.items.filter((i)=>{
+            return i.selected;
+        });
+        this.props.onFormItemSelected(this.props.formItem, selectedItem.length > 0 ? selectedItem[0] : this.props.formItem.items[0]);
     }
 
     render() {

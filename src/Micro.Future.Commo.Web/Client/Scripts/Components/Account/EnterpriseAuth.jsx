@@ -14,7 +14,7 @@ class EnterpriseAuth extends React.Component {
 
     render() {
         const {enterprises} = this.props;
-        let header = <div className='header'>
+        let header = <div className='enterprise-list-header'>
             <div className='column'>企业名称</div>
             <div className='column'>企业邮箱</div>
             <div className='column'>法人代表</div>
@@ -35,7 +35,7 @@ class EnterpriseAuth extends React.Component {
 
     getRow(enterprise) {
         const {authenticateEnterprise} = this.props;
-        return <div>
+        return <div key={enterprise.enterpriseId}>
             <div className='column'>{enterprise.name}</div>
             <div className='column'>{enterprise.emailAddress}</div>
             <div className='column'>{enterprise.legalRepresentative}</div>

@@ -11,7 +11,9 @@ module.exports = {
         sourceType: 'module'
     },
     output: {
-        filename: "./wwwroot/dist/bundle.js"
+        path: './wwwroot/dist',
+        publicPath: '/dist/',
+        filename: "bundle.js"
     },
     devServer: {
         contentBase: ".",
@@ -19,11 +21,18 @@ module.exports = {
         port: 9010
     },
     plugins: [
-        new extractTextPlugin("./wwwroot/dist/bundle.css"),
+        new extractTextPlugin("bundle.css"),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                dead_code: true,
+                unused: true
+            }
         })
     ],
     module: {
@@ -38,8 +47,8 @@ module.exports = {
             },
             { test: /\.css$/, loader: "style-loader!css-loader" },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader?limit=100000'
+                test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
+                loader: 'url-loader?limit=10000?name=/dist/images/[hash].[ext]'
             },
             {
                 test: /\.(js|jsx)$/,

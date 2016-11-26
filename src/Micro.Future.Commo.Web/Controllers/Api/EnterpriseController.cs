@@ -131,11 +131,14 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     throw new BadRequestException(message);
                 }
             }
-            throw new BadRequestException("企业注册失败, 请检查输入是否正确");
+
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToArray();
+            throw new BadRequestException(string.Join("\r\n", allErrors));
         }
 
         [HttpPost]
         [Route("{id:int}")]
+        [Authorize()]
         public async Task UpdateEnterprise(int id, EnterpriseUpdateModel model)
         {
             if (ModelState.IsValid)
@@ -176,6 +179,12 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
                 enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
                 enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
+                enterpriseInfo.InvoiceMaterial = model.InvoiceMaterial;
+                enterpriseInfo.RegisterWarehouse = model.RegisterWarehouse;
+                enterpriseInfo.MaxTradeAmountPerMonth = model.MaxTradeAmountPerMonth;
+                if (model.IsAcceptanceBillETicket.HasValue) {
+                    enterpriseInfo.IsAcceptanceBillETicket = model.IsAcceptanceBillETicket.HasValue;
+                }
                 if (model.PreviousProfit.HasValue)
                 {
                     enterpriseInfo.PreviousProfit = model.PreviousProfit.Value;
@@ -196,7 +205,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
             else
             {
-                throw new BadRequestException("输入数据不正确");
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToArray();
+                throw new BadRequestException(string.Join("\r\n", allErrors));
             }
         }
 
@@ -250,7 +260,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 _logger.LogError(ex.Message, ex);
                 throw;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
                 throw new BadRequestException("验证码发送失败");
@@ -258,11 +268,25 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("Unauthed")]
         [Authorize(Roles = "Admin")]
         public IEnumerable<EnterpriseInfo> Get()
         {
             var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.UNAPPROVED);
+            if (result.HasError)
+            {
+                throw new BadRequestException(result.Error.Message);
+            }
+
+            return result.Result;
+        }
+
+        [HttpGet]
+        [Route("")]
+        [Authorize(Roles = "Admin")]
+        public IEnumerable<EnterpriseInfo> GetAll()
+        {
+            var result = _enterpriseManager.QueryEnterprises(null, EnterpriseStateType.APPROVED);
             if (result.HasError)
             {
                 throw new BadRequestException(result.Error.Message);

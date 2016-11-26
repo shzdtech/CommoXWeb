@@ -6,22 +6,24 @@ import {
     ADD_REQUIREMENT_FAILURE,
     FETCH_REQUIREMENT_LIST,
     FETCH_REQUIREMENT_LIST_SUCCESS,
-    FETCH_REQUIREMENT_LIST_FAILURE
+    FETCH_REQUIREMENT_LIST_FAILURE,
+    ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
+    SET_PAYMENT_METHOD
 } from '../Constants/ActionTypes';
-import {TEXT} from '../Constants/FilterTypes';
+import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
 import FilterProperty from '../Models/FilterProperty';
 import { push } from 'react-router-redux';
-import {ajaxError} from './CommonActions';
-import {resetForm} from '../Actions';
+import {ajaxError, showToastr} from './CommonActions';
+import {resetForm, showSpinner} from '../Actions';
 //requirement
-export const addRequirementRequest = (list, selectedType) => {
+export const addRequirementRequest = (list, selectedType, enterpriseId) => {
     let requirement = {};
     requirement.rules = [];
     requirement.type = selectedType;
     list.forEach((l) => {
 
-        if (l.type === TEXT) {
+        if (l.type === TEXT || l.type === DATE || l.type === LABEL) {
             if (l.value !== undefined && l.value !== null && l.value !== '') {
                 if (l.filterProperty === FilterProperty.Requirement) {
                     requirement[l.key] = l.value;
@@ -29,6 +31,7 @@ export const addRequirementRequest = (list, selectedType) => {
                     requirement.rules.push({
                         ruleType: l.ruleType,
                         key: l.title,
+                        directionType: l.ruleDirectionType,
                         value: l.value,
                         operationType: 2
                     });
@@ -42,12 +45,15 @@ export const addRequirementRequest = (list, selectedType) => {
                 requirement.rules.push({
                     key: l.key,
                     value: values.join(','),
+                    directionType: l.ruleDirectionType,
                     operationType: 1
                 });
             }
         }
     });
-
+    if (enterpriseId) {
+        requirement.enterpriseId = enterpriseId;
+    }
     return $.post(HOST + 'api/Requirement', requirement);
 };
 
@@ -65,15 +71,54 @@ export const addRequirementFailure = (error) => {
     };
 };
 
-export const addRequirement = (list, selectedType) => {
-    return (dispatch) => {
-        return addRequirementRequest(list, selectedType).then(
+export const addRequirementForCreateChainSuccess = (requirement) => {
+    return {
+        type: ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
+        requirement: requirement
+    }
+}
+
+export const addRequirement = (list, selectedType, enterpriseId) => {
+    return (dispatch, getState) => {
+        const createChainState = getState().chain.createChainState;
+        if (selectedType === 1 && createChainState.length > 0 && createChainState[0].requirement && createChainState[0].requirement.type == 1) {
+            dispatch(push('/createChain'));
+            dispatch(resetForm());
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个采购客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        } else if (selectedType === 2 && createChainState.length > 0 &&
+            createChainState[createChainState.length - 1].requirement
+            && createChainState[createChainState.length - 1].requirement.type == 2) {
+            dispatch(push('/createChain'));
+            dispatch(resetForm());
+            return dispatch(showToastr({
+                message: "一条匹配链中只可以存在一个销售客户",
+                toastType: 'toast-error',
+                show: true
+            }));
+        }
+        dispatch(showSpinner(true));
+
+        return addRequirementRequest(list, selectedType, enterpriseId).then(
             requirement => {
-                dispatch(addRequirementSuccess(requirement));
+                dispatch(showSpinner(false));
                 dispatch(resetForm());
-                dispatch(push('/requirements'));
+                if (enterpriseId) {
+                    dispatch(addRequirementForCreateChainSuccess(requirement));
+
+                    dispatch(push('/createChain'));
+                } else {
+                    dispatch(addRequirementSuccess(requirement));
+                    dispatch(push('/requirement'));
+                }
             },
-            error => ajaxError(dispatch, error)
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
         );
     };
 };
@@ -112,5 +157,13 @@ export const fetchRequirements = (searchCriteria) => {
         );
     };
 };
+
+export const setPaymentMethod = (paymentTypeId) =>{
+    return {
+        type: SET_PAYMENT_METHOD,
+        paymentTypeId: paymentTypeId
+    };
+};
+
 
 

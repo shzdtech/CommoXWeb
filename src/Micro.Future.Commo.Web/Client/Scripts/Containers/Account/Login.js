@@ -12,8 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogin: (email, password) => {
-            dispatch(loginAction(email, password));
+        onLogin: (email, password, redirect) => {
+            dispatch(loginAction(email, password, redirect));
         },
         onCloseForm: () => {
             dispatch(push('/'));

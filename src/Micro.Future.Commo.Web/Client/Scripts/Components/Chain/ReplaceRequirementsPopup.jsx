@@ -28,6 +28,7 @@ class ReplaceRequirementsPopup extends React.Component {
                                 index={this.props.replaceRequirement.index}
                                 requirementId={this.props.replaceRequirement.requirementId}
                                 chainId={this.props.replaceRequirement.chainId}
+                                actionName="用当前需求替换"
                                 replaceRequirementAction={this.props.replaceRequirementAction} />
                         })
                     }

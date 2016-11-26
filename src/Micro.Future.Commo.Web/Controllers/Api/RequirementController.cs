@@ -33,12 +33,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpPost]
         public async Task<Models.RequirementInfo> AddRequirement(Models.RequirementInfo requirement)
         {
-            var user = await _userManager.GetUserAsync(User);
             var requirementInfo = new RequirementInfo
             {
                 UserId = UserId,
                 RequirementId = requirement.RequirementId,
-                EnterpriseId = user.EnterpriseId,
                 PaymentType = requirement.PaymentType,
                 PaymentDateTime = requirement.PaymentDateTime,
                 PaymentAmount = requirement.PaymentAmount,
@@ -65,6 +63,18 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 Rules = requirement.Rules
             };
 
+            if (requirement.EnterpriseId > 0)
+            {
+                requirementInfo.EnterpriseId = requirement.EnterpriseId;
+                requirementInfo.OpUserId = UserId;
+            }
+            else
+            {
+                var user = await _userManager.GetUserAsync(User);
+                requirementInfo.EnterpriseId = user.EnterpriseId;
+            }
+
+            
             var result = _requirementManager.AddRequirementInfo(requirementInfo);
             if (result.HasError)
             {
@@ -72,11 +82,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
             requirement.RequirementId = result.Result.RequirementId;
+            requirement.EnterpriseName = result.Result.EnterpriseName;
             return requirement;
         }
 
         [Route("")]
         [HttpGet]
+        [Authorize()]
         public async Task<IEnumerable<Models.RequirementInfo>> GetRequirements(RequirementSearchModel searchCriteria)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -86,6 +98,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 criteria.PageNo = searchCriteria.PageNo;
                 criteria.PageSize = searchCriteria.PageSize;
+                criteria.OrderByFields = new List<OrderByInfo> { new OrderByInfo { Field = "CreateTime", OrderBy = "desc" } };
                 if (searchCriteria.RequirementType != RequirementType.None)
                 {
                     criteria.RequirementType = searchCriteria.RequirementType;
@@ -117,6 +130,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [Route("{id:int}/Chains")]
         [HttpGet]
+        [Authorize()]
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = new List<RequirementChainInfo>();
@@ -139,6 +153,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.RequirementInfo> SearchRequirements(RequirementSearchModel searchCriteria)
         {
             var criteria = new RequirementSearchCriteria();
+            criteria.OrderByFields = new List<OrderByInfo> { new OrderByInfo { Field = "CreateTime", OrderBy = "desc" } };
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductName))
                 criteria.ProductName = searchCriteria.ProductName;
             if (!string.IsNullOrWhiteSpace(searchCriteria.ProductType))
@@ -167,4 +182,5 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return requirements;
         }
     }
+
 }

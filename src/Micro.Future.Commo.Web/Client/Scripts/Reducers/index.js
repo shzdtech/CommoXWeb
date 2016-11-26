@@ -9,18 +9,23 @@ import forms from './forms';
 import common from './Common';
 import requirements from './requirements';
 import account from './Account/account';
+import admin from './Admin';
+import trade from './Trade';
 import { routerReducer } from 'react-router-redux';
 
 const reducers = combineReducers({
     home,
     filters: filters(commonFilterList),
     myFilters: filters(myFilterList),
+    selectRequirementFilters: filters(commonFilterList),
     filterContentToggled,
     chain,
     requirements,
     forms,
     account,
     common,
+    admin,
+    trade,
     routing: routerReducer
 });
 

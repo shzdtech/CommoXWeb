@@ -105,12 +105,13 @@
       "wwwroot",
       "Views",
       "appsettings.json",
+      "MongoConf.json",
       "web.config"
     ]
   },
 
   "scripts": {
-    "prepublish": [ "npm install", "bower install"],
+    "prepublish": [],//"npm install", "bower install"],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }

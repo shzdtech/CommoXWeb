@@ -10,7 +10,7 @@ class Popup extends React.Component {
     render() {
         return <div>
             <div className='popup-conatainer'>
-                <div className='header'>
+                <div className='popup-header'>
                     <span className='glyphicon glyphicon-remove' onClick={this.props.onClosePopup}></span>
                     {this.props.title}
                 </div>

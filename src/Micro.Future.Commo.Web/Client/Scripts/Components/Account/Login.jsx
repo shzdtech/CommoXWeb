@@ -31,8 +31,9 @@ class Login extends React.Component {
     onLogin() {
         let email = this.refs.email.value;
         let password = this.refs.password.value;
+        console.log(this.props.location.query);
         if (email !== null && email !== '' && password !== null && password !== '') {
-            this.props.onLogin(email, password);
+            this.props.onLogin(email, password, this.props.location.query.redirect);
         }
     }
 
