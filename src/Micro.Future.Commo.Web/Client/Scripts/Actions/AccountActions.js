@@ -105,7 +105,7 @@ export const loginFailure = (userInfo) => {
     };
 };
 
-export const loginAction = (email, password) => {
+export const loginAction = (email, password, redirect) => {
     return dispatch => {
         loginRequest(email, password).then(
             userInfo => {
@@ -118,7 +118,7 @@ export const loginAction = (email, password) => {
                     }));
                 }
                 dispatch(loginSuccess(userInfo));
-                dispatch(push('/'));
+                dispatch(push(redirect ? redirect : '/'));
             },
             error => ajaxError(dispatch, error)
         );

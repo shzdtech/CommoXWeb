@@ -46,7 +46,8 @@ arrayFindPolyfill();
 
 class App extends React.Component{
     render(){
-        console.log(this.props);
+        //console.log(this.props);
+        //console.log(this.props.location.query);
         let className = this.props.location.pathname === '/' || this.props.location.pathname === '/marketQuotation' ? 'home' : 'container main-wrapper';
         if(this.props.location.pathname === '/billTrade' || this.props.location.pathname === '/fundTrade'){
             className='trade';
