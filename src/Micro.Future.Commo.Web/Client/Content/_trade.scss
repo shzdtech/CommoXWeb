@@ -183,6 +183,10 @@
                                 border:none;
                             }
 
+                            &.updated{
+                                background: $primary-color-opacity
+                            }
+
                             div{
                                 padding: 5px 15px;
                             }

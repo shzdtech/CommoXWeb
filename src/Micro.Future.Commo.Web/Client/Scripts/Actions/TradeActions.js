@@ -3,7 +3,9 @@ import {
     SELECT_TRADE_STATE,
     UPDATE_TRADE_STATE_SUCCESS,
     SET_SELECT_ENTERPRISE_TRADE,
-    SET_SELECT_ADMIN_TRADE
+    SET_SELECT_ADMIN_TRADE,
+
+    UPDATE_ORDER_STATE_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -101,8 +103,13 @@ export const fetchMyTradeByType = (typeId) => {
 };
 
 export const setSelectEnterpriseTrade = () => {
-    return {
-        type: SET_SELECT_ENTERPRISE_TRADE
+
+    return (dispatch, getState) => {
+        const state = getState();
+        return dispatch({
+            type: SET_SELECT_ENTERPRISE_TRADE,
+            enterpriseId: state.account.login.enterpriseId
+        });
     }
 };
 
@@ -111,3 +118,35 @@ export const setSelectAdminTrade = () => {
         type: SET_SELECT_ADMIN_TRADE
     }
 }
+
+
+
+export const updateOrderState = (tradeId, orderId, newstate) => {
+    return (dispatch) => {
+        dispatch(showSpinner(true));
+        return updateOrderStateRequest(tradeId, orderId, newstate).then(
+            res => {
+                dispatch(updateOrderStateSuccess(tradeId, orderId));
+                dispatch(showSpinner(false));
+            },
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}
+
+
+const updateOrderStateRequest = (orderId, newstate) => {
+    const request = $.post(HOST + 'api/Order/' + orderId + '/State/' + newstate);
+    return request;
+};
+
+export const updateOrderStateSuccess = (tradeId, orderId) => {
+    return {
+        type: UPDATE_ORDER_STATE_SUCCESS,
+        orderId: orderId,
+        tradeId: tradeId
+    }
+};

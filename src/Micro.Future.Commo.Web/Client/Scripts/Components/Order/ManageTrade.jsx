@@ -15,14 +15,15 @@ class ManageTrade extends React.Component {
     }
 
     render() {
-        let {formItem, trades, onFormItemSelected, updateToNextState} = this.props;
+        let {formItem, trades, onFormItemSelected, updateToNextState, updateOrderToNextState} = this.props;
 
         return <div className='trade-list-manager-container'>
             <FormItem formItem={formItem} onFormItemSelected={onFormItemSelected} />
             <div className='trade-list-container'>
                {
                 trades.map((t)=>{
-                       return <Trade key={t.tradeId} trade={t} updateToNextState={updateToNextState} isMine={formItem.isMine}/>
+                       return <Trade key={t.tradeId} trade={t} updateToNextState={updateToNextState} isMine={formItem.isMine}
+                        enterpriseId = {formItem.enterpriseId} updateOrderToNextState={updateOrderToNextState}/>
                    })
                }
             </div>
