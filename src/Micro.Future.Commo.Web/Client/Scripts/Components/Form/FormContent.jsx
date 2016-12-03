@@ -49,8 +49,12 @@ class FormContent extends React.Component {
                     <div className='form-item-list'>
                         {m.items.map(function (r) {
 
-                            if(r.key === 'paymentAmount' && list[11].value && list[10].value){
-                                r.value = list[11].value * list[10].value;
+                            if(r.key === 'paymentAmount'){
+                                if(list[11].value && list[10].value){
+                                    r.value = list[11].value * list[10].value;
+                                }else{
+                                    r.value = null;
+                                }
                             }
 
                             if (r.type === TEXT) {
