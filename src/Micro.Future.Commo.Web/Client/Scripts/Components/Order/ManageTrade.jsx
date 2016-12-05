@@ -15,7 +15,7 @@ class ManageTrade extends React.Component {
     }
 
     render() {
-        let {formItem, trades, onFormItemSelected, updateToNextState, updateOrderToNextState} = this.props;
+        let {formItem, trades, onFormItemSelected, updateToNextState, updateOrderToNextState, uploadOrdersImage} = this.props;
 
         return <div className='trade-list-manager-container'>
             <FormItem formItem={formItem} onFormItemSelected={onFormItemSelected} />
@@ -23,7 +23,8 @@ class ManageTrade extends React.Component {
                {
                 trades.map((t)=>{
                        return <Trade key={t.tradeId} trade={t} updateToNextState={updateToNextState} isMine={formItem.isMine}
-                        enterpriseId = {formItem.enterpriseId} updateOrderToNextState={updateOrderToNextState}/>
+                        enterpriseId = {formItem.enterpriseId} updateOrderToNextState={updateOrderToNextState}
+                        uploadOrdersImage={uploadOrdersImage}/>
                    })
                }
             </div>

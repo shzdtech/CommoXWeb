@@ -1,4 +1,5 @@
 import React from 'react';
+import FileUploadComponent from '../Common/FileUploadComponent';
 
 class Trade extends React.Component {
     constructor() {
@@ -37,6 +38,7 @@ class Trade extends React.Component {
     getOrderItem(order, index) {
         let action = null;
         let className = null;
+        let uploadComponent = null;
         if (order.orderStateId > this.props.trade.currentState) {
             className = 'updated';
         }
@@ -47,28 +49,71 @@ class Trade extends React.Component {
                     <span className='btn btn-large' onClick={() => { this.props.updateToNextState(this.props.trade.tradeId, this.props.trade.currentState + 1) } }>{this.getNextStateAction(this.props.trade.currentState) }</span>
                 </div>
             } else {
-                action = order.enterpriseId === this.props.enterpriseId && order.orderStateId === this.props.trade.currentState && <div>
-                    <span className='btn btn-large' onClick={() => {
-                        this.props.updateOrderToNextState(this.props.trade.tradeId, order.orderId, this.props.trade.currentState + 1)
-                    }
-                    }>{this.getNextOrderStateAction(this.props.trade.currentState) }</span>
-                </div>
+                if (order.enterpriseId === this.props.enterpriseId && order.orderStateId === this.props.trade.currentState) {
+                    action = <div>
+                        <span className='btn btn-large' onClick={() => {
+                            this.props.updateOrderToNextState(this.props.trade.tradeId, order.orderId, this.props.trade.currentState + 1)
+                        }
+                        }>{this.getNextOrderStateAction(this.props.trade.currentState) }</span>
+                    </div>
+                    uploadComponent = this.getUploadComponenet(order.orderId, this.props.trade.currentState);
+                }
             }
+        }
+
+        let contractImages = [];
+        let invoiceImages = [];
+        if (order.orderImages !== null) {
+            order.orderImages.forEach((image) => {
+                if (image.imageType === 1) {
+                    contractImages.push(<span key={image.imageId}><img class='image-thumbnail' src={image.imagePath} /></span>);
+                } else if (image.imageType === 2) {
+                    invoiceImages.push(<span key={image.imageId}><img class='image-thumbnail' src={image.imagePath} /></span>);
+                }
+            })
+        }
+        if (contractImages.length > 0) {
+            contractImages.unshift(<span>合同图片：</span>);
+        }
+
+        if (invoiceImages.length > 0) {
+            invoiceImages.unshift(<span>发票图片：</span>);
         }
 
         return <tr key={order.orderId}>
             <td className={className}>
-                <div>企业名称: {order.enterpriseName}</div>
+                <div>企业 名称: {order.enterpriseName}</div>
                 <div>企业编号: {order.requirementId}</div>
+                {uploadComponent}
+                {contractImages}
+                {invoiceImages}
             </td>
-            <td className='no-border'>
+            < td className='no-border'>
                 {action}
             </td>
         </tr>
     }
 
+
+    getUploadComponenet(orderId, state) {
+        let label = null;
+        if (state === 1) {
+            label = '请上传合同扫描件';
+            return <FileUploadComponent label = {label} uploadImages={(images) => {
+                this.props.uploadOrdersImage(this.props.trade.tradeId, orderId, 1, images)
+            } }/>
+        } else if (state === 4) {
+            label = '请上传发票扫描件';
+            return <FileUploadComponent label = {label} uploadImages={(images) => {
+                this.props.uploadOrdersImage(this.props.trade.tradeId, orderId, 2, images)
+            } }/>
+        }
+        return null;
+    }
+
+
     getCurrentStateById(id) {
-        let state = '合同'
+        let state = '签署合同'
         switch (id) {
             case 1:
                 state = '签署合同';
@@ -91,11 +136,13 @@ class Trade extends React.Component {
             default:
                 break;
         }
+
         return state;
     }
 
-    getNextStateAction(id) {
-        let state = null
+
+    getNextOrderStateAction(id) {
+        state = null
         switch (id) {
             case 1:
                 state = '支付资金';
@@ -115,8 +162,10 @@ class Trade extends React.Component {
             default:
                 break;
         }
+
         return state;
     }
+
 
     getNextOrderStateAction(id) {
         let state = null

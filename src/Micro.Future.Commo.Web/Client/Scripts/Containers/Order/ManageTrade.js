@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ManageTrade from '../../Components/Order/ManageTrade';
-import {fetchTradeByType, selectTradeState, updateTradeState, fetchMyTradeByType, updateOrderState} from '../../Actions/TradeActions';
+import {fetchTradeByType, selectTradeState, updateTradeState, fetchMyTradeByType, updateOrderState, uploadOrderImages} from '../../Actions/TradeActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateOrderToNextState:(tradeId, orderId, newstate) => {
              dispatch(updateOrderState(tradeId, orderId, newstate));
+        },
+        uploadOrdersImage: (tradeId, orderId, imageType, images) => {
+            dispatch(uploadOrderImages(tradeId, orderId, imageType, images))
         }
     };
 };

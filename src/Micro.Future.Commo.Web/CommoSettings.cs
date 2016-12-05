@@ -9,5 +9,6 @@ namespace Micro.Future.Commo.Web
     public class CommoSettings
     {
         public string ImageFolder { get; set; }
+        public string OrderImageFolder { get; set; }
     }
 }

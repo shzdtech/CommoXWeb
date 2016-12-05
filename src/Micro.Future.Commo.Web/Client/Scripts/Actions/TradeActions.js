@@ -5,7 +5,8 @@ import {
     SET_SELECT_ENTERPRISE_TRADE,
     SET_SELECT_ADMIN_TRADE,
 
-    UPDATE_ORDER_STATE_SUCCESS
+    UPDATE_ORDER_STATE_SUCCESS,
+    UPLOAD_ORDER_IMAGES_SUCCESS
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -119,8 +120,6 @@ export const setSelectAdminTrade = () => {
     }
 }
 
-
-
 export const updateOrderState = (tradeId, orderId, newstate) => {
     return (dispatch) => {
         dispatch(showSpinner(true));
@@ -150,3 +149,47 @@ export const updateOrderStateSuccess = (tradeId, orderId) => {
         tradeId: tradeId
     }
 };
+
+
+const uploadOrderImagesRequest = (tradeId, orderId, imageType, model) => {
+     const request = $.ajax({
+        type: 'post',
+        url: HOST + 'api/Order/' + orderId + '/Trade/' + tradeId + '/Images/Type/'+ imageType,
+        contentType: false,
+        processData: false,
+        data: model,
+        timeout: 600000
+    });
+    return request;
+}
+
+const uploadOrderImagesSuccess = ()=>{
+    return {
+        type: UPLOAD_ORDER_IMAGES_SUCCESS
+    };
+};
+
+export const uploadOrderImages = (tradeId, orderId, imageType, images) => {
+    var model = new FormData();
+    if(images !== null && images.length > 0){
+        for(let i = 0; i< images.length; i++){
+            if(images[i].type.indexOf('image') > -1){
+                 model.append('images[]', images[i]);
+            }
+        }
+    }
+    return (dispatch) => {
+        dispatch(showSpinner(true));
+        return uploadOrderImagesRequest(tradeId, orderId, imageType, model).then(
+            res => {
+                
+                dispatch(showSpinner(false));
+                dispatch(uploadOrderImagesSuccess(tradeId, orderId));    
+            },
+            error => {
+                dispatch(showSpinner(false));
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}

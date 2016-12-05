@@ -22,10 +22,6 @@ let products = [{
         name: '锌',
         value: '锌'
     }, {
-        id: 5,
-        name: '锌',
-        value: '锌'
-    }, {
         id: 6,
         name: '锡',
         value: '锡'
