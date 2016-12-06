@@ -8,7 +8,8 @@ import {
     FETCH_REQUIREMENT_LIST_SUCCESS,
     FETCH_REQUIREMENT_LIST_FAILURE,
     ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
-    SET_PAYMENT_METHOD
+    SET_PAYMENT_METHOD,
+    DELETE_REQUIREMENT_SUCCESS
 } from '../Constants/ActionTypes';
 import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -164,6 +165,29 @@ export const setPaymentMethod = (paymentTypeId) =>{
         paymentTypeId: paymentTypeId
     };
 };
+
+export const deleteRequirementsRequest = (requirementId) => {
+     return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Requirement/' + requirementId
+    });
+}
+
+const deleteRequirementSuccess = (requirementId) => {
+    return {
+        type: DELETE_REQUIREMENT_SUCCESS,
+        requirementId: requirementId
+    }
+}
+
+export const deleteRequirement = (requirementId) => {
+    return (dispatch) => {
+        return deleteRequirementsRequest(requirementId).then(
+            res => dispatch(deleteRequirementSuccess(requirementId)),
+            error => ajaxError(dispatch, error)
+        );
+    };
+}
 
 
 

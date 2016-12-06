@@ -32,6 +32,7 @@ class Trade extends React.Component {
 
                 </tbody>
             </table>
+            <div className='show-big-picture-overlay'></div>
         </div>
     }
 
@@ -106,7 +107,11 @@ class Trade extends React.Component {
             label = '请上传发票扫描件';
             return <FileUploadComponent label = {label} uploadImages={(images) => {
                 this.props.uploadOrdersImage(this.props.trade.tradeId, orderId, 2, images)
-            } }/>
+            } }
+
+                showBigPicture={(url) => {
+                    this.showBigPicture.bind(this);
+                } }/>
         }
         return null;
     }
@@ -189,6 +194,11 @@ class Trade extends React.Component {
                 break;
         }
         return state;
+    }
+
+    showBigPicture(e, imgurl){
+        $(e).closest('.trade-node').addClass('show-big-picture');
+        
     }
 }
 

@@ -63,11 +63,28 @@
 
         &:hover {
             outline: 1px solid $primary-color;
+
+            .requirement-items{
+                .glyphicon-trash{
+                    display: block !important;
+                    color: $warning-color;
+                }
+            }
         }
 
         .requirement-items {
             padding: 10px;
             background: $primary-color-opacity;
+            position: relative;
+
+             .glyphicon-trash{
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  cursor: pointer;
+                  display: none;
+                  font-size: 15px;
+             }
 
             .requirement-item {
                 margin-bottom: 5px;

@@ -32,6 +32,7 @@ class Requirement extends React.Component {
 
         return <div key={requirementId} className='requirement'>
             <div className='requirement-items'>
+                {this.props.requirement.state === 0 ? <span className='glyphicon glyphicon-trash' onClick={()=>this.props.deleteRequirement(requirementId)}></span> : null}
                 <div className='requirement-item main'><span className='title'>需求编号: </span><span>{requirementId}</span></div>
                 {type ? <div className='requirement-item main'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销') }</span></div> : null}
                 {enterpriseName ? <div className='requirement-item'><span className='title'>公司名称：</span><span>{enterpriseName}</span></div> : null}

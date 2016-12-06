@@ -128,6 +128,15 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
         }
 
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        [Authorize()]
+        public void Delete(int id)
+        {
+            _requirementManager.DeleteRequirement(id);
+        }
+
         [Route("{id:int}/Chains")]
         [HttpGet]
         [Authorize()]

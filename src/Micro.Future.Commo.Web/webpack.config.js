@@ -27,13 +27,13 @@ module.exports = {
             jQuery: "jquery",
             "window.jQuery": "jquery"
         }),
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false,
-        //         dead_code: true,
-        //         unused: true
-        //     }
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                dead_code: true,
+                unused: true
+            }
+        })
     ],
     module: {
         loaders: [

@@ -34,6 +34,9 @@ class FileUploadComponent extends React.Component {
             picReader.addEventListener("load", function (event) {
                 let picFile = event.target;
                 let span = document.createElement("span");
+                $(span).on('click', (e)=>{
+                    this.props.showBigPicture(e, picFile.result);
+                })
                 span.innerHTML = "<img class='image-thumbnail' src='" + picFile.result + "'" +
                     "title='" + picFile.name + "'/>";
                 output.insertBefore(span, null);

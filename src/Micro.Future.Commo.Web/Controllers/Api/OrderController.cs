@@ -67,6 +67,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             _tradeManager.BulkSaveOrderImages(list);
         }
 
+        [HttpDelete]
+        [Route("OrderImage/{imageId:int}")]
+        public void DeleteOrderImage(int imageId)
+        {
+            _tradeManager.DeleteOrderImage(imageId);
+        }
+
         private string _SaveImages(IFormFile imageFile)
         {
             var filePath = @"wwwroot/" + _commoSettingsAccessor.Value.OrderImageFolder;
