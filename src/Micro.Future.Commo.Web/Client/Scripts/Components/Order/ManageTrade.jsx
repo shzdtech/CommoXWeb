@@ -15,16 +15,27 @@ class ManageTrade extends React.Component {
     }
 
     render() {
-        let {formItem, trades, onFormItemSelected, updateToNextState, updateOrderToNextState, uploadOrdersImage} = this.props;
+        let {formItem, trades, onFormItemSelected, updateToNextState, updateOrderToNextState, uploadOrdersImage, 
+            deleteOrderImages, showBigImage, hideBigImage} = this.props;
+
+        let bigImage = null;
+        if(formItem.bigImageUrl != null){
+           bigImage = <div className='big-image-container' onClick={()=>hideBigImage()}>
+                <img src={formItem.bigImageUrl} />
+            </div>
+        }
 
         return <div className='trade-list-manager-container'>
+             {bigImage}
             <FormItem formItem={formItem} onFormItemSelected={onFormItemSelected} />
             <div className='trade-list-container'>
                {
                 trades.map((t)=>{
                        return <Trade key={t.tradeId} trade={t} updateToNextState={updateToNextState} isMine={formItem.isMine}
                         enterpriseId = {formItem.enterpriseId} updateOrderToNextState={updateOrderToNextState}
-                        uploadOrdersImage={uploadOrdersImage}/>
+                        uploadOrdersImage={uploadOrdersImage}
+                        deleteOrderImages={deleteOrderImages}
+                        showBigImage={showBigImage}/>
                    })
                }
             </div>

@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ManageTrade from '../../Components/Order/ManageTrade';
-import {fetchTradeByType, selectTradeState, updateTradeState, fetchMyTradeByType, updateOrderState, uploadOrderImages} from '../../Actions/TradeActions';
+import {fetchTradeByType, selectTradeState, updateTradeState, 
+    fetchMyTradeByType, updateOrderState, uploadOrderImages, deleteOrderImage,
+    showBigImage,
+    hideBigImage
+} from '../../Actions/TradeActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -28,6 +32,15 @@ const mapDispatchToProps = (dispatch) => {
         },
         uploadOrdersImage: (tradeId, orderId, imageType, images) => {
             dispatch(uploadOrderImages(tradeId, orderId, imageType, images))
+        },
+        deleteOrderImages: (tradeId, orderId, imageId) => {
+            dispatch(deleteOrderImage(tradeId, orderId, imageId));
+        },
+        showBigImage:(imageUrl)=>{
+            dispatch(showBigImage(imageUrl));
+        },
+        hideBigImage: ()=>{
+            dispatch(hideBigImage());
         }
     };
 };

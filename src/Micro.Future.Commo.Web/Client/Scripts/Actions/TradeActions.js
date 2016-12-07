@@ -6,7 +6,12 @@ import {
     SET_SELECT_ADMIN_TRADE,
 
     UPDATE_ORDER_STATE_SUCCESS,
-    UPLOAD_ORDER_IMAGES_SUCCESS
+    UPLOAD_ORDER_IMAGES_SUCCESS,
+
+    DELETE_ORDER_IMAGE_SUCCESS,
+
+    SHOW_BIG_ORDER_IMAGE,
+    HIDE_BIG_ORDER_IMAGE
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -163,9 +168,13 @@ const uploadOrderImagesRequest = (tradeId, orderId, imageType, model) => {
     return request;
 }
 
-const uploadOrderImagesSuccess = ()=>{
+const uploadOrderImagesSuccess = (tradeId, orderId, orderImages)=>{
     return {
-        type: UPLOAD_ORDER_IMAGES_SUCCESS
+        type: UPLOAD_ORDER_IMAGES_SUCCESS,
+        tradeId: tradeId,
+        orderId: orderId,
+        orderImages: orderImages
+
     };
 };
 
@@ -181,10 +190,9 @@ export const uploadOrderImages = (tradeId, orderId, imageType, images) => {
     return (dispatch) => {
         dispatch(showSpinner(true));
         return uploadOrderImagesRequest(tradeId, orderId, imageType, model).then(
-            res => {
-                
+            orderImages => {
                 dispatch(showSpinner(false));
-                dispatch(uploadOrderImagesSuccess(tradeId, orderId));    
+                dispatch(uploadOrderImagesSuccess(tradeId, orderId, orderImages));    
             },
             error => {
                 dispatch(showSpinner(false));
@@ -193,3 +201,45 @@ export const uploadOrderImages = (tradeId, orderId, imageType, images) => {
         );
     };
 }
+
+const deleteOrderImageRequest = (orderImageId)=>{
+    return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Order/OrderImage/' + orderImageId
+    });
+}
+
+const deleteOrderImageSuccess = (tradeId, orderId, orderImageId) => {
+    return {
+        type: DELETE_ORDER_IMAGE_SUCCESS,
+        tradeId: tradeId,
+        orderId: orderId,
+        orderImageId: orderImageId
+    }
+}
+
+export const deleteOrderImage = (tradeId, orderId, orderImageId) => {
+     return (dispatch) => {
+        return deleteOrderImageRequest(orderImageId).then(
+            res => {
+                dispatch(deleteOrderImageSuccess(tradeId, orderId, orderImageId));    
+            },
+            error => {
+                ajaxError(dispatch, error);
+            }
+        );
+    };
+}
+
+export const showBigImage = (imageUrl)=>{
+     return {
+         type: SHOW_BIG_ORDER_IMAGE,
+         imageUrl: imageUrl
+     }
+ }
+
+export const  hideBigImage = ()=>{
+      return {
+          type: HIDE_BIG_ORDER_IMAGE
+      }
+  }

@@ -64,21 +64,26 @@ class Trade extends React.Component {
 
         let contractImages = [];
         let invoiceImages = [];
+
+        let deleteAction = (imageId) =>{
+            return order.enterpriseId === this.props.enterpriseId && this.props.isMine ? <span className='glyphicon glyphicon-trash' onClick={()=>{this.props.deleteOrderImages(this.props.trade.tradeId, order.orderId, imageId)}}></span> : null
+        }
+
         if (order.orderImages !== null) {
             order.orderImages.forEach((image) => {
                 if (image.imageType === 1) {
-                    contractImages.push(<span key={image.imageId}><img class='image-thumbnail' src={image.imagePath} /></span>);
+                    contractImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={()=>this.props.showBigImage(image.imagePath)} />{this.props.trade.currentState === 1 ? deleteAction(image.imageId) : null}</span>);
                 } else if (image.imageType === 2) {
-                    invoiceImages.push(<span key={image.imageId}><img class='image-thumbnail' src={image.imagePath} /></span>);
+                    invoiceImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={()=>this.props.showBigImage(image.imagePath)} />{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
                 }
             })
         }
         if (contractImages.length > 0) {
-            contractImages.unshift(<span>合同图片：</span>);
+            contractImages.unshift(<span key='contract-image-title' className='order-image-title'>合同图片：</span>);
         }
 
         if (invoiceImages.length > 0) {
-            invoiceImages.unshift(<span>发票图片：</span>);
+            invoiceImages.unshift(<span key='invoice-image-title' className='order-image-title'>发票图片：</span>);
         }
 
         return <tr key={order.orderId}>
@@ -86,8 +91,12 @@ class Trade extends React.Component {
                 <div>企业 名称: {order.enterpriseName}</div>
                 <div>企业编号: {order.requirementId}</div>
                 {uploadComponent}
-                {contractImages}
-                {invoiceImages}
+                <div className='order-images'>
+                    {contractImages}
+                </div>
+                <div className='order-images'>
+                    {invoiceImages}
+                </div>
             </td>
             < td className='no-border'>
                 {action}

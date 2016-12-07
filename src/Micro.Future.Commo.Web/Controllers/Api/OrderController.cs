@@ -42,7 +42,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         [HttpPost]
         [Route("{id:int}/Trade/{tradeId:int}/Images/Type/{type:int}")]
-        public void UploadImages(int id, int tradeId, OrderImageType type)
+        public IList<OrderImageInfo> UploadImages(int id, int tradeId, OrderImageType type)
         {
             var imageFiles = HttpContext.Request.Form.Files.ToArray();
             var list = new List<OrderImageInfo>();
@@ -64,7 +64,13 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 }
             }
 
-            _tradeManager.BulkSaveOrderImages(list);
+            var result = _tradeManager.BulkSaveOrderImages(list);
+            if (result == null)
+            {
+                result = new List<OrderImageInfo>();
+            }
+
+            return result;
         }
 
         [HttpDelete]
