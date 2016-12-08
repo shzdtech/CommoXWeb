@@ -669,7 +669,7 @@ export default {
         }, {
             id: 11,
             title: '企业开户仓库',
-            key: '',
+            key: 'warehouseAccount',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
             type: TEXT

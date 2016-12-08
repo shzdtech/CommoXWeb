@@ -15,6 +15,8 @@ namespace Micro.Future.Commo.Web.Models
         public int RequirementId { get; set; }
         public int EnterpriseId { get; set; }
 
+        public string InvoiceAmount { get; set; }
+
         /// <summary>
         /// 创建时间
         /// </summary>

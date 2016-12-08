@@ -109,12 +109,12 @@ class Trade extends React.Component {
         let label = null;
         if (state === 1) {
             label = '请上传合同扫描件';
-            return <FileUploadComponent label = {label} uploadImages={(images) => {
+            return <FileUploadComponent label = {label} componentId={orderId} uploadImages={(images) => {
                 this.props.uploadOrdersImage(this.props.trade.tradeId, orderId, 1, images)
             } }/>
         } else if (state === 4) {
             label = '请上传发票扫描件';
-            return <FileUploadComponent label = {label} uploadImages={(images) => {
+            return <FileUploadComponent label = {label} componentId={orderId} uploadImages={(images) => {
                 this.props.uploadOrdersImage(this.props.trade.tradeId, orderId, 2, images)
             } }
 

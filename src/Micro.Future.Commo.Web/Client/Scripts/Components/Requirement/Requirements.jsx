@@ -49,7 +49,6 @@ class Requirements extends React.Component {
         const {requirements, isDemo, filters} = this.props;
         return <div className='requirement-list'>
             <FilterList filters={filters} />
-            {!isDemo && requirements && requirements.length > 0 ? <div className='title'>我的需求：</div> : null}
             <Masonry
                 className={'my-gallery-class'} // default ''
                 options={masonryOptions} // default {}

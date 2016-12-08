@@ -53,7 +53,8 @@ const trades = (state = [], action) => {
                     let newt = Object.assign({}, t);
                     newt.orders = t.orders.map((o) => {
                         if (o.orderId === action.orderId) {
-                            let newOrder = Object.assign({}, o, { orderImages: [...o.orderImages, ...action.orderImages] });
+                            let images = o.orderImages === null ? [] : o.orderImages;
+                            let newOrder = Object.assign({}, o, { orderImages: [...images, ...action.orderImages] });
                             return newOrder;
                         } else {
                             return o;
