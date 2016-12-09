@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import Requirements from '../../Components/Requirement/Requirements';
-import {fetchRequirements, deleteRequirement} from '../../Actions/RequirementActions';
+import {fetchRequirements, deleteRequirement, updateExpandState} from '../../Actions/RequirementActions';
 import {fetchChains} from '../../Actions/ChainActions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleteRequirement: (requirementId) => {
             dispatch(deleteRequirement(requirementId));
+        },
+        updateExpandState: (requirementId, state) => {
+            dispatch(updateExpandState(requirementId, state));
         }
     };
 };

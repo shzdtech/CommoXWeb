@@ -9,7 +9,8 @@ import {
     FETCH_REQUIREMENT_LIST_FAILURE,
     ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
     SET_PAYMENT_METHOD,
-    DELETE_REQUIREMENT_SUCCESS
+    DELETE_REQUIREMENT_SUCCESS,
+    UPDATE_REQUIREMENT_EXPAND_STATE
 } from '../Constants/ActionTypes';
 import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -187,6 +188,14 @@ export const deleteRequirement = (requirementId) => {
             error => ajaxError(dispatch, error)
         );
     };
+}
+
+export const updateExpandState= (requirementId, state) => {
+    return {
+        type: UPDATE_REQUIREMENT_EXPAND_STATE,
+        requirementId: requirementId,
+        expanded: state
+    }
 }
 
 

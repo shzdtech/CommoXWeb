@@ -80,7 +80,7 @@ class Requirements extends React.Component {
             }
         }
 
-        return <Requirement requirement={requirement} key={requirement.requirementId} deleteRequirement={this.props.deleteRequirement}>{operators}</Requirement>
+        return <Requirement requirement={requirement} key={requirement.requirementId} deleteRequirement={this.props.deleteRequirement} updateExpandState={this.props.updateExpandState}>{operators}</Requirement>
     }
 }
 
