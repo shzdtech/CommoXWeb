@@ -4,88 +4,7 @@ import FilterProperty from './Models/FilterProperty';
 import RuleType from './Models/RuleType';
 import Category from './Models/Category';
 import enterpriseTypes from './Models/EnterpriseTypes';
-
-let products = [{
-    id: 1,
-    name: '铜',
-    value: '铜'
-}, {
-        id: 2,
-        name: '铝',
-        value: '铝'
-    }, {
-        id: 3,
-        name: '铅',
-        value: '铅'
-    }, {
-        id: 4,
-        name: '锌',
-        value: '锌'
-    }, {
-        id: 6,
-        name: '锡',
-        value: '锡'
-    }, {
-        id: 7,
-        name: '镍',
-        value: '镍'
-    }, {
-        id: 8,
-        name: '锰',
-        value: '锰'
-    }, {
-        id: 9,
-        name: '硅',
-        value: '硅'
-    }, {
-        id: 10,
-        name: '钴锂',
-        value: '钴锂'
-    }, {
-        id: 11,
-        name: '锑',
-        value: '锑'
-    }, {
-        id: 12,
-        name: '铟镓锗',
-        value: '铟镓锗'
-    }, {
-        id: 13,
-        name: '钨',
-        value: '钨'
-    }, {
-        id: 14,
-        name: '铋硒碲',
-        value: '铋硒碲'
-    }, {
-        id: 15,
-        name: '钴锂',
-        value: '钴锂'
-    }, {
-        id: 16,
-        name: '小金属',
-        value: '小金属'
-    }, {
-        id: 17,
-        name: '贵金属',
-        value: '贵金属'
-    }, {
-        id: 18,
-        name: '稀土',
-        value: '稀土'
-    }, {
-        id: 19,
-        name: '钢铁',
-        value: '钢铁'
-    }, {
-        id: 20,
-        name: '废金属',
-        value: '废金属'
-    }, {
-        id: 21,
-        name: '利源',
-        value: '利源'
-    }];
+import products from './Models/Products';
 
 let invoiceValues = [{
     id: 1,
@@ -265,11 +184,27 @@ export default {
             valueType: 'number'
         }, {
             id: 12,
-            title: '企业仓库开户',
+            title: '企业开户仓库',
             key: 'warehouseAccount',
             filterProperty: FilterProperty.Requirement,
             category: Category.Product,
-            type: TEXT
+            items: [{
+                id: 1,
+                name: '裕强仓储',
+                value: '裕强仓储'
+            }, {
+                    id: 2,
+                    name: '全胜仓储',
+                    value: '全胜仓储'
+                }, {
+                    id: 3,
+                    name: '中证寰球仓储',
+                    value: '中证寰球仓储'
+                },{
+                    id: 4,
+                    name: '不限',
+                    value: ''
+                }]
         }, {
             id: 13,
             title: '下游企业类型',
@@ -328,14 +263,15 @@ export default {
             category: Category.Invoice,
             filterProperty: FilterProperty.Requirement,
             type: TEXT
-        }, {
-            id: 19,
-            title: '经营范围',
-            key: 'businessRange',
-            category: Category.Enterprise,
-            filterProperty: FilterProperty.Requirement,
-            type: TEXT
         }
+        // , {
+        //     id: 19,
+        //     title: '经营范围',
+        //     key: 'businessRange',
+        //     category: Category.Enterprise,
+        //     filterProperty: FilterProperty.Requirement,
+        //     type: TEXT
+        // }
     ],
     sell: [{
         id: 1,
@@ -365,6 +301,14 @@ export default {
             category: Category.Product,
             items: products,
             multipleSelection: true
+        },
+         {
+            id: 20,
+            title: '资金金额',
+            key: 'paymentAmount',
+            filterProperty: FilterProperty.Requirement,
+            category: Category.Capital,
+            type: LABEL
         },
         {
             id: 3,
@@ -407,27 +351,30 @@ export default {
             filterProperty: FilterProperty.Requirement,
             type: TEXT
         },  
-        //{
-        //     id: 8,
-        //     title: '交易要求',
-        //     key: 'productTransferMode',
-        //     filterProperty: FilterProperty.Requirement,
-        //     category: Category.Capital,
-        //     items: [{
-        //         id: 1,
-        //         name: '先货后款',
-        //         value: '先货后款'
-        //     }, {
-        //             id: 2,
-        //             name: '款到出货',
-        //             value: '款到出货'
-        //         }, {
-        //             id: 3,
-        //             name: '不限',
-        //             value: '不限'
-        //         }]
-        // }, 
         {
+            id: 8,
+            title: '企业开户仓库',
+            key: 'warehouseAccount',
+            filterProperty: FilterProperty.Requirement,
+            category: Category.Product,
+            items: [{
+                id: 1,
+                name: '裕强仓储',
+                value: '裕强仓储'
+            }, {
+                    id: 2,
+                    name: '全胜仓储',
+                    value: '全胜仓储'
+                }, {
+                    id: 3,
+                    name: '中证寰球仓储',
+                    value: '中证寰球仓储'
+                },{
+                    id: 4,
+                    name: '不限',
+                    value: ''
+                }]
+        }, {
             id: 9,
             title: '支付方式',
             filterProperty: FilterProperty.Requirement,
@@ -534,14 +481,15 @@ export default {
             category: Category.Enterprise,
             items: [...enterpriseTypes],
             multipleSelection: true
-        }, {
-            id: 21,
-            title: '经营范围',
-            key: 'businessRange',
-            category: Category.Enterprise,
-            filterProperty: FilterProperty.Requirement,
-            type: TEXT
         }
+        // , {
+        //     id: 21,
+        //     title: '经营范围',
+        //     key: 'businessRange',
+        //     category: Category.Enterprise,
+        //     filterProperty: FilterProperty.Requirement,
+        //     type: TEXT
+        // }
     ],
     subsidy: [
         {
@@ -672,7 +620,23 @@ export default {
             key: 'warehouseAccount',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            items: [{
+                id: 1,
+                name: '裕强仓储',
+                value: '裕强仓储'
+            }, {
+                    id: 2,
+                    name: '全胜仓储',
+                    value: '全胜仓储'
+                }, {
+                    id: 3,
+                    name: '中证寰球仓储',
+                    value: '中证寰球仓储'
+                },{
+                    id: 4,
+                    name: '不限',
+                    value: ''
+                }]
         }, {
             id: 14,
             title: '开票面额',
@@ -726,7 +690,23 @@ export default {
             key: 'businessRange',
             category: Category.Enterprise,
             filterProperty: FilterProperty.Requirement,
-            type: TEXT
+            items: [{
+                id: 1,
+                name: '有色金属',
+                value: '有色金属'
+            }, {
+                    id: 2,
+                    name: '黑色金属',
+                    value: '黑色金属'
+                }, {
+                    id: 3,
+                    name: '化工',
+                    value: '化工'
+                }, {
+                    id: 4,
+                    name: '不限',
+                    value: ''
+                }]
         },
     ]
 };

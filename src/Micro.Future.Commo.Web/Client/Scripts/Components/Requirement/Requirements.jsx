@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import Masonry from 'react-masonry-component';
 import FilterList from '../FilterList';
 import Requirement from '../Common/Requirement';
+import SorterComponent from '../Common/SorterComponent';
 
 const masonryOptions = {
     transitionDuration: 1
@@ -23,6 +24,8 @@ class Requirements extends React.Component {
 
         if (prevProps.filters.filter((f) => { return f.selected }).length !== this.props.filters.filter((f) => { return f.selected }).length) {
             this.searchByFilter();
+        }else if(prevProps.sorters !== this.props.sorters){
+             this.searchByFilter();
         }
     }
 
@@ -42,13 +45,22 @@ class Requirements extends React.Component {
                 }
             }
         })
+
+        this.props.sorters.map((s)=>{
+            if(s.sortOrder){
+                searchCriteria.orderByField = s.key;
+                searchCriteria.orderBy = s.sortOrder
+            }
+        });
+
         this.props.searchByFilter(searchCriteria);
     }
 
     render() {
-        const {requirements, isDemo, filters} = this.props;
+        const {requirements, isDemo, filters, sorters} = this.props;
         return <div className='requirement-list'>
             <FilterList filters={filters} />
+            <SorterComponent sorters={sorters} sort={(key) => this.props.sortRequirement(key)} />
             <Masonry
                 className={'my-gallery-class'} // default ''
                 options={masonryOptions} // default {}

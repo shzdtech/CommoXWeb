@@ -8,6 +8,7 @@ import filterContentToggled from './filterContentToggled'
 import forms from './forms';
 import common from './Common';
 import requirements from './requirements';
+import requirement from './requirement';
 import account from './Account/account';
 import admin from './Admin';
 import trade from './Trade';
@@ -21,6 +22,7 @@ const reducers = combineReducers({
     filterContentToggled,
     chain,
     requirements,
+    requirement,
     forms,
     account,
     common,

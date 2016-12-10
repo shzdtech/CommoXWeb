@@ -38,7 +38,7 @@ class ChainListManager extends React.Component {
         return <div className='chain-list-manager-container'>
             <FormItem formItem={formItem} onFormItemSelected={onFormItemSelected} />
             <div className='chain-list-container'>
-                <ChainList {...this.props}/>
+                <ChainList {...this.props} />
             </div>
             {popup}
         </div>

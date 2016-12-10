@@ -21,7 +21,7 @@
 
                        & > a {
                             color: $white;
-                            font-size: 20px;
+                            font-size: 18px;
 
                             &:hover{
                                 color:$white !important;
@@ -55,7 +55,7 @@
 
                 a {
                     color: $white;
-                    font-size: 20px;
+                    font-size: 18px;
 
                     &:focus,
                     &:hover{
@@ -72,7 +72,7 @@
         .btn {
             background: $primary-color;
             border: none;
-            font-size: 20px;
+            font-size: 18px;
             color: $white;
 
             &:focus,
@@ -106,7 +106,7 @@
         }
 
         .dropdown-menu {
-            top: 110%;
+            top: 120%;
 
             & > li > a {
                 color: $normal-font-color;

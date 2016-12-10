@@ -1,6 +1,7 @@
 import {TEXT} from '../Constants/FilterTypes';
 import RequirementType from './RequirementType';
 import FilterProperty from './FilterProperty';
+import products from './Products';
 
 export default [{
     id: 1001,
@@ -39,5 +40,12 @@ export default [{
                 name: '购销',
                 value: RequirementType.Subsidy
             }]
+    },
+    {
+        id: 1003,
+        title: '货物名称',
+        filterProperty: FilterProperty.Requirement,
+        key: 'productName',
+        items: products
     }
 ];

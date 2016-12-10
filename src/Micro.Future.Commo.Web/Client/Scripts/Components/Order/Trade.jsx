@@ -155,8 +155,8 @@ class Trade extends React.Component {
     }
 
 
-    getNextOrderStateAction(id) {
-        state = null
+    getNextStateAction(id) {
+        let state = null
         switch (id) {
             case 1:
                 state = '支付资金';

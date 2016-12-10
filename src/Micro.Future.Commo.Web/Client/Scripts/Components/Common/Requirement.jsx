@@ -48,7 +48,10 @@ class Requirement extends React.Component {
             }
         }
 
-        let expandClassName = expanded ? 'expanded' : '';
+        let enableExpand = this.props.updateExpandState !== null && this.props.updateExpandState !== undefined;
+
+        let expandClassName = (!enableExpand) || expanded ? 'expanded' : '';
+        
         return <div key={requirementId} className='requirement'>
             <div className={'requirement-items ' + expandClassName}>
                 {this.props.requirement.state === 0 ? <span className='glyphicon glyphicon-trash' onClick={() => this.props.deleteRequirement(requirementId) }></span> : null}
@@ -102,9 +105,9 @@ class Requirement extends React.Component {
                 {invoiceTransferMode ? <div className='requirement-item'><span className='title'>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
                 {createTime ? <div className='requirement-item'><span className='title'>创建时间：</span><span>{new Date(createTime).toLocaleString() }</span></div> : null}
            
-                {count > 8 ? <div className="gradient-back"></div> : null}
-                {count > 8 ? <span className='glyphicon glyphicon-menu-up' onClick={() => this.props.updateExpandState(requirementId, false) }></span> : null}
-                {count > 8 ? <span className='glyphicon glyphicon-menu-down' onClick={() => this.props.updateExpandState(requirementId, true) }></span> : null}
+                {count > 8 && enableExpand ? <div className="gradient-back"></div> : null}
+                {count > 8 && enableExpand ? <span className='glyphicon glyphicon-menu-up' onClick={() => this.props.updateExpandState(requirementId, false) }></span> : null}
+                {count > 8 && enableExpand? <span className='glyphicon glyphicon-menu-down' onClick={() => this.props.updateExpandState(requirementId, true) }></span> : null}
             </div>
             <div className='operators'>
                 {this.props.children}

@@ -29,5 +29,9 @@ namespace Micro.Future.Commo.Web.Models.RequirementModels
         public int PageNo { get; set; }
 
         public int PageSize { get; set; }
+
+        public string OrderByField { get; set; }
+
+        public string OrderBy { get; set; }
     }
 }

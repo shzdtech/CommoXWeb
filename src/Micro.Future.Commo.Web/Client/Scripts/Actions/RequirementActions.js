@@ -10,7 +10,8 @@ import {
     ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS,
     SET_PAYMENT_METHOD,
     DELETE_REQUIREMENT_SUCCESS,
-    UPDATE_REQUIREMENT_EXPAND_STATE
+    UPDATE_REQUIREMENT_EXPAND_STATE,
+    UPDATE_REQUIREMENT_SORTER
 } from '../Constants/ActionTypes';
 import {TEXT, DATE, LABEL} from '../Constants/FilterTypes';
 import {HOST} from '../appSettings';
@@ -198,5 +199,11 @@ export const updateExpandState= (requirementId, state) => {
     }
 }
 
+export const sortRequirement = (key) => {
+     return {
+        type: UPDATE_REQUIREMENT_SORTER,
+        sortKey:key
+    }
+}
 
 
