@@ -188,6 +188,7 @@ export default {
             key: 'warehouseAccount',
             filterProperty: FilterProperty.Requirement,
             category: Category.Product,
+            isRequired: true,
             items: [{
                 id: 1,
                 name: '裕强仓储',
@@ -357,6 +358,7 @@ export default {
             key: 'warehouseAccount',
             filterProperty: FilterProperty.Requirement,
             category: Category.Product,
+            isRequired: true,
             items: [{
                 id: 1,
                 name: '裕强仓储',
@@ -620,6 +622,7 @@ export default {
             key: 'warehouseAccount',
             category: Category.Product,
             filterProperty: FilterProperty.Requirement,
+            isRequired: true,
             items: [{
                 id: 1,
                 name: '裕强仓储',
@@ -690,6 +693,7 @@ export default {
             key: 'businessRange',
             category: Category.Enterprise,
             filterProperty: FilterProperty.Requirement,
+            isRequired: true,
             items: [{
                 id: 1,
                 name: '有色金属',
