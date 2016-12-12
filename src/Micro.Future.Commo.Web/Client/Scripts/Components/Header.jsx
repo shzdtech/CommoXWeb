@@ -4,6 +4,8 @@ import {DropdownButton, MenuItem} from 'react-bootstrap';
 import Spinner from './Common/Spinner';
 import Toastr from './Common/Toastr';
 
+let brand = require('../../Content/images/logo.png');
+
 class Header extends React.Component {
     componentDidMount() {
         this.props.checkEnterpriseAuthenticated();
@@ -85,6 +87,9 @@ class Header extends React.Component {
                             <span className="glyphicon glyphicon-menu-hamburger"></span>
                         </div>
                         <div className="navbar-brand">
+                            <Link to='/'>
+                                <img src={brand} />
+                            </Link>
                         </div>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse" aria-expanded="false">

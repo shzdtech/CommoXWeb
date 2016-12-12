@@ -36,7 +36,7 @@ class Chain extends React.Component {
           //  operatorsOverlay = <div className='operators-overlay'></div>
         }
 
-        return <div className={className}>
+        return <div><div className={className}>
             {operators}
             {operatorsOverlay}
             {
@@ -50,7 +50,7 @@ class Chain extends React.Component {
                         index={index} />;
                 })
             }
-        </div>;
+        </div></div>;
     }
 
 }

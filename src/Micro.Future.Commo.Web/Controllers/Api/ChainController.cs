@@ -110,7 +110,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Authorize(Roles = "Admin")]
         public IEnumerable<Models.RequirementInfo> GetReplacement(int id, int index)
         {
-            var result = _chainManager.FindReplacedRequirementsForChain(id, index);
+            var result = _chainManager.FindReplacedRequirementsForChain(id, index, 10);
             var requirements = new List<Models.RequirementInfo>();
             if (result != null)
             {

@@ -51,10 +51,10 @@ class ChainNode extends React.Component {
             operatorsOverlay = <div className='operators-overlay'></div>
         }
 
-        return (<div className={!chain.reject && accept ? 'chain-node accept' : 'chain-node'}>
-            <div className='title'>{enterpriseName}</div>
+        return <div className={!chain.reject && accept ? 'chain-node accept' : 'chain-node'}>
             {requirementId ? <div className='title'><span>需求ID: </span><span>{requirementId}</span></div> : null}
             {type ? <div className='title'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销') }</span></div> : null}
+            <div className='sub-title'><span>企业名称：</span><span>{enterpriseName}</span></div>
             {enterpriseId ? <div className='sub-title'><span>企业编号：</span><span>{enterpriseId}</span></div> : null}
             {paymentAmount ? <div className='sub-title'><span>资金金额: </span><span>{paymentAmount}</span></div> : null}
             {paymentDateTime ? <div className='sub-title'><span>货款支付时间: </span><span>{paymentDateTime}</span></div> : null}
@@ -74,7 +74,7 @@ class ChainNode extends React.Component {
             {invoiceTransferMode ? <div className='sub-title'><span>发票交接方式：</span><span>{invoiceTransferMode}</span></div> : null}
             {operators}
             {operatorsOverlay}
-        </div>);
+        </div>
     }
 
     confirmChain(chainId, requirementId, accept) {

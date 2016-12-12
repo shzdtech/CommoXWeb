@@ -6,11 +6,11 @@
     }
 
     .chain {
-        padding: 10px;
+        padding: 5px;
         display: -webkit-inline-box;
         display: -webkit-inline-flex;
         display: -ms-inline-flexbox;
-        display: flex;
+        display: inline-flex;
         justify-content: left;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
@@ -22,6 +22,8 @@
         -webkit-align-items: stretch;
         -ms-flex-align: stretch;
         position: relative;
+        margin: 10px 0;
+        border: 1px solid $primary-color-light;
 
         & > .operators {
             position: absolute;
@@ -54,17 +56,17 @@
 
         &.confirmed {
             .chain-node {
-                background: $primary-color;
+                background: $primary-color-opacity-new;
                 color: $white;
-                border-right: 1px solid $white;
+                border-right: 1px solid $primary-color-opacity-new;
 
                 .title {
                     color: $white;
                 }
 
                 &::after {
-                    background: $primary-color;
-                    border-color: $white;
+                    background: #63758c;
+                    border-color: #63758c;
                 }
             }
         }
@@ -120,12 +122,13 @@
 
         .chain-node {
             border-color: $primary-color;
-            border-width: 1px 0 1px 1px;
+            border-width: 1px 1px 1px 1px;
             border-style: solid;
             padding: 20px 15px;
             position: relative;
             min-height: 80px;
             color: $normal-font-color;
+            margin: 5px;
 
             &.accept {
                 background: $primary-color;

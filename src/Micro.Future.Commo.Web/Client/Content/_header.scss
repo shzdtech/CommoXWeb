@@ -16,6 +16,17 @@
         border: none;
 
         &.navbar-default{
+
+            .navbar-header{
+                .navbar-brand{
+                    padding: 5px;
+
+                    img{
+                        height: 36px;    
+                    }
+                }
+            }
+            
             .navbar-nav {
                & > li {
 
