@@ -1,7 +1,7 @@
 .home {
     background: #f7f7f7;
-    margin-top: 50px;
-    min-height: calc(100vh - 50px);
+    // margin-top: 50px;
+    min-height: 100vh;
 
     .main-tab {
         padding: 50px 0 50px 0;
@@ -184,7 +184,7 @@
     }
 
     .basis-tab{
-        padding: 40px 40px 60px 40px;;
+        padding: 110px 40px 60px 40px;;
         background: $white;
 
         .basis-chart{
@@ -194,11 +194,11 @@
     }
 
     .partner-tab{
-        padding: 30px 0 0 0;
+        padding: 10px 0 0 0;
 
         .part-info{
             h1{
-                font-size: 25px;
+                font-size: 18px;
                 font-weight: bold;
             }
 

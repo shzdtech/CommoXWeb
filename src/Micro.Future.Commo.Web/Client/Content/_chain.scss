@@ -441,6 +441,12 @@
         padding: 20px;
     }
 
+    .requirement{
+        .operators{
+            padding: 0;
+        }
+    }
+
 }
 
 .finance-list {
@@ -458,7 +464,7 @@
         }
 
         tbody{
-            color: $normal-font-color;
+            color: #999;
             td{
                 padding: 10px 15px;
             }

@@ -1,8 +1,9 @@
 .header {
     width: 100%;
-    background: $primary-color;
-    height: 50px;
+    background: $header-background;
+    height: 70px;
     position: fixed;
+    box-shadow: 0 0 3px $header-background;
     top: 0;
     left: 0;
     z-index: 999;
@@ -11,7 +12,7 @@
         max-width: 1170px;
         margin: 0 auto;
         margin-bottom: 20px;
-        background: $primary-color;
+        background: transparent;
         border-radius: 0;
         border: none;
 
@@ -19,10 +20,10 @@
 
             .navbar-header{
                 .navbar-brand{
-                    padding: 5px;
+                    padding: 7px;
 
                     img{
-                        height: 36px;    
+                        height: 50px;    
                     }
                 }
             }
@@ -37,7 +38,7 @@
                             &:hover{
                                 color:$white !important;
                                 border-bottom: 3px solid $warning-color; 
-                                padding-bottom: 12px;
+                                padding-bottom: 22px;
                             }
                         }
                     }
@@ -54,7 +55,7 @@
                         padding-bottom: 5px;
                         border: 1px solid $white;
                         border-radius: 3px;
-                        margin: 10px 10px 0 0;
+                        margin: 20px 10px 0 0;
 
                         &:hover{
                             border: 1px solid $warning-color; 
@@ -67,6 +68,7 @@
                 a {
                     color: $white;
                     font-size: 18px;
+                    padding-top: 25px;
 
                     &:focus,
                     &:hover{
@@ -78,24 +80,24 @@
     }
 
     .btn-group {
-        margin-top: 10px;
+        margin-top: 20px;
 
         .btn {
-            background: $primary-color;
+            background: transparent;
             border: none;
             font-size: 18px;
             color: $white;
 
             &:focus,
             &:hover {
-                background: $primary-color;
+                background: transparent;
             }
         }
 
         .btn-default {
             &.dropdown-toggle {
                 box-shadow: none;
-                background: $primary-color !important;
+                background: transparent !important;
                 color: $white !important;
             }
         }
@@ -103,13 +105,13 @@
         &.open {
             & > .btn-default {
                 &.dropdown-toggle {
-                    background: $primary-color !important;
+                    background: transparent !important;
                     color: $white !important;
 
                     &:active,
                     &:focus,
                     &:hover {
-                        background: $primary-color;
+                        background: transparent;
                         color: $white;
                     }
                 }
@@ -117,13 +119,14 @@
         }
 
         .dropdown-menu {
-            top: 120%;
+            top: 145%;
 
             & > li > a {
                 color: $normal-font-color;
+                padding-top: 5px;
 
                 &:hover {
-                    background: $primary-color;
+                    background: $header-background;
                     color: $white;
                 }
             }
