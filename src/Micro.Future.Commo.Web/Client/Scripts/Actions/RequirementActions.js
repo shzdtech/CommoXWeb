@@ -42,6 +42,9 @@ export const addRequirementRequest = (list, selectedType, enterpriseId) => {
             }
         } else {
             let values = l.items.filter((item) => { return item.selected; }).map((i) => { return i.value; });
+            if(selectedType !== 3 && l.key==='productName'){
+                requirement.businessRange = l.items.filter((item) => { return item.selected; })[0].businessRange;
+            }
             if (l.filterProperty === FilterProperty.Requirement) {
                 requirement[l.key] = values.join(',');
             } else if (l.filterProperty === FilterProperty.Rule) {

@@ -29,7 +29,6 @@ class AcceptanceBillTab extends React.Component {
         let bankRows = acceptanceBankList.map((acceptanceBank) => {
             return <tr key={acceptanceBank.bankId}>
                 <td className='left'>{acceptanceBank.bankName}</td>
-                <td>{acceptanceBank.bankName}</td>
                 <td>{acceptanceBank.bankType === 1 ? '国股' : acceptanceBank.acceptanceType === 2 ? '城商' : '农商'}</td>
                 <td>{acceptanceBank.bankPrice}%</td>
                 <td>{acceptanceBank.acceptanceType === 1 ? '大票' : '小票'}</td>

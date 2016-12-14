@@ -15,6 +15,14 @@ class FundTrade extends React.Component {
         let fundtrade = require('../../../Content/images/fundtrade.png');
         let arrow = require('../../../Content/images/arrow.png');
 
+        let list = this.props.financeInfoList.map((f) => {
+            return <tr key={f.productId}>
+                <td className='left'>{f.bankAddress}</td>
+                <td>{f.productTerm}天</td>    
+                <td>{f.productYield}%</td>
+            </tr>
+        });
+
         return <div>
             <div className='jumbotron'>
                 <div className='container'>
@@ -32,30 +40,40 @@ class FundTrade extends React.Component {
                         <img src={arrow} />
                     </li>
                     <li className="li3">
-                        <a onClick={this.startFundTrade.bind(this)}>
+                        <a onClick={this.startFundTrade.bind(this) }>
                             <img src={fundtrade} />
                         </a>
                     </li>
                 </ul>
             </div>
-             <div className='container invest-info'>
+            <div className='container invest-info'>
                 <div className='invest-tab'>
-                    <div className='title'>年化收益率</div>
-                    {
-                        this.props.financeInfoList.map((f)=>{
-                            return <div className='invest-item' key={f.productId}>
-                                <span>{f.productYield}%</span>
-                            </div>
-                        })
-                    }
+                    <table>
+                        <thead>
+                            <tr>
+                                <td className='left'>
+                                    银行
+                                </td>
+                                <td>
+                                    投资期限
+                                </td>
+                                <td>
+                                    预计年化收益
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {list}
+                        </tbody>
+                    </table>
                 </div>
-               
+
                 <div className='clearfix'></div>
-                </div>
+            </div>
         </div>
     }
 
-    startFundTrade(){
+    startFundTrade() {
         this.props.startFundTrade();
     }
 }

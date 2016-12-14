@@ -704,10 +704,18 @@ export default {
                     value: '黑色金属'
                 }, {
                     id: 3,
+                    name: '贵金属',
+                    value: '贵金属'
+                },{
+                    id: 4,
+                    name: '小金属',
+                    value: '小金属'
+                },{
+                    id: 5,
                     name: '化工',
                     value: '化工'
                 }, {
-                    id: 4,
+                    id: 6,
                     name: '不限',
                     value: ''
                 }]

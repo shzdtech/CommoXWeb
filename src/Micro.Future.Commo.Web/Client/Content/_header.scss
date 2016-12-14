@@ -69,6 +69,7 @@
                     color: $white;
                     font-size: 18px;
                     padding-top: 25px;
+                    padding-bottom: 25px;
 
                     &:focus,
                     &:hover{
@@ -124,6 +125,7 @@
             & > li > a {
                 color: $normal-font-color;
                 padding-top: 5px;
+                padding-bottom: 5px;
 
                 &:hover {
                     background: $header-background;
