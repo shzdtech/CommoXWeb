@@ -56,7 +56,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Authorize(Roles = "Admin")]
         public IEnumerable<Models.ChainInfo> Get(ChainStatusType statusId)
         {
-            var chainList = _chainManager.QueryAllChains(statusId).Result;
+            var chainList = _chainManager.QueryAllChains(statusId).Data;
             if (chainList == null)
             {
                 return new List<Models.ChainInfo>();

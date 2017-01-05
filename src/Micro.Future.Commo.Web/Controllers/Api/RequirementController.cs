@@ -91,8 +91,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 throw new BadRequestException(result.Error.Message);
             }
 
-            requirement.RequirementId = result.Result.RequirementId;
-            requirement.EnterpriseName = result.Result.EnterpriseName;
+            requirement.RequirementId = result.Data.RequirementId;
+            requirement.EnterpriseName = result.Data.EnterpriseName;
             return requirement;
         }
 
@@ -145,7 +145,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [HttpGet]
         public Models.RequirementInfo GetRequirement(int id)
         {
-            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Result);
+            return new Models.RequirementInfo(_requirementManager.QueryRequirementInfo(id).Data);
         }
 
 
@@ -163,8 +163,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         public IEnumerable<Models.ChainInfo> GetChains(int id)
         {
             var chains = new List<RequirementChainInfo>();
-            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED).Result;
-            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED).Result;
+            var lockedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.LOCKED).Data;
+            var confirmedChains = _chainManager.QueryChainsByRequirementId(id, ChainStatusType.CONFIRMED).Data;
             if (lockedChains != null)
             {
                 chains.AddRange(lockedChains.ToList());

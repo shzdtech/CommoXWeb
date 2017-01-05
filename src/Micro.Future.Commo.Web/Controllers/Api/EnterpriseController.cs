@@ -99,10 +99,10 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     enterpriseInfo.CreateTime = DateTime.Now;
 
                     var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
-                    if (!bizResult.HasError && bizResult.Result > 0)
+                    if (!bizResult.HasError && bizResult.Data > 0)
                     {
                         ApplicationUser userInfo = await _userManager.FindByEmailAsync(user.Email);
-                        userInfo.EnterpriseId = bizResult.Result;
+                        userInfo.EnterpriseId = bizResult.Data;
                         await _userManager.UpdateAsync(userInfo);
 
                     }
@@ -278,7 +278,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 throw new BadRequestException(result.Error.Message);
             }
 
-            return result.Result;
+            return result.Data;
         }
 
         [HttpGet]
@@ -292,7 +292,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 throw new BadRequestException(result.Error.Message);
             }
 
-            return result.Result;
+            return result.Data;
         }
 
         [HttpPost]

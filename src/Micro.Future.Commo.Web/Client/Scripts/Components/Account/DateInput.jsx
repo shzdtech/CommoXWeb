@@ -30,6 +30,7 @@ class DateInput extends React.Component {
             </label>
             <DatePicker
                 selected={selectedDate}
+                dateFormat="YYYY/MM/DD"
                 onChange={this.changeValue}
                 placeholderText={info.placeholder} />
             {requiredNotation}
