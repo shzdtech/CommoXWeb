@@ -93,12 +93,12 @@ const UserIsAdmin = UserAuthWrapper({
     predicate: user => user && user.isAdmin,
     redirectAction: (newLoc) => (dispatch) => {
         browserHistory.replace(newLoc);
-        dispatch(showToastr({
-            message: '您没有此操作的权限',
-            toastType: 'toast-warning',
-            show: true,
-            autoClose: true
-        }));
+        // dispatch(showToastr({
+        //     message: '您没有此操作的权限',
+        //     toastType: 'toast-warning',
+        //     show: true,
+        //     autoClose: true
+        // }));
     }
 });
 

@@ -15,7 +15,7 @@ class SelectRequirementsPopup extends React.Component {
 
     render() {
         const {filters} = this.props;
-        return <Popup title='请选择合适的需求替换' onClosePopup={()=>{this.props.cancelSelectRequirement()}}>
+        return <Popup title='请选择需求' onClosePopup={()=>{this.props.cancelSelectRequirement()}}>
             <div className='requirement-list'>
                 <FilterList filters={filters} />
                 <Masonry

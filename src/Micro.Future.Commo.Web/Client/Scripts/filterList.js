@@ -2,6 +2,7 @@ import {TEXT} from './Constants/FilterTypes';
 import RequirementType from './Models/RequirementType';
 import FilterProperty from './Models/FilterProperty';
 import RuleType from './Models/RuleType';
+import products from './Models/Products';
 
 export default [{
     id: 1,
@@ -79,52 +80,15 @@ export default [{
     //     multipleSelection: false,
     //     type: TEXT
     // },
-    {
-        id: 5,
-        title: '货物类型',
-        filterProperty: FilterProperty.Requirement,
-        parentFilterId: 1,
-        parentItemId: 1,
-        key: 'productType',
-        items: [{
-            id: 1,
-            name: '有色金属',
-            value: '有色金属'
-        }, {
-                id: 2,
-                name: '化工',
-                value: '化工'
-            }, {
-                id: 3,
-                name: '其他',
-                value: '其他'
-            }]
-    }, {
+   {
         id: 6,
         title: '货物名称',
         filterProperty: FilterProperty.Requirement,
         key: 'productName',
         parentFilterId: 5,
         parentItemId: 1,
-        items: [{
-            id: 1,
-            name: '铜',
-            value: '铜'
-        }, {
-                id: 2,
-                name: '铁',
-                value: '铁'
-            }, {
-                id: 3,
-                name: '锌',
-                value: '锌'
-            }, {
-                id: 4,
-                name: '铝',
-                value: '铝'
-            }],
-        multipleSelection: true
-    },
+        items: products
+   },
     // {
     //     id: 7,
     //     title: '货物规格',

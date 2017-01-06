@@ -54,7 +54,7 @@ class Requirement extends React.Component {
         
         return <div key={requirementId} className='requirement'>
             <div className={'requirement-items ' + expandClassName}>
-                {this.props.requirement.state === 0 ? <span className='glyphicon glyphicon-trash' onClick={() => this.props.deleteRequirement(requirementId) }></span> : null}
+                {!this.props.hide && this.props.requirement.state === 0 ? <span className='glyphicon glyphicon-trash' onClick={() => this.props.deleteRequirement(requirementId) }></span> : null}
                 <div className='requirement-item main'><span className='title'>需求编号: </span><span>{requirementId}</span></div>
                 {type ? <div className='requirement-item main'><span className='title'>需求类型：</span><span>{type === 1 ? '采购' : (type === 2 ? '销售' : '购销') }</span></div> : null}
                 {enterpriseName ? <div className='requirement-item'><span className='title'>公司名称：</span><span>{enterpriseName}</span></div> : null}
@@ -97,7 +97,7 @@ class Requirement extends React.Component {
                 {warehouseAddress1 ? <div className='requirement-item'>
                     <span className='title'>仓库地址: </span><span>{warehouseAddress1}</span></div> : null}
                 {tradeProfit ? <div className='requirement-item'><span className='title'>合同利润：</span><span>{tradeProfit}</span></div> : null}
-                {businessRange ? <div className='requirement-item'><span className='title'>业务范围：</span><span>{businessRange}</span></div> : null}
+                
                 {invoiceValue ? <div className='requirement-item'><span className='title'>开票面额：</span><span>{invoiceValuesEnum[invoiceValue]}</span></div> : null}
                 {invoicedQuantity ? <div className='requirement-item'><span className='title'>开票量：</span><span>{invoicedQuantity}</span></div> : null}
                 {invoiceRequirement ? <div className='requirement-item'><span className='title'>开票要求：</span><span>{invoiceRequirement}</span></div> : null}

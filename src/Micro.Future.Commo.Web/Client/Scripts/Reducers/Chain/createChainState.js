@@ -18,14 +18,14 @@ const createChainState = (state = [], action) => {
         case ADD_REQUIREMENT_FOR_CREATE_CHAIN_SUCCESS:
         case SELECT_REQUIREMENT_TO_CREATE: {
             if (action.requirement.type === 1) {
-                return [{ type: 1, requirement: action.requirement }, ...state];
+                return [...state, { type: 1, requirement: action.requirement }];
             } else if (action.requirement.type === 3 && state.length > 0 &&
                 state[state.length - 1].requirement
                 && state[state.length - 1].requirement.type == 2) {
                 return [...state.slice(0, state.length - 1),
                     { type: 1, requirement: action.requirement }, state[state.length - 1]];
             } else {
-                return [...state, { type: 1, requirement: action.requirement }];
+                return [{ type: 1, requirement: action.requirement }, ...state];
             }
         }
         case RESET_CREATE_CHAIN:{

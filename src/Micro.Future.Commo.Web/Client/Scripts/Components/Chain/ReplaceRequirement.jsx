@@ -10,7 +10,7 @@ class ReplaceRequirement extends React.Component {
         let {replaceRequirementAction, index, chainId, requirement} = this.props;
         let operators = <a className='btn' 
         onClick={()=> replaceRequirementAction(chainId, index, requirement)}>{this.props.actionName}</a>
-        return <Requirement requirement={this.props.requirement}>{operators}</Requirement>
+        return <Requirement requirement={this.props.requirement} hide={true}>{operators}</Requirement>
     }
 }
 

@@ -26,6 +26,7 @@ class DatePickerFormItem extends React.Component {
             </label>
              <DatePicker
                 selected={selectedDate}
+                dateFormat="YYYY/MM/DD"
                 onChange={this.changeValue}
                 placeholderText={formItem.placeholder ? formItem.placeholder : formItem.title} />          
             <span className='unit'>{formItem.unit}</span>
