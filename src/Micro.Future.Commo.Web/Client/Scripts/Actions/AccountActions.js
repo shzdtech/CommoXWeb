@@ -140,7 +140,8 @@ export const submitCreateUserSuccess = () => {
 };
 
 const submitCreateUserRequest = (user) => {
-    return $.post(HOST + 'api/Account/User', { email: user.email.value, password: user.password.value });
+    return $.post(HOST + 'api/Account/User', { userName: user.userName.value, 
+        email: user.email.value, password: user.password.value });
 };
 
 export const submitCreateUser = (user) => {

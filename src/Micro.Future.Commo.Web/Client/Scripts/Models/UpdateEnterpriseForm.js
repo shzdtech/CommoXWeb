@@ -25,10 +25,10 @@ export default {
     },
     invoiceMaterial: {
         label: '企业开票资料',
-        type: 'text',
+        type: 'file',
         key: 'invoiceMaterial',
         length: 'medium',
-        placeholder: '企业开票资料',
+        placeholder: '上传企业开票资料',
     },
     registerCapital: {
         label: '注册资金(￥)',
@@ -66,10 +66,6 @@ export default {
         key: 'invoiceValue',
         length: 'short',
         options: [{
-            key: '1',
-            label: '千元版',
-            value: 1
-        }, {
                 key: '2',
                 label: '万元版',
                 value: 2

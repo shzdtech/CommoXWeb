@@ -67,6 +67,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     {
                         var enterprise = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
                         userInfo.EnterpriseAuthenticated = enterprise.EnterpriseState == Business.Abstraction.BizObject.EnterpriseStateType.APPROVED;
+                        userInfo.EnterpriseName = enterprise.Name;
                     }
                     return userInfo;
                 }
@@ -83,7 +84,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             {
                 var user = await _userManager.GetUserAsync(User);
 
-                var createdUser = new ApplicationUser { UserName = model.Email, Email = model.Email, EnterpriseId = user.EnterpriseId, InitialPassword = model.Password };
+                var createdUser = new ApplicationUser { UserName = model.UserName, Email = model.Email, EnterpriseId = user.EnterpriseId, InitialPassword = model.Password };
 
                 var result = await _userManager.CreateAsync(createdUser, model.Password);
                 if (result.Succeeded)

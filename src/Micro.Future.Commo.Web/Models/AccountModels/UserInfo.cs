@@ -12,6 +12,7 @@ namespace Micro.Future.Commo.Web.Models.AccountModels
         public List<string> Roles { get; set; }
         public string Email { get; set; }
         public int EnterpriseId { get; set; }
+        public string EnterpriseName { get; set; }
         public bool EnterpriseAuthenticated { get; set; }
 
 

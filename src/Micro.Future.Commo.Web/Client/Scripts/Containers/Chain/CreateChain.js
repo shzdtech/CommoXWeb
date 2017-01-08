@@ -11,7 +11,8 @@ import {createChainWithNewRequirement,
     selectCreateChainOption,
     typeCreateChainOption,
     resetCreateChainOption,
-    submitCreateChain
+    submitCreateChain,
+    resetCreateChain
 } from '../../Actions/ChainActions';
 import {resetForm} from '../../Actions';
 
@@ -42,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         onCreateChainOptionTyped: (formItem, value)=>dispatch(typeCreateChainOption(formItem, value)), 
         onCreateChainOptionSelected: (formItem, item) => dispatch(selectCreateChainOption(formItem, item)),
+        cleanCreateChain: ()=> dispatch(resetCreateChain()),
         submitCreateChain: (createChainState, createChainOptions) => dispatch(submitCreateChain(createChainState, createChainOptions))
     }
 };

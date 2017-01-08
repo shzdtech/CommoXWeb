@@ -132,6 +132,8 @@ class CreateChain extends React.Component {
             <div className='operators'>
                 <a className={'btn btn-large ' }
                     onClick={() => { this.props.submitCreateChain(createChainState, createChainOptions) } }>确定</a>
+                    <a className={'btn btn-large calloff' }
+                    onClick={() => { this.props.cleanCreateChain() } }>清空</a>
             </div>
         </div>
     }

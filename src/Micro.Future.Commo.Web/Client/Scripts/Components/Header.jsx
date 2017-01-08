@@ -59,6 +59,7 @@ class Header extends React.Component {
                         <li key="addrequirement"><a onClick={()=>this.props.addRequirement()}>添加新需求</a></li>,
                         <li key="userInfo">
                             <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
+                                {this.props.userInfo.enterpriseName ? <MenuItem eventKey="enterpriseName" className='enterprise-name'>{this.props.userInfo.enterpriseName}</MenuItem> : null}
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
                                     <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem> : null}
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?

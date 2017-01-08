@@ -1,4 +1,12 @@
 export default {
+    userName: {
+        label: '用户名称',
+        type: 'text',
+        legth: 'medium',
+        key: 'userName',
+        placeholder: '用户名称',
+        isRequired: true
+    },
     email: {
         label: '登录邮箱',
         type: 'text',

@@ -7,10 +7,6 @@ import enterpriseTypes from './Models/EnterpriseTypes';
 import products from './Models/Products';
 
 let invoiceValues = [{
-    id: 1,
-    name: '千元版',
-    value: 1
-}, {
         id: 2,
         name: '万元版',
         value: 2
