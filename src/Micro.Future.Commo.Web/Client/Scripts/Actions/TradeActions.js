@@ -142,7 +142,7 @@ export const updateOrderState = (tradeId, orderId, newstate) => {
 }
 
 
-const updateOrderStateRequest = (orderId, newstate) => {
+const updateOrderStateRequest = (tradeId, orderId, newstate) => {
     const request = $.post(HOST + 'api/Order/' + orderId + '/State/' + newstate);
     return request;
 };
