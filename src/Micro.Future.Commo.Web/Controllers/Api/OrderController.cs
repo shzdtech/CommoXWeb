@@ -41,16 +41,16 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         }
 
         [HttpPost]
-        [Route("{id:int}/Trade/{tradeId:int}/Images/Type/{type:int}")]
-        public IList<OrderImageInfo> UploadImages(int id, int tradeId, OrderImageType type)
+        [Route("{id:int}/Trade/{tradeId:int}/Files/Type/{type:int}")]
+        public IList<OrderImageInfo> UploadFiles(int id, int tradeId, OrderFileType type)
         {
-            var imageFiles = HttpContext.Request.Form.Files.ToArray();
+            var files = HttpContext.Request.Form.Files.ToArray();
             var list = new List<OrderImageInfo>();
-            if (imageFiles != null)
+            if (files != null)
             {
-                for (int i = 0; i < imageFiles.Length; i++)
+                for (int i = 0; i < files.Length; i++)
                 {
-                    var filePath = _SaveImages(imageFiles[i]);
+                    var filePath = _SaveImages(files[i]);
                     list.Add(new OrderImageInfo
                     {
                         OrderId = id,

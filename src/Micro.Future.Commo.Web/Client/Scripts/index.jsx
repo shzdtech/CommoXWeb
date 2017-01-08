@@ -123,7 +123,7 @@ ReactDOM.render(
                 <Route path="/financeManage" component={UserIsAuthenticated(UserIsAdmin(FinanceManager))} />
                 <Route path='/billTrade' component={BillTrade} />
                 <Route path='/fundTrade' component={FundTrade} />
-                <Route path="*" component={Home} />
+               
             </Route>
         </Router>
     </Provider>,

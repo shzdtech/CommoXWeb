@@ -159,7 +159,7 @@ export const updateOrderStateSuccess = (tradeId, orderId) => {
 const uploadOrderImagesRequest = (tradeId, orderId, imageType, model) => {
      const request = $.ajax({
         type: 'post',
-        url: HOST + 'api/Order/' + orderId + '/Trade/' + tradeId + '/Images/Type/'+ imageType,
+        url: HOST + 'api/Order/' + orderId + '/Trade/' + tradeId + '/Files/Type/'+ imageType,
         contentType: false,
         processData: false,
         data: model,
@@ -182,9 +182,7 @@ export const uploadOrderImages = (tradeId, orderId, imageType, images) => {
     var model = new FormData();
     if(images !== null && images.length > 0){
         for(let i = 0; i< images.length; i++){
-            if(images[i].type.indexOf('image') > -1){
-                 model.append('images[]', images[i]);
-            }
+                 model.append('files[]', images[i]);
         }
     }
     return (dispatch) => {

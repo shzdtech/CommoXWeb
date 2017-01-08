@@ -65,16 +65,25 @@ class Trade extends React.Component {
         let contractImages = [];
         let invoiceImages = [];
 
-        let deleteAction = (imageId) =>{
-            return order.enterpriseId === this.props.enterpriseId && this.props.isMine ? <span className='glyphicon glyphicon-trash' onClick={()=>{this.props.deleteOrderImages(this.props.trade.tradeId, order.orderId, imageId)}}></span> : null
+        let deleteAction = (imageId) => {
+            return order.enterpriseId === this.props.enterpriseId && this.props.isMine ? <span className='glyphicon glyphicon-trash' onClick={() => { this.props.deleteOrderImages(this.props.trade.tradeId, order.orderId, imageId) } }></span> : null
         }
 
         if (order.orderImages !== null) {
             order.orderImages.forEach((image) => {
                 if (image.imageType === 1) {
-                    contractImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={()=>this.props.showBigImage(image.imagePath)} />{this.props.trade.currentState === 1 ? deleteAction(image.imageId) : null}</span>);
+                    if (image.imagePath.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                        contractImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={() => this.props.showBigImage(image.imagePath) } />{this.props.trade.currentState === 1 ? deleteAction(image.imageId) : null}</span>);
+                    } else {
+                        contractImages.push(<span key={image.imageId}><a className='image-thumbnail' download={image.imagePath.replace(/^.*[\\\/]/, '')} href={image.imagePath} onClick={()=>this.downloadFile(image.imagePath)}>合同文件</a>{this.props.trade.currentState === 1 ? deleteAction(image.imageId) : null}</span>);
+                    }
+
                 } else if (image.imageType === 2) {
-                    invoiceImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={()=>this.props.showBigImage(image.imagePath)} />{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
+                    if (image.imagePath.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                        invoiceImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={() => this.props.showBigImage(image.imagePath) } />{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
+                    }else{
+                        invoiceImages.push(<span key={image.imageId}><a className='image-thumbnail' src={image.imagePath} download={image.imagePath.replace(/^.*[\\\/]/, '')>发票文件</a>{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
+                    }
                 }
             })
         }
@@ -205,9 +214,14 @@ class Trade extends React.Component {
         return state;
     }
 
-    showBigPicture(e, imgurl){
+    showBigPicture(e, imgurl) {
         $(e).closest('.trade-node').addClass('show-big-picture');
-        
+
+    }
+
+    downloadFile(fileUrl){
+        window.open(fileUrl,'Download');
+        return false;
     }
 }
 
