@@ -63,7 +63,10 @@ class Header extends React.Component {
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
                                     <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem> : null}
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
-                                    <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>创建用户</MenuItem> : null}
+                                    <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>用户创建</MenuItem> : null}
+                                {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
+                                    <MenuItem eventKey="manageEnterpriseUsers" onSelect={this.props.onSelectDropdown}>用户管理</MenuItem> : null}
+                                
                                 <MenuItem divider />
                                 <MenuItem eventKey="myTrades" onSelect={this.props.onSelectDropdown}>我的订单</MenuItem>
                                 <MenuItem divider />

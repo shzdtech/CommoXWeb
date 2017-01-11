@@ -78,7 +78,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
         [Route("User")]
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public async Task CreateUser(CreateUserModel model)
+        public async Task<UserInfo> CreateUser(CreateUserModel model)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +95,11 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     {
                         await _roleManager.CreateAsync(new IdentityRole() { Name = roleName });
                     }
+
+                    await _userManager.AddToRoleAsync(createdUser, roleName);
+
+                    var newUser = await _userManager.FindByEmailAsync(model.Email);
+                    return new UserInfo(newUser, new List<string> { "User" });
                 }
                 else
                 {
@@ -120,6 +125,27 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             }
 
         }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        [Route("Enterprise/Users")]
+        public async Task<IEnumerable<UserInfo>> GetEnterpriseUsers()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var users = await _userManager.GetUsersInRoleAsync("User");
+            return users.Where(u => u.EnterpriseId == user.EnterpriseId).Select(u => new UserInfo(u, null));
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Administrator")]
+        [Route("User/{userId}")]
+        public async Task DeleteEnterpriseUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            await _userManager.DeleteAsync(user);
+        }
+
 
         [Route("Password")]
         [HttpPost]

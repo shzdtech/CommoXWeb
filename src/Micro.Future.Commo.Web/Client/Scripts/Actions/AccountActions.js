@@ -20,6 +20,8 @@ import {
     AUTHENTICATE_ENTERPRISE_SUCCESS,
     GET_VERFICATION_CODE_SUCCESS,
     GET_ENTERPRISE_SUCCESS,
+    GET_ENTERPRISE_USER_SUCCESS,
+    DELETE_ENTERPRISE_USER_SUCCESS,
     NO_NEED_ROUTE
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
@@ -125,6 +127,53 @@ export const loginAction = (email, password, redirect) => {
     };
 };
 
+const getEnterpriseUserRequest = () => {
+    const request = $.get(HOST + 'api/Account/Enterprise/Users');
+    return request;
+}
+
+export const getEnterpriseUserSuccess = (users) => {
+   return {
+        type: GET_ENTERPRISE_USER_SUCCESS,
+        users: users
+   }
+};
+
+export const getEnterpriseUser = () => {
+    return dispatch => {
+        getEnterpriseUserRequest().then(
+            users => {
+                dispatch(getEnterpriseUserSuccess(users))
+            },
+            error => ajaxError(dispatch, error)
+        );
+    }
+}
+
+
+const deleteEnterpriseUserRequest = (userId) => {
+    return $.ajax({
+        type: 'delete',
+        url: HOST + 'api/Account/User/' + userId
+    });
+}
+
+export const deleteEnterpriseUserSuccess = (userId)=> {
+    return {
+        type: DELETE_ENTERPRISE_USER_SUCCESS,
+        userId: userId
+    };
+};
+
+export const deleteEnterpriseUser = (userId) => {
+    return dispatch => {
+        deleteEnterpriseUserRequest(userId).then(
+            response => dispatch(deleteEnterpriseUserSuccess(userId)),
+            error => ajaxError(dispatch, error)
+        );
+    }
+}
+
 export const changeCreateUserForm = (key, value) => {
     return {
         type: CHANGE_NEW_USER_FORM,
@@ -133,9 +182,10 @@ export const changeCreateUserForm = (key, value) => {
     }
 }
 
-export const submitCreateUserSuccess = () => {
+export const submitCreateUserSuccess = (newUser) => {
     return {
-        type: CREATE_NEW_USER_SUCCESS
+        type: CREATE_NEW_USER_SUCCESS,
+        newUser: newUser
     };
 };
 
@@ -148,7 +198,7 @@ export const submitCreateUser = (user) => {
     return dispatch => {
         dispatch(showSpinner(true));
         submitCreateUserRequest(user).then(
-            res => {
+            newUser => {
                 dispatch(showSpinner(false));
                 dispatch(showToastr({
                     message: '用户创建成功',
@@ -156,7 +206,7 @@ export const submitCreateUser = (user) => {
                     show: true,
                     autoClose: true
                 }));
-                dispatch(submitCreateUserSuccess());
+                dispatch(submitCreateUserSuccess(newUser));
                 dispatch(push('/'));
             },
             error => {

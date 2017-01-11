@@ -26,7 +26,9 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(push("/manageTrade"));
             }else if (key === "createUser") {
                 dispatch(push("/createuser"));
-            } else if (key === "changePassword") {
+            } else if(key === "manageEnterpriseUsers"){
+                dispatch(push("manageEnterpriseUsers"))
+            }else if (key === "changePassword") {
                 dispatch(push("/changepassword"));
             } else if (key === "updateEnterprise") {
                 dispatch(push("/updateEnterprise"));

@@ -7,6 +7,7 @@ import newUser from './newUser';
 import password from './password';
 import resetPassword from './resetPassword';
 import enterpriseList from './enterpriseList';
+import enterpriseUsers from './enterpriseUsers';
 
 const account = combineReducers({
     login,
@@ -16,7 +17,8 @@ const account = combineReducers({
     enterpriseList,
     newUser,
     password,
-    resetPassword
+    resetPassword,
+    enterpriseUsers
 });
 
 export default account;

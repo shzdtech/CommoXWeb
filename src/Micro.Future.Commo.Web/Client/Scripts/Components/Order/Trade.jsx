@@ -82,7 +82,7 @@ class Trade extends React.Component {
                     if (image.imagePath.match(/\.(jpeg|jpg|gif|png)$/) != null) {
                         invoiceImages.push(<span key={image.imageId}><img className='image-thumbnail' src={image.imagePath} onClick={() => this.props.showBigImage(image.imagePath) } />{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
                     }else{
-                        invoiceImages.push(<span key={image.imageId}><a className='image-thumbnail' src={image.imagePath} download={image.imagePath.replace(/^.*[\\\/]/, '')>发票文件</a>{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
+                        invoiceImages.push(<span key={image.imageId}><a className='image-thumbnail' src={image.imagePath} download={image.imagePath.replace(/^.*[\\\/]/, '')}>发票文件</a>{this.props.trade.currentState === 4 ? deleteAction(image.imageId) : null}</span>);
                     }
                 }
             })

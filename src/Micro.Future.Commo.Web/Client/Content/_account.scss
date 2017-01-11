@@ -196,3 +196,26 @@
         }
     }
 }
+
+.enterprise-users-container{
+    table{
+        margin: 0 auto;
+        
+        thead{
+            background: #34495e;
+            color: $white;
+            font-weight: bold;
+
+            td{
+                padding: 10px 15px;
+            }
+        }
+
+        tbody{
+            color: #999;
+            td{
+                padding: 10px 15px;
+            }
+        }
+    }
+}
