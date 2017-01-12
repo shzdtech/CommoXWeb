@@ -57,7 +57,7 @@ export default {
         type: 'number',
         key: 'invoicedQuantity',
         length: 'short',
-        placeholder: '开票量',
+        placeholder: '请输入月度开票总金额',
         isRequired: true
     },
     invoiceValue: {
@@ -155,13 +155,6 @@ export default {
                 label: '非常差'
             }
         ]
-    },
-    annualInspection: {
-        label: '年检情况',
-        type: 'text',
-        key: 'annualInspection',
-        length: 'medium',
-        placeholder: '年检情况'
     },
     previousSales: {
         label: '上年度营业额',

@@ -66,7 +66,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     if (userInfo.EnterpriseId > 0)
                     {
                         var enterprise = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
-                        userInfo.EnterpriseAuthenticated = enterprise.EnterpriseState == Business.Abstraction.BizObject.EnterpriseStateType.APPROVED;
+                        userInfo.EnterpriseState = enterprise.EnterpriseState;
                         userInfo.EnterpriseName = enterprise.Name;
                     }
                     return userInfo;

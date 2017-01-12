@@ -111,7 +111,7 @@ export const loginAction = (email, password, redirect) => {
     return dispatch => {
         loginRequest(email, password).then(
             userInfo => {
-                if (userInfo.enterpriseId > 0 && !userInfo.enterpriseAuthenticated) {
+                if (userInfo.enterpriseId > 0 && userInfo.enterpriseState !== 2) {
                     dispatch(showToastr({
                         message: '企业未认证通过，请及时提交认证信息，否则将无法提交需求',
                         toastType: 'toast-warning',
@@ -289,8 +289,7 @@ const updateEnterpriseRequest = (enterpriseInfo) => {
     for (var key in enterpriseInfo) {
         if (enterpriseInfo[key].type === 'file') {
             if (enterpriseInfo[key].file[0] !== null &&
-                enterpriseInfo[key].file[0].size > 0 &&
-                enterpriseInfo[key].file[0].type.indexOf('image') > -1) {
+                enterpriseInfo[key].file[0].size > 0) {
                 model.append(key, enterpriseInfo[key].file[0]);
             }
         }
@@ -453,12 +452,12 @@ const getEnterpriseRequest = (enterpriseId) => {
 
 export const checkEnterpriseAuthenticated = () => {
     let userInfo = auth.getUserInfo();
-    if (userInfo && !userInfo.enterpriseAuthenticated && userInfo.enterpriseId > 0) {
+    if (userInfo && userInfo.enterpriseState !== 2 && userInfo.enterpriseId > 0) {
         return (dispatch) => {
             return getEnterpriseRequest(userInfo.enterpriseId).then(
                 enterpriseInfo => {
                     if (enterpriseInfo.enterpriseAuthenticated) {
-                        userInfo.enterpriseAuthenticated = true;
+                        userInfo.enterpriseState = 2;
                         auth.setUserInfo(userInfo);
                     } else if (userInfo.enterpriseId > 0) {
                         dispatch(showToastr({

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Micro.Future.Business.DataAccess.Commo.CommoObject;
+using Micro.Future.Commo.Business.Abstraction.BizObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ namespace Micro.Future.Commo.Web.Models.AccountModels
         public string Email { get; set; }
         public int EnterpriseId { get; set; }
         public string EnterpriseName { get; set; }
-        public bool EnterpriseAuthenticated { get; set; }
+        public EnterpriseStateType EnterpriseState { get; set; }
 
 
         public UserInfo(ApplicationUser user, List<string> roles)

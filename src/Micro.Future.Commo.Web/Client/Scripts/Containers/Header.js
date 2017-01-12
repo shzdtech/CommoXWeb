@@ -32,6 +32,8 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(push("/changepassword"));
             } else if (key === "updateEnterprise") {
                 dispatch(push("/updateEnterprise"));
+            } else if (key === "viewEnterprise") {
+                dispatch(push("viewEnterprise"));
             } else if (key === "signOut") {
                 dispatch(signOut());
             } else if (key === "makeChain") {

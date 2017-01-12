@@ -6,6 +6,7 @@ using Micro.Future.Commo.Web.Models.EnterpriseModels;
 using Micro.Future.Commo.Web.Services;
 using Micro.Future.Commo.Web.Utilities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -95,7 +96,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                     enterpriseInfo.EmailAddress = model.EmailAddress;
                     enterpriseInfo.MobilePhone = model.MobilePhone;
                     enterpriseInfo.Address = model.Address;
-                    enterpriseInfo.EnterpriseState = EnterpriseStateType.UNAPPROVED;
+                    enterpriseInfo.EnterpriseState = EnterpriseStateType.UNSUBMITED;
                     enterpriseInfo.CreateTime = DateTime.Now;
 
                     var bizResult = _enterpriseManager.AddEnterprise(enterpriseInfo);
@@ -152,25 +153,17 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
                 EnterpriseInfo enterpriseInfo = _enterpriseManager.QueryEnterpriseInfo(user.EnterpriseId);
 
-                var imageFile = HttpContext.Request.Form.Files["businessLicense"];
-                if (imageFile != null)
-                {
-                    var filePath = _commoSettingsAccessor.Value.ImageFolder;
-                    var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-
-                    if (!Directory.Exists(filePath))
-                    {
-                        Directory.CreateDirectory(filePath);
-                    }
-                    var fullPath = Path.Combine(filePath, fileName);
-                    using (var stream = System.IO.File.Create(fullPath))
-                    {
-                        imageFile.OpenReadStream().CopyTo(stream);
-                    }
-
-                    enterpriseInfo.LicenseImagePath = fullPath;
+                var businessLicenseFile = HttpContext.Request.Form.Files["businessLicense"];
+                if (businessLicenseFile != null)
+                { 
+                    enterpriseInfo.LicenseImagePath = _SaveFile(businessLicenseFile);
                 }
 
+                var invoiceMaterialFile = HttpContext.Request.Form.Files["businessLicense"];
+                if (invoiceMaterialFile != null)
+                {
+                    enterpriseInfo.InvoiceMaterial = _SaveFile(invoiceMaterialFile);
+                }
 
                 enterpriseInfo.AnnualInspection = model.AnnualInspection;
                 enterpriseInfo.BusinessRange = model.BusinessRange;
@@ -179,7 +172,6 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 enterpriseInfo.LegalRepresentative = model.LegalRepresentative;
                 enterpriseInfo.LicenseImagePath = model.LicenseImagePath;
                 enterpriseInfo.PaymentMethodId = model.PaymentMethodId;
-                enterpriseInfo.InvoiceMaterial = model.InvoiceMaterial;
                 enterpriseInfo.RegisterWarehouse = model.RegisterWarehouse;
                 enterpriseInfo.MaxTradeAmountPerMonth = model.MaxTradeAmountPerMonth;
                 if (model.IsAcceptanceBillETicket.HasValue) {
@@ -314,6 +306,25 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 throw new ForbiddenException("您没有权限获取该企业信息");
             }
             return _enterpriseManager.QueryEnterpriseInfo(id);
+        }
+
+
+        private string _SaveFile(IFormFile file)
+        {
+            var filePath = @"wwwroot/" + "_" +  _commoSettingsAccessor.Value.ImageFolder;
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+
+            if (!Directory.Exists(filePath))
+            {
+                Directory.CreateDirectory(filePath);
+            }
+            var fullPath = Path.Combine(filePath, fileName);
+            using (var stream = System.IO.File.Create(fullPath))
+            {
+                file.OpenReadStream().CopyTo(stream);
+            }
+
+            return filePath;
         }
     }
 }

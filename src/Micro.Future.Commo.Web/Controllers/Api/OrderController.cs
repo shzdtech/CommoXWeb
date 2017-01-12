@@ -82,8 +82,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         private string _SaveImages(IFormFile imageFile)
         {
-            var filePath = @"wwwroot/" + _commoSettingsAccessor.Value.OrderImageFolder;
-            var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+            var filePath = @"wwwroot/" + "_" + _commoSettingsAccessor.Value.OrderImageFolder;
+            var fileName = Path.GetFileNameWithoutExtension(imageFile.FileName) + Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
 
             if (!Directory.Exists(filePath))
             {

@@ -60,8 +60,12 @@ class Header extends React.Component {
                         <li key="userInfo">
                             <DropdownButton title={this.props.userInfo.userName} id="bg-nested-dropdown" >
                                 {this.props.userInfo.enterpriseName ? <MenuItem eventKey="enterpriseName" className='enterprise-name'>{this.props.userInfo.enterpriseName}</MenuItem> : null}
-                                {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
+                                {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 && 
+                                (this.props.userInfo.enterpriseState === 3 || this.props.userInfo.enterpriseState === 0 )?
                                     <MenuItem eventKey="updateEnterprise" onSelect={this.props.onSelectDropdown}>企业认证</MenuItem> : null}
+                                
+                                <MenuItem eventKey="viewEnterprise" onSelect={this.props.onSelectDropdown}>企业信息</MenuItem>
+    
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?
                                     <MenuItem eventKey="createUser" onSelect={this.props.onSelectDropdown}>用户创建</MenuItem> : null}
                                 {this.props.userInfo.roles.filter((r) => { return r === 'Administrator' }).length > 0 ?

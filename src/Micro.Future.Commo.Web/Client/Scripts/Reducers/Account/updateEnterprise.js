@@ -1,4 +1,5 @@
 import enterpriseForm from '../../Models/UpdateEnterpriseForm';
+import registerForm from '../../Models/EnterpriseForm';
 import {UPDATE_ENTERPRISE_FORM, UPDATE_ENTERPRISE_SUCCESS, GET_ENTERPRISE_SUCCESS} from '../../Constants/ActionTypes';
 
 const updateEnterpriseForm = (state = enterpriseForm, action) => {
@@ -11,7 +12,12 @@ const updateEnterpriseForm = (state = enterpriseForm, action) => {
         case GET_ENTERPRISE_SUCCESS: {
             let newState = Object.assign({}, state, );
             for (var key in newState) {
-                if (action.enterpriseInfo[key] !== undefined && action.enterpriseInfo[key] !== null) {
+                if(action.enterpriseInfo[key] !== undefined && registerForm[key] !== undefined){
+                    newState[key] = registerForm[key];
+                    newState[key].value = action.enterpriseInfo[key];
+                    newState[key].type = "label";
+                }
+                else if (action.enterpriseInfo[key] !== undefined && action.enterpriseInfo[key] !== null) {
                     newState[key].value = action.enterpriseInfo[key];
                 }
             }
