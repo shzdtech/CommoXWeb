@@ -311,8 +311,8 @@ namespace Micro.Future.Commo.Web.Controllers.Api
 
         private string _SaveFile(IFormFile file)
         {
-            var filePath = @"wwwroot/" + "_" +  _commoSettingsAccessor.Value.ImageFolder;
-            var fileName = Path.GetFileNameWithoutExtension(file.FileName) + Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var filePath = @"wwwroot/" +  _commoSettingsAccessor.Value.ImageFolder;
+            var fileName = Path.GetFileNameWithoutExtension(file.FileName) + "_" + Guid.NewGuid() + Path.GetExtension(file.FileName);
 
             if (!Directory.Exists(filePath))
             {
@@ -324,7 +324,7 @@ namespace Micro.Future.Commo.Web.Controllers.Api
                 file.OpenReadStream().CopyTo(stream);
             }
 
-            return filePath;
+            return @"/" + _commoSettingsAccessor.Value.ImageFolder + @"/" + fileName;
         }
     }
 }

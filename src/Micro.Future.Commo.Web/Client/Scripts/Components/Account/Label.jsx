@@ -11,9 +11,10 @@ class Label extends React.Component {
         var value_label = null;
 
         if(info.type === 'file'){
-            value_label = <span><a download={info.value} href={info.value}>{info.label}</a></span>
+            value_label = <span><a download={info.value&&info.value.replace(/^.*[\\\/]/, '')} 
+            href={info.value&&info.value.replace(/^.*[\\\/]/, '')}>{info.label}</a></span>
         }else{
-            <span className="label_text">{info.value}</span>
+            value_label = <span className="label_text">{info.value}</span>
         }
 
         return <div className='input-container'>
@@ -21,7 +22,7 @@ class Label extends React.Component {
                 <span className="label_text">{info.label}:</span>
             </label>
             <label className="input_value" htmlFor={info.key}>
-                <span className="label_text">{info.value}</span>
+                {value_label}
             </label>
         </div>
     }

@@ -265,3 +265,4 @@ src/Micro.Future.Commo.Web/Properties/PublishProfiles/publish-module.psm1
 src/Micro.Future.Commo.Web/Properties/PublishProfiles/commoweb-publish.ps1
 src/Micro.Future.Commo.Web/wwwroot/dist/
 src/Micro.Future.Commo.Web/wwwroot/customerimages/
+src/Micro.Future.Commo.Web/wwwroot/enterpriseFiles/

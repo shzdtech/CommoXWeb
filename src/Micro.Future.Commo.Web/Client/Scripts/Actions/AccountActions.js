@@ -327,8 +327,11 @@ export const updateEnterprise = (enterpriseInfo) => {
     return (dispatch) => {
         return updateEnterpriseRequest(enterpriseInfo).then(
             response => {
+                userInfo = auth.getUserInfo();
+                userInfo.enterpriseState = 1;
+                dispatch(loginSuccess(userInfo));
                 dispatch(updateEnterpriseSuccess(response));
-                dispatch(push('/'));
+                dispatch(push('viewEnterprise'));
             },
             error => ajaxError(dispatch, error)
         );
