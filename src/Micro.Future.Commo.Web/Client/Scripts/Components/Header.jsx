@@ -19,7 +19,6 @@ class Header extends React.Component {
                     <li key="fundTrade"><Link to="/fundTrade">资金贸易</Link></li>
                 ]
             }
-
             return null;
         }
         const userPanel = () => {

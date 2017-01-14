@@ -22,7 +22,8 @@ import {
     GET_ENTERPRISE_SUCCESS,
     GET_ENTERPRISE_USER_SUCCESS,
     DELETE_ENTERPRISE_USER_SUCCESS,
-    NO_NEED_ROUTE
+    NO_NEED_ROUTE,
+    SET_ENTERPRISE
 } from '../Constants/ActionTypes';
 import {HOST} from '../appSettings';
 import { push } from 'react-router-redux';
@@ -133,10 +134,10 @@ const getEnterpriseUserRequest = () => {
 }
 
 export const getEnterpriseUserSuccess = (users) => {
-   return {
+    return {
         type: GET_ENTERPRISE_USER_SUCCESS,
         users: users
-   }
+    }
 };
 
 export const getEnterpriseUser = () => {
@@ -158,7 +159,7 @@ const deleteEnterpriseUserRequest = (userId) => {
     });
 }
 
-export const deleteEnterpriseUserSuccess = (userId)=> {
+export const deleteEnterpriseUserSuccess = (userId) => {
     return {
         type: DELETE_ENTERPRISE_USER_SUCCESS,
         userId: userId
@@ -190,8 +191,10 @@ export const submitCreateUserSuccess = (newUser) => {
 };
 
 const submitCreateUserRequest = (user) => {
-    return $.post(HOST + 'api/Account/User', { userName: user.userName.value, 
-        email: user.email.value, password: user.password.value });
+    return $.post(HOST + 'api/Account/User', {
+        userName: user.userName.value,
+        email: user.email.value, password: user.password.value
+    });
 };
 
 export const submitCreateUser = (user) => {
@@ -383,7 +386,7 @@ export const getAllEnterprise = () => {
     };
 }
 
-export  const changeEnterpriseSelection = (key, newValue) => {
+export const changeEnterpriseSelection = (key, newValue) => {
     return {
         type: CHANGE_ENTERPRISE_SELECTION,
         value: newValue
@@ -491,17 +494,21 @@ const getEnterpriseSuccess = (enterpriseInfo) => {
     }
 }
 
-export const getEnterprise = () => {
+export const getEnterprise = (enterpriseId) => {
     return (dispatch) => {
-        let userInfo = auth.getUserInfo();
-        return getEnterpriseRequest(userInfo.enterpriseId).then(
-            enterpriseInfo => {
-                dispatch(getEnterpriseSuccess(enterpriseInfo));
-            },
-            error => {
-                ajaxError(dispatch, error);
-            }
-        );
+        if (!enterpriseId) {
+            let userInfo = auth.getUserInfo();
+            enterpriseId = userInfo.enterpriseId;
+        }
+
+            return getEnterpriseRequest(enterpriseId).then(
+                enterpriseInfo => {
+                    dispatch(getEnterpriseSuccess(enterpriseInfo));
+                },
+                error => {
+                    ajaxError(dispatch, error);
+                }
+            );
     };
 }
 
@@ -575,5 +582,12 @@ export const getResetPasswordVerficationCode = (email) => {
                 ajaxError(dispatch, error);
             }
         );
+    };
+}
+
+export const setEnterprise = (enterprise) => {
+    return {
+        type: SET_ENTERPRISE,
+        enterpriseInfo: enterprise
     };
 }

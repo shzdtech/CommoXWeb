@@ -303,7 +303,11 @@ namespace Micro.Future.Commo.Web.Controllers.Api
             var user = await _userManager.GetUserAsync(User);
             if (user.EnterpriseId != id)
             {
-                throw new ForbiddenException("您没有权限获取该企业信息");
+                var roles = await _userManager.GetRolesAsync(user);
+                if (!roles.Contains("Admin"))
+                {
+                    throw new ForbiddenException("您没有权限获取该企业信息");
+                }
             }
             return _enterpriseManager.QueryEnterpriseInfo(id);
         }

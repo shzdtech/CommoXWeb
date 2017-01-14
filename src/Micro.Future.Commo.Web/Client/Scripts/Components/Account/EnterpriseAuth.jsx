@@ -36,7 +36,7 @@ class EnterpriseAuth extends React.Component {
     getRow(enterprise) {
         const {authenticateEnterprise} = this.props;
         return <div key={enterprise.enterpriseId}>
-            <div className='column'>{enterprise.name}</div>
+            <div className='column'><a onClick={()=>{this.props.viewEnterpriseDetail(enterprise)}}>{enterprise.name}</a></div>
             <div className='column'>{enterprise.emailAddress}</div>
             <div className='column'>{enterprise.legalRepresentative}</div>
             <div className='column'>{enterprise.contracts}</div>

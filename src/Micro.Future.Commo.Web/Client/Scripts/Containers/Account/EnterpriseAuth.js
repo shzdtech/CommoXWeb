@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import EnterpriseAuth from '../../Components/Account/EnterpriseAuth';
-import {getUnauthedEnterprise, authenticateEnterprise} from '../../Actions/AccountActions';
+import {getUnauthedEnterprise, authenticateEnterprise, setEnterprise} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -16,6 +17,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         authenticateEnterprise: (enterpriseId, state) => {
             dispatch(authenticateEnterprise(enterpriseId, state));
+        },
+        viewEnterpriseDetail: (enterprise) => {
+            
+            dispatch(push('viewEnterprise'));
+            dispatch(setEnterprise(enterprise));
         }
     };
 };
