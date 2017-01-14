@@ -330,8 +330,9 @@ export const updateEnterprise = (enterpriseInfo) => {
     return (dispatch) => {
         return updateEnterpriseRequest(enterpriseInfo).then(
             response => {
-                userInfo = auth.getUserInfo();
+                let userInfo = auth.getUserInfo();
                 userInfo.enterpriseState = 1;
+                auth.setUserInfo(userInfo);
                 dispatch(loginSuccess(userInfo));
                 dispatch(updateEnterpriseSuccess(response));
                 dispatch(push('viewEnterprise'));

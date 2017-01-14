@@ -5,7 +5,7 @@ import {getEnterprise} from '../../Actions/AccountActions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        enterpriseInfo: state.account.updateEnterprise,
+        enterpriseInfo: state.account.viewEnterprise,
         userInfo: state.account.login,
     }
 }

@@ -30,7 +30,7 @@ class ViewEnterprise extends React.Component {
                     info.value = moment(info.value).format('YYYY-MM-DD');
                 } else if (info.type === 'select' && info.value !== null && info.value !== undefined) {
                     var selected = info.options.filter((o) => { return o.value === info.value });
-                    if(selected.lenght>0){
+                    if(selected.length>0){
                         info.value = selected[0].label;
                     }
                 }
